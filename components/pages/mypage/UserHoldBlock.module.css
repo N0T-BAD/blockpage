@@ -17,6 +17,7 @@
 .HoldBlock p{
     padding: 0 1rem;
     font-family: var(--bp-font);
+    font-weight: 500;
 }
 
 button.charge {

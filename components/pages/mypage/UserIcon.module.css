@@ -16,6 +16,8 @@
     background-color: var(--bp-primary);
     width: 3rem;
     text-align: center;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .author {
@@ -30,4 +32,6 @@
     background-color: var(--bp-secondary);
     width: 3rem;
     text-align: center;
+    font-size: 14px;
+    font-weight: 500;
 }
