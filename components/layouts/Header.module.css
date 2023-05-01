@@ -1,4 +1,4 @@
-.blockHeader {
+.blockMainHeader {
   width: 100%;
   padding: 1rem 1.2rem 8rem 1.2rem;
   position: fixed;
@@ -7,6 +7,17 @@
   flex-direction: column;
   justify-content: center;
   background: linear-gradient(0deg, #ffffff00 0%, #ffffff 50%);
+  z-index: 100;
+}
+
+.blockHeader {
+  width: 100%;
+  padding: 1rem 1.2rem 1rem 1.2rem;
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   z-index: 100;
 }
 
@@ -40,6 +51,32 @@
 }
 .logo h1 {
   font-size: 0;
+}
+
+.blockMainHeader nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.blockMainHeader nav ul li {
+  list-style: none;
+}
+
+.blockMainHeader nav ul li img {
+  width: 100%;
+  height: auto;
+}
+
+.blockMainHeader nav ul.innerMenu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.blockMainHeader nav ul.innerMenu > li {
+  list-style: none;
+  width: 1.4rem;
+  margin-left: 1.5rem;
 }
 
 .blockHeader nav ul {
