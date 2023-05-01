@@ -1,0 +1,17 @@
+.UserMenu{
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 2.5rem;
+}
+
+.UserMenu img{
+    margin-right: 2rem;
+}
+
+.UserMenu p {
+    font-size: large;
+    font-family: var(--bp-font);
+    font-weight: 500;
+    width: 80%;
+    align-items: center;
+}

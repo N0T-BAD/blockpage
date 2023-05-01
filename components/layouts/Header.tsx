@@ -4,6 +4,7 @@ import { StaticMenuData } from '@/types/staticDataType'
 import style from '@/components/layouts/Header.module.css'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 export default function Header() {
   const router = useRouter();
@@ -18,9 +19,9 @@ export default function Header() {
 
   return (
     router.pathname === '/' ?
-      <header className={style.blockHeader}>
+      <header className={style.blockMainHeader}>
         <div className={style.logo}>
-          <Image src={'/assets/images/logo/logo.svg'} alt="logo" width={200} height={77} />
+          <Image src={'/assets/images/logo/logo.svg'} alt="logo" width={200} height={77} onClick={handlemain} />
           <h1>BlockPage</h1>
         </div>
         <nav>
@@ -32,12 +33,16 @@ export default function Header() {
                     <ul className={style.innerMenu}>
                       {menu.innerMenu.map((innerMenu: StaticMenuData) => (
                         <li key={innerMenu.id}>
-                          <Image src={innerMenu.iconUrl} alt={innerMenu.name} width={30} height={30} />
+                          <Link href={innerMenu.path}>
+                            <Image src={innerMenu.iconUrl} alt={innerMenu.name} width={30} height={30} />
+                          </Link>
                         </li>
                       ))}
                     </ul>
                     :
-                    <Image src={menu.iconUrl} alt={menu.name} width={30} height={30} onClick={handleBack} />
+                    <Link href={menu.path}>
+                      <Image src={menu.iconUrl} alt={menu.name} width={30} height={30} />
+                    </Link>
                 }
               </li>
             ))}
@@ -45,20 +50,52 @@ export default function Header() {
         </nav>
       </header>
       :
-      router.pathname === "/search" ?
-        <header>
-          <div className={style.searchlogo}>
+      router.pathname === "/mypage" ?
+        <header className={style.blockHeader}>
+          <div className={style.logo}>
             <Image src={'/assets/images/logo/logo.svg'} alt="logo" width={200} height={77} onClick={handlemain} />
+            <h1>BlockPage</h1>
           </div>
+          <nav>
+            <ul>
+              {staticMenuData.map((menu: StaticMenuData) => (
+                <li key={menu.id}>
+                  {
+                    menu.innerMenu ?
+                      <ul className={style.innerMenu}>
+                        {menu.innerMenu.map((innerMenu: StaticMenuData) => (
+                          <li key={innerMenu.id}>
+                            <Link href={innerMenu.path}>
+                              <Image src={innerMenu.iconUrl} alt={innerMenu.name} width={30} height={30} />
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                      :
+                      <Link href={menu.path}>
+                        <Image src={menu.iconUrl} alt={menu.name} width={30} height={30} />
+                      </Link>
+                  }
+                </li>
+              ))}
+            </ul>
+          </nav>
         </header>
         :
-        router.pathname === '/login' ?
-          <header className={style.LoginHeader}>
-            <div className={style.LoginBack}>
-              <Image src={"/assets/images/icons/back.svg"} alt={"뒤로가기"} width={20} height={20} />
+        router.pathname === "/search" ?
+          <header>
+            <div className={style.searchlogo}>
+              <Image src={'/assets/images/logo/logo.svg'} alt="logo" width={200} height={77} onClick={handlemain} />
             </div>
           </header>
           :
-          <></>
+          router.pathname === '/login' ?
+            <header className={style.LoginHeader}>
+              <div className={style.LoginBack}>
+                <Image src={"/assets/images/icons/back.svg"} alt={"뒤로가기"} width={20} height={20} onClick={handleBack} />
+              </div>
+            </header>
+            :
+            <></>
   )
 }

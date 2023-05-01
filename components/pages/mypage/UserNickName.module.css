@@ -1,0 +1,11 @@
+.usernicknameImg{
+    display: flex;
+    align-items: center;
+    position: relative;
+    left: 5rem;
+}
+
+.usernicknameImg p {
+    padding: 0 2rem;
+    font-family: var(--bp-font);
+}
