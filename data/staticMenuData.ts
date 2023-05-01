@@ -21,7 +21,7 @@ export const staticMenuData = [
         id: 3,
         name: 'User',
         iconUrl: '/assets/images/icons/userIcon.svg',
-        path: '/user',
+        path: '/login',
       }
     ]
   },
