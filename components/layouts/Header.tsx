@@ -12,8 +12,12 @@ export default function Header() {
     router.push("/");
   }
 
+  const handleBack = () => {
+    router.back();
+  }
+
   return (
-    router.pathname === "/" ?
+    router.pathname === '/' ?
       <header className={style.blockHeader}>
         <div className={style.logo}>
           <Image src={'/assets/images/logo/logo.svg'} alt="logo" width={200} height={77} />
@@ -33,7 +37,7 @@ export default function Header() {
                       ))}
                     </ul>
                     :
-                    <Image src={menu.iconUrl} alt={menu.name} width={30} height={30} />
+                    <Image src={menu.iconUrl} alt={menu.name} width={30} height={30} onClick={handleBack} />
                 }
               </li>
             ))}
@@ -48,6 +52,13 @@ export default function Header() {
           </div>
         </header>
         :
-        <></>
+        router.pathname === '/login' ?
+          <header className={style.LoginHeader}>
+            <div className={style.LoginBack}>
+              <Image src={"/assets/images/icons/back.svg"} alt={"뒤로가기"} width={20} height={20} />
+            </div>
+          </header>
+          :
+          <></>
   )
 }

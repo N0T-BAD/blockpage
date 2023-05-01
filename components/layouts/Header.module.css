@@ -5,9 +5,26 @@
   top: 0;
   display: flex;
   flex-direction: column;
-  justify-contents: center;
-  background: linear-gradient(0deg, #FFFFFF00 0%,  #FFFFFF 50%);
+  justify-content: center;
+  background: linear-gradient(0deg, #ffffff00 0%, #ffffff 50%);
   z-index: 100;
+}
+
+.LoginHeader {
+  z-index: 100;
+  width: 100%;
+  padding: 1rem 1.2rem 1rem 1.2rem;
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.LoginBack {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .logo {
@@ -17,7 +34,7 @@
   margin-bottom: -2.2rem;
   z-index: 101;
 }
-.logo img{
+.logo img {
   width: 100%;
   height: auto;
 }
