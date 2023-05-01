@@ -3,35 +3,51 @@ import { staticMenuData } from '@/data/staticMenuData'
 import { StaticMenuData } from '@/types/staticDataType'
 import style from '@/components/layouts/Header.module.css'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 export default function Header() {
+  const router = useRouter();
+
+  const handleBack = () => {
+    router.back();
+  }
 
   return (
-    <header className={style.blockHeader}>
-      <div className={style.logo}>
-        <Image src={'/assets/images/logo/logo.svg'} alt="logo" width={200} height={77} />
-        <h1>BlockPage</h1>
-      </div>
-      <nav>
-        <ul>
-          {staticMenuData.map((menu:StaticMenuData) => (
-            <li key={menu.id}>
-              {
-                menu.innerMenu ? 
-                  <ul className={style.innerMenu}>
-                    {menu.innerMenu.map((innerMenu:StaticMenuData) => (
-                      <li key={innerMenu.id}>
-                        <Image src={innerMenu.iconUrl} alt={innerMenu.name} width={30} height={30} />
-                      </li>
-                    ))}
-                  </ul>
-                :
-                <Image src={menu.iconUrl} alt={menu.name} width={30} height={30} />
-              }
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </header>
+    router.pathname === '/' ?
+      <header className={style.blockHeader}>
+        <div className={style.logo}>
+          <Image src={'/assets/images/logo/logo.svg'} alt="logo" width={200} height={77} />
+          <h1>BlockPage</h1>
+        </div>
+        <nav>
+          <ul>
+            {staticMenuData.map((menu: StaticMenuData) => (
+              <li key={menu.id}>
+                {
+                  menu.innerMenu ?
+                    <ul className={style.innerMenu}>
+                      {menu.innerMenu.map((innerMenu: StaticMenuData) => (
+                        <li key={innerMenu.id}>
+                          <Image src={innerMenu.iconUrl} alt={innerMenu.name} width={30} height={30} />
+                        </li>
+                      ))}
+                    </ul>
+                    :
+                    <Image src={menu.iconUrl} alt={menu.name} width={30} height={30} onClick={handleBack} />
+                }
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </header>
+      :
+      router.pathname === '/login' ?
+        <header className={style.LoginHeader}>
+          <div className={style.LoginBack}>
+            <Image src={"/assets/images/icons/back.svg"} alt={"뒤로가기"} width={20} height={20} />
+          </div>
+        </header>
+        :
+        <></>
   )
 }
