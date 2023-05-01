@@ -8,6 +8,10 @@ import { useRouter } from 'next/router'
 export default function Header() {
   const router = useRouter();
 
+  const handlemain = () => {
+    router.push("/");
+  }
+
   const handleBack = () => {
     router.back();
   }
@@ -41,13 +45,20 @@ export default function Header() {
         </nav>
       </header>
       :
-      router.pathname === '/login' ?
-        <header className={style.LoginHeader}>
-          <div className={style.LoginBack}>
-            <Image src={"/assets/images/icons/back.svg"} alt={"뒤로가기"} width={20} height={20} />
+      router.pathname === "/search" ?
+        <header>
+          <div className={style.searchlogo}>
+            <Image src={'/assets/images/logo/logo.svg'} alt="logo" width={200} height={77} onClick={handlemain} />
           </div>
         </header>
         :
-        <></>
+        router.pathname === '/login' ?
+          <header className={style.LoginHeader}>
+            <div className={style.LoginBack}>
+              <Image src={"/assets/images/icons/back.svg"} alt={"뒤로가기"} width={20} height={20} />
+            </div>
+          </header>
+          :
+          <></>
   )
 }
