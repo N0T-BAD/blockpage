@@ -18,7 +18,7 @@ export default function Header() {
   }
 
   return (
-    router.pathname === '/' ?
+    router.pathname === '/' || router.pathname === "/mypage" ?
       <header className={style.blockHeader}>
         <div className={style.logo}>
           <Image src={'/assets/images/logo/logo.svg'} alt="logo" width={200} height={77} onClick={handlemain} />

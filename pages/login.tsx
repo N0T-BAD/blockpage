@@ -3,7 +3,7 @@ import { NextPageWithLayout } from "./_app"
 import Image from "next/image"
 import style from "@/pages/login.module.css"
 
-const Page: NextPageWithLayout = () => {
+const login: NextPageWithLayout = () => {
   return (
     <>
       <div className={style.LogoSection}>
@@ -20,13 +20,13 @@ const Page: NextPageWithLayout = () => {
   )
 }
 
-Page.getLayout = function getLayout(Page: React.ReactElement) {
+login.getLayout = function getLayout(login: React.ReactElement) {
   return (
     <Layout>
-      {Page}
+      {login}
     </Layout>
   )
 }
 
-export default Page
+export default login
 

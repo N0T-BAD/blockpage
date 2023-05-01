@@ -7,7 +7,7 @@ import GenreSection from "@/components/pages/genre/GenreSection"
 import GameSection from "@/components/pages/game/GameSection"
 
 
-const Page: NextPageWithLayout = () => {
+const main: NextPageWithLayout = () => {
   return (
     <>
       <MainSection />
@@ -19,13 +19,13 @@ const Page: NextPageWithLayout = () => {
   )
 }
 
-Page.getLayout = function getLayout(Page: React.ReactElement) {
+main.getLayout = function getLayout(main: React.ReactElement) {
   return (
     <Layout>
-      {Page}
+      {main}
     </Layout>
   )
 }
 
-export default Page
+export default main
 
