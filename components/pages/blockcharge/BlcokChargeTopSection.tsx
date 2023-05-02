@@ -1,6 +1,6 @@
 import React from 'react'
 import style from '@/components/pages/blockcharge/BlcokChargeTopSection.module.css'
-import MyBlock from './MyBlock'
+import MyBlock from '@/components/pages/blockcharge/MyBlock'
 
 export default function BlcokChargeTopSection() {
   return (

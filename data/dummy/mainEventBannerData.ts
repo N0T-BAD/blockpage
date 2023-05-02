@@ -1,4 +1,3 @@
-
 export const mainEventBannerData = [
   {
     id: 1,
