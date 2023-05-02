@@ -1,6 +1,6 @@
 import React from 'react'
 import GameBanner from './GameBanner'
-import style from '@/components/pages/game/GameSection.module.css'
+import style from '@/components/pages/main/game/GameSection.module.css'
 
 export default function GameSection() {
   return (

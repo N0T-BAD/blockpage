@@ -7,6 +7,7 @@
   --bp-white: #FFFFFF;
   --bp-blue: #69D2FF;
   --bp-gray: #F3F3F3;
+  --bp-red: #FF54D9;
   --bp-secondary-gray: #F3F3F3;
   
   --bp-font-gray: #778087;
@@ -48,4 +49,8 @@ body {
 
 a {
   text-decoration: none;
+}
+
+section {
+  margin: 3rem 0;
 }

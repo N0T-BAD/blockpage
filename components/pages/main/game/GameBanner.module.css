@@ -23,35 +23,45 @@
 }
 
 .gamewrap {
+  width: 100%;
+  margin-top: 10rem;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  white-space: nowrap;
-  overflow-x: auto;
+  justify-content: center;
 }
+
+
 
 .gameBox {
   display: flex;
   justify-content: space-between;
-  width: 22.5rem;
+  width: 80%;
+  min-width: 22rem;
   height: 6rem;
-  background-color: var(--bp-blue);
+  background-color: var(--bp-gray);
   border-radius: 0.5rem;
-  margin-top: 7rem;
-  margin-right: 1rem;
+  transition: 1s;
+}
+
+.gameBox.blue {
+  background-color: var(--bp-blue);
+}
+.gameBox.red {
+  background-color: var(--bp-red);
 }
 
 .gameBox img {
+  opacity: 1;
   position: relative;
   bottom: 4.65rem;
   border-radius: 0.5rem 0 0 0.5rem;
-  animation: banner 0.5s ease-in-out;
+  transition: 1s;
 }
 
 .gameText {
   display: flex;
   flex-direction: column;
   padding-left: 1.5rem;
+  transition: 1s;
 }
 
 .gameBox p:first-child {

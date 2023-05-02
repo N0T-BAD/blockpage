@@ -1,5 +1,5 @@
 import React from 'react'
-import style from '@/components/pages/best/BestRankingContent.module.css'
+import style from '@/components/pages/main/best/BestRankingContent.module.css'
 import Image from 'next/image'
 
 export default function BestRankingContent() {
