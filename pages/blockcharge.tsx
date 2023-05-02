@@ -1,9 +1,11 @@
 import Layout from "@/components/layouts/layout"
 import { NextPageWithLayout } from "./_app"
+import BlcokChargeTopSection from "@/components/pages/blockcharge/BlcokChargeTopSection"
 
 const blockcharge: NextPageWithLayout = () => {
   return (
     <>
+      <BlcokChargeTopSection />
     </>
   )
 }

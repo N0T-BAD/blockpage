@@ -6,8 +6,8 @@ import BestRankingLeftImg from './BestRankingLeftImg'
 export default function BestSection2() {
     return (
         <section className={style.bestSection2}>
-            <BestRankingLeftImg/>
-            <BestRankingContent/>
+            <BestRankingLeftImg />
+            <BestRankingContent />
         </section>
     )
 }

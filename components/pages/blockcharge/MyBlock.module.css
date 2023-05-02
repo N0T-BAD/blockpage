@@ -1,0 +1,16 @@
+.MyBlockbg {
+  width: 100%;
+  height: 8rem;
+  background-color: var(--bp-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+}
+
+.MyBlock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
