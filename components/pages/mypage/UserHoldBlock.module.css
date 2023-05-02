@@ -1,0 +1,28 @@
+.HoldChargeBlock{
+    display: flex;
+    background: var(--bp-primary-glow);
+    justify-content: space-evenly;
+    padding: 0 1rem;
+    border-radius: 1rem;
+    width: 90%;
+}
+
+.HoldBlock{
+    display: flex;
+    height: 2rem;
+    align-items: center;
+    width: 75%;
+}
+
+.HoldBlock p{
+    padding: 0 1rem;
+    font-family: var(--bp-font);
+    font-weight: 500;
+}
+
+button.charge {
+    background-color: var(--bp-black);
+    color: var(--bp-white);
+    width: 3rem;
+    border-radius: 0.4rem;
+}

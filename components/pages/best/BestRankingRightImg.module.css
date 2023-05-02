@@ -1,0 +1,73 @@
+@keyframes banner {
+    0% {
+      opacity: 0;
+      transform: translateY(1rem);
+      filter: blur(0.5rem);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+.bestimg_1 {
+    position: relative;
+    width: 50%;
+}
+
+.imgbox {
+    width: 100%;
+    margin-bottom: 1rem;
+    animation: banner 0.5s ease-in-out;
+    position: relative;
+    z-index: 101;
+}
+
+.imgbox img{
+  animation: banner 0.5s ease-in-out;
+}
+
+.bestimg_1 .bgbox {
+    box-sizing: border-box;
+
+    position: absolute;
+    left: 27.74%;
+    right: 7.69%;
+    top: 20.09%;
+    bottom: 4.86%;
+
+    background: #FFFFFF;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 100;
+    width: 70%;
+    height: 75%;
+}
+
+.bestimg_1 .bgbox p.rank{
+    text-align: end;
+    color: var(--bp-secondary);
+    font-size: 0.7rem;
+    animation: banner 0.5s ease-in-out;
+}
+
+p.bgtxt{
+    position: absolute;
+        left: 27.74%;
+        right: 3%;
+        top: 10%;
+        bottom: 19.55%;
+    
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 0.9rem;
+        line-height: 21px;
+        /* identical to box height, or 175% */
+        text-align: end;
+        z-index: 101;
+    
+        color: #000000;
+        animation: banner 0.5s ease-in-out;
+}

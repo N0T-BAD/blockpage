@@ -1,0 +1,53 @@
+.historyBoxs{
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-right: 1rem;
+}
+
+.historyBox{
+    background: var(--bp-secondary-gray);
+    border-radius: 10px;
+    width: 48%;
+    margin: 10px 0px;
+    height: 25px;
+}
+
+.history{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    height: 100%;
+    align-items: center;
+}
+
+.history img{
+    width: 7%;
+    height: 50%;
+}
+
+.history p{
+    width: fit-content;
+    height: 100%;
+    margin: 0;
+    font-family: var(--bp-font);
+    color: var(--bp-black);
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+}
+
+.KeyWordTitle{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--bp-font);
+    color: var(--bp-gray);
+    font-size: 0.8rem;
+}
+
+.KeyWordTitle p {
+    font-family: var(--bp-font);
+    color: var(--bp-black);
+}
