@@ -1,7 +1,7 @@
 import Layout from "@/components/layouts/layout"
 import { NextPageWithLayout } from "./_app"
 import Image from "next/image"
-import style from "@/pages/login.module.css"
+import style from "@/pages/css/login.module.css"
 
 const login: NextPageWithLayout = () => {
   return (
@@ -14,7 +14,7 @@ const login: NextPageWithLayout = () => {
         <p>다양한 서비스를 이용해보세요.</p>
       </div>
       <div className={style.KakaoLogin}>
-        <Image src={"/assets/images/login/kakao_login.png"} alt={"카카오 로그인"} width={300} height={50} />
+        <Image src={"/assets/images/login/kakao_login.png"} alt={"카카오 로그인"} width={300} height={45} />
       </div>
     </>
   )
