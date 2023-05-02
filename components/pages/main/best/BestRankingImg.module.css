@@ -21,7 +21,7 @@
     margin-bottom: 1rem;
     animation: banner 0.5s ease-in-out;
     position: relative;
-    z-index: 101;
+    z-index: 11;
 }
 
 .imgbox img{
@@ -40,7 +40,7 @@
     background: #FFFFFF;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    z-index: 100;
+    z-index: 10;
     width: 70%;
     height: 75%;
 }
@@ -66,7 +66,7 @@ p.bgtxt{
         line-height: 21px;
         /* identical to box height, or 175% */
         text-align: end;
-        z-index: 101;
+        z-index: 11;
     
         color: #000000;
         animation: banner 0.5s ease-in-out;
