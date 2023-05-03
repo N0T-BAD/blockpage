@@ -15,7 +15,7 @@ export const userBottomMenuData = [
     id: 3,
     name: '블럭 이용 내역',
     iconUrl: "/assets/images/mypage/Block.png",
-    path: "/block-history"
+    path: "/blockpurchase"
   },
   {
     id: 4,

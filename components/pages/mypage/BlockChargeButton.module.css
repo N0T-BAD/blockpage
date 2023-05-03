@@ -1,0 +1,11 @@
+button.charge {
+  background-color: var(--bp-black);
+  color: var(--bp-white);
+  width: 3rem;
+  border-radius: 0.4rem;
+  height: 2rem;
+}
+
+.BlockChargeButton {
+  align-self: center;
+}

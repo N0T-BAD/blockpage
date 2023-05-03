@@ -4,6 +4,7 @@ import style from '@/components/pages/mypage/UserHoldBlock.module.css'
 import { useRouter } from 'next/router'
 import { HoldingBlockData } from '@/types/holdingBlockData';
 import { holdingBlockData } from '@/data/holdingBlockData';
+import BlockChargeButton from './BlockChargeButton';
 
 export default function UserHoldBlock() {
 
@@ -23,9 +24,7 @@ export default function UserHoldBlock() {
                         <Image src={"/assets/images/mypage/Block.png"} alt={"Block"} width={35} height={25} />
                         <p>X {haveBlock.number}</p>
                     </div>
-                    <button className={style.charge} onClick={onClickCharge}>
-                        충전
-                    </button>
+                    <BlockChargeButton />
                 </>
             ))}
         </div>
