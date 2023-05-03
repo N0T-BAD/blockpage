@@ -11,7 +11,7 @@ export default function BlockCharge() {
         <>
             {
                 chargeBlockData.map((data: ChargeBlockData) => (
-                    <div className={style.ChargeBlock}>
+                    <div className={style.ChargeBlock} key={data.id}>
                         <div className={style.ChargeBlock__title}>
                             <p>블럭 {data.number}개</p>
                         </div>
