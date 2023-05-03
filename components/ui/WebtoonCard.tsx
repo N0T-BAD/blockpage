@@ -13,12 +13,15 @@ export default function WebtoonCard() {
     <div className={style.box}>
       {
         listviewData &&
-        listviewData.map((data) => (
+        listviewData.map((data, index) => (
           <>
             <div
               className={style.imgBox}
               key={data.id}
             >
+              <div className={style.rank}>
+                {index + 1}
+              </div>
               <Image
                 src={data.imgUrl}
                 alt={data.title}
