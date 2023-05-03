@@ -1,10 +1,9 @@
 import Layout from "@/components/layouts/layout"
 import { NextPageWithLayout } from "./_app"
 import MainSection from "@/components/pages/main/MainSection"
-import BestSection from "@/components/pages/best/BestSection"
-import BestSection2 from "@/components/pages/best/BestSection2"
-import GenreSection from "@/components/pages/genre/GenreSection"
-import GameSection from "@/components/pages/game/GameSection"
+import GameSection from "@/components/pages/main/game/GameSection"
+import CategoryFilter from "@/components/pages/main/category/CategoryFilter"
+import BestSection from "@/components/pages/main/best/BestSection"
 
 
 const main: NextPageWithLayout = () => {
@@ -12,9 +11,8 @@ const main: NextPageWithLayout = () => {
     <>
       <MainSection />
       <GameSection />
-      <GenreSection />
+      <CategoryFilter />
       <BestSection />
-      <BestSection2 />
     </>
   )
 }

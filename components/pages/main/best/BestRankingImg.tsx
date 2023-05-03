@@ -1,8 +1,8 @@
 import React from 'react'
-import style from '@/components/pages/best/BestRankingRightImg.module.css'
+import style from '@/components/pages/main/best/BestRankingImg.module.css'
 import Image from 'next/image'
 
-export default function BestRankingRightImg() {
+export default function BestRankingImg() {
     return (
         <div className={style.bestimg_1}>
             <div className={style.imgbox}>
