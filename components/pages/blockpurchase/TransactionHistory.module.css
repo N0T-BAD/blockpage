@@ -22,3 +22,15 @@
   color: var(--bp-blue);
   border-bottom: 0.2rem solid var(--bp-blue);
 }
+
+.chargeBlockBox {
+  display: flex;
+}
+
+.chargeBlockBox p{
+  padding-right: 0.4rem;
+}
+
+.chargeBlockBox p.chargeBoxContent{
+  color: var(--bp-blue);
+}
