@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import style from '@/components/pages/listview/ListviewNavContent.module.css'
-import { topNavData } from '@/data/dummy/navData';
+import { staticTopNavData } from '@/data/staticMenuData';
 import { StaticNavData } from '@/types/staticDataType';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 export default function ListviewNavContent() {
 
   const router = useRouter();
-  const [navData] = useState<StaticNavData[]>(topNavData);
+  const [navData] = useState<StaticNavData[]>(staticTopNavData);
 
   return (
     <div className={style.listviewContent}>

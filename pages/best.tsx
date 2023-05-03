@@ -1,11 +1,13 @@
 import Layout from "@/components/layouts/layout"
 import { NextPageWithLayout } from "./_app"
 import ListviewNav from "@/components/pages/listview/ListviewNavSection"
+import ListviewSection from "@/components/pages/listview/ListviewSection"
 
 const best: NextPageWithLayout = () => {
   return (
     <>
       <ListviewNav />
+      <ListviewSection />
     </>
   )
 }
