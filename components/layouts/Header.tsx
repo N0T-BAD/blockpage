@@ -20,7 +20,9 @@ export default function Header() {
   return (
     router.pathname === '/' ||
       router.pathname === "/mypage" ||
-      router.pathname === "/best" ?
+      router.pathname === "/best" ||
+      router.pathname === "/week" ||
+      router.pathname === "/genre" ?
       (
         <header className={router.pathname === '/' ? style.blockMainHeader : style.blockHeader}>
           <div className={style.logo}>

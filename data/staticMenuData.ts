@@ -37,7 +37,7 @@ export const staticTopNavData = [
   {
     id: 1,
     name: "요일별 웹툰",
-    link: "/weekend?category=1",
+    link: "/week?category=1",
   },
   {
     id: 2,
@@ -48,6 +48,82 @@ export const staticTopNavData = [
     id: 3,
     name: "베스트",
     link: "/best",
+  },
+];
+
+export const staticWeekNavData = [
+  {
+    id: 1,
+    name: "월",
+    link: "/week?category=1",
+  },
+  {
+    id: 2,
+    name: "화",
+    link: "/week?category=2",
+  },
+  {
+    id: 3,
+    name: "수",
+    link: "/week?category=3",
+  },
+  {
+    id: 4,
+    name: "목",
+    link: "/week?category=4",
+  },
+  {
+    id: 5,
+    name: "금",
+    link: "/week?category=5",
+  },
+  {
+    id: 6,
+    name: "토",
+    link: "/week?category=6",
+  },
+  {
+    id: 7,
+    name: "일",
+    link: "/week?category=7",
+  },
+];
+
+export const staticGenreNavData = [
+  {
+    id: 1,
+    name: "로맨스",
+    link: "/genre?category=1",
+  },
+  {
+    id: 2,
+    name: "액션",
+    link: "/genre?category=2",
+  },
+  {
+    id: 3,
+    name: "무협",
+    link: "/genre?category=3",
+  },
+  {
+    id: 4,
+    name: "드라마",
+    link: "/genre?category=4",
+  },
+  {
+    id: 5,
+    name: "판타지",
+    link: "/genre?category=5",
+  },
+  {
+    id: 6,
+    name: "로맨스 판타지",
+    link: "/genre?category=6",
+  },
+  {
+    id: 7,
+    name: "성인",
+    link: "/genre?category=7",
   },
 ];
 

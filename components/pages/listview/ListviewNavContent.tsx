@@ -13,7 +13,7 @@ export default function ListviewNavContent() {
   return (
     <div className={style.listviewContent}>
       <nav>
-        <ul>
+        <ul className={style.navContent}>
           {
             navData &&
             navData.map((nav) => (

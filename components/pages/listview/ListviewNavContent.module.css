@@ -5,9 +5,21 @@
 
 .listviewContent ul {
   display: flex;
+  list-style: none;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+.listviewContent ul.navContent {
+  display: flex;
   justify-content: center;
   list-style: none;
-  width: 100%;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+.listviewContent ul::-webkit-scrollbar {
+  display: none;
 }
 
 .listviewContent ul li {
