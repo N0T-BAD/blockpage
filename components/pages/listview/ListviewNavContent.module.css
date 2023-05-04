@@ -1,0 +1,43 @@
+.listviewContent {
+  width: 100%;
+  background-color: var(--bp-gray);
+}
+
+.listviewContent ul {
+  display: flex;
+  list-style: none;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+.listviewContent ul.navContent {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+.listviewContent ul::-webkit-scrollbar {
+  display: none;
+}
+
+.listviewContent ul li {
+  text-align: center;
+  list-style: none;
+  padding: 1rem 1.4rem;
+  font-size: 0.9rem;
+  color: #6e6e6e;
+}
+
+.listviewContent ul a {
+  color: var(--bp-font-gray);
+}
+
+.listviewContent ul li.active {
+  color: var(--bp-primary);
+  font-weight: 700;
+  border-bottom: 3px;
+  border-bottom-style: solid;
+  border-bottom-color: var(--color-primary);
+}

@@ -17,8 +17,6 @@ export default function BestRankingContent() {
             </div>
             <p className={style.title}>이것이 법이다</p>
             <p className={style.author}>RK STUDIO, 글 쓰냐</p>
-            <p className={style.option2}>1시간마다 무료 . 학원/판타지</p>
-            <p className={style.viewmore}>View more</p>
         </div>
     )
 }
