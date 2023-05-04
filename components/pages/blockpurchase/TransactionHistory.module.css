@@ -27,10 +27,19 @@
   display: flex;
 }
 
-.chargeBlockBox p{
+.chargeBlockBox p {
   padding-right: 0.4rem;
 }
 
-.chargeBlockBox p.chargeBoxContent{
+.chargeBlockBox p.chargeBoxContent {
   color: var(--bp-blue);
+}
+
+.BlockHistoryDataList {
+  margin: 1rem 0.5rem;
+  border-bottom: 0.1rem solid var(--bp-secondary-gray);
+}
+
+.subhistorybox {
+  padding-bottom: 1rem;
 }

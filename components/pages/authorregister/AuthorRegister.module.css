@@ -1,0 +1,51 @@
+.AuthorRegister {
+  height: 2rem;
+  display: flex;
+}
+
+.AuthorName {
+  width: 25%;
+}
+
+.AuthorName p {
+  height: 1.97rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+}
+
+.AuthorInput {
+  width: 50%;
+  display: flex;
+}
+
+.AuthorInput input {
+  border: none;
+  width: 100%;
+  font-size: 1rem;
+  height: 2rem;
+  background-color: var(--bp-gray);
+}
+
+.AuthorInput input::placeholder {
+  padding-left: 0.5rem;
+}
+
+.AuthorButton {
+  width: 25%;
+  display: flex;
+  align-items: center;
+  padding: 0 0.8rem;
+}
+
+.AuthorButton button {
+  width: 100%;
+  height: 2rem;
+  border: none;
+  background-color: var(--bp-blue);
+  color: var(--bp-white);
+  font-size: 0.7rem;
+  font-weight: 600;
+  border-radius: 0.4rem;
+}

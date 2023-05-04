@@ -29,10 +29,10 @@ const TransectionHistory = () => {
       </div>
 
       {TransactionHistoryData.map((category) => (
-        <div style={{ display: category.name === active ? 'block' : 'none' }}>
+        <div className={style.BlockHistoryDataList} style={{ display: category.name === active ? 'block' : 'none' }}>
           {
             category.name === '충전 내역' ?
-              <div key={category.chargesubcategories[0].subCategoryId}>
+              <div className={style.subhistorybox} key={category.chargesubcategories[0].subCategoryId}>
                 <p>{category.chargesubcategories[0].date}</p>
                 <div className={style.chargeBlockBox}>
                   <p>구매</p>
@@ -49,7 +49,7 @@ const TransectionHistory = () => {
               </div>
               :
               category.name === '사용 내역' ?
-                <div key={category.chargesubcategories[1].subCategoryId}>
+                <div className={style.subhistorybox} key={category.chargesubcategories[1].subCategoryId}>
                   <p>{category.chargesubcategories[1].date}</p>
                   <div>
                     <p>{category.chargesubcategories[1].purchase}</p>

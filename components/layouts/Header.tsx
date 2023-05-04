@@ -115,15 +115,25 @@ export default function Header() {
                     <div className={style.BlockChargeBack}>
                       <Image src={"/assets/images/icons/back.svg"} alt={"뒤로가기"} width={20} height={20} onClick={handleBack} />
                     </div>
-                    <div className={style.BlockChargeLogo}>
+                    <div className={style.BlockUseLogo}>
                       <p>블럭 이용 내역</p>
                     </div>
-                    <div>
-                      <BlockChargeButton />
-                    </div>
+                    <BlockChargeButton />
                   </div>
                 </header>
                 :
-                <></>
+                router.pathname === '/authorregister' ?
+                  <header className={style.BlockChargeHeader}>
+                    <div className={style.BlockChargeTxt}>
+                      <div className={style.BlockChargeBack}>
+                        <Image src={"/assets/images/icons/back.svg"} alt={"뒤로가기"} width={20} height={20} onClick={handleBack} />
+                      </div>
+                      <div className={style.BlockChargeLogo}>
+                        <p>작가 등록</p>
+                      </div>
+                    </div>
+                  </header>
+                  :
+                  <></>
   )
 }

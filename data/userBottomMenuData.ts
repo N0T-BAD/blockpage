@@ -9,7 +9,7 @@ export const userBottomMenuData = [
     id: 2,
     name: '회원정보 변경',
     iconUrl: "/assets/images/icons/InformationChange.svg",
-    path: "/user-info"
+    path: "/userinfo"
   },
   {
     id: 3,
@@ -21,19 +21,19 @@ export const userBottomMenuData = [
     id: 4,
     name: 'NFT 보관함',
     iconUrl: "/assets/images/icons/NFTBox.svg",
-    path: "/nft-box"
+    path: "/nftbox"
   },
   {
     id: 5,
     name: '작가 등록',
     iconUrl: "/assets/images/icons/UserPlus.svg",
-    path: "/user-register"
+    path: "/authorregister"
   },
   {
     id: 6,
     name: '작가 관리',
     iconUrl: "/assets/images/icons/author.svg",
-    path: "/user-management"
+    path: "/usermanagement"
   },
   {
     id: 7,

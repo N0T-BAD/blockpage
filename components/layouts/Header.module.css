@@ -153,15 +153,17 @@
 
 .BlockChargeLogo {
   margin: auto;
-  width: 7rem;
+  width: 100%;
   display: flex;
   z-index: 101;
   text-align: center;
   font-family: var(--bp-font);
   font-weight: 600;
+  justify-content: center;
 }
 .BlockChargeLogo p {
-  width: 100%;
+  width: 25%;
+  text-align: start;
 }
 
 .BlockChargeTxt {
@@ -170,4 +172,20 @@
   display: flex;
   z-index: 101;
   text-align: center;
+}
+
+.BlockUseLogo {
+  margin: auto;
+  width: 100%;
+  display: flex;
+  z-index: 101;
+  text-align: center;
+  font-family: var(--bp-font);
+  font-weight: 600;
+  justify-content: center;
+}
+
+.BlockUseLogo p {
+  width: 45%;
+  text-align: end;
 }
