@@ -3,7 +3,7 @@ export const staticMenuData = [
     id: 1,
     name: "SideMenu",
     iconUrl: "/assets/images/icons/menuIcon.svg",
-    path: "/menu",
+    path: "/mypage",
   },
   {
     id: 2,
