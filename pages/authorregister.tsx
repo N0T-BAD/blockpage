@@ -1,11 +1,13 @@
 import Layout from "@/components/layouts/layout"
 import { NextPageWithLayout } from "./_app"
 import AuthorRegisterTopSection from "@/components/pages/authorregister/AuthorRegisterTopSection"
+import AuthorRegisterMiddleSection from "@/components/pages/authorregister/AuthorRegisterMiddleSection"
 
 const authorregister: NextPageWithLayout = () => {
   return (
     <>
       <AuthorRegisterTopSection />
+      <AuthorRegisterMiddleSection />
     </>
   )
 }

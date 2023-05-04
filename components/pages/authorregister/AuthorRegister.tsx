@@ -11,7 +11,7 @@ export default function AuthorRegister() {
         <input type='text' placeholder='작가명을 입력해주세요.' />
       </div>
       <div className={style.AuthorButton}>
-        <button>작가 등록</button>
+        <button>중복 체크</button>
       </div>
     </div>
   )
