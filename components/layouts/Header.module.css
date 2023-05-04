@@ -24,7 +24,7 @@
 .LoginHeader {
   z-index: 100;
   width: 100%;
-  padding: 1rem 1.2rem 1rem 1.2rem;
+  padding: 2rem 1.2rem 2rem 1.2rem;
   position: fixed;
   top: 0;
   display: flex;
@@ -121,4 +121,71 @@
 
 .searchlogo h1 {
   font-size: 0;
+}
+
+.BlockChargeHeader {
+  width: 100%;
+  padding: 1rem 1.2rem 1rem 1.2rem;
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 100;
+  border-bottom: var(--bp-secondary-gray) 1px solid;
+}
+
+.BlockChargeBack {
+  width: 6%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.BlockChargeHeader nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.BlockChargeHeader nav ul li {
+  list-style: none;
+}
+
+.BlockChargeLogo {
+  margin: auto;
+  width: 100%;
+  display: flex;
+  z-index: 101;
+  text-align: center;
+  font-family: var(--bp-font);
+  font-weight: 600;
+  justify-content: center;
+}
+.BlockChargeLogo p {
+  width: 25%;
+  text-align: start;
+}
+
+.BlockChargeTxt {
+  margin: auto;
+  width: 100%;
+  display: flex;
+  z-index: 101;
+  text-align: center;
+}
+
+.BlockUseLogo {
+  margin: auto;
+  width: 100%;
+  display: flex;
+  z-index: 101;
+  text-align: center;
+  font-family: var(--bp-font);
+  font-weight: 600;
+  justify-content: center;
+}
+
+.BlockUseLogo p {
+  width: 45%;
+  text-align: end;
 }

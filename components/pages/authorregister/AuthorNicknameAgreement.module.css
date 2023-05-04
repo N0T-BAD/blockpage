@@ -1,0 +1,18 @@
+.AuthorNicknameAgreementBox {
+  width: 100%;
+  height: 10rem;
+  background-color: var(--bp-gray);
+  text-align: center;
+  border-radius: 1rem;
+  margin: 1rem 0;
+}
+
+.AuthorNicknameAgreementBox p {
+  padding: 1rem;
+}
+
+.AuthorButton {
+  margin-top: 10rem;
+  display: flex;
+  justify-content: flex-end;
+}

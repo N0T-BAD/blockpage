@@ -1,0 +1,52 @@
+.HistoryCategory {
+  width: 100%;
+}
+
+.HistoryCategory nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.HistoryCategory nav ul li {
+  list-style: none;
+  width: 50%;
+  height: 2rem;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.HistoryCategory nav ul li.active {
+  font-weight: 600;
+  color: var(--bp-blue);
+  border-bottom: 0.2rem solid var(--bp-blue);
+}
+
+.chargeBlockBox {
+  display: flex;
+}
+
+.chargeBlockBox p {
+  padding-right: 0.4rem;
+}
+
+.chargeBlockBox p.chargeBoxContent {
+  color: var(--bp-blue);
+}
+
+.Clickactive {
+  margin: 1rem 0.5rem;
+  border-bottom: 0.1rem solid var(--bp-secondary-gray);
+  display: block;
+}
+
+.NoClickactive {
+  margin: 1rem 0.5rem;
+  border-bottom: 0.1rem solid var(--bp-secondary-gray);
+  display: none;
+}
+
+.subhistorybox {
+  padding-bottom: 1rem;
+}
