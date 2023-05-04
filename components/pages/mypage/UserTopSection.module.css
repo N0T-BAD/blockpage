@@ -1,4 +1,6 @@
 section.UserTopSection {
   margin-top: 7rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
   display: flex;
 }

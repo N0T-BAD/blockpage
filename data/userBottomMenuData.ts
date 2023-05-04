@@ -31,9 +31,9 @@ export const userBottomMenuData = [
   },
   {
     id: 6,
-    name: '작가 관리',
+    name: '작품 관리',
     iconUrl: "/assets/images/icons/author.svg",
-    path: "/usermanagement"
+    path: "/authorworkslist"
   },
   {
     id: 7,

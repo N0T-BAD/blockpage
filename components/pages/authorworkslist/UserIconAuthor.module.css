@@ -1,4 +1,4 @@
-.reader_box {
+.author_box {
   width: 15%;
   flex-direction: column;
   display: flex;
@@ -6,16 +6,16 @@
   margin: 0 1rem;
 }
 
-.reader {
+.author {
   padding: 0.2rem 0;
   width: fit-content;
 }
 
-.reader p {
+.author p {
   color: var(--bp-white);
   font-family: var(--bp-font);
   border-radius: 3rem;
-  background-color: var(--bp-primary);
+  background-color: var(--bp-secondary);
   width: 3rem;
   text-align: center;
   font-size: 14px;
