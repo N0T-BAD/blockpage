@@ -1,19 +1,19 @@
-@keyframes banner-slide-down {
-  0% {
-    opacity: 0;
-    transform: translateY(-1rem);
-  }
+.webtoonBox {
+  display: flex;
+  width: 100%;
+}
 
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.ImgWrap {
+  width: 40%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
 }
 
 .contentWrap {
   margin: 0;
-  animation: banner-slide-down 0.5s ease-in-out;
-  width: 50%;
+  width: 60%;
+  align-self: center;
 }
 
 .contentWrap .option {
@@ -80,4 +80,59 @@
   color: var(--bp-secondary);
   font-size: 0.8rem;
   font-weight: 600;
+}
+
+.HistoryCategory {
+  width: 100%;
+}
+
+.HistoryCategory nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.HistoryCategory nav ul li {
+  list-style: none;
+  width: 50%;
+  height: 2rem;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.HistoryCategory nav ul li.active {
+  font-weight: 600;
+  color: var(--bp-blue);
+  border-bottom: 0.2rem solid var(--bp-blue);
+}
+
+.chargeBlockBox {
+  display: flex;
+}
+
+.chargeBlockBox p {
+  padding-right: 0.4rem;
+}
+
+.chargeBlockBox p.chargeBoxContent {
+  color: var(--bp-blue);
+}
+
+.Clickactive {
+  margin: 1rem 0.5rem;
+  border-bottom: 0.1rem solid var(--bp-secondary-gray);
+  display: block;
+  width: 100%;
+}
+
+.NoClickactive {
+  margin: 1rem 0.5rem;
+  border-bottom: 0.1rem solid var(--bp-secondary-gray);
+  display: none;
+  width: 100%;
+}
+
+.subhistorybox {
+  padding-bottom: 1rem;
 }

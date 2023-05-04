@@ -38,28 +38,28 @@ export const TransactionHistoryData = [
     name: '사용 내역',
     chargesubcategories: [
       {
-        subCategoryId: 5,
+        subCategoryId: 1,
         date: "23.04.22",
         purchase: "세화, 봄",
         balance: "21화",
         amount: "블럭 2개"
       },
       {
-        subCategoryId: 6,
+        subCategoryId: 2,
         date: "23.04.23",
         purchase: "파워레인저",
         balance: "12화",
         amount: "블럭 2개"
       },
       {
-        subCategoryId: 7,
+        subCategoryId: 3,
         date: "23.04.25",
         purchase: "캐릭캐릭 체인지",
         balance: "3화",
         amount: "블럭 2개"
       },
       {
-        subCategoryId: 8,
+        subCategoryId: 4,
         date: "23.04.28",
         purchase: "두부",
         balance: "7화",

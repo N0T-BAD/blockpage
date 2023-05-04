@@ -6,9 +6,13 @@ export default function AuthorSignupButton() {
 
   const router = useRouter();
 
+  const handleAuthorSignup = () => {
+    router.push('/authorworkslist')
+  }
+
   return (
     <div className={style.AuthorSignupButtonBox}>
-      <button className={style.AuthorSignupButton}>작가 등록</button>
+      <button className={style.AuthorSignupButton} onClick={handleAuthorSignup}>작가 등록</button>
     </div>
   )
 }
