@@ -5,3 +5,9 @@ export interface StaticMenuData {
   path: string;
   innerMenu?: StaticMenuData[];
 }
+
+export interface StaticNavData {
+  id: number;
+  name: string;
+  link: string;
+}

@@ -1,0 +1,77 @@
+@keyframes banner {
+  0% {
+    opacity: 0;
+    transform: translateY(1rem);
+    filter: blur(0.5rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes banner-slide-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.gamewrap {
+  width: 100%;
+  margin-top: 10rem;
+  display: flex;
+  justify-content: center;
+}
+
+
+
+.gameBox {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  min-width: 22rem;
+  height: 6rem;
+  background-color: var(--bp-gray);
+  border-radius: 0.5rem;
+  transition: 1s;
+}
+
+.gameBox.blue {
+  background-color: var(--bp-blue);
+}
+.gameBox.red {
+  background-color: var(--bp-red);
+}
+
+.gameBox img {
+  opacity: 1;
+  position: relative;
+  bottom: 4.65rem;
+  border-radius: 0.5rem 0 0 0.5rem;
+  transition: 1s;
+}
+
+.gameText {
+  display: flex;
+  flex-direction: column;
+  padding-left: 1.5rem;
+  transition: 1s;
+}
+
+.gameBox p:first-child {
+  color: var(--bp-white);
+  font-size: 1.3rem;
+  padding: 1rem 0 0.4rem 0;
+}
+
+.gameBox p:last-child {
+  font-size: 0.7rem;
+  word-break: keep-all;
+  width: 6rem;
+}

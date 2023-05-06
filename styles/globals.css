@@ -1,22 +1,23 @@
 @import url("./common/font.css");
 
-:root {  
-  --bp-primary: #00FFB2;
-  --bp-secondary: #9A2AED;
-  --bp-black: #171F24;
-  --bp-white: #FFFFFF;
-  --bp-blue: #69D2FF;
-  --bp-gray: #F3F3F3;
-  --bp-secondary-gray: #F3F3F3;
-  
+:root {
+  --bp-primary: #00ffb2;
+  --bp-secondary: #9a2aed;
+  --bp-black: #171f24;
+  --bp-white: #ffffff;
+  --bp-blue: #69d2ff;
+  --bp-gray: #f3f3f3;
+  --bp-red: #ff54d9;
+  --bp-secondary-gray: #f3f3f3;
+
   --bp-font-gray: #778087;
-  
-  --bp-line-gray: #D9D9D9;
 
-  --bp-primary-glow: linear-gradient(45deg, #9025FC 0%, #1308FE 100%);
-  --bp-secondary-glow: linear-gradient(45deg, #00E09D 0%, #BD00FF 100%);
+  --bp-line-gray: #d9d9d9;
 
-  --bp-font: 'Roboto', sans-serif;
+  --bp-primary-glow: linear-gradient(45deg, #9025fc 0%, #1308fe 100%);
+  --bp-secondary-glow: linear-gradient(45deg, #00e09d 0%, #bd00ff 100%);
+
+  --bp-font: "Roboto", sans-serif;
 
   /* --primary-glow: conic-gradient(
     from 180deg at 50% 50%,
@@ -30,8 +31,6 @@
     rgba(255, 255, 255, 1),
     rgba(255, 255, 255, 0)
   ); */
-
-  
 }
 
 * {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import style from '@/components/pages/blockcharge/BlockCharge.module.css'
 import { ChargeBlockData } from '@/types/chargeBlockData'
 import { chargeBlockData } from '@/data/chargeBlockData'

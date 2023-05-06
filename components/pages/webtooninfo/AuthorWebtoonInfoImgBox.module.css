@@ -1,0 +1,12 @@
+.InfoImgBox{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    margin: 2rem 0;
+    flex-direction: column;
+}
+
+.InfoImgBox input{
+    width: 100%;
+    margin: 1rem 0;
+}
