@@ -136,6 +136,7 @@
   z-index: 100;
   border-bottom: var(--bp-secondary-gray) 1px solid;
   height: 4rem;
+  background-color: var(--bp-white);
 }
 
 .BlockChargeBack {

@@ -6,11 +6,12 @@ import Link from 'next/link'
 
 export default function BlockCharge() {
 
+
     return (
         <>
             {
                 chargeBlockData.map((data: ChargeBlockData) => (
-                    <div className={style.ChargeBlock} key={data.id}>
+                    <div className={style.ChargeBlock}>
                         <div className={style.ChargeBlock__title}>
                             <p>블럭 {data.number}개</p>
                         </div>

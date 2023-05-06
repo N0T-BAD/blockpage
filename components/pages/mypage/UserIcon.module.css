@@ -21,3 +21,19 @@
   font-size: 14px;
   font-weight: 500;
 }
+
+.author {
+  padding: 0.2rem 0;
+  width: fit-content;
+}
+
+.author p {
+  color: var(--bp-white);
+  font-family: var(--bp-font);
+  border-radius: 3rem;
+  background-color: var(--bp-secondary);
+  width: 3rem;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+}
