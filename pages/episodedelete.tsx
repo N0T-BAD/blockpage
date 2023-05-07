@@ -1,11 +1,13 @@
 import Layout from "@/components/layouts/layout"
 import { NextPageWithLayout } from "./_app"
 import EpisodeDeleteTopSection from "@/components/pages/episodedelete/EpisodeDeleteTopSection"
+import EpisodeDeleteMiddleSection from "@/components/pages/episodedelete/EpisodeDeleteMiddleSection"
 
 const EpisodeDelete: NextPageWithLayout = () => {
     return (
         <>
             <EpisodeDeleteTopSection />
+            <EpisodeDeleteMiddleSection />
         </>
     )
 }

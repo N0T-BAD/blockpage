@@ -10,13 +10,13 @@
 }
 
 .DeleteInfoBox p{
-    width: 25%;
+    width: 35%;
     text-align: center;
     align-self: center;
 }
 
 .DeleteInfoBox p.title{
-    width: 70%;
+    width: 60%;
     background-color: var(--bp-gray);
     border-radius: 1rem;
     border: none;
@@ -31,13 +31,13 @@
 }
 
 .DeleteInfoBox_2 p{
-    width: 25%;
+    width: 35%;
     text-align: center;
     align-self: center;
 }
 
 .DeleteInfoBox_2 input{
-    width: 70%;
+    width: 65%;
     background-color: var(--bp-gray);
     border-radius: 1rem;
     border: none;
@@ -48,7 +48,7 @@
 .submit {
     width: 100%;
     height: 3rem;
-    margin-Top: 25rem;
+    margin-Top: 20rem;
     text-align: center;
 }
 

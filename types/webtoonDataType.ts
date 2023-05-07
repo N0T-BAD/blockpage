@@ -7,6 +7,10 @@ export interface webtoonTitleDataType {
 }
 
 export interface webtoonepisodeDataType {
-    id: number;
+    id: string;
     title: string;
+}
+
+export interface episodeDeleteDataType {
+    episodedeletereason: string;
 }
