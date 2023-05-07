@@ -3,8 +3,13 @@
   width: 100%;
 }
 
+.webtoonInfoWrap{
+  width: 85%;
+  display: flex;
+}
+
 .ImgWrap {
-  width: 40%;
+  width: 45%;
   height: 100%;
   position: relative;
   overflow: hidden;
@@ -12,7 +17,7 @@
 
 .contentWrap {
   margin: 0;
-  width: 45%;
+  width: 55%;
   align-self: center;
 }
 
@@ -31,6 +36,12 @@
 .contentWrap p.title {
   margin-bottom: 0.4rem;
   font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.contentWrap p.episodetitle {
+  margin-bottom: 0.4rem;
+  font-size: 1rem;
   font-weight: 900;
 }
 
