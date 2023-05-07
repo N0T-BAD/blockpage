@@ -132,6 +132,18 @@ export default function Header() {
                       </div>
                     </header>
                     :
-                    <></>
+                    router.pathname === '/webtoondelete' ?
+                      <header className={style.BlockChargeHeader}>
+                        <div className={style.BlockChargeTxt}>
+                          <div className={style.BlockChargeBack}>
+                            <Image src={"/assets/images/icons/back.svg"} alt={"뒤로가기"} width={20} height={20} onClick={handleBack} />
+                          </div>
+                          <div className={style.BlockChargeLogo}>
+                            <p>웹툰 삭제</p>
+                          </div>
+                        </div>
+                      </header>
+                      :
+                      <></>
   )
 }

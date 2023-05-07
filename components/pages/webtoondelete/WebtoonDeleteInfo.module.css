@@ -1,21 +1,21 @@
-.WebtoonInfoWrap{
+.WebtoonDeleteInfoWrap{
     margin: 3rem 0;
 }
 
-.InfoBox{
+.DeleteInfoBox{
     display: flex;
     width: 100%;
     height: 2rem;
-    margin: 2rem 0;
+    margin: 4rem 0;
 }
 
-.InfoBox p{
+.DeleteInfoBox p{
     width: 25%;
     text-align: center;
     align-self: center;
 }
 
-.InfoBox input{
+.DeleteInfoBox p.title{
     width: 70%;
     background-color: var(--bp-gray);
     border-radius: 1rem;
@@ -23,39 +23,32 @@
     padding-left: 1rem;
 }
 
-.InfoBox p.author{
-    width: 70%;
-    background-color: var(--bp-gray);
-    border-radius: 1rem;
-    border: none;
-    padding-left: 1rem;
-}
-
-.InfoillustratorBox {
+.DeleteInfoBox_2{
     display: flex;
     width: 100%;
     height: 2rem;
-    margin: 2rem 0;
+    margin: 4rem 0;
 }
 
-.InfoillustratorBox p{
-    width: 35%;
+.DeleteInfoBox_2 p{
+    width: 25%;
     text-align: center;
     align-self: center;
 }
 
-.InfoillustratorBox input{
-    width: 60%;
+.DeleteInfoBox_2 input{
+    width: 70%;
     background-color: var(--bp-gray);
     border-radius: 1rem;
     border: none;
     padding-left: 1rem;
+    word-break:break-all;
 }
 
 .submit {
     width: 100%;
     height: 3rem;
-    margin: 1rem 0;
+    margin-Top: 25rem;
     text-align: center;
 }
 

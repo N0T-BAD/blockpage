@@ -4,6 +4,9 @@ import AuthorWebtoonInfoImgBox from './AuthorWebtoonInfoImgBox';
 import { authorWebtoonInfoDataType, authorWebtoonInfoImgDataType } from '@/types/authorWebtoonInfoImgDataType';
 import { useRouter } from 'next/router';
 import axios from 'axios';
+import { authorNameDataType } from '@/types/authorNameDataType';
+import { webtoonAuthorState } from '@/state/webtoon/webtoonAuthorState';
+import { useRecoilState } from 'recoil';
 
 export default function AuthorWebtoonInfoForm() {
 
@@ -14,18 +17,17 @@ export default function AuthorWebtoonInfoForm() {
         description: '',
         genre: '',
         day: '',
-        author: '',
         illustrator: '',
     });
 
     const [webtoonInfoImgData, setWebtoonInfoImgData] = useState<authorWebtoonInfoImgDataType[]>([]);
 
+    const [authorName, setAuthorName] = useRecoilState<authorNameDataType>(webtoonAuthorState);
+
     useEffect(() => {
         console.log(webtoonInfoData)
         console.log(webtoonInfoImgData)
     }, [webtoonInfoData, webtoonInfoImgData])
-
-
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -37,7 +39,7 @@ export default function AuthorWebtoonInfoForm() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (webtoonInfoData.title === '' || webtoonInfoData.description === '' || webtoonInfoData.genre === '' || webtoonInfoData.day === '' || webtoonInfoData.author === '') {
+        if (webtoonInfoData.title === '' || webtoonInfoData.description === '' || webtoonInfoData.genre === '' || webtoonInfoData.day === '') {
             alert('웹툰 정보를 입력해주세요.')
         } else if (webtoonInfoImgData[0] === undefined || webtoonInfoImgData[1] === undefined) {
             alert('웹툰 이미지를 입력해주세요.')
@@ -47,16 +49,18 @@ export default function AuthorWebtoonInfoForm() {
                 description: webtoonInfoData.description,
                 genre: webtoonInfoData.genre,
                 day: webtoonInfoData.day,
-                author: webtoonInfoData.author,
                 illustrator: webtoonInfoData.illustrator,
                 mainImage: webtoonInfoImgData[0].mainImage,
                 thumbnailImage: webtoonInfoImgData[1].thumbnailImage,
             })
                 .then((res) => {
-                    if (res) {
-                        router.push('/success'); // '/success'로 이동
-                        alert('웹툰 정보가 등록되었습니다.')
-                    }
+                    setAuthorName(
+                        {
+                            author: res.data.author
+                        }
+                    )
+                    alert('웹툰 정보가 등록되었습니다.')
+                    router.push('/authorworkslist')
                 })
         }
     };
@@ -83,7 +87,7 @@ export default function AuthorWebtoonInfoForm() {
                     </div>
                     <div className={style.InfoBox}>
                         <p>작가 : </p>
-                        <input type="text" name="author" onChange={handleInput} />
+                        <p className={style.author}>{authorName.author}</p>
                     </div>
                     <div className={style.InfoillustratorBox}>
                         <p>일러스트레이터 : </p>
@@ -94,7 +98,7 @@ export default function AuthorWebtoonInfoForm() {
                     }} isRequired={true} />
 
                     <div className={style.submit}>
-                        <button className={style.submit} type="submit">등록</button>
+                        <button type="submit">등록</button>
                     </div>
                 </form>
             </div>

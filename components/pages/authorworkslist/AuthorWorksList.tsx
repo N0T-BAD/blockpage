@@ -16,10 +16,6 @@ const AuthorWorksList = () => {
 
   const router = useRouter();
 
-  const handlewebttoninfo = () => {
-    router.push("/webtooninfo");
-  }
-
   return (
     <>
       <div className={style.HistoryCategory}>
@@ -61,6 +57,10 @@ const AuthorWorksList = () => {
                     <p className={style.title}>{category.webtoonsubcategories[1].title}</p>
                     <p className={style.author}>{category.webtoonsubcategories[1].author}</p>
                   </div>
+                  <div className={style.webtoonButton}>
+                    <button >수정</button>
+                    <button onClick={() => router.push('/webtoondelete')}>삭제</button>
+                  </div>
                 </div>
                 <footer className={style.AuthorFooterWrap}>
                   <div className={style.footerBtn}>
@@ -70,7 +70,7 @@ const AuthorWorksList = () => {
                       width={50}
                       height={50}
                       priority
-                      onClick={handlewebttoninfo}
+                      onClick={() => router.push("/webtooninfo")}
                     />
                   </div>
                 </footer>

@@ -12,7 +12,12 @@
 
 .contentWrap {
   margin: 0;
-  width: 60%;
+  width: 45%;
+  align-self: center;
+}
+
+.webtoonButton{
+  width: 15%;
   align-self: center;
 }
 
@@ -166,4 +171,11 @@ footer.AuthorFooterWrap {
   width: 30%;
   height: 30%;
   filter: brightness(0) invert(1);
+}
+
+.webtoonButton button{
+  width: 100%;
+  margin: 0.5rem 0;
+  border: none;
+  height: 1.5rem;
 }

@@ -12,7 +12,7 @@ export default function UserIcon() {
                     <p>독자</p>
                 </div>
                 :
-                router.pathname === "/webtooninfo" || router.pathname === "/authorworkslist" ?
+                router.pathname === "/webtooninfo" || router.pathname === "/authorworkslist" || router.pathname === "/webtoondelete" ?
                     <div className={style.author}>
                         <p>작가</p>
                     </div>
