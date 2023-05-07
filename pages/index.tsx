@@ -10,7 +10,7 @@ import Portal from "@/components/modals/ModalPortal"
 const main: NextPageWithLayout = () => {
   return (
     <>
-      <Portal><MainSection /></Portal>
+      <MainSection />
       <MainSection />
       <GameSection />
       <CategoryFilter />
