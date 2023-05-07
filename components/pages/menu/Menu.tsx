@@ -12,9 +12,13 @@ export default function Menu() {
     router.push("/login");
   }
 
+  const handleClose = () => {
+    router.back();
+  }
+
   return (
     <div>
-      <div className={style.closeImg}>
+      <div className={style.closeImg} onClick={handleClose}>
         <Image
           src={"/assets/images/icons/close.svg"}
           alt={"close"}

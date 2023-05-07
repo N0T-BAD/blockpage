@@ -1,0 +1,62 @@
+.webtoonBox {
+  display: flex;
+  width: 100%;
+}
+
+.ImgWrap {
+  width: 40%;
+  position: relative;
+  overflow: hidden;
+}
+
+.contentWrap {
+  width: 60%;
+  align-self: center;
+}
+
+.contentWrap .option {
+  display: flex;
+  align-items: center;
+  margin: 0.3rem 0;
+}
+
+.contentWrap p.title {
+  margin-bottom: 0.4rem;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.contentWrap .author {
+  margin-bottom: 0.4rem;
+  color: var(--bp-font-gray);
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.contentWrap .option .views {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-right: 1rem;
+}
+
+.contentWrap .option .views p.viewstxt {
+  color: var(--bp-primary);
+  font-size: 0.7rem;
+  font-weight: 400;
+  margin-left: 0.3rem;
+}
+
+.contentWrap .option .likes {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-right: 1rem;
+}
+
+.contentWrap .option .likes p.likestxt {
+  color: var(--bp-secondary);
+  font-size: 0.7rem;
+  font-weight: 400;
+  margin-left: 0.3rem;
+}
