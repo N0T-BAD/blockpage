@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 
 import LikeButton from '@/components/ui/LikeButton';
 import LikeViewSection from '@/components/ui/webtoonInfo/LikeViewSection';
+import BackBtn from '@/components/ui/BackBtn';
 
 export default function WebtoonInfo() {
 
@@ -28,7 +29,7 @@ export default function WebtoonInfo() {
   return (
     <>
       <div className={style.top}>
-        <Image src={"/assets/images/icons/back.svg"} alt={"뒤로가기"} width={20} height={20} onClick={handleBack} />
+        <BackBtn />
         <div>
           <LikeButton
             like={like}
