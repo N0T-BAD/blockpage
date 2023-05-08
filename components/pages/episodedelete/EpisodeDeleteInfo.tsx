@@ -44,7 +44,7 @@ export default function EpisodeDeleteInfo() {
                             title: res.data.title,
                         }
                     )
-                    alert('회차 삭제 요첨이 완료되었습니다.')
+                    alert('회차 삭제 요청이 완료되었습니다.')
                     router.push('/authorworkslist')
                 })
         }
