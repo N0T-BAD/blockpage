@@ -155,8 +155,8 @@ export default function Header() {
                             <div className={style.BlockChargeBack}>
                               <Image src={"/assets/images/icons/back.svg"} alt={"뒤로가기"} width={20} height={20} onClick={handleBack} />
                             </div>
-                            <div className={style.BlockChargeLogo}>
-                              <p>회차 조회</p>
+                            <div className={style.EpisodeLogo}>
+                              <p>에피소드 조회</p>
                             </div>
                           </div>
                         </header>
@@ -167,12 +167,24 @@ export default function Header() {
                               <div className={style.BlockChargeBack}>
                                 <Image src={"/assets/images/icons/back.svg"} alt={"뒤로가기"} width={20} height={20} onClick={handleBack} />
                               </div>
-                              <div className={style.BlockChargeLogo}>
-                                <p>회차 삭제</p>
+                              <div className={style.EpisodeLogo}>
+                                <p>에피소드 삭제</p>
                               </div>
                             </div>
                           </header>
                           :
-                          <></>
+                          router.pathname === '/episodeinfo' ?
+                            <header className={style.BlockChargeHeader}>
+                              <div className={style.BlockChargeTxt}>
+                                <div className={style.BlockChargeBack}>
+                                  <Image src={"/assets/images/icons/back.svg"} alt={"뒤로가기"} width={20} height={20} onClick={handleBack} />
+                                </div>
+                                <div className={style.EpisodeLogo}>
+                                  <p>에피소드 등록</p>
+                                </div>
+                              </div>
+                            </header>
+                            :
+                            <></>
   )
 }

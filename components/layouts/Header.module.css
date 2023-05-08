@@ -170,6 +170,21 @@
   text-align: start;
 }
 
+.EpisodeLogo {
+  margin: auto;
+  width: 100%;
+  display: flex;
+  z-index: 101;
+  text-align: center;
+  font-family: var(--bp-font);
+  font-weight: 600;
+  justify-content: center;
+}
+.EpisodeLogo p {
+  width: 35%;
+  text-align: start;
+}
+
 .BlockChargeTxt {
   margin: auto;
   width: 100%;
