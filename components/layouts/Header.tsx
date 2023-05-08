@@ -18,6 +18,11 @@ export default function Header() {
     router.back();
   }
 
+  const handlemypageBack = () => {
+    router.push("/mypage");
+  }
+
+
   return (
     router.pathname === '/' ||
       router.pathname === "/mypage" ||
@@ -87,7 +92,7 @@ export default function Header() {
               <header className={style.BlockChargeHeader}>
                 <div className={style.BlockChargeTxt}>
                   <div className={style.BlockChargeBack}>
-                    <Image src={"/assets/images/icons/back.svg"} alt={"뒤로가기"} width={20} height={20} onClick={handleBack} />
+                    <Image src={"/assets/images/icons/back.svg"} alt={"뒤로가기"} width={20} height={20} onClick={handlemypageBack} />
                   </div>
                   <div className={style.BlockUseLogo}>
                     <p>블럭 이용 내역</p>
@@ -100,7 +105,7 @@ export default function Header() {
                 <header className={style.BlockChargeHeader}>
                   <div className={style.BlockChargeTxt}>
                     <div className={style.BlockChargeBack}>
-                      <Image src={"/assets/images/icons/back.svg"} alt={"뒤로가기"} width={20} height={20} onClick={handleBack} />
+                      <Image src={"/assets/images/icons/back.svg"} alt={"뒤로가기"} width={20} height={20} onClick={handlemypageBack} />
                     </div>
                     <div className={style.BlockChargeLogo}>
                       <p>작가 등록</p>
@@ -112,7 +117,7 @@ export default function Header() {
                   <header className={style.BlockChargeHeader}>
                     <div className={style.BlockChargeTxt}>
                       <div className={style.BlockChargeBack}>
-                        <Image src={"/assets/images/icons/back.svg"} alt={"뒤로가기"} width={20} height={20} onClick={handleBack} />
+                        <Image src={"/assets/images/icons/back.svg"} alt={"뒤로가기"} width={20} height={20} onClick={handlemypageBack} />
                       </div>
                       <div className={style.BlockChargeLogo}>
                         <p>작품 관리</p>
