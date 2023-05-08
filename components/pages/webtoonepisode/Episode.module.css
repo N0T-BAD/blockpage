@@ -1,0 +1,42 @@
+/* .episodeSection {} */
+
+.episodeState p {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.episode {
+  display: flex;
+}
+
+.episodeImg {
+  width: 40%;
+  text-align: center;
+}
+
+.episodeContents {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+.subject {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.rating {
+  font-size: 0.9rem;
+  color: var(--bp-primary);
+  margin-right: 0.5rem;
+}
+
+.date {
+  font-size: 0.9rem;
+  color: var(--bp-secondary);
+}
+
+.episodeOption {
+  display: flex;
+  align-items: center;
+}
