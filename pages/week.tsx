@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { NextPageWithLayout } from "./_app"
+import { NextPageWithLayout } from "@/pages/_app"
 
 import Layout from "@/components/layouts/layout"
 import ListviewNavSection from "@/components/pages/listview/ListviewNavSection"

@@ -2,7 +2,6 @@ import Image from 'next/image'
 import React from 'react'
 import style from '@/components/pages/search/SearchBar.module.css'
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 
 
 export default function SearchBar() {

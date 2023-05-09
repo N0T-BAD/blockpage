@@ -1,4 +1,4 @@
-import { NextPageWithLayout } from "./_app"
+import { NextPageWithLayout } from "@/pages/_app"
 import HistorySection from "@/components/pages/search/HistorySection"
 import Layout from "@/components/layouts/layout"
 import SearchBarSection from "@/components/pages/search/SearchBarSection"

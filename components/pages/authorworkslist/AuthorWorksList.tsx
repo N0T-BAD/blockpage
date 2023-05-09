@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import style from '@/components/pages/authorworkslist/AuthorWorksList.module.css'
 import Image from 'next/image';
 import { authorWorksListData } from '@/data/authorWorksListData';
-import AuthorCash from './AuthorCash';
+import AuthorCash from '@/components/pages/authorworkslist/AuthorCash';
 import { useRouter } from 'next/router';
 
 const AuthorWorksList = () => {

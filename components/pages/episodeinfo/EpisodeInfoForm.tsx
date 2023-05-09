@@ -143,15 +143,3 @@ export default function EpisodeInfoForm() {
     </>
   )
 }
-
-// episodeThumbnailImage를 입력 받아서 !episodeThumbnailImage 이면 alert('에피소드 썸네일 이미지를 입력해주세요.')
-// episodeImage를 입력 받아서 !episodeImage 이면 alert('에피소드 이미지를 입력해주세요.')
-// episodeInfoData를 입력 받아서 !episodeInfoData 이면 alert('에피소드 정보를 입력해주세요.')
-// episodeThumbnailImage, episodeImage, episodeInfoData가 모두 입력되면 axios.post('/api/authorwebtooninfo', {
-//   episodetitle: episodeInfoData.episodetitle,
-//   episodedescription: episodeInfoData.episodedescription,
-//   day: episodeInfoData.day,
-//   authortalk: episodeInfoData.authortalk,
-//   episodeThumbnailImage: episodeThumbnailImage,
-//   episodeImage: episodeImage,
-// })
