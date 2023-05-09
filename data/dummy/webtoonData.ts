@@ -1,4 +1,5 @@
 export const webtoonInfoData = {
+  id: 1,
   title: "세화, 가는 길",
   author: "한혜연",
   imgUrl: "/assets/dummy/01.png",
@@ -6,6 +7,17 @@ export const webtoonInfoData = {
   likes: 242,
   week: "금요웹툰",
   genre: "드라마",
+};
+
+export const webtoonSummaryData = {
+  id: 1,
+  summary:
+    "사랑하던 사람이 갑자기 세상을 떠난 후 상실감과 죄책감으로 하루하루 살아가던 세화. 자신의 이름과 같은 세화사에서 진행",
+};
+
+export const webtoonStateData = {
+  id: 1,
+  state: "연재중",
 };
 
 export const episodeData = [

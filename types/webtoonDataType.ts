@@ -16,6 +16,7 @@ export interface episodeDeleteDataType {
 }
 
 export interface WebtoonInfoDataType {
+  id: number;
   title: string;
   author: string;
   imgUrl: string;
@@ -23,6 +24,16 @@ export interface WebtoonInfoDataType {
   likes: number;
   week: string;
   genre: string;
+}
+
+export interface WebtoonSummaryDataType {
+  id: number;
+  summary: string;
+}
+
+export interface WebtoonStateDataType {
+  id: number;
+  state: string;
 }
 
 export interface EpisodeDataType {

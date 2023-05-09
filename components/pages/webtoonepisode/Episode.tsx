@@ -12,13 +12,6 @@ export default function Episode() {
 
   return (
     <>
-      <div className={style.episodeState}>
-        <p>연재중</p>
-        <Separator
-          color='black'
-          gutter={1}
-        />
-      </div>
       {
         episode &&
         episode.map((data) => (
