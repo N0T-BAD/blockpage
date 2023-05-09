@@ -1,9 +1,11 @@
 .webtoonBox {
   display: flex;
   width: 100%;
+  border-bottom: 1px solid var(--bp-gray);
+  padding: 0.6rem 0;
 }
 
-.webtoonInfoWrap{
+.webtoonInfoWrap {
   width: 85%;
   display: flex;
 }
@@ -21,7 +23,7 @@
   align-self: center;
 }
 
-.webtoonButton{
+.webtoonButton {
   width: 15%;
   align-self: center;
 }
@@ -154,7 +156,7 @@
 }
 
 footer.AuthorFooterWrap {
-  width: 100%;
+  width: 90%;
   height: 100px;
   /* background: linear-gradient(180deg, #ffffff00 0%, #ffffff 50%); */
   position: fixed;
@@ -162,7 +164,6 @@ footer.AuthorFooterWrap {
   z-index: 100;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .footerBtn {
@@ -170,7 +171,7 @@ footer.AuthorFooterWrap {
   height: 80px;
   background-color: var(--bp-primary);
   border-radius: 50%;
-  box-shadow: 0px 5px 5px 2px #69D2FF;
+  box-shadow: 0px 5px 5px 2px #69d2ff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -184,7 +185,7 @@ footer.AuthorFooterWrap {
   filter: brightness(0) invert(1);
 }
 
-.webtoonButton button{
+.webtoonButton button {
   width: 100%;
   margin: 0.5rem 0;
   border: none;

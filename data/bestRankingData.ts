@@ -1,10 +1,13 @@
-export const bestRankingContentData = [
+export const bestRankingData = [
   {
     id: 1,
     views: "173.3M",
     likes: "235.5M",
     title: "마음의 소리",
     author: "조석",
+    ranking: "1",
+    rankup: "+2",
+    imgUrl: "/assets/images/best/image1.png",
   },
   {
     id: 2,
@@ -12,6 +15,9 @@ export const bestRankingContentData = [
     likes: "678.3M",
     title: "파우스트 인 러브",
     author: "세화",
+    ranking: "2",
+    rankup: "-6",
+    imgUrl: "/assets/images/best/image2.png",
   },
   {
     id: 3,
@@ -19,6 +25,9 @@ export const bestRankingContentData = [
     likes: "783.3M",
     title: "외모지상주의",
     author: "박태준",
+    ranking: "3",
+    rankup: "+8",
+    imgUrl: "/assets/dummy/03.png",
   },
   {
     id: 4,
@@ -26,5 +35,8 @@ export const bestRankingContentData = [
     likes: "693.8M",
     title: "갓오브 하이스쿨",
     author: "박용재",
+    ranking: "4",
+    rankup: "+2",
+    imgUrl: "/assets/dummy/01.png",
   },
 ]

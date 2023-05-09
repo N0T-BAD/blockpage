@@ -49,7 +49,7 @@ export default function EpisodelistBox() {
                                 width={50}
                                 height={50}
                                 priority
-                                onClick={() => router.push("/webtooninfo")}
+                                onClick={() => router.push("/episodeinfo")}
                             />
                         </div>
                     </footer>

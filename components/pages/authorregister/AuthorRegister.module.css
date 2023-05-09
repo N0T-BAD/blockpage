@@ -17,16 +17,24 @@
 }
 
 .AuthorInput {
-  width: 60%;
+  width: 55%;
+  height: 4rem;
   display: flex;
+  flex-direction: column;
 }
 
 .AuthorInput input {
   border: none;
   width: 100%;
   font-size: 1rem;
-  height: 2rem;
+  height: 50%;
   background-color: var(--bp-gray);
+}
+
+.AuthorInput p {
+  width: 100%;
+  font-size: 1rem;
+  height: 2rem;
 }
 
 .AuthorInput input::placeholder {

@@ -1,7 +1,7 @@
 @import url("./common/font.css");
 
 :root {
-  --bp-primary: #00ffb2;
+  --bp-primary: #a6c9ff;
   --bp-secondary: #9a2aed;
   --bp-black: #171f24;
   --bp-white: #ffffff;
@@ -15,7 +15,8 @@
   --bp-line-gray: #d9d9d9;
 
   --bp-primary-glow: linear-gradient(45deg, #9025fc 0%, #1308fe 100%);
-  --bp-secondary-glow: linear-gradient(45deg, #00e09d 0%, #bd00ff 100%);
+  /* --bp-secondary-glow: linear-gradient(45deg, #00e09d 0%, #bd00ff 100%); */
+  --bp-secondary-glow: linear-gradient(45deg, #a6c9ff 0%, #bd00ff 100%);
 
   --bp-font: "Roboto", sans-serif;
 
