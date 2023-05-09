@@ -20,6 +20,7 @@ export default function WebtoonCard() {
           <div
             className={style.imgBox}
             key={data.id}
+            onClick={() => router.push(`/webtoon/${data.id}`)}
           >
             {
               router.pathname === '/best' &&

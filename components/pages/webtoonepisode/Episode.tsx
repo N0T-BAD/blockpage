@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import style from '@/components/pages/webtoonepisode/Episode.module.css'
 import Separator from '@/components/ui/Separator'
 import Image from 'next/image'
+import { EpisodeDataType } from '@/types/webtoonDataType';
+import { episodeData } from '@/data/dummy/webtoonData';
 
 export default function Episode() {
+
+  const [episode] = useState<EpisodeDataType[]>(episodeData);
+
   return (
-    <section className={style.episodeSection}>
+    <>
       <div className={style.episodeState}>
         <p>연재중</p>
         <Separator
@@ -14,28 +19,35 @@ export default function Episode() {
           gutter={1}
         />
       </div>
-      <div className={style.episode}>
-        <div className={style.episodeImg}>
-          <Image
-            src={"/assets/dummy/01.png"}
-            alt='에피소드 썸네일'
-            width={120}
-            height={70}
-            priority
-          />
-        </div>
-        <div className={style.episodeContents}>
-          <p className={style.subject}>금요웹툰 세화, 가는길 제목길어지면 7화</p>
-          <div className={style.episodeOption}>
-            <p className={style.rating}>평점 9.99</p>
-            <p className={style.date}>23.04.15</p>
-          </div>
-        </div>
-      </div>
-      <Separator
-        color='var(--bp-line-gray)'
-        gutter={1}
-      />
-    </section>
+      {
+        episode &&
+        episode.map((data) => (
+          <section className={style.episodeSection} key={data.id}>
+            <div className={style.episode}>
+              <div className={style.episodeImg}>
+                <Image
+                  src={data.imgUrl}
+                  alt='에피소드 썸네일'
+                  width={120}
+                  height={70}
+                  priority
+                />
+              </div>
+              <div className={style.episodeContents}>
+                <p className={style.subject}>{data.subject}</p>
+                <div className={style.episodeOption}>
+                  <p className={style.rating}>평점 {data.rating}</p>
+                  <p className={style.date}>{data.date}</p>
+                </div>
+              </div>
+            </div>
+            <Separator
+              color='var(--bp-line-gray)'
+              gutter={1}
+            />
+          </section>
+        ))
+      }
+    </>
   )
 }

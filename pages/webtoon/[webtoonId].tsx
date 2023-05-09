@@ -1,10 +1,10 @@
-import { NextPageWithLayout } from "./_app"
+import { NextPageWithLayout } from "../_app"
 
 import Layout from "@/components/layouts/layout"
 import WebtoonEpisodeSection from "@/components/pages/webtoonepisode/WebtoonEpisodeSection"
 import WebtoonInfoSection from "@/components/pages/webtoonepisode/WebtoonInfoSection"
 
-const webtoonepisodelist: NextPageWithLayout = () => {
+const webtoon: NextPageWithLayout = () => {
 
   return (
     <>
@@ -14,13 +14,13 @@ const webtoonepisodelist: NextPageWithLayout = () => {
   )
 }
 
-webtoonepisodelist.getLayout = function getLayout(webtoonepisodelist: React.ReactElement) {
+webtoon.getLayout = function getLayout(webtoon: React.ReactElement) {
   return (
     <Layout>
-      {webtoonepisodelist}
+      {webtoon}
     </Layout>
   )
 }
 
-export default webtoonepisodelist
+export default webtoon
 

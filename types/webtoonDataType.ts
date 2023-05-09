@@ -24,3 +24,11 @@ export interface WebtoonInfoDataType {
   week: string;
   genre: string;
 }
+
+export interface EpisodeDataType {
+  id: number;
+  subject: string;
+  imgUrl: string;
+  rating: number;
+  date: string;
+}
