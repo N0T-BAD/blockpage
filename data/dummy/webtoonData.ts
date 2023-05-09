@@ -20,7 +20,7 @@ export const webtoonStateData = {
   state: "연재중",
 };
 
-export const episodeData = [
+export const episodeListData = [
   {
     id: 1,
     subject: "세화, 가는 길 1화",
@@ -43,3 +43,11 @@ export const episodeData = [
     date: "23.04.29",
   },
 ];
+
+export const episodeData = {
+  id: 1,
+  subject: "세화, 가는 길 1화",
+  imgUrl: "/assets/dummy/01.png",
+  rating: 9.99,
+  date: "23.04.15",
+};

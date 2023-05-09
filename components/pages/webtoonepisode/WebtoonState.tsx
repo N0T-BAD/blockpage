@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import style from '@/components/pages/webtoonepisode/Episode.module.css'
+import style from '@/components/pages/webtoonepisode/WebtoonState.module.css'
 import Separator from '@/components/ui/Separator'
 import { WebtoonStateDataType } from '@/types/webtoonDataType';
 import { webtoonStateData } from '@/data/dummy/webtoonData';

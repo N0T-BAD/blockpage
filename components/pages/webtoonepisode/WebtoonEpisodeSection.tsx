@@ -5,13 +5,14 @@ import WebtoonSummary from './WebtoonSummary'
 import Episode from './Episode'
 import WebtoonState from './WebtoonState'
 import { WebtoonInfoDataType } from '@/types/webtoonDataType'
+import EpisodeSection from './EpisodeSection'
 
 export default function WebtoonEpisodeSection() {
   return (
     <section className={style.webtoonEpisodeSection}>
       <WebtoonSummary />
       <WebtoonState />
-      <Episode />
+      <EpisodeSection />
     </section>
   )
 }

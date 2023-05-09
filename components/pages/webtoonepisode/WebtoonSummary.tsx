@@ -6,7 +6,12 @@ import { webtoonSummaryData } from '@/data/dummy/webtoonData';
 
 export default function WebtoonSummary() {
 
+  const [close, setClose] = useState(true);
   const summaryData = useState<WebtoonSummaryDataType>(webtoonSummaryData);
+
+  const handleClose = () => {
+    setClose(!close);
+  }
 
   return (
     <section className={style.webtoonSummarySection}>
@@ -14,10 +19,11 @@ export default function WebtoonSummary() {
         <p>줄거리</p>
       </div>
       <div className={style.summary}>
-        <p>{summaryData[0].summary}</p>
+        <p className={close ? `${style.close}` : ""}>{summaryData[0].summary}</p>
       </div>
+      <div className={style.shadow}></div>
       <div className={style.summaryMore}>
-        <p>더 보기</p>
+        <p onClick={handleClose}>{close ? "더보기" : "간략히"}</p>
       </div>
     </section>
   )

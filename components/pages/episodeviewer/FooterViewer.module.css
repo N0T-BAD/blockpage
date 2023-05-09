@@ -1,15 +1,74 @@
 .viewerFooterWrap {
   width: 100%;
-  height: 4rem;
+  height: 22rem;
   padding: 0 1.5rem;
   position: fixed;
   bottom: 0;
   z-index: 100;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   border-top: 0.2rem solid var(--bp-primary);
   border-radius: 1rem 1rem 0 0;
   background-color: var(--bp-white);
   overflow: hidden;
+}
+
+.navFoot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 0;
+}
+
+.ratingBtn {
+  color: var(--bp-white);
+  display: flex;
+  align-items: center;
+  background-color: var(--bp-secondary);
+  border-radius: 1rem;
+  padding: 0 1rem;
+}
+
+.ratingBtn p:first-child {
+  font-size: 1.3rem;
+  padding-bottom: 0.3rem;
+  margin-right: 0.2rem;
+}
+
+.ratingBtn p:last-child {
+  font-size: 0.9rem;
+  margin-left: 0.5rem;
+}
+
+.authorSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.authorMent {
+  display: flex;
+  align-items: flex-end;
+}
+
+.authorMent p:first-child {
+  font-size: 0.9rem;
+  color: var(--bp-secondary);
+  margin-right: 0.5rem;
+}
+
+.authorMent p:last-child {
+  color: var(--bp-font-gray);
+}
+
+.authorComment {
+  margin: 0.3rem 0;
+}
+
+.nextEpisode {
+  margin: 2rem 0;
 }
