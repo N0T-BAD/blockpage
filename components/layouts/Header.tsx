@@ -62,7 +62,8 @@ export default function Header() {
         </header>
       )
       :
-      router.pathname === "/search" ?
+      router.pathname === "/search" ||
+        router.pathname === "/searchresult" ?
         <header>
           <div className={style.searchlogo}>
             <Image src={'/assets/images/logo/logo.svg'} alt="logo" width={200} height={77} onClick={handlemain} />

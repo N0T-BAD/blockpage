@@ -12,12 +12,17 @@ export default function SearchBar() {
     const handleBack = () => {
         router.back();
     }
+
+    const handleSearch = () => {
+        router.push('/searchresult');
+    }
+
     return (
         <div className={style.SearchBar}>
             <Image src={"/assets/images/icons/back.svg"} alt={"back"} width={20} height={20} onClick={handleBack} />
             <div className={style.searchbarbg}>
                 <input className={style.searchinput} placeholder='검색어를 입력해주세요.'></input>
-                <Image src={"/assets/images/icons/search.svg"} alt={"search"} width={20} height={20} />
+                <Image src={"/assets/images/icons/search.svg"} alt={"search"} width={20} height={20} onClick={handleSearch} />
             </div>
         </div>
     )
