@@ -1,5 +1,5 @@
 import Layout from "@/components/layouts/layout"
-import { NextPageWithLayout } from "./_app"
+import { NextPageWithLayout } from "@/pages/_app"
 import AuthorWorksListTopSection from "@/components/pages/authorworkslist/AuthorWorksListTopSection"
 import AuthorWorksListMiddleSection from "@/components/pages/authorworkslist/AuthorWorksListMiddleSection"
 

@@ -134,7 +134,7 @@
   flex-direction: column;
   justify-content: center;
   z-index: 100;
-  border-bottom: var(--bp-secondary-gray) 1px solid;
+  border-bottom: var(--bp-gray) 1px solid;
   height: 4rem;
   background-color: var(--bp-white);
 }

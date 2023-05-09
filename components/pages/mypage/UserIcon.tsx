@@ -9,7 +9,7 @@ export default function UserIcon() {
         || router.pathname === "/episodedelete";
 
     return (
-        <div className={style.reader_box}>
+        <>
             {router.pathname === "/mypage" ?
                 <div className={style.reader}>
                     <p>독자</p>
@@ -22,6 +22,6 @@ export default function UserIcon() {
                     :
                     <></>
             }
-        </div>
+        </>
     )
 }

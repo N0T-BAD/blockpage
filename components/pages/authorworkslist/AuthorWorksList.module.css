@@ -139,14 +139,14 @@
 
 .Clickactive {
   margin: 1rem 0.5rem;
-  border-bottom: 0.1rem solid var(--bp-secondary-gray);
+  border-bottom: 0.1rem solid var(--bp-gray);
   display: block;
   width: 100%;
 }
 
 .NoClickactive {
   margin: 1rem 0.5rem;
-  border-bottom: 0.1rem solid var(--bp-secondary-gray);
+  border-bottom: 0.1rem solid var(--bp-gray);
   display: none;
   width: 100%;
 }
