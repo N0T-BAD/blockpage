@@ -166,8 +166,11 @@
   justify-content: center;
 }
 .BlockChargeLogo p {
-  width: 25%;
-  text-align: start;
+  width: 80%;
+  text-align: center;
+}
+.BlockChargeLogo img {
+  width: 10%;
 }
 
 .EpisodeLogo {
