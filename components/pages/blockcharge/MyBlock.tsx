@@ -6,7 +6,7 @@ export default function MyBlock() {
   return (
     <div className={style.MyBlockbg}>
       <div className={style.MyBlock}>
-        <Image src={'/assets/images/mypage/Block.png'} alt="block" width={30} height={25} />
+        <Image src={'/assets/images/icons/Block.svg'} alt="block" width={30} height={25} />
         <p>보유 블럭 100</p>
       </div>
       <div className={style.MyBuyBlock}>

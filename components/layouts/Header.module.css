@@ -205,6 +205,24 @@
 }
 
 .BlockUseLogo p {
-  width: 45%;
+  width: 35%;
   text-align: end;
+}
+
+.ChargeBlock_Button {
+  width: 11%;
+}
+
+.ChargeBlock_Button p {
+  background-color: var(--bp-black);
+  color: var(--bp-white);
+  text-align: center;
+  width: 100%;
+  border-radius: 0.5rem;
+  height: 1.5rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

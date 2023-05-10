@@ -14,7 +14,7 @@ export default function BlockChargeButton() {
   return (
     <div className={style.BlockChargeButton}>
       <button className={style.charge} onClick={onClickCharge}>
-        충전
+        충전하기
       </button>
     </div>
   )

@@ -20,12 +20,11 @@
 }
 
 img.userImage1 {
-  z-index: 100;
   display: flex;
 }
 
 img.userImage2 {
-  z-index: 101;
+  z-index: 1;
   position: relative;
   left: 2rem;
   bottom: 1.1rem;

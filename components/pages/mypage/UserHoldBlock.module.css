@@ -1,22 +1,32 @@
 .HoldChargeBlock {
   display: flex;
-  background: var(--bp-primary-glow);
-  justify-content: space-evenly;
+  flex-direction: column;
   padding: 0 1rem;
   border-radius: 1rem;
   width: 90%;
 }
 
-.HoldBlock {
+p.HoldBlock {
+  font-family: var(--bp-font);
+  font-weight: 700;
+  font-size: 50px;
   display: flex;
-  height: 2.5rem;
-  align-items: center;
-  width: 75%;
+  justify-content: center;
+}
+
+p.HoldBlocktxt {
+  font-family: var(--bp-font);
+  font-weight: 400;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1rem;
+  color: var(--bp-font-gray);
 }
 
 .HoldBlock p {
   padding: 0 1rem;
-  font-family: var(--bp-font);
+
   font-weight: 500;
   height: 2rem;
   display: flex;
