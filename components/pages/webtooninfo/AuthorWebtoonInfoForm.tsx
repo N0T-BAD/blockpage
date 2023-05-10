@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import style from '@/components/pages/webtooninfo/AuthorWebtoonInfoForm.module.css'
-import AuthorWebtoonInfoImgBox from './AuthorWebtoonInfoImgBox';
+import AuthorWebtoonInfoImgBox from '@/components/pages/webtooninfo/AuthorWebtoonInfoImgBox';
 import { authorWebtoonInfoDataType, authorWebtoonInfoImgDataType } from '@/types/authorWebtoonInfoImgDataType';
 import { useRouter } from 'next/router';
 import axios from 'axios';

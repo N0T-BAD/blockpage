@@ -1,19 +1,33 @@
+.UserBottomMenulist {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  padding: 0 2.2rem;
+  place-content: center;
+}
+
 .UserMenu {
   display: flex;
-  justify-content: flex-start;
-  padding: 0 2.5rem;
-  margin: 1rem 0;
+  flex-direction: column;
+  width: 30%;
+  align-items: center;
+  text-align: -webkit-center;
+  padding: 0.6rem;
+  margin: 0.5rem 0.3rem;
 }
 
 .UserMenu img {
-  margin-right: 2rem;
+  display: flex;
+  align-items: center;
 }
 
 .UserMenu p {
-  font-size: large;
+  font-size: 0.8rem;
   font-family: var(--bp-font);
   font-weight: 500;
-  width: 80%;
   align-items: center;
   color: var(--bp-black);
+  padding: 0.5rem 0;
 }

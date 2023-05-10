@@ -134,13 +134,13 @@
   flex-direction: column;
   justify-content: center;
   z-index: 100;
-  border-bottom: var(--bp-secondary-gray) 1px solid;
+  border-bottom: var(--bp-gray) 1px solid;
   height: 4rem;
   background-color: var(--bp-white);
 }
 
 .BlockChargeBack {
-  width: 6%;
+  width: 10%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -157,7 +157,7 @@
 
 .BlockChargeLogo {
   margin: auto;
-  width: 100%;
+  width: 90%;
   display: flex;
   z-index: 101;
   text-align: center;
@@ -166,8 +166,11 @@
   justify-content: center;
 }
 .BlockChargeLogo p {
-  width: 25%;
+  width: 32%;
   text-align: start;
+}
+.BlockChargeLogo img {
+  width: 10%;
 }
 
 .EpisodeLogo {
@@ -181,7 +184,7 @@
   justify-content: center;
 }
 .EpisodeLogo p {
-  width: 35%;
+  width: 40%;
   text-align: start;
 }
 
@@ -190,21 +193,36 @@
   width: 100%;
   display: flex;
   z-index: 101;
-  text-align: center;
 }
 
 .BlockUseLogo {
   margin: auto;
-  width: 100%;
-  display: flex;
-  z-index: 101;
+  width: 80%;
   text-align: center;
   font-family: var(--bp-font);
   font-weight: 600;
+  display: flex;
   justify-content: center;
 }
 
 .BlockUseLogo p {
-  width: 45%;
-  text-align: end;
+  width: 100%;
+}
+
+.ChargeBlock_Button {
+  width: 10%;
+}
+
+.ChargeBlock_Button p {
+  background-color: var(--bp-black);
+  color: var(--bp-white);
+  text-align: center;
+  width: 100%;
+  border-radius: 0.5rem;
+  height: 1.5rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

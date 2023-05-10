@@ -37,7 +37,7 @@ export default function EpisodelistBox() {
                             </div>
                         </div>
                         <div className={style.webtoonButton}>
-                            <button >수정</button>
+                            <button onClick={() => router.push('/changeepisode')}>수정</button>
                             <button onClick={() => router.push('/episodedelete')}>삭제</button>
                         </div>
                     </div>

@@ -1,0 +1,35 @@
+.closeBtn {
+  display: flex;
+  justify-content: right;
+  padding-right: 1.5rem;
+  margin-top: 2rem;
+}
+
+.menuTop {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menuTop p {
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 0 2rem;
+}
+
+.menuTop img {
+  transform: scaleX(-1);
+}
+
+.menuContents {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3rem;
+}
+
+.menuContents p {
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: 1rem 0 1rem 2.5rem;
+}

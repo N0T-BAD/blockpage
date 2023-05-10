@@ -1,5 +1,5 @@
 import Layout from "@/components/layouts/layout"
-import { NextPageWithLayout } from "./_app"
+import { NextPageWithLayout } from "@/pages/_app"
 import ListviewNavSection from "@/components/pages/listview/ListviewNavSection"
 import ListviewSection from "@/components/pages/listview/ListviewSection"
 

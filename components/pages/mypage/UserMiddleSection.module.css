@@ -1,5 +1,5 @@
-section.UserMiddleSection{
-    margin: 2rem 0;
-    display: flex;
-    justify-content: center;
+section.UserMiddleSection {
+  margin: 3rem 1rem;
+  display: flex;
+  justify-content: center;
 }

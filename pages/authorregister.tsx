@@ -1,5 +1,5 @@
 import Layout from "@/components/layouts/layout"
-import { NextPageWithLayout } from "./_app"
+import { NextPageWithLayout } from "@/pages/_app"
 import AuthorRegisterTopSection from "@/components/pages/authorregister/AuthorRegisterTopSection"
 
 const authorregister: NextPageWithLayout = () => {

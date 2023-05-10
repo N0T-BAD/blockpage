@@ -77,3 +77,17 @@
   width: 100%;
   margin: 1rem 0;
 }
+
+.episodeInfoImgBox img {
+  width: 50%;
+  align-self: center;
+}
+
+.ImgPreview {
+  display: flex;
+  width: 100%;
+  margin: 2rem 0;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: 25rem;
+}

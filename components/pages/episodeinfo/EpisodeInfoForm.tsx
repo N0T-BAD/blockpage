@@ -6,6 +6,7 @@ import { useRecoilState } from 'recoil';
 import { episodeInfoFormDataType } from '@/types/episodeInfoForm';
 import { webtoonepisodeDataType } from '@/types/webtoonDataType';
 import { episodeDeleteState } from '@/state/webtoon/episodeDeleteState';
+import Image from 'next/image';
 
 export default function EpisodeInfoForm() {
 
@@ -18,8 +19,8 @@ export default function EpisodeInfoForm() {
     authortalk: '',
   });
 
-
   const [webtoonepisode, setWebtoonEpisode] = useRecoilState<webtoonepisodeDataType>(episodeDeleteState);
+
 
   const [episodeThumbnailImage, setEpisodeThumbnailImage] = useState<File>();
   const [episodeImage, setEpisodeImage] = useState<File[]>();
@@ -126,14 +127,16 @@ export default function EpisodeInfoForm() {
           <div className={style.episodeInfoImgBox}>
             <p>에피소드 썸네일 이미지 : </p>
             <input type="file" accept="image/*" onChange={handleThumbnailImage} />
-            {episodeThumbnailImagePreview && <img src={episodeThumbnailImagePreview} alt="episodeThumbnailImagePreview" />}
+            {episodeThumbnailImagePreview && <Image src={episodeThumbnailImagePreview} alt="episodeThumbnailImagePreview" width={200} height={200} />}
           </div>
           <div className={style.episodeInfoImgBox}>
             <p>에피소드 이미지 : </p>
             <input type="file" accept="image/*" onChange={handleEpisodeImage} multiple />
-            {episodeImagePreview.map((preview, index) => (
-              <img key={index} src={preview} alt={`episodeImagePreview_${index}`} />
-            ))}
+            <div className={style.ImgPreview}>
+              {episodeImagePreview.map((preview, index) => (
+                <Image key={index} src={preview} alt={`episodeImagePreview_${index}`} width={200} height={200} />
+              ))}
+            </div>
           </div>
           <div className={style.submit}>
             <button type="submit">등록</button>
@@ -143,15 +146,3 @@ export default function EpisodeInfoForm() {
     </>
   )
 }
-
-// episodeThumbnailImage를 입력 받아서 !episodeThumbnailImage 이면 alert('에피소드 썸네일 이미지를 입력해주세요.')
-// episodeImage를 입력 받아서 !episodeImage 이면 alert('에피소드 이미지를 입력해주세요.')
-// episodeInfoData를 입력 받아서 !episodeInfoData 이면 alert('에피소드 정보를 입력해주세요.')
-// episodeThumbnailImage, episodeImage, episodeInfoData가 모두 입력되면 axios.post('/api/authorwebtooninfo', {
-//   episodetitle: episodeInfoData.episodetitle,
-//   episodedescription: episodeInfoData.episodedescription,
-//   day: episodeInfoData.day,
-//   authortalk: episodeInfoData.authortalk,
-//   episodeThumbnailImage: episodeThumbnailImage,
-//   episodeImage: episodeImage,
-// })

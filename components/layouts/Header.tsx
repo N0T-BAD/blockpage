@@ -5,7 +5,6 @@ import style from '@/components/layouts/Header.module.css'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import BlockChargeButton from '../pages/mypage/BlockChargeButton'
 
 export default function Header() {
   const router = useRouter();
@@ -25,7 +24,6 @@ export default function Header() {
 
   return (
     router.pathname === '/' ||
-      router.pathname === "/mypage" ||
       router.pathname === "/best" ||
       router.pathname === "/week" ||
       router.pathname === "/genre" ?
@@ -62,7 +60,8 @@ export default function Header() {
         </header>
       )
       :
-      router.pathname === "/search" ?
+      router.pathname === "/search" ||
+        router.pathname === "/searchresult" ?
         <header>
           <div className={style.searchlogo}>
             <Image src={'/assets/images/logo/logo.svg'} alt="logo" width={200} height={77} onClick={handlemain} />
@@ -97,7 +96,11 @@ export default function Header() {
                   <div className={style.BlockUseLogo}>
                     <p>블럭 이용 내역</p>
                   </div>
-                  <BlockChargeButton />
+                  <div className={style.ChargeBlock_Button}>
+                    <Link href={"/blockcharge"}>
+                      <p>충전</p>
+                    </Link>
+                  </div>
                 </div>
               </header>
               :
@@ -185,6 +188,33 @@ export default function Header() {
                               </div>
                             </header>
                             :
-                            <></>
+                            router.pathname === '/changeepisode' ?
+                              <header className={style.BlockChargeHeader}>
+                                <div className={style.BlockChargeTxt}>
+                                  <div className={style.BlockChargeBack}>
+                                    <Image src={"/assets/images/icons/back.svg"} alt={"뒤로가기"} width={20} height={20} onClick={handleBack} />
+                                  </div>
+                                  <div className={style.EpisodeLogo}>
+                                    <p>에피소드 수정</p>
+                                  </div>
+                                </div>
+                              </header>
+                              :
+                              router.pathname === "/mypage" ?
+                                <header className={style.BlockChargeHeader}>
+                                  <div className={style.BlockChargeTxt}>
+                                    <div className={style.BlockChargeBack}>
+                                      <Image src={"/assets/images/icons/back.svg"} alt={"뒤로가기"} width={20} height={20} onClick={handleBack} />
+                                    </div>
+                                    <div className={style.BlockChargeLogo}>
+                                      <p>마이페이지</p>
+                                    </div>
+                                    <div className={style.logout}>
+                                      <Image src={"/assets/images/icons/logout.svg"} alt={"로그아웃"} width={20} height={20} />
+                                    </div>
+                                  </div>
+                                </header>
+                                :
+                                <></>
   )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import style from '@/components/pages/main/best/BestSection.module.css'
-import BestRankingCard from './BestRankingCard'
+import BestRankingCard from '@/components/pages/main/best/BestRankingCard'
 
 export default function BestSection() {
     return (
