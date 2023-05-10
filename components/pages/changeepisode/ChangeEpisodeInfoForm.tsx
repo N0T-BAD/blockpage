@@ -3,12 +3,11 @@ import style from '@/components/pages/episodeinfo/EpisodeInfoForm.module.css'
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { useRecoilState } from 'recoil';
-import { episodeInfoFormDataType } from '@/types/episodeInfoForm';
-import { webtoonepisodeDataType } from '@/types/webtoonDataType';
-import { episodeDeleteState } from '@/state/webtoon/episodeDeleteState';
+import { changeEpisodeInfoFormDataType, episodeInfoFormDataType } from '@/types/episodeInfoForm';
 import Image from 'next/image';
+import { changeEpisodeInfoState } from '@/state/episode/changeEpisodeInfoState';
 
-export default function EpisodeInfoForm() {
+export default function ChangeEpisodeInfoForm() {
 
   const router = useRouter();
 
@@ -19,7 +18,7 @@ export default function EpisodeInfoForm() {
     authortalk: '',
   });
 
-  const [webtoonepisode, setWebtoonEpisode] = useRecoilState<webtoonepisodeDataType>(episodeDeleteState);
+  const [webtoonepisode, setWebtoonEpisode] = useRecoilState<changeEpisodeInfoFormDataType>(changeEpisodeInfoState);
 
 
   const [episodeThumbnailImage, setEpisodeThumbnailImage] = useState<File>();
@@ -86,6 +85,12 @@ export default function EpisodeInfoForm() {
             {
               id: res.data.id,
               title: res.data.title,
+              episodetitle: res.data.episodetitle,
+              episodedescription: res.data.episodedescription,
+              day: res.data.day,
+              authortalk: res.data.authortalk,
+              episodeThumbnail: res.data.episodeThumbnail,
+              episodeImage: res.data.episodeImage,
             }
           )
           if (res.status === 200) {

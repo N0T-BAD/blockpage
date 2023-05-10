@@ -186,6 +186,18 @@ export default function Header() {
                               </div>
                             </header>
                             :
-                            <></>
+                            router.pathname === '/changeepisode' ?
+                              <header className={style.BlockChargeHeader}>
+                                <div className={style.BlockChargeTxt}>
+                                  <div className={style.BlockChargeBack}>
+                                    <Image src={"/assets/images/icons/back.svg"} alt={"뒤로가기"} width={20} height={20} onClick={handleBack} />
+                                  </div>
+                                  <div className={style.EpisodeLogo}>
+                                    <p>에피소드 수정</p>
+                                  </div>
+                                </div>
+                              </header>
+                              :
+                              <></>
   )
 }

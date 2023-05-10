@@ -4,7 +4,7 @@ import style from '@/components/pages/mypage/UserHoldBlock.module.css'
 import { useRouter } from 'next/router'
 import { HoldingBlockData } from '@/types/holdingBlockData';
 import { holdingBlockData } from '@/data/holdingBlockData';
-import BlockChargeButton from './BlockChargeButton';
+import BlockChargeButton from '@/components/pages/mypage/BlockChargeButton';
 
 export default function UserHoldBlock() {
 

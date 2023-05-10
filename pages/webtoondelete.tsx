@@ -1,5 +1,5 @@
 import Layout from "@/components/layouts/layout"
-import { NextPageWithLayout } from "./_app"
+import { NextPageWithLayout } from "@/pages/_app"
 import WebtoonDeleteTopSection from "@/components/pages/webtoondelete/WebtoonDeleteTopSection"
 import WebtoonDeleteMiddleSection from "@/components/pages/webtoondelete/WebtoonDeleteMiddleSection"
 

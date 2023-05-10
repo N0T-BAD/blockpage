@@ -1,5 +1,5 @@
 import Layout from "@/components/layouts/layout"
-import { NextPageWithLayout } from "./_app"
+import { NextPageWithLayout } from "@/pages/_app"
 import Image from "next/image"
 import style from "@/pages/css/login.module.css"
 

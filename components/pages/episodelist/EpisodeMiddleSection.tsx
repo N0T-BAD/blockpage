@@ -1,6 +1,6 @@
 import React from 'react'
 import style from '@/components/pages/episodelist/EpisodeMiddleSection.module.css'
-import EpisodelistBox from './EpisodelistBox'
+import EpisodelistBox from '@/components/pages/episodelist/EpisodelistBox'
 
 export default function EpisodeMiddleSection() {
     return (
