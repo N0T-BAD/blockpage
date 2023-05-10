@@ -29,6 +29,12 @@ export default function AuthorWebtoonInfoForm() {
         console.log(webtoonInfoImgData)
     }, [webtoonInfoData, webtoonInfoImgData])
 
+    useEffect(() => {
+        axios(`api/author`)
+            .then(res => res.data)
+            .then(data => setAuthorName(data))
+    }, [authorName])
+
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setWebtoonInfoData({
@@ -54,11 +60,7 @@ export default function AuthorWebtoonInfoForm() {
                 thumbnailImage: webtoonInfoImgData[1].thumbnailImage,
             })
                 .then((res) => {
-                    setAuthorName(
-                        {
-                            author: res.data.author
-                        }
-                    )
+                    console.log(res)
                     alert('웹툰 정보가 등록되었습니다.')
                     router.push('/authorworkslist')
                 })
@@ -67,41 +69,43 @@ export default function AuthorWebtoonInfoForm() {
 
     return (
         <>
-            <div className={style.WebtoonInfoWrap}>
-                <form onSubmit={handleSubmit}>
-                    <div className={style.InfoBox}>
-                        <p>작품명 : </p>
-                        <input type="text" name="title" onChange={handleInput} />
-                    </div>
-                    <div className={style.InfoBox}>
-                        <p>줄거리 : </p>
-                        <input type="text" name="description" onChange={handleInput} />
-                    </div>
-                    <div className={style.InfoBox}>
-                        <p>장르 : </p>
-                        <input type="text" name="genre" onChange={handleInput} />
-                    </div>
-                    <div className={style.InfoBox}>
-                        <p>요일 : </p>
-                        <input type="text" name="day" onChange={handleInput} />
-                    </div>
-                    <div className={style.InfoBox}>
-                        <p>작가 : </p>
-                        <p className={style.author}>{authorName.author}</p>
-                    </div>
-                    <div className={style.InfoillustratorBox}>
-                        <p>일러스트레이터 : </p>
-                        <input type="text" name="illustrator" placeholder='미입력시, 본인으로 등록됩니다.' onChange={handleInput} />
-                    </div>
-                    <AuthorWebtoonInfoImgBox onUpload={(data: authorWebtoonInfoImgDataType) => {
-                        setWebtoonInfoImgData([...webtoonInfoImgData, data])
-                    }} isRequired={true} />
+            {authorName &&
+                <div className={style.WebtoonInfoWrap}>
+                    <form onSubmit={handleSubmit}>
+                        <div className={style.InfoBox}>
+                            <p>작품명 : </p>
+                            <input type="text" name="title" onChange={handleInput} />
+                        </div>
+                        <div className={style.InfoBox}>
+                            <p>줄거리 : </p>
+                            <input type="text" name="description" onChange={handleInput} />
+                        </div>
+                        <div className={style.InfoBox}>
+                            <p>장르 : </p>
+                            <input type="text" name="genre" onChange={handleInput} />
+                        </div>
+                        <div className={style.InfoBox}>
+                            <p>요일 : </p>
+                            <input type="text" name="day" onChange={handleInput} />
+                        </div>
+                        <div className={style.InfoBox}>
+                            <p>작가 : </p>
+                            <p className={style.author}>{authorName.author}</p>
+                        </div>
+                        <div className={style.InfoillustratorBox}>
+                            <p>일러스트레이터 : </p>
+                            <input type="text" name="illustrator" value={authorName.author} placeholder='미입력시, 본인으로 등록됩니다.' onChange={handleInput} />
+                        </div>
+                        <AuthorWebtoonInfoImgBox onUpload={(data: authorWebtoonInfoImgDataType) => {
+                            setWebtoonInfoImgData([...webtoonInfoImgData, data])
+                        }} isRequired={true} />
 
-                    <div className={style.submit}>
-                        <button type="submit">등록</button>
-                    </div>
-                </form>
-            </div>
+                        <div className={style.submit}>
+                            <button type="submit">등록</button>
+                        </div>
+                    </form>
+                </div>
+            }
         </>
     )
 }
