@@ -1,0 +1,22 @@
+.headerSection {
+  width: 100%;
+  padding: 2rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.leftHead {
+  width: 20%;
+}
+
+.centerHead {
+  width: 60%;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.rightHead {
+  width: 20%;
+}
