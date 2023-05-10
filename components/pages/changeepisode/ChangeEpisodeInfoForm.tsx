@@ -30,6 +30,12 @@ export default function ChangeEpisodeInfoForm() {
     console.log(episodeInfoData)
   }, [episodeInfoData])
 
+  useEffect(() => {
+    axios(`/api/authorwebtooninfo/${router.query.id}`)
+      .then(res => res.data)
+      .then(data => setWebtoonEpisode(data))
+  }, [webtoonepisode])
+
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setEpisodeInfoData({
@@ -81,18 +87,7 @@ export default function ChangeEpisodeInfoForm() {
         episodeImage: episodeImage,
       })
         .then((res) => {
-          setWebtoonEpisode(
-            {
-              id: res.data.id,
-              title: res.data.title,
-              episodetitle: res.data.episodetitle,
-              episodedescription: res.data.episodedescription,
-              day: res.data.day,
-              authortalk: res.data.authortalk,
-              episodeThumbnail: res.data.episodeThumbnail,
-              episodeImage: res.data.episodeImage,
-            }
-          )
+          console.log(res)
           if (res.status === 200) {
             alert('웹툰 정보가 등록되었습니다.')
             router.push('/authorworkslist')
@@ -103,51 +98,55 @@ export default function ChangeEpisodeInfoForm() {
 
   return (
     <>
-      <div className={style.WebtoonDeleteInfoWrap}>
-        <form onSubmit={handleSubmit}>
-          <div className={style.webtoonInfoBox}>
-            <p>작품명 : </p>
-            <p className={style.title}>{webtoonepisode.title}</p>
-          </div>
-          <div className={style.webtoonInfoBox}>
-            <p>에피소드 회차 : </p>
-            <p className={style.title}>{webtoonepisode.id}화</p>
-          </div>
-          <div className={style.episodeInfoBox}>
-            <p>에피소드 명 : </p>
-            <input type="text" name="episodetitle" onChange={handleInput} />
-          </div>
-          <div className={style.episodeInfoBox}>
-            <p>에피소드 내용 : </p>
-            <input type="text" name="episodedescription" onChange={handleInput} />
-          </div>
-          <div className={style.episodeInfoBox}>
-            <p>업로드 일 : </p>
-            <input type="text" name="day" onChange={handleInput} />
-          </div>
-          <div className={style.episodeInfoBox}>
-            <p>작가의 말 : </p>
-            <input type="text" name="authortalk" onChange={handleInput} />
-          </div>
-          <div className={style.episodeInfoImgBox}>
-            <p>에피소드 썸네일 이미지 : </p>
-            <input type="file" accept="image/*" onChange={handleThumbnailImage} />
-            {episodeThumbnailImagePreview && <Image src={episodeThumbnailImagePreview} alt="episodeThumbnailImagePreview" width={200} height={200} />}
-          </div>
-          <div className={style.episodeInfoImgBox}>
-            <p>에피소드 이미지 : </p>
-            <input type="file" accept="image/*" onChange={handleEpisodeImage} multiple />
-            <div className={style.ImgPreview}>
-              {episodeImagePreview.map((preview, index) => (
-                <Image key={index} src={preview} alt={`episodeImagePreview_${index}`} width={200} height={200} />
-              ))}
+      {webtoonepisode &&
+        <div className={style.WebtoonDeleteInfoWrap}>
+          <form onSubmit={handleSubmit}>
+            <div className={style.webtoonInfoBox}>
+              <p>작품명 : </p>
+              <p className={style.title}>{webtoonepisode.title}</p>
             </div>
-          </div>
-          <div className={style.submit}>
-            <button type="submit">등록</button>
-          </div>
-        </form>
-      </div>
+            <div className={style.webtoonInfoBox}>
+              <p>에피소드 회차 : </p>
+              <p className={style.title}>{webtoonepisode.id}화</p>
+            </div>
+            <div className={style.episodeInfoBox}>
+              <p>에피소드 명 : </p>
+              <input type="text" name="episodetitle" value={webtoonepisode.episodetitle} onChange={handleInput} />
+            </div>
+            <div className={style.episodeInfoBox}>
+              <p>에피소드 내용 : </p>
+              <input type="text" name="episodedescription" value={webtoonepisode.episodedescription} onChange={handleInput} />
+            </div>
+            <div className={style.episodeInfoBox}>
+              <p>업로드 일 : </p>
+              <input type="text" name="day" value={webtoonepisode.day} onChange={handleInput} />
+            </div>
+            <div className={style.episodeInfoBox}>
+              <p>작가의 말 : </p>
+              <input type="text" name="authortalk" value={webtoonepisode.authortalk} onChange={handleInput} />
+            </div>
+            <div className={style.episodeInfoImgBox}>
+              <p>에피소드 썸네일 이미지 : </p>
+              <input type="file" accept="image/*" onChange={handleThumbnailImage} value={webtoonepisode.episodeThumbnail} />
+              {episodeThumbnailImagePreview && <Image src={episodeThumbnailImagePreview} alt="episodeThumbnailImagePreview" width={200} height={200} />}
+            </div>
+            <div className={style.episodeInfoImgBox}>
+              <p>에피소드 이미지 : </p>
+              <input type="file" value={webtoonepisode.episodeImage} accept="image/*" onChange={handleEpisodeImage} multiple />
+              <div className={style.ImgPreview}>
+                {episodeImagePreview.map((preview, index) => (
+                  <div key={index}>
+                    <Image src={preview} alt={`에피소드 ${index + 1}`} width={200} height={200} />
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className={style.submit}>
+              <button type="submit">등록</button>
+            </div>
+          </form>
+        </div>
+      }
     </>
   )
 }

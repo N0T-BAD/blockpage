@@ -63,7 +63,7 @@ const AuthorWorksList = () => {
                     </div>
                   </div>
                   <div className={style.webtoonButton}>
-                    <button >수정</button>
+                    <button onClick={() => router.push('/changewebtoon')}>수정</button>
                     <button onClick={() => router.push('/webtoondelete')}>삭제</button>
                   </div>
                 </div>
