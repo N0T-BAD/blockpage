@@ -211,3 +211,36 @@ export const categoryMenuData = [
     ],
   },
 ];
+
+export const staticMenuListData = [
+  {
+    id: 1,
+    name: "요일별 웹툰",
+    link: "/week?category=1",
+  },
+  {
+    id: 2,
+    name: "장르별 웹툰",
+    link: "/genre?category=1",
+  },
+  {
+    id: 3,
+    name: "인기순 웹툰",
+    link: "/best",
+  },
+  {
+    id: 4,
+    name: "게임",
+    link: "/game",
+  },
+  {
+    id: 5,
+    name: "보관함",
+    link: "/inventory",
+  },
+  {
+    id: 6,
+    name: "마이페이지",
+    link: "/mypage",
+  },
+];
