@@ -5,7 +5,6 @@ import WebtoonEpisodeSection from "@/components/pages/webtoonepisode/WebtoonEpis
 import WebtoonInfoSection from "@/components/pages/webtoonepisode/WebtoonInfoSection"
 
 const webtoon: NextPageWithLayout = () => {
-
   return (
     <>
       <WebtoonInfoSection />

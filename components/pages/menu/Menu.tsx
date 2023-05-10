@@ -3,6 +3,8 @@ import React from 'react'
 import { useRouter } from 'next/router'
 
 import style from "@/components/pages/menu/Menu.module.css"
+import CloseBtn from '@/components/ui/CloseBtn';
+import BackBtn from '@/components/ui/BackBtn';
 
 export default function Menu() {
 
@@ -12,19 +14,10 @@ export default function Menu() {
     router.push("/login");
   }
 
-  const handleClose = () => {
-    router.back();
-  }
-
   return (
     <div>
-      <div className={style.closeImg} onClick={handleClose}>
-        <Image
-          src={"/assets/images/icons/close.svg"}
-          alt={"close"}
-          width={20}
-          height={20}
-        />
+      <div className={style.closeBtn} >
+        <CloseBtn />
       </div>
       <div className={style.menuTop} onClick={handleLogin}>
         <Image
@@ -34,12 +27,6 @@ export default function Menu() {
           height={50}
         />
         <p>로그인하세요.</p>
-        <Image
-          src={"/assets/images/icons/back.svg"}
-          alt={"login"}
-          width={20}
-          height={20}
-        />
       </div>
       <div className={style.menuContents}>
         <div onClick={() => router.push("/week")}>
@@ -63,7 +50,7 @@ export default function Menu() {
         <div onClick={() => router.push("/mypage")}>
           <p>마이페이지</p>
         </div>
-      </div >
-    </div >
+      </div>
+    </div>
   )
 }

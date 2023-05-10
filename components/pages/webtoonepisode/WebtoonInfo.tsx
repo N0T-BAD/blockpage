@@ -16,14 +16,9 @@ export default function WebtoonInfo() {
   const [like, setLike] = useState(false);
   const infoData = useState<WebtoonInfoDataType>(webtoonInfoData);
 
-  const handleBack = () => {
-    router.back();
-  }
-
   const handleLike = () => {
     //api 호출 db 갱신
     setLike(!like);
-    console.log(like);
   }
 
   return (
