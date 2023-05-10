@@ -9,7 +9,7 @@
 p.HoldBlock {
   font-family: var(--bp-font);
   font-weight: 700;
-  font-size: 50px;
+  font-size: 3.5rem;
   display: flex;
   justify-content: center;
 }
@@ -17,7 +17,7 @@ p.HoldBlock {
 p.HoldBlocktxt {
   font-family: var(--bp-font);
   font-weight: 400;
-  font-size: 12px;
+  font-size: 0.8rem;
   display: flex;
   justify-content: center;
   padding-bottom: 1rem;
@@ -26,7 +26,6 @@ p.HoldBlocktxt {
 
 .HoldBlock p {
   padding: 0 1rem;
-
   font-weight: 500;
   height: 2rem;
   display: flex;
