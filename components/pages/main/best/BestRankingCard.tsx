@@ -22,6 +22,7 @@ export default function BestRankingCard() {
               </div>
               <p className={style.title}>{data.title}</p>
               <p className={style.author}>{data.author}</p>
+              <p className={style.option2}>{data.genre}</p>
             </div>
             <div className={style.bestimg_1} key={data.id}>
               <div className={style.imgbox}>
@@ -32,7 +33,7 @@ export default function BestRankingCard() {
                 <p className={style.rank}>{data.rankup}</p>
               </div>
             </div>
-          </div>
+          </div >
         ))
       }
     </>

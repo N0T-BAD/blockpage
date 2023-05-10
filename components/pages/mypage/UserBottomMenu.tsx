@@ -7,17 +7,17 @@ import Link from 'next/link'
 
 export default function UserBottomMenu() {
     return (
-        <>
+        <div className={style.UserBottomMenulist}>
             {
                 userBottomMenuData.map((data: UserBottomMenuData) => (
-                    <Link href={data.path}>
-                        <div className={style.UserMenu} key={data.id}>
+                    <div className={style.UserMenu} key={data.id}>
+                        <Link href={data.path}>
                             <Image src={data.iconUrl} alt={data.name} width={30} height={30} />
                             <p>{data.name}</p>
-                        </div>
-                    </Link>
+                        </Link>
+                    </div>
                 ))
             }
-        </>
+        </div>
     )
 }

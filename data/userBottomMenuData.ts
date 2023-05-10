@@ -14,7 +14,7 @@ export const userBottomMenuData = [
   {
     id: 3,
     name: '블럭 이용 내역',
-    iconUrl: "/assets/images/mypage/Block.png",
+    iconUrl: "/assets/images/icons/Block.svg",
     path: "/blockpurchase"
   },
   {
@@ -32,13 +32,7 @@ export const userBottomMenuData = [
   {
     id: 6,
     name: '작품 관리',
-    iconUrl: "/assets/images/icons/author.svg",
+    iconUrl: "/assets/images/icons/userIcon.svg",
     path: "/authorworkslist"
-  },
-  {
-    id: 7,
-    name: '로그아웃',
-    iconUrl: "/assets/images/icons/logout.svg",
-    path: "/logout"
   }
 ]

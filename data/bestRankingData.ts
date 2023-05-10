@@ -7,6 +7,7 @@ export const bestRankingData = [
     author: "조석",
     ranking: "1",
     rankup: "+2",
+    genre: "일상",
     imgUrl: "/assets/images/best/image1.png",
   },
   {
@@ -17,6 +18,7 @@ export const bestRankingData = [
     author: "세화",
     ranking: "2",
     rankup: "-6",
+    genre: "판타지",
     imgUrl: "/assets/images/best/image2.png",
   },
   {
@@ -27,6 +29,7 @@ export const bestRankingData = [
     author: "박태준",
     ranking: "3",
     rankup: "+8",
+    genre: "드라마",
     imgUrl: "/assets/dummy/03.png",
   },
   {
@@ -37,6 +40,7 @@ export const bestRankingData = [
     author: "박용재",
     ranking: "4",
     rankup: "+2",
+    genre: "액션",
     imgUrl: "/assets/dummy/01.png",
   },
 ]
