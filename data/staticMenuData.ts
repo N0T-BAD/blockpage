@@ -238,9 +238,4 @@ export const staticMenuListData = [
     name: "보관함",
     link: "/inventory",
   },
-  {
-    id: 6,
-    name: "마이페이지",
-    link: "/mypage",
-  },
 ];

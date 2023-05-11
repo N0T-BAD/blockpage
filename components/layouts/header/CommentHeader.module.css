@@ -1,0 +1,26 @@
+.commentSection {
+  padding: 2rem 1.5rem;
+}
+
+.headerSection {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 1.5rem;
+}
+
+.leftHead {
+  width: 20%;
+}
+
+.centerHead {
+  width: 60%;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.rightHead {
+  width: 20%;
+}
