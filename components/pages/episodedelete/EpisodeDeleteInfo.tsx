@@ -18,8 +18,13 @@ export default function EpisodeDeleteInfo() {
 
     useEffect(() => {
         console.log(episodeDeleteInfoData)
-        console.log(episodeInfo)
-    }, [episodeDeleteInfoData, episodeInfo])
+    }, [episodeDeleteInfoData])
+
+    useEffect(() => {
+        axios(`/api/authorwebtooninfo/${router.query.id}`)
+            .then(res => res.data)
+            .then(data => setEpisodeInfo(data))
+    }, [episodeInfo])
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -38,37 +43,36 @@ export default function EpisodeDeleteInfo() {
                 episodedeletereason: episodeDeleteInfoData.episodedeletereason,
             })
                 .then((res) => {
-                    setEpisodeInfo(
-                        {
-                            id: res.data.id,
-                            title: res.data.title,
-                        }
-                    )
-                    alert('회차 삭제 요첨이 완료되었습니다.')
+                    console.log(res)
+                    alert('회차 삭제 요청이 완료되었습니다.')
                     router.push('/authorworkslist')
                 })
         }
     };
 
     return (
-        <div className={style.WebtoonDeleteInfoWrap}>
-            <form onSubmit={handleSubmit}>
-                <div className={style.DeleteInfoBox}>
-                    <p>작품명 : </p>
-                    <p className={style.title}>{episodeInfo.title}</p>
+        <>
+            {episodeInfo &&
+                <div className={style.WebtoonDeleteInfoWrap}>
+                    <form onSubmit={handleSubmit}>
+                        <div className={style.DeleteInfoBox}>
+                            <p>작품명 : </p>
+                            <p className={style.title}>{episodeInfo.title}</p>
+                        </div>
+                        <div className={style.DeleteInfoBox}>
+                            <p>에피소드 회차 : </p>
+                            <p className={style.title}>{episodeInfo.id}화</p>
+                        </div>
+                        <div className={style.DeleteInfoBox_2}>
+                            <p>삭제 이유 : </p>
+                            <input type="text" name="episodedeletereason" onChange={handleInput} />
+                        </div>
+                        <div className={style.submit}>
+                            <button type="submit">삭제</button>
+                        </div>
+                    </form>
                 </div>
-                <div className={style.DeleteInfoBox}>
-                    <p>에피소드 회차 : </p>
-                    <p className={style.title}>{episodeInfo.id}화</p>
-                </div>
-                <div className={style.DeleteInfoBox_2}>
-                    <p>삭제 이유 : </p>
-                    <input type="text" name="episodedeletereason" onChange={handleInput} />
-                </div>
-                <div className={style.submit}>
-                    <button type="submit">삭제</button>
-                </div>
-            </form>
-        </div>
+            }
+        </>
     )
 }

@@ -21,6 +21,12 @@ export default function WebtoonDeleteInfo() {
         console.log(webtoonTitle)
     }, [webtoonDeleteInfoData, webtoonTitle])
 
+    useEffect(() => {
+        axios(`/api/authorwebtooninfo/${router.query.id}`)
+            .then(res => res.data)
+            .then(data => setWebtoonTitle(data))
+    }, [webtoonTitle])
+
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setWebtoonDeleteInfoData({
@@ -38,11 +44,7 @@ export default function WebtoonDeleteInfo() {
                 deletereason: webtoonDeleteInfoData.deletereason,
             })
                 .then((res) => {
-                    setWebtoonTitle(
-                        {
-                            title: res.data.title
-                        }
-                    )
+                    console.log(res)
                     alert('웹툰 삭제 요첨이 완료되었습니다.')
                     router.push('/authorworkslist')
                 })
@@ -50,20 +52,24 @@ export default function WebtoonDeleteInfo() {
     };
 
     return (
-        <div className={style.WebtoonDeleteInfoWrap}>
-            <form onSubmit={handleSubmit}>
-                <div className={style.DeleteInfoBox}>
-                    <p>작품명 : </p>
-                    <p className={style.title}>{webtoonTitle.title}</p>
+        <>
+            {webtoonTitle &&
+                <div className={style.WebtoonDeleteInfoWrap}>
+                    <form onSubmit={handleSubmit}>
+                        <div className={style.DeleteInfoBox}>
+                            <p>작품명 : </p>
+                            <p className={style.title}>{webtoonTitle.title}</p>
+                        </div>
+                        <div className={style.DeleteInfoBox_2}>
+                            <p>삭제 이유 : </p>
+                            <input type="text" name="deletereason" onChange={handleInput} />
+                        </div>
+                        <div className={style.submit}>
+                            <button type="submit">삭제</button>
+                        </div>
+                    </form>
                 </div>
-                <div className={style.DeleteInfoBox_2}>
-                    <p>삭제 이유 : </p>
-                    <input type="text" name="deletereason" onChange={handleInput} />
-                </div>
-                <div className={style.submit}>
-                    <button type="submit">삭제</button>
-                </div>
-            </form>
-        </div>
+            }
+        </>
     )
 }
