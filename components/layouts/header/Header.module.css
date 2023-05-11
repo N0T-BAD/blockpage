@@ -144,7 +144,7 @@
 }
 
 .BlockChargeBack {
-  width: 6%;
+  width: 10%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -162,7 +162,7 @@
 
 .BlockChargeLogo {
   margin: auto;
-  width: 100%;
+  width: 90%;
   display: flex;
   z-index: 101;
   text-align: center;
@@ -172,8 +172,8 @@
 }
 
 .BlockChargeLogo p {
-  width: 80%;
-  text-align: center;
+  width: 32%;
+  text-align: start;
 }
 
 .BlockChargeLogo img {
@@ -192,7 +192,7 @@
 }
 
 .EpisodeLogo p {
-  width: 35%;
+  width: 40%;
   text-align: start;
 }
 
@@ -201,27 +201,24 @@
   width: 100%;
   display: flex;
   z-index: 101;
-  text-align: center;
 }
 
 .BlockUseLogo {
   margin: auto;
-  width: 100%;
-  display: flex;
-  z-index: 101;
+  width: 80%;
   text-align: center;
   font-family: var(--bp-font);
   font-weight: 600;
+  display: flex;
   justify-content: center;
 }
 
 .BlockUseLogo p {
-  width: 35%;
-  text-align: end;
+  width: 100%;
 }
 
 .ChargeBlock_Button {
-  width: 11%;
+  width: 10%;
 }
 
 .ChargeBlock_Button p {

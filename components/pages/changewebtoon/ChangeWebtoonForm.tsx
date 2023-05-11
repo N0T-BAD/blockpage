@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import style from '@/components/pages/webtooninfo/AuthorWebtoonInfoForm.module.css'
-import { authorWebtoonInfoDataType } from '@/types/authorWebtoonInfoImgDataType';
+import style from '@/components/pages/changewebtoon/ChangeWebtoonForm.module.css'
+import { authorWebtoonInfoDataType, authorWebtoonInfoStateType } from '@/types/authorWebtoonInfoImgDataType';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { authorNameDataType } from '@/types/authorNameDataType';
+import { webtoonInfoState } from '@/state/webtoon/webtoonInfoState';
 import { useRecoilState } from 'recoil';
 import Image from 'next/image';
-import { webtoonAuthorState } from '@/state/webtoon/webtoonAuthorState';
 
-export default function AuthorWebtoonInfoForm() {
+export default function ChangeWebtoonForm() {
 
     const router = useRouter();
 
@@ -20,22 +19,18 @@ export default function AuthorWebtoonInfoForm() {
         illustrator: '',
     });
 
+    const [changewebtoonData, setChangeWebtoonData] = useRecoilState<authorWebtoonInfoStateType>(webtoonInfoState);
+
     const [WebtoonThumbnailImage, setWebtoonThumbnailImage] = useState<File>();
     const [WebtoonMainImage, setWebtoonMainImage] = useState<File>();
     const [WebtoonThumbnailImagePreview, setWebtoonThumbnailImagePreview] = useState<string>();
     const [WebtoonMainImagePreview, setWebtoonMainImagePreview] = useState<string>();
 
-    const [authorName, setAuthorName] = useRecoilState<authorNameDataType>(webtoonAuthorState);
-
     useEffect(() => {
-        console.log(webtoonInfoData)
-    }, [webtoonInfoData])
-
-    useEffect(() => {
-        axios(`api/author`)
+        axios(`api/webtooninfo/${router.query.id}`)
             .then(res => res.data)
-            .then(data => setAuthorName(data))
-    }, [authorName])
+            .then(data => setChangeWebtoonData(data))
+    }, [router.query.id])
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -93,49 +88,49 @@ export default function AuthorWebtoonInfoForm() {
 
     return (
         <>
-            {authorName &&
-                <div className={style.WebtoonInfoWrap}>
+            <div className={style.WebtoonInfoWrap}>
+                {changewebtoonData &&
                     <form onSubmit={handleSubmit}>
                         <div className={style.InfoBox}>
                             <p>작품명 : </p>
-                            <input type="text" name="title" onChange={handleInput} />
+                            <input type="text" name="title" value={changewebtoonData.title} onChange={handleInput} />
                         </div>
                         <div className={style.InfoBox}>
                             <p>줄거리 : </p>
-                            <input type="text" name="description" onChange={handleInput} />
+                            <input type="text" name="description" value={changewebtoonData.description} onChange={handleInput} />
                         </div>
                         <div className={style.InfoBox}>
                             <p>장르 : </p>
-                            <input type="text" name="genre" onChange={handleInput} />
+                            <input type="text" name="genre" value={changewebtoonData.genre} onChange={handleInput} />
                         </div>
                         <div className={style.InfoBox}>
                             <p>요일 : </p>
-                            <input type="text" name="day" onChange={handleInput} />
+                            <input type="text" name="day" value={changewebtoonData.day} onChange={handleInput} />
                         </div>
                         <div className={style.InfoBox}>
                             <p>작가 : </p>
-                            <p className={style.author}>{authorName.author}</p>
+                            <p className={style.author}>{changewebtoonData.author}</p>
                         </div>
                         <div className={style.InfoillustratorBox}>
                             <p>일러스트레이터 : </p>
-                            <input type="text" name="illustrator" value={authorName.author} placeholder='미입력시, 본인으로 등록됩니다.' onChange={handleInput} />
+                            <input type="text" name="illustrator" value={changewebtoonData.illustrator} placeholder='미입력시, 본인으로 등록됩니다.' onChange={handleInput} />
                         </div>
                         <div className={style.InfoImgBox}>
                             <p>메인 이미지 : </p>
-                            <input type="file" accept="image/*" onChange={handleMainImage} />
+                            <input type="file" accept="image/*" onChange={handleMainImage} value={changewebtoonData.mainImageData} />
                             {WebtoonMainImagePreview && <Image src={WebtoonMainImagePreview} alt="WebtoonThumbnailImagePreview" width={200} height={200} />}
                         </div>
                         <div className={style.InfoImgBox}>
                             <p>썸네일 이미지 : </p>
-                            <input type="file" accept="image/*" onChange={handleThumbnailImage} />
+                            <input type="file" accept="image/*" onChange={handleThumbnailImage} value={changewebtoonData.thumbnailImageData} />
                             {WebtoonThumbnailImagePreview && <Image src={WebtoonThumbnailImagePreview} alt="WebtoonMainImagePreview" width={200} height={200} />}
                         </div>
                         <div className={style.submit}>
                             <button type="submit">등록</button>
                         </div>
                     </form>
-                </div>
-            }
+                }
+            </div>
         </>
     )
 }
