@@ -29,6 +29,13 @@ export default function UserNickName() {
         }
     );
 
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setUserNickname({
+            ...userNickname,
+            nickname: e.target.value,
+        });
+    };
+
     // const [userNickname, setUserNickname] = useState<ChangeUserDataType>(
     //     {
     //         nickname: '',
@@ -80,7 +87,7 @@ export default function UserNickName() {
                                 <>
                                     {userNickName.map((data) => (
                                         router.pathname === '/changeuserinfo' ?
-                                            <input className={style.usernickname} type='text' value={data.nickname} />
+                                            <input className={style.usernickname} type='text' defaultValue={data.nickname} onChange={handleChange} />
                                             :
                                             <p className={style.usernickname}>{data.nickname}</p>
                                     ))}

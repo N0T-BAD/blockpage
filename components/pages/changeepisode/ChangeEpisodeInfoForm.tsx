@@ -111,28 +111,28 @@ export default function ChangeEpisodeInfoForm() {
             </div>
             <div className={style.episodeInfoBox}>
               <p>에피소드 명 : </p>
-              <input type="text" name="episodetitle" value={webtoonepisode.episodetitle} onChange={handleInput} />
+              <input type="text" name="episodetitle" defaultValue={webtoonepisode.episodetitle} onChange={handleInput} />
             </div>
             <div className={style.episodeInfoBox}>
               <p>에피소드 내용 : </p>
-              <input type="text" name="episodedescription" value={webtoonepisode.episodedescription} onChange={handleInput} />
+              <input type="text" name="episodedescription" defaultValue={webtoonepisode.episodedescription} onChange={handleInput} />
             </div>
             <div className={style.episodeInfoBox}>
               <p>업로드 일 : </p>
-              <input type="text" name="day" value={webtoonepisode.day} onChange={handleInput} />
+              <input type="text" name="day" defaultValue={webtoonepisode.day} onChange={handleInput} />
             </div>
             <div className={style.episodeInfoBox}>
               <p>작가의 말 : </p>
-              <input type="text" name="authortalk" value={webtoonepisode.authortalk} onChange={handleInput} />
+              <input type="text" name="authortalk" defaultValue={webtoonepisode.authortalk} onChange={handleInput} />
             </div>
             <div className={style.episodeInfoImgBox}>
               <p>에피소드 썸네일 이미지 : </p>
-              <input type="file" accept="image/*" onChange={handleThumbnailImage} value={webtoonepisode.episodeThumbnail} />
+              <input type="file" accept="image/*" onChange={handleThumbnailImage} defaultValue={webtoonepisode.episodeThumbnail} />
               {episodeThumbnailImagePreview && <Image src={episodeThumbnailImagePreview} alt="episodeThumbnailImagePreview" width={200} height={200} />}
             </div>
             <div className={style.episodeInfoImgBox}>
               <p>에피소드 이미지 : </p>
-              <input type="file" value={webtoonepisode.episodeImage} accept="image/*" onChange={handleEpisodeImage} multiple />
+              <input type="file" defaultValue={webtoonepisode.episodeImage} accept="image/*" onChange={handleEpisodeImage} multiple />
               <div className={style.ImgPreview}>
                 {episodeImagePreview.map((preview, index) => (
                   <div key={index}>
