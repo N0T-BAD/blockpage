@@ -1,0 +1,28 @@
+export const commentDatas = [
+  {
+    id: 1,
+    parentsId: 1,
+    parentsNickname: "백고은",
+    content: "한혜연 작가님 작품이라니!! 너무 반갑고 좋습니다.",
+    likesCount: 24,
+    dislikesCount: 1,
+    replyCount: 0,
+    report: false,
+    erase: false,
+    pin: false,
+  },
+  {
+    id: 2,
+    parentsId: 1,
+    parentsNickname: "백고은",
+    childId: 2,
+    childNickname: "김태근",
+    content: "한혜연 작가님 작품이라니!! 너무 반갑고 좋습니다.",
+    likesCount: 124,
+    dislikesCount: 11,
+    replyCount: 2,
+    report: false,
+    erase: false,
+    pin: false,
+  },
+];
