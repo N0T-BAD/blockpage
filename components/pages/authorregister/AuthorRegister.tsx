@@ -42,7 +42,7 @@ export default function AuthorRegister({ inputData, setInputData }: ChildProps) 
           if (res.data === true) {
             alert("사용 가능한 작가명입니다.")
             setErrMsg({ ...errMsg, nicknameErr: "" })
-          } else {
+          } else if (inputData.nickname.length < 2 || inputData.nickname.length > 10 || regex.test(inputData.nickname)) {
             alert('사용 불가능한 작가명입니다.');
             setErrMsg({ ...errMsg, nicknameErr: '이미 사용 중인 작가명입니다.' });
           }
