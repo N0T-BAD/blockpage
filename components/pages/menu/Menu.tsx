@@ -4,7 +4,9 @@ import { useRouter } from 'next/router'
 
 import style from "@/components/pages/menu/Menu.module.css"
 import CloseBtn from '@/components/ui/CloseBtn';
-import BackBtn from '@/components/ui/BackBtn';
+import UserProfileImg from '@/components/ui/UserProfileImg';
+import MenuList from './MenuList';
+import BtnSection from './BtnSection';
 
 export default function Menu() {
 
@@ -15,42 +17,30 @@ export default function Menu() {
   }
 
   return (
-    <div>
-      <div className={style.closeBtn} >
+    <section className={style.menuSection}>
+      <div className={style.closeBtn}>
         <CloseBtn />
       </div>
-      <div className={style.menuTop} onClick={handleLogin}>
+      <section className={style.userSection}>
+        <div className={style.user} onClick={handleLogin}>
+          <UserProfileImg />
+          <div className={style.userSectionTxt}>
+            <p>404님</p>
+            <p>오늘도 좋은 하루입니다.</p>
+          </div>
+        </div>
+      </section>
+      <BtnSection />
+      <MenuList />
+      <div className={style.logoImg}>
         <Image
-          src={"/assets/images/mypage/userImg.png"}
-          alt={"userImg"}
-          width={50}
-          height={50}
+          src={'/assets/images/logo/logo.svg'}
+          alt='logo'
+          width={120}
+          height={60}
+          priority
         />
-        <p>로그인하세요.</p>
       </div>
-      <div className={style.menuContents}>
-        <div onClick={() => router.push("/week")}>
-          <p>요일별 웹툰</p>
-        </div>
-        <div onClick={() => router.push("/genre")}>
-          <p>장르별 웹툰</p>
-        </div>
-        <div onClick={() => router.push("/best")}>
-          <p>인기순 웹툰</p>
-        </div>
-        <div onClick={() => router.push("/")}>
-          <p>게임</p>
-        </div>
-        <div onClick={() => router.push("/")}>
-          <p>스토어</p>
-        </div>
-        <div onClick={() => router.push("/")}>
-          <p>보관함</p>
-        </div>
-        <div onClick={() => router.push("/mypage")}>
-          <p>마이페이지</p>
-        </div>
-      </div>
-    </div>
+    </section>
   )
 }

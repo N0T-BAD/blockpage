@@ -1,25 +1,63 @@
+.menuSection {
+  padding: 2rem 1.5rem;
+}
+
 .closeBtn {
   display: flex;
   justify-content: right;
-  padding-right: 1.5rem;
-  margin-top: 2rem;
 }
 
-.menuTop {
-  margin-top: 3rem;
+.userSection {
+  margin-top: 1rem;
+}
+
+.user {
+  width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  align-items: flex-end;
 }
 
-.menuTop p {
-  font-size: 1.2rem;
-  font-weight: 700;
+.user p {
+  font-size: 1rem;
   padding: 0 2rem;
 }
 
-.menuTop img {
-  transform: scaleX(-1);
+.user p:first-child {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.userSectionTxt {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.btnSection {
+  margin: 3rem 0 1rem 0;
+  display: flex;
+  font-weight: 700;
+}
+
+.mypageBtn {
+  display: flex;
+  align-items: center;
+  padding: 0.3rem 1.7rem;
+  border-radius: 2rem;
+  background-color: var(--bp-secondary);
+  color: var(--bp-white);
+  z-index: 1;
+}
+
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  padding: 0.3rem 1.7rem 0.3rem 2.6rem;
+  margin-left: -1.9rem;
+  border-radius: 2rem;
+  border: 0.15rem solid var(--bp-secondary);
+  color: var(--bp-secondary);
 }
 
 .menuContents {
@@ -32,4 +70,23 @@
   font-size: 1.2rem;
   font-weight: 500;
   padding: 1rem 0 1rem 2.5rem;
+}
+
+.menuList {
+  padding: 1.7rem;
+  font-size: 1.3rem;
+  line-height: 3.5rem;
+  padding-inline-start: 1.5em;
+}
+
+.menuList li::marker {
+  color: var(--bp-blue);
+}
+
+.menuList li {
+  width: fit-content;
+}
+
+.logoImg {
+  margin: 2rem 0 0 0.5rem;
 }
