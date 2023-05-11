@@ -17,7 +17,6 @@ export default function CommentInput() {
     setBtnState(!btnState);
     setInputCount(0);
     //댓글등록
-    console.log('Register')
   }
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {

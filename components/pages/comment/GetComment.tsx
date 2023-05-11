@@ -5,6 +5,7 @@ import style from '@/components/pages/comment/GetComment.module.css'
 import { commentDataType } from '@/types/commentDataType';
 import { commentDatas } from '@/data/dummy/commentData';
 import Separator from '@/components/ui/Separator';
+import CommentUserInfo from './CommentUserInfo';
 
 export default function GetComment(props: { episodeId: number }) {
 
@@ -29,7 +30,7 @@ export default function GetComment(props: { episodeId: number }) {
   }
 
   const handleView = () => {
-
+    setOpenReply(!openReply);
   }
 
   const handleDeclaration = () => {
@@ -43,14 +44,10 @@ export default function GetComment(props: { episodeId: number }) {
         commentData.map((data) => (
           <div key={data.id}>
             <div className={style.topSection}>
-              <div className={style.profile}>
-                <Image className={style.userImage1} src={"/assets/images/mypage/userImg.png"} alt={"userImg"} width={40} height={40} priority />
-                <div>
-                  <p>{data.parentsNickname}</p>
-                  {/* api 데이터 추가해야 함 */}
-                  <p className={style.date}>23.05.15</p>
-                </div>
-              </div>
+              <CommentUserInfo
+                parentsNickname={data.parentsNickname}
+                date={data.date}
+              />
               <div className={style.topIcon}>
                 {
                   isAuthor ?
@@ -73,7 +70,7 @@ export default function GetComment(props: { episodeId: number }) {
                 />
               </div>
             </div>
-            <p className={style.commentTxt}>한혜연 작가님 작품이라니!! 너무 반갑고 좋습니다.</p>
+            <p className={style.commentTxt}>{data.content}</p>
             <div className={style.bottomSection}>
               {
                 data.replyCount > 0
@@ -120,6 +117,21 @@ export default function GetComment(props: { episodeId: number }) {
             />
           </div>
         ))
+      }
+      {
+        openReply ?
+          <div className={style.replySection}>
+            <div>
+              <div className={style.profile}>
+                <Image className={style.userImage1} src={"/assets/images/mypage/userImg.png"} alt={"userImg"} width={40} height={40} priority />
+                <div>
+                  <p>김태근</p>
+                  <p className={style.date}>23-05-12 22:01</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          : ""
       }
     </>
   )

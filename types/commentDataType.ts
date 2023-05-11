@@ -11,4 +11,5 @@ export interface commentDataType {
   report: boolean;
   erase: boolean;
   pin: boolean;
+  date: string;
 }
