@@ -1,12 +1,12 @@
 import React from 'react'
 import style from '@/components/pages/authorregister/AuthorNicknameAgreement.module.css'
 import { useRouter } from 'next/router';
-import { authorNameDataType } from '@/types/authorNameDataType';
+import { authorNicknameDataType } from '@/types/authorNameDataType';
 import axios from 'axios';
 
 interface ChildProps {
-  inputData: authorNameDataType;
-  setInputData: React.Dispatch<React.SetStateAction<authorNameDataType>>;
+  inputData: authorNicknameDataType;
+  setInputData: React.Dispatch<React.SetStateAction<authorNicknameDataType>>;
 }
 
 export default function AuthorNicknameAgreement({ inputData, setInputData }: ChildProps) {
@@ -14,8 +14,8 @@ export default function AuthorNicknameAgreement({ inputData, setInputData }: Chi
   const router = useRouter();
 
   const handleAuthorSignup = () => {
-    axios.post('http://localhost:3000/api/author/signup', {
-      nickname: inputData.author,
+    axios.post('http://localhost:3000/api/v1/members?type=author', {
+      creator_nickname: inputData.creator_nickname,
     })
       .then((res) => {
         if (res.data === true) {

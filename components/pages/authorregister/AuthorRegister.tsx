@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import style from '@/components/pages/authorregister/AuthorRegister.module.css'
 import { AuthorSignupDataType } from '@/types/authorSignupDataType'
-import { authorNameDataType } from '@/types/authorNameDataType'
+import { authorNicknameDataType } from '@/types/authorNameDataType'
 import axios from 'axios';
 
 interface ChildProps {
-  inputData: authorNameDataType;
-  setInputData: React.Dispatch<React.SetStateAction<authorNameDataType>>;
+  inputData: authorNicknameDataType;
+  setInputData: React.Dispatch<React.SetStateAction<authorNicknameDataType>>;
 }
 
 export default function AuthorRegister({ inputData, setInputData }: ChildProps) {
@@ -21,7 +21,7 @@ export default function AuthorRegister({ inputData, setInputData }: ChildProps) 
     const { value } = e.target;
     setInputData({
       ...inputData,
-      author: value
+      creator_nickname: value
     })
     if (value.length < 2 || value.length > 10) {
       setErrMsg({ ...errMsg, nicknameErr: "작가명은 2자 이상 10자 이하로 입력해주세요." })
@@ -33,17 +33,17 @@ export default function AuthorRegister({ inputData, setInputData }: ChildProps) 
   }
 
   const handleAuthorRegister = () => {
-    if (inputData.author === "") {
+    if (inputData.creator_nickname === "") {
       alert('작가명을 입력해주세요.')
     } else {
-      axios.post('http://localhost:3000/api/author/nicknamecheck', {
-        nickname: inputData.author,
+      axios.post('http://localhost:3000/api/v1/members?type=author', {
+        creator_nickname: inputData.creator_nickname,
       })
         .then((res) => {
           if (res.data === true) {
             alert("사용 가능한 작가명입니다.")
             setErrMsg({ ...errMsg, nicknameErr: "" })
-          } else if (inputData.author.length < 2 || inputData.author.length > 10 || regex.test(inputData.author)) {
+          } else if (inputData.creator_nickname.length < 2 || inputData.creator_nickname.length > 10 || regex.test(inputData.creator_nickname)) {
             alert('사용 불가능한 작가명입니다.');
             setErrMsg({ ...errMsg, nicknameErr: '이미 사용 중인 작가명입니다.' });
           }
@@ -61,7 +61,7 @@ export default function AuthorRegister({ inputData, setInputData }: ChildProps) 
           <p>작가명 :</p>
         </div>
         <div className={style.AuthorInput}>
-          <input type='text' placeholder='작가명을 입력해주세요.' onChange={handleNicknameChange} />
+          <input type='text' name="creator_nickname" placeholder='작가명을 입력해주세요.' onChange={handleNicknameChange} />
           <p>{errMsg.nicknameErr}</p>
         </div>
         <div className={style.AuthorButton}>

@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
-import style from '@/components/pages/authorregister/AuthorRegisterTopSection.module.css'
+import style from '@/components/pages/authorregister/AuthorRegisterSection.module.css'
 import AuthorRegister from '@/components/pages/authorregister/AuthorRegister'
 import AuthorNicknameAgreement from '@/components/pages/authorregister/AuthorNicknameAgreement'
-import { authorNameDataType } from '@/types/authorNameDataType';
+import { authorNicknameDataType } from '@/types/authorNameDataType';
 
-export default function AuthorRegisterTopSection() {
+export default function AuthorRegisterSection() {
 
 
-  const [inputData, setInputData] = useState<authorNameDataType>({
-    author: '',
+  const [inputData, setInputData] = useState<authorNicknameDataType>({
+    creator_nickname: '',
   });
 
   return (

@@ -1,3 +1,14 @@
+@keyframes slide-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .blockMainHeader {
   width: 100%;
   padding: 1rem 1.2rem 8rem 1.2rem;
@@ -32,6 +43,8 @@
   flex-direction: column;
   justify-content: center;
   height: 4rem;
+  animation: slide-in-left 1s ease-in-out forwards;
+  opacity: 0;
 }
 
 .LoginBack {
@@ -125,6 +138,13 @@
   font-size: 0;
 }
 
+.BlockChargeBack {
+  width: 10%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .BlockChargeHeader {
   width: 100%;
   padding: 1rem 1.2rem 1rem 1.2rem;
@@ -139,19 +159,37 @@
   background-color: var(--bp-white);
 }
 
-.BlockChargeBack {
-  width: 10%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
 .BlockChargeHeader nav ul {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 .BlockChargeHeader nav ul li {
+  list-style: none;
+}
+
+.AnimationHeader {
+  width: 100%;
+  padding: 1rem 1.2rem 1rem 1.2rem;
+  position: fixed;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 100;
+  border-bottom: var(--bp-gray) 1px solid;
+  height: 4rem;
+  background-color: var(--bp-white);
+  animation: slide-in-left 1s ease-in-out forwards;
+  opacity: 0;
+}
+
+.AnimationHeader nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.AnimationHeader nav ul li {
   list-style: none;
 }
 

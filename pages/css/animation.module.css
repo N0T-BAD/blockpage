@@ -9,8 +9,7 @@
   }
 }
 
-section.LoginSection {
-  margin: 1rem 2rem;
+.animation {
   animation: slide-in-left 1s ease-in-out forwards;
   opacity: 0;
 }

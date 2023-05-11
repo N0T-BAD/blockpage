@@ -105,7 +105,7 @@ export default function Header() {
               </header>
               :
               router.pathname === '/authorregister' ?
-                <header className={style.BlockChargeHeader}>
+                <header className={style.AnimationHeader}>
                   <div className={style.BlockChargeTxt}>
                     <div className={style.BlockChargeBack}>
                       <Image src={"/assets/images/icons/back.svg"} alt={"뒤로가기"} width={20} height={20} onClick={handlemypageBack} />

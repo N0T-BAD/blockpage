@@ -1,12 +1,13 @@
 import Layout from "@/components/layouts/layout"
 import { NextPageWithLayout } from "@/pages/_app"
-import AuthorRegisterTopSection from "@/components/pages/authorregister/AuthorRegisterTopSection"
+import AuthorRegisterSection from "@/components/pages/authorregister/AuthorRegisterSection"
+import style from '@/pages/css/animation.module.css'
 
 const authorregister: NextPageWithLayout = () => {
   return (
-    <>
-      <AuthorRegisterTopSection />
-    </>
+    <div className={style.animation}>
+      <AuthorRegisterSection />
+    </div>
   )
 }
 
