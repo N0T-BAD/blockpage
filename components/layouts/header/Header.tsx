@@ -1,10 +1,11 @@
 import React from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+
+import style from '@/components/layouts/header/Header.module.css'
 import { staticMenuData } from '@/data/staticMenuData'
 import { StaticMenuData } from '@/types/staticDataType'
-import style from '@/components/layouts/Header.module.css'
-import Image from 'next/image'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
 import CommentHeader from './CommentHeader'
 
 export default function Header() {
