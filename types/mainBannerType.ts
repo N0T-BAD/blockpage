@@ -4,6 +4,5 @@ export interface MainBannerType {
   name: string;
   imgUrl: string;
   path: string;
-  freeOption: number;
   categoryName: string;
 }

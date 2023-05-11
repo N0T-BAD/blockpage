@@ -15,6 +15,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  margin: 1rem 0;
 }
 
 .contentWrap {
@@ -157,7 +158,7 @@ p.bgtxt {
   font-family: "Roboto";
   font-style: normal;
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 21px;
   /* identical to box height, or 175% */
   text-align: end;

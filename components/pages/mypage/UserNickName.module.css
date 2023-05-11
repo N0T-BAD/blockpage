@@ -15,8 +15,8 @@
 }
 
 .userImage {
-  margin: 0.5rem 0;
-  height: 3.5rem;
+  margin: 1rem 0;
+  height: 4rem;
 }
 
 img.userImage1 {
@@ -30,7 +30,7 @@ img.userImage2 {
   bottom: 1.1rem;
 }
 
-.usernicknameImg p.usernickname {
+.usernicknameImg .usernickname {
   padding: 0.5rem 2rem;
   font-family: var(--bp-font);
   font-size: 1.5rem;

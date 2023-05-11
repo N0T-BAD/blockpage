@@ -1,0 +1,33 @@
+.LoginBox {
+  background-color: var(--bp-secondary-gray);
+  border-radius: 3rem;
+  width: 100%;
+  height: 30rem;
+}
+
+.LogoSection {
+  margin-top: 12rem;
+  text-align: center;
+  position: relative;
+  bottom: 2.5rem;
+}
+
+.Logintxt {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.Logintxt p {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.KakaoLogin {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.Logintxt p.KakaoLogin {
+  font-size: 2rem;
+  font-weight: 600;
+}

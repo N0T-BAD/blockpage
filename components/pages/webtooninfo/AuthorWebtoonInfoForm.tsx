@@ -32,7 +32,7 @@ export default function AuthorWebtoonInfoForm() {
     }, [webtoonInfoData])
 
     useEffect(() => {
-        axios(`api/author`)
+        axios(`api/v1/webtoons`)
             .then(res => res.data)
             .then(data => setAuthorName(data))
     }, [authorName])
@@ -74,7 +74,7 @@ export default function AuthorWebtoonInfoForm() {
         } else if (!WebtoonThumbnailImagePreview || !WebtoonMainImagePreview) {
             alert('웹툰 이미지를 입력해주세요.')
         } else {
-            axios.post('/api/authorwebtooninfo', {
+            axios.post('/api/v1/webtoons', {
                 title: webtoonInfoData.title,
                 description: webtoonInfoData.description,
                 genre: webtoonInfoData.genre,

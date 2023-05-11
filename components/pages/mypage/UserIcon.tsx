@@ -10,7 +10,7 @@ export default function UserIcon() {
 
     return (
         <>
-            {router.pathname === "/mypage" ?
+            {router.pathname === "/mypage" || router.pathname === '/changeuserinfo' ?
                 <div className={style.reader}>
                     <p>독자</p>
                 </div>
