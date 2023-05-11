@@ -1,31 +1,40 @@
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import style from '@/components/pages/mypage/UserNickName.module.css'
 import UserIcon from './UserIcon'
 import UserProfileImg from '@/components/ui/UserProfileImg'
 import { useRouter } from 'next/router'
+import { ChangeUserDataType } from '@/types/changeUserDataType'
+import axios from 'axios'
 
 export default function UserNickName() {
 
-    const router = useRouter();
+    const [userNickname, setUserNickname] = useState<ChangeUserDataType>(
+        {
+            nickname: '',
+        }
+    );
 
-    const RouterUrl = router.pathname === "/webtooninfo" || router.pathname === "/authorworkslist" || router.pathname === "/webtoondelete" || router.pathname === "/episodelist" || router.pathname === "/episodeinfo"
-        || router.pathname === "/episodedelete" || router.pathname === '/changewebtoon';
+    useEffect(() => {
+        axios.get('http://localhost:3000/api/v1/members?type=nickname')
+            .then((res) => {
+                setUserNickname(res.data);
+            })
+    }, [])
 
     return (
-        <div className={style.usernicknameImgBox}>
-            <div className={style.usernicknameImg}>
-                <UserProfileImg />
-                <p className={style.usernickname}>사공사님</p>
-                {router.pathname === '/mypage' ?
-                    <p className={style.usernicknamechange}>닉네임 변경</p>
+        <>
+            <div className={style.usernicknameImgBox}>
+                {userNickname.nickname ?
+                    <div className={style.usernicknameImg}>
+                        <UserProfileImg />
+                        <p className={style.usernickname}>{userNickname.nickname}</p>
+                        <UserIcon />
+                    </div>
                     :
-                    RouterUrl ?
-                        ""
-                        : ""
+                    ""
                 }
-                <UserIcon />
             </div>
-        </div>
+        </>
     )
 }

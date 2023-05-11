@@ -4,6 +4,7 @@ section.bestSection {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 8rem;
 }
 
 .bestItemWrap {

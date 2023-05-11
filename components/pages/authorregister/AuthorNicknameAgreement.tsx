@@ -1,23 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react'
 import style from '@/components/pages/authorregister/AuthorNicknameAgreement.module.css'
 import { useRouter } from 'next/router';
-import { AuthorNicknameCheckDataType } from '@/types/authorSignupDataType';
+import { authorNameDataType } from '@/types/authorNameDataType';
 import axios from 'axios';
 
 interface ChildProps {
-  inputData: AuthorNicknameCheckDataType;
-  setInputData: React.Dispatch<React.SetStateAction<AuthorNicknameCheckDataType>>;
+  inputData: authorNameDataType;
+  setInputData: React.Dispatch<React.SetStateAction<authorNameDataType>>;
 }
 
 export default function AuthorNicknameAgreement({ inputData, setInputData }: ChildProps) {
 
   const router = useRouter();
 
-
-
   const handleAuthorSignup = () => {
     axios.post('http://localhost:3000/api/author/signup', {
-      nickname: inputData.nickname,
+      nickname: inputData.author,
     })
       .then((res) => {
         if (res.data === true) {

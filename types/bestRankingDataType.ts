@@ -1,10 +1,11 @@
 export interface BestRankingDataType {
-  id: number;
-  views: string;
-  likes: string;
-  title: string;
-  author: string;
+  webtoonId: number;
+  webtoonTitle: string;
+  creator: string;
+  illustrator: string;
+  views: number;
+  interestCount: number;
+  webtoonThumbnail: string;
   ranking: string;
-  rankup: string;
-  imgUrl: string;
+  genre: string;
 }

@@ -22,17 +22,5 @@ export const userBottomMenuData = [
     name: 'NFT 보관함',
     iconUrl: "/assets/images/icons/NFTBox.svg",
     path: "/nftbox"
-  },
-  {
-    id: 5,
-    name: '작가 등록',
-    iconUrl: "/assets/images/icons/UserPlus.svg",
-    path: "/authorregister"
-  },
-  {
-    id: 6,
-    name: '작품 관리',
-    iconUrl: "/assets/images/icons/userIcon.svg",
-    path: "/authorworkslist"
   }
 ]
