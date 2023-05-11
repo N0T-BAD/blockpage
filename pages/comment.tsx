@@ -1,13 +1,14 @@
 import { NextPageWithLayout } from "./_app"
 
 import Layout from "@/components/layouts/layout"
-import CommentSection from "@/components/pages/comment/CommentSection"
+import CommentInputSection from "@/components/pages/comment/CommentInputSection"
 
 const comment: NextPageWithLayout = () => {
 
   return (
     <>
-      <CommentSection />
+      <CommentInputSection />
+
     </>
   )
 }

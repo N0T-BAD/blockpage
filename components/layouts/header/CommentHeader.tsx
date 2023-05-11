@@ -1,6 +1,6 @@
 import React from 'react'
 
-import style from '@/components/pages/comment/CommentSection.module.css'
+import style from '@/components/pages/comment/CommentHeader.module.css'
 import BackBtn from '@/components/ui/BackBtn'
 
 export default function CommentHeader() {
