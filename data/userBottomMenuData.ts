@@ -9,7 +9,7 @@ export const userBottomMenuData = [
     id: 2,
     name: '회원정보 변경',
     iconUrl: "/assets/images/icons/InformationChange.svg",
-    path: "/userinfo"
+    path: "/changeuserinfo"
   },
   {
     id: 3,
