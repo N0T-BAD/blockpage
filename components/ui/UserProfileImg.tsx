@@ -18,7 +18,7 @@ export default function UserProfileImg() {
   const [userProfileImage, setUserProfileImage] = useState<File>();
   const [userProfileImagePreview, setUserProfileImagePreview] = useState<string>();
 
-  const routerPathname = router.pathname === '/mypage' || router.pathname === '/authorworkslist' || router.pathname === '/episodelist' || router.pathname === '/changeepisode' || router.pathname === '/episodedelete' || router.pathname === '/episodeinfo' || router.pathname === '/webtooninfo' || router.pathname === '/changewebtoon' || router.pathname === '/webtoondelete' || router.pathname === '/changeuserinfo';
+  const routerPathname = router.pathname === '/mypage' || router.pathname === '/authorworkslist' || router.pathname === '/episodelist' || router.pathname === '/changeepisode' || router.pathname === '/episodedelete' || router.pathname === '/episodeinfo' || router.pathname === '/webtooninfo' || router.pathname === '/changewebtoon' || router.pathname === '/webtoondelete' || router.pathname === '/changeuserinfo' || router.pathname === '/menu';
 
   // useEffect(() => {
   //   axios.get('http://localhost:3000/api/v1/members?type=profileimage')

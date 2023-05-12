@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import style from '@/components/pages/changeuserinfo/ChangeUserInfo.module.css'
 import { profileskinDataType } from '@/types/changeUserDataType'
+import { profileskinData } from '@/data/profileskinData'
 
-export default function ChangeUserInfo() {
+interface ChildProps {
+    profileSkinColor: profileskinDataType;
+    setProfileSkinColor: React.Dispatch<React.SetStateAction<profileskinDataType>>;
+}
 
-    const [profileSkinColor, setProfileSkinColor] = useState<profileskinDataType>(
-        {
-            id: 0,
-            color: '',
-        }
-    )
+export default function ChangeUserInfo({ profileSkinColor, setProfileSkinColor }: ChildProps) {
+
 
     return (
         <div className={style.ChangeUserIntoWrap}>
