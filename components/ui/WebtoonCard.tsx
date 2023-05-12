@@ -2,35 +2,28 @@ import React, { useState } from 'react'
 import Image from 'next/image';
 
 import style from '@/components/ui/WebtoonCard.module.css'
-import { listviewContentData } from '@/data/dummy/listviewData';
-import { listviewDataType } from '@/types/listviewDataType';
-import { useRouter } from 'next/router';
-import LikeViewSection from './webtoonInfo/LikeViewSection';
+import { WebToonListDataType } from '@/types/webtoonDataType';
 
-export default function WebtoonCard() {
+export default function WebtoonCard(props: {data: WebToonListDataType}) {
 
-  const router = useRouter();
-  const [listviewData] = useState<listviewDataType[]>(listviewContentData);
+  const data = props.data;
 
   return (
     <div className={style.box}>
-      {
-        listviewData &&
-        listviewData.map((data, index) => (
           <div
             className={style.imgBox}
             key={data.id}
-            onClick={() => router.push(`/webtoon/${data.id}`)}
+            // onClick={() => router.push(`/webtoon/${data.id}`)}
           >
-            {
+            {/* {
               router.pathname === '/best' &&
               <div className={style.rank}>
                 {index + 1}
               </div>
-            }
+            } */}
             <div className={style.contentBox}>
               <Image
-                src={data.imgUrl}
+                src={data.titleImg}
                 alt={data.title}
                 width={110}
                 height={110}
@@ -62,8 +55,6 @@ export default function WebtoonCard() {
               </div>
             </div>
           </div>
-        ))
-      }
     </div>
   )
 }

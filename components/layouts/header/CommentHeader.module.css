@@ -1,9 +1,11 @@
-.commentSection {
-  padding: 2rem 1.5rem;
-}
-
 .headerSection {
   width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  background-color: white;
+}
+.navHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
