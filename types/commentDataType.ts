@@ -1,5 +1,4 @@
 export interface commentDataType {
-  id: number;
   parentsId: number;
   parentsNickname: string;
   childId?: number;
