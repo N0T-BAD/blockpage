@@ -93,19 +93,19 @@ export default function ChangeWebtoonForm() {
                     <form onSubmit={handleSubmit}>
                         <div className={style.InfoBox}>
                             <p>작품명 : </p>
-                            <input type="text" name="title" value={changewebtoonData.title} onChange={handleInput} />
+                            <input type="text" name="title" defaultValue={changewebtoonData.title} onChange={handleInput} />
                         </div>
                         <div className={style.InfoBox}>
                             <p>줄거리 : </p>
-                            <input type="text" name="description" value={changewebtoonData.description} onChange={handleInput} />
+                            <input type="text" name="description" defaultValue={changewebtoonData.description} onChange={handleInput} />
                         </div>
                         <div className={style.InfoBox}>
                             <p>장르 : </p>
-                            <input type="text" name="genre" value={changewebtoonData.genre} onChange={handleInput} />
+                            <input type="text" name="genre" defaultValue={changewebtoonData.genre} onChange={handleInput} />
                         </div>
                         <div className={style.InfoBox}>
                             <p>요일 : </p>
-                            <input type="text" name="day" value={changewebtoonData.day} onChange={handleInput} />
+                            <input type="text" name="day" defaultValue={changewebtoonData.day} onChange={handleInput} />
                         </div>
                         <div className={style.InfoBox}>
                             <p>작가 : </p>
@@ -113,16 +113,16 @@ export default function ChangeWebtoonForm() {
                         </div>
                         <div className={style.InfoillustratorBox}>
                             <p>일러스트레이터 : </p>
-                            <input type="text" name="illustrator" value={changewebtoonData.illustrator} placeholder='미입력시, 본인으로 등록됩니다.' onChange={handleInput} />
+                            <input type="text" name="illustrator" defaultValue={changewebtoonData.illustrator} placeholder='미입력시, 본인으로 등록됩니다.' onChange={handleInput} />
                         </div>
                         <div className={style.InfoImgBox}>
                             <p>메인 이미지 : </p>
-                            <input type="file" accept="image/*" onChange={handleMainImage} value={changewebtoonData.mainImageData} />
+                            <input type="file" accept="image/*" onChange={handleMainImage} defaultValue={changewebtoonData.mainImageData} />
                             {WebtoonMainImagePreview && <Image src={WebtoonMainImagePreview} alt="WebtoonThumbnailImagePreview" width={200} height={200} />}
                         </div>
                         <div className={style.InfoImgBox}>
                             <p>썸네일 이미지 : </p>
-                            <input type="file" accept="image/*" onChange={handleThumbnailImage} value={changewebtoonData.thumbnailImageData} />
+                            <input type="file" accept="image/*" onChange={handleThumbnailImage} defaultValue={changewebtoonData.thumbnailImageData} />
                             {WebtoonThumbnailImagePreview && <Image src={WebtoonThumbnailImagePreview} alt="WebtoonMainImagePreview" width={200} height={200} />}
                         </div>
                         <div className={style.submit}>

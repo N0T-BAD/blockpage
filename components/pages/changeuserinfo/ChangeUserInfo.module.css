@@ -1,0 +1,110 @@
+.ChangeUserIntoWrap {
+  margin: 0 1rem;
+}
+
+.profileSkinWrap {
+  margin-bottom: 4rem;
+}
+
+p.profileSkinchangetxt {
+  margin: 1rem 0;
+}
+
+.profileSkinBox {
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  overflow-x: scroll;
+  margin: 1rem 0;
+  background-color: var(--bp-gray);
+}
+
+p.profileSkintxt {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.ProfileSkinButtonBox {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  margin: 0 1rem;
+}
+
+.profileSkinItemPurple {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0.5rem;
+  background-color: var(--bp-secondary);
+  border-radius: 3rem;
+  border: none;
+}
+
+.profileSkinItemPink {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0.5rem;
+  background-color: var(--bp-red);
+  border-radius: 3rem;
+  border: none;
+}
+
+.profileSkinItemGreen {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0.5rem;
+  background-color: var(--bp-green);
+  border-radius: 3rem;
+  border: none;
+}
+
+.profileSkinItemblue {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0.5rem;
+  background-color: var(--bp-blue);
+  border-radius: 3rem;
+  border: none;
+}
+
+.certificationBox {
+  margin: 2.5rem 0;
+}
+
+.certificationtxt {
+  margin: 1rem 0;
+  font-size: 0.8rem;
+  color: var(--bp-font-gray);
+}
+
+button.certificationBtn {
+  background-color: var(--bp-blue);
+  color: var(--bp-white);
+  width: 9rem;
+  border-radius: 3rem;
+  height: 3rem;
+  margin: 0;
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: var(--bp-font);
+}
+
+.ChangeButtonBox {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 7rem;
+}
+
+button.ChangeButton {
+  background-color: var(--bp-primary);
+  color: var(--bp-white);
+  width: 15%;
+  border-radius: 3rem;
+  height: 2rem;
+  margin: 0;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-family: var(--bp-font);
+}

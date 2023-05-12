@@ -17,17 +17,12 @@
 .userImage {
   margin: 1rem 0;
   height: 4rem;
+  display: flex;
+  flex-direction: column;
 }
 
 img.userImage1 {
   display: flex;
-}
-
-img.userImage2 {
-  z-index: 1;
-  position: relative;
-  left: 3rem;
-  bottom: 1.1rem;
 }
 
 .usernicknameImg .usernickname {
@@ -35,10 +30,28 @@ img.userImage2 {
   font-family: var(--bp-font);
   font-size: 1.5rem;
   font-weight: 700;
+  border: none;
+  text-align: center;
 }
 
 .usernicknameImg p.usernicknamechange {
   margin: 0.5rem 0;
   color: var(--bp-font-gray);
   font-size: 0.8rem;
+}
+
+.uploadBtn {
+  position: fixed;
+  left: 13rem;
+  top: 10rem;
+  z-index: 10;
+}
+
+.uploadBtn input {
+  width: 0;
+}
+
+.userProfileImagePreview {
+  border-radius: 5rem;
+  border: 3px solid var(--bp-primary);
 }

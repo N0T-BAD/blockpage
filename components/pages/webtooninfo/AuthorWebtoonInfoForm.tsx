@@ -118,7 +118,7 @@ export default function AuthorWebtoonInfoForm() {
                         </div>
                         <div className={style.InfoillustratorBox}>
                             <p>일러스트레이터 : </p>
-                            <input type="text" name="illustrator" value={authorName.author} placeholder='미입력시, 본인으로 등록됩니다.' onChange={handleInput} />
+                            <input type="text" name="illustrator" placeholder='미입력시, 본인으로 등록됩니다.' onChange={handleInput} />
                         </div>
                         <div className={style.InfoImgBox}>
                             <p>메인 이미지 : </p>
