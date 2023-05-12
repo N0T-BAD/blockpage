@@ -1,13 +1,11 @@
 import Layout from "@/components/layouts/layout"
-import ChangeUserInfoMiddleSection from "@/components/pages/changeuserinfo/ChangeUserInfoMiddleSection"
-import ChangeUserInfoTopSection from "@/components/pages/changeuserinfo/ChangeUserInfoTopSection"
+import ChangeUserInfoSection from "@/components/pages/changeuserinfo/ChangeUserInfoSection"
 import { NextPageWithLayout } from "@/pages/_app"
 
 const ChangeUserInfo: NextPageWithLayout = () => {
   return (
     <>
-      <ChangeUserInfoTopSection />
-      <ChangeUserInfoMiddleSection />
+      <ChangeUserInfoSection />
     </>
   )
 }

@@ -1,20 +1,19 @@
-export const profileskinData = {
-  "color": [
+export const profileskinData =
+  [
     {
-      "id": 1,
+      // "id": 1,
       "color": "purple"
     },
     {
-      "id": 2,
+      // "id": 2,
       "color": "pink"
     },
     {
-      "id": 3,
+      // "id": 3,
       "color": "green"
     },
     {
-      "id": 4,
+      // "id": 4,
       "color": "blue"
     }
   ]
-}
