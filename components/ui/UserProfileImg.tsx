@@ -48,14 +48,17 @@ export default function UserProfileImg() {
         <>
           {/* {userprofileImg?.profileskin ?
             <> */}
-          {userProfileImagePreview && <Image src={userProfileImagePreview} className={style.userProfileImagePreview} alt="userProfileImagePreview" width={70} height={70} />}
+
           {router.pathname === '/changeuserinfo' ?
-            <label className={style.uploadBtn}>
-              <input type="file" accept="image/*" onChange={handleuserProfileImage} />
-              <Image className={style.userImage2} src={"/assets/images/icons/imagebtn.svg"} alt={"userImgbtn"} width={25} height={25} />
-            </label>
+            <>
+              {userProfileImagePreview && <Image src={userProfileImagePreview} className={style.userProfileImagePreview} alt="userProfileImagePreview" width={70} height={70} />}
+              <label className={style.uploadBtn}>
+                <input type="file" accept="image/*" onChange={handleuserProfileImage} />
+                <Image className={style.userImage2} src={"/assets/images/icons/imagebtn.svg"} alt={"userImgbtn"} width={25} height={25} />
+              </label>
+            </>
             :
-            ""
+            <Image src={"/assets/images/mypage/userImg.png"} alt="userProfileImagePreview" width={70} height={70} />
           }
           {/* </>
             :

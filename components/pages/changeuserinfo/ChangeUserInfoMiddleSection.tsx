@@ -1,11 +1,11 @@
 import React from 'react'
 import style from '@/components/pages/changeuserinfo/ChangeUserInfoMiddleSection.module.css'
-import ChangeUserInto from './ChangeUserInto'
+import ChangeUserInfo from '@/components/pages/changeuserinfo/ChangeUserInfo'
 
 export default function ChangeUserInfoMiddleSection() {
     return (
         <section className={style.ChangeUserInfoMiddleSection}>
-            <ChangeUserInto />
+            <ChangeUserInfo />
         </section>
     )
 }

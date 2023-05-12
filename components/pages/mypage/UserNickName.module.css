@@ -30,7 +30,7 @@ img.userImage1 {
   font-family: var(--bp-font);
   font-size: 1.5rem;
   font-weight: 700;
-  border:none;
+  border: none;
   text-align: center;
 }
 
@@ -41,23 +41,17 @@ img.userImage1 {
 }
 
 .uploadBtn {
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  font-size: 0px;
-  width: 20px;
+  position: fixed;
+  left: 13rem;
+  top: 10rem;
+  z-index: 10;
 }
 
-.uploadBtn input{
+.uploadBtn input {
   width: 0;
 }
-.uploadBtn img.userImage2 {
-  z-index: 1;
-  position: relative;
-  left: 2.3rem;
-  bottom: 3.5rem;
-}
 
-.userProfileImagePreview{
+.userProfileImagePreview {
   border-radius: 5rem;
+  border: 3px solid var(--bp-primary);
 }
