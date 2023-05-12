@@ -4,8 +4,6 @@ import React, { useState } from 'react'
 import style from '@/components/pages/comment/GetComment.module.css'
 import { commentDataType } from '@/types/commentDataType';
 import { commentDatas } from '@/data/dummy/commentData';
-import Separator from '@/components/ui/Separator';
-import CommentUserInfo from './CommentUserInfo';
 import ReplyComment from './ReplyComment';
 import Comment from './Comment';
 
@@ -44,6 +42,7 @@ export default function GetComment(props: { episodeId: number, }) {
       {
         commentData &&
         commentData.map((data, idx) => (
+          !data.childId &&
           <div key={idx}>
             <Comment
               data={data}
@@ -55,13 +54,21 @@ export default function GetComment(props: { episodeId: number, }) {
               handleView={handleView}
               handleDeclaration={handleDeclaration}
             />
-            {
-              openReply &&
-                data.childId ?
-                <ReplyComment /> : ""
-            }
           </div>
         ))
+      }
+      {
+        openReply ?
+          <ReplyComment
+            data={commentData}
+            isAuthor={isAuthor}
+            handlePush={handlePush}
+            handleDelete={handleDelete}
+            handleLike={handleLike}
+            handleDislike={handleDislike}
+            handleDeclaration={handleDeclaration}
+          />
+          : ""
       }
     </>
   )
