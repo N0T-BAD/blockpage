@@ -123,14 +123,15 @@ export default function Header() {
                   </header>
                   :
                   router.pathname === '/webtooninfo' ||
-                    router.pathname === '/webtoondelete' ?
+                    router.pathname === '/webtoondelete' ||
+                    router.pathname === '/changewebtoon' ?
                     <header className={style.BlockChargeHeader}>
                       <div className={style.BlockChargeTxt}>
                         <div className={style.BlockChargeBack}>
                           <Image src={"/assets/images/icons/back.svg"} alt={"뒤로가기"} width={20} height={20} onClick={handleBack} />
                         </div>
                         <div className={style.BlockChargeLogo}>
-                          {router.pathname === '/webtooninfo' ? <p>웹툰 등록</p> : <p>웹툰 삭제</p>}
+                          {router.pathname === '/webtooninfo' ? <p>웹툰 등록</p> : router.pathname === '/webtoondelete' ? <p>웹툰 삭제</p> : <p>웹툰 수정</p>}
                         </div>
                       </div>
                     </header>
