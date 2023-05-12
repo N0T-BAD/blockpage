@@ -1,0 +1,58 @@
+.topSection {
+  display: flex;
+  justify-content: space-between;
+}
+
+.topIcon {
+  display: flex;
+}
+
+.profile {
+  display: flex;
+}
+
+.date {
+  color: var(--bp-secondary);
+}
+
+.profile img {
+  margin-right: 1rem;
+}
+
+.topIcon img:last-child {
+  margin-left: 1.5rem;
+}
+
+.commentTxt {
+  padding: 1rem 0;
+  font-size: 0.9rem;
+}
+
+.bottomSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bottomSection p {
+  font-size: 0.9rem;
+  color: var(--bp-font-gray);
+}
+
+.bottomIcon {
+  display: flex;
+}
+
+.bottomIcon div {
+  display: flex;
+  align-items: center;
+}
+
+.bottomIcon div:not(:last-of-type):after {
+  content: "|";
+  padding: 0 0.7rem;
+}
+
+.emotion img {
+  margin-right: 0.4rem;
+}
