@@ -37,17 +37,17 @@ export const staticTopNavData = [
   {
     id: 1,
     name: "요일별 웹툰",
-    link: "/week?category=1",
+    link: "week",
   },
   {
     id: 2,
     name: "장르별 웹툰",
-    link: "/genre?category=1",
+    link: "genre",
   },
   {
     id: 3,
     name: "베스트",
-    link: "/best",
+    link: "best",
   },
 ];
 
@@ -216,17 +216,17 @@ export const staticMenuListData = [
   {
     id: 1,
     name: "요일별 웹툰",
-    link: "/week?category=1",
+    link: "/category/week",
   },
   {
     id: 2,
     name: "장르별 웹툰",
-    link: "/genre?category=1",
+    link: "/category/genre",
   },
   {
     id: 3,
     name: "인기순 웹툰",
-    link: "/best",
+    link: "/category/best",
   },
   {
     id: 4,

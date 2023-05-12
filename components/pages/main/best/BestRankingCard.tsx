@@ -44,7 +44,7 @@ export default function BestRankingCard() {
                 <div className={style.imgbox}>
                   <Image src={data.webtoonThumbnail} alt={"베스트 이미지"} width={190} height={170} />
                 </div>
-                <p className={style.bgtxt}>{data.ranking}</p>
+                <div className={style.bgtxt}>{data.ranking}</div>
               </div>
             </div>
           ))

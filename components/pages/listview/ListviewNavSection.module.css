@@ -1,4 +1,13 @@
-section.navSection {
-  width: 100%;
-  margin-top: 5rem;
+.navSection nav ul{
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  align-items: center;
+}
+
+.navSection nav ul li{
+  margin: 0 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--bp-font-gray);
 }
