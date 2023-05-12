@@ -15,7 +15,6 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin: 1rem 0;
 }
 
 .contentWrap {
@@ -81,7 +80,6 @@
   color: var(--bp-white);
   border-radius: 1.5rem;
   margin-bottom: 0.6rem;
-  height: 1rem;
 }
 
 .contentWrap p.viewmore {
@@ -124,6 +122,10 @@
   animation: banner 0.5s ease-in-out;
 }
 
+.bestimg_1 {
+  position: relative;
+}
+
 .bestimg_1 .bgbox {
   box-sizing: border-box;
 
@@ -148,22 +150,21 @@
   animation: banner 0.5s ease-in-out;
 }
 
-p.bgtxt {
+.bgtxt {
   position: absolute;
-  left: 27.74%;
-  right: 3%;
-  top: 10%;
-  bottom: 19.55%;
-
+  top: 20px;
+  right: 5px;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
   font-family: "Roboto";
-  font-style: normal;
   font-weight: 700;
   font-size: 1rem;
-  line-height: 21px;
-  /* identical to box height, or 175% */
-  text-align: end;
-  z-index: 11;
-
-  color: #000000;
+  background-color: var(--bp-primary);
+  z-index: 1;
+  color: var(--bp-white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   animation: banner 0.5s ease-in-out;
 }
