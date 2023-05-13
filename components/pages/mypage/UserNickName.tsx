@@ -3,13 +3,18 @@ import style from '@/components/pages/mypage/UserNickName.module.css'
 import UserIcon from './UserIcon'
 import UserProfileImg from '@/components/ui/UserProfileImg'
 import axios from 'axios'
-import { ChangeUserDataType } from '@/types/changeUserDataType'
+import { ChangeUserDataType, profileskinDataType } from '@/types/changeUserDataType'
 import { authorNicknameDataType } from '@/types/authorNameDataType'
 import { useRouter } from 'next/router'
 import { userNickName } from '@/data/userNickName'
 import { creatorNickName } from '@/data/creatorNickName'
 
-export default function UserNickName() {
+interface ChildProps {
+    profileSkinColor: profileskinDataType;
+    setProfileSkinColor: React.Dispatch<React.SetStateAction<profileskinDataType>>;
+}
+
+export default function UserNickName({ profileSkinColor, setProfileSkinColor }: ChildProps) {
 
     const router = useRouter();
 

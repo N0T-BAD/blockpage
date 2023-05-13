@@ -37,7 +37,7 @@ export default function UserBottomMenu() {
                     ))}
                     <div className={style.UserMenu}>
                         <Link href={"/authorworkslist"}>
-                            <Image src={"/assets/images/icons/userIcon.svg"} alt={"작품 관리"} width={30} height={30} />
+                            <Image src={"/assets/images/icons/authorIcon.svg"} alt={"작품 관리"} width={30} height={30} />
                             <p>작품 관리</p>
                         </Link>
                     </div>

@@ -10,7 +10,7 @@
 
 .searchbarbg input.searchinput {
   width: 80%;
-  background-color: var(--bp-secondary-gray);
+  background-color: var(--bp-gray);
   border: none;
 }
 

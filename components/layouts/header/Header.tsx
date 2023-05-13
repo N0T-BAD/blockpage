@@ -123,27 +123,29 @@ export default function Header() {
                   </header>
                   :
                   router.pathname === '/webtooninfo' ||
-                    router.pathname === '/webtoondelete' ?
+                    router.pathname === '/webtoondelete' ||
+                    router.pathname === '/changewebtoon' ?
                     <header className={style.BlockChargeHeader}>
                       <div className={style.BlockChargeTxt}>
                         <div className={style.BlockChargeBack}>
                           <Image src={"/assets/images/icons/back.svg"} alt={"뒤로가기"} width={20} height={20} onClick={handleBack} />
                         </div>
                         <div className={style.BlockChargeLogo}>
-                          {router.pathname === '/webtooninfo' ? <p>웹툰 등록</p> : <p>웹툰 삭제</p>}
+                          {router.pathname === '/webtooninfo' ? <p>웹툰 등록</p> : router.pathname === '/webtoondelete' ? <p>웹툰 삭제</p> : <p>웹툰 수정</p>}
                         </div>
                       </div>
                     </header>
                     :
                     router.pathname === '/episodelist' ||
-                      router.pathname === '/episodedelete' ?
+                      router.pathname === '/episodedelete' ||
+                      router.pathname === '/changeuserinfo' ?
                       <header className={style.BlockChargeHeader}>
                         <div className={style.BlockChargeTxt}>
                           <div className={style.BlockChargeBack}>
                             <Image src={"/assets/images/icons/back.svg"} alt={"뒤로가기"} width={20} height={20} onClick={handleBack} />
                           </div>
                           <div className={style.EpisodeLogo}>
-                            {router.pathname === '/episodelist' ? <p>에피소드 조회</p> : <p>에피소드 삭제</p>}
+                            {router.pathname === '/episodelist' ? <p>에피소드 조회</p> : router.pathname === '/episodedelete' ? <p>에피소드 삭제</p> : <p>회원정보 변경</p>}
                           </div>
                         </div>
                       </header>
