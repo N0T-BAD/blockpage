@@ -1,7 +1,7 @@
 import AuthorWebtooninfoTopSection from "@/components/pages/webtooninfo/AuthorWebtooninfoTopSection"
 import { NextPageWithLayout } from "@/pages/_app"
-import Layout from "@/components/layouts/layout"
 import AuthorWebtooninfoBottomSection from "@/components/pages/webtooninfo/AuthorWebtooninfoBottomSection"
+import TotalLayout from "@/components/layouts/TotalLayout"
 
 const webtooninfo: NextPageWithLayout = () => {
     return (
@@ -14,9 +14,9 @@ const webtooninfo: NextPageWithLayout = () => {
 
 webtooninfo.getLayout = function getLayout(webtooninfo: React.ReactElement) {
     return (
-        <Layout>
+        <TotalLayout>
             {webtooninfo}
-        </Layout>
+        </TotalLayout>
     )
 }
 

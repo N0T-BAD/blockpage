@@ -1,7 +1,7 @@
-import Layout from "@/components/layouts/layout"
 import { NextPageWithLayout } from "@/pages/_app"
 import EpisodeDeleteTopSection from "@/components/pages/episodedelete/EpisodeDeleteTopSection"
 import EpisodeDeleteMiddleSection from "@/components/pages/episodedelete/EpisodeDeleteMiddleSection"
+import TotalLayout from "@/components/layouts/TotalLayout"
 
 const EpisodeDelete: NextPageWithLayout = () => {
     return (
@@ -14,9 +14,9 @@ const EpisodeDelete: NextPageWithLayout = () => {
 
 EpisodeDelete.getLayout = function getLayout(EpisodeDelete: React.ReactElement) {
     return (
-        <Layout>
+        <TotalLayout>
             {EpisodeDelete}
-        </Layout>
+        </TotalLayout>
     )
 }
 

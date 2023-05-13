@@ -1,0 +1,48 @@
+.BlockChargeHeader {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    background-color: white;
+  }
+  .BlockChargeBox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 1.5rem;
+  }
+  
+  .leftHead {
+    width: 20%;
+  }
+  
+  .centerHead {
+    width: 60%;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+  
+  .rightHead {
+    display: flex;
+    justify-content: flex-end;
+    width: 20%;
+    height: 1.5rem;
+    
+  }
+
+  .rightHeadBox {
+    width: 50%;
+    background-color: var(--bp-black);
+    border-radius: 0.4rem;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .rightHeadBox p{
+    color: var(--bp-white);
+    font-size: 0.8rem;
+    height: 100%;
+  }
