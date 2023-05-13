@@ -1,4 +1,4 @@
-import Layout from "@/components/layouts/layout"
+import TotalLayout from "@/components/layouts/TotalLayout"
 import ChangeUserInfoSection from "@/components/pages/changeuserinfo/ChangeUserInfoSection"
 import { NextPageWithLayout } from "@/pages/_app"
 
@@ -12,9 +12,9 @@ const ChangeUserInfo: NextPageWithLayout = () => {
 
 ChangeUserInfo.getLayout = function getLayout(ChangeUserInfo: React.ReactElement) {
   return (
-    <Layout>
+    <TotalLayout>
       {ChangeUserInfo}
-    </Layout>
+    </TotalLayout>
   )
 }
 
