@@ -55,7 +55,7 @@ export default function UserProfileImg() {
               <Image className={style.userImage2} src={"/assets/images/icons/imagebtn.svg"} alt={"userImgbtn"} width={25} height={25} />
             </label>
             :
-            ""
+            <Image className={style.userImage1} src={"/assets/images/mypage/userImg.png"} alt={"userImg"} width={60} height={60} />
           }
           {/* </>
             :
