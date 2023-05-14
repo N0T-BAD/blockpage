@@ -8,7 +8,7 @@ export default function BestTotalButton() {
   const router = useRouter();
 
   const onClick = () => {
-    router.push('/best')
+    router.push('/category/best')
   }
 
   return (
