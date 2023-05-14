@@ -7,28 +7,24 @@ export const TransactionHistoryData = [
         subCategoryId: 1,
         date: "23.04.19",
         purchase: "블럭 20개",
-        balance: "블럭 100개",
         amount: "1,000원"
       },
       {
         subCategoryId: 2,
         date: "23.04.20",
         purchase: "블럭 30개",
-        balance: "블럭 70개",
         amount: "2,000원"
       },
       {
         subCategoryId: 3,
         date: "23.04.21",
         purchase: "블럭 10개",
-        balance: "블럭 60개",
         amount: "4,000원"
       },
       {
         subCategoryId: 4,
         date: "23.04.22",
         purchase: "블럭 40개",
-        balance: "블럭 20개",
         amount: "6,000원"
       }
     ]
@@ -36,7 +32,7 @@ export const TransactionHistoryData = [
   {
     id: 2,
     name: '사용 내역',
-    chargesubcategories: [
+    expensesubcategories: [
       {
         subCategoryId: 1,
         date: "23.04.22",

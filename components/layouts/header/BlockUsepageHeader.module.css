@@ -32,9 +32,9 @@
   }
 
   .rightHeadBox {
-    width: 50%;
-    background-color: var(--bp-black);
-    border-radius: 0.4rem;
+    width: 60%;
+    background-color: var(--bp-primary);
+    border-radius: 0.6rem;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -45,4 +45,5 @@
     color: var(--bp-white);
     font-size: 0.8rem;
     height: 100%;
+    font-weight: 700;
   }
