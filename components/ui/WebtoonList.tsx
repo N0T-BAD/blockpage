@@ -4,8 +4,12 @@ import Image from 'next/image'
 import style from '@/components/ui/WebtoonList.module.css'
 import { listviewDataType } from '@/types/listviewDataType'
 import Separator from './Separator'
+import { useRouter } from 'next/router'
 
 export default function WebtoonList(props: { data: listviewDataType }) {
+
+  const router = useRouter();
+  const { archiveName } = router.query;
 
   return (
     <div>
@@ -26,6 +30,12 @@ export default function WebtoonList(props: { data: listviewDataType }) {
           </div>
           <p className={style.title} >{props.data.title}</p>
           <p className={style.author} >{props.data.author}</p>
+          <p className={style.genre}>{props.data.genre}</p>
+          {
+            archiveName === "purchase" ?
+              <p className={style.endDate}>유효기간 {props.data.endDate}</p>
+              : ""
+          }
         </div>
       </div>
       <Separator color='var(--bp-gray)' gutter={0.5} />
