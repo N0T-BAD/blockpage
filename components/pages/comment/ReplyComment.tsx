@@ -11,7 +11,7 @@ export default function ReplyComment(props: {
   handleDelete: () => void,
   handleLike: () => void,
   handleDislike: () => void,
-  handleDeclaration: () => void,
+  handleReport: () => void,
 }) {
   console.log(props.data);
   return (
@@ -31,7 +31,7 @@ export default function ReplyComment(props: {
                   handleDelete={props.handleDelete}
                   handleLike={props.handleLike}
                   handleDislike={props.handleDislike}
-                  handleDeclaration={props.handleDeclaration}
+                  handleReport={props.handleReport}
                 /> : ""
             ))
           }
