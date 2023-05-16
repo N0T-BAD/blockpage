@@ -1,22 +1,40 @@
 import React from 'react'
-import Image from 'next/image'
 
 import style from '@/components/pages/comment/GetComment.module.css'
+import { commentDataType } from '@/types/commentDataType'
+import Comment from './Comment'
 
-export default function ReplyComment() {
+export default function ReplyComment(props: {
+  data: commentDataType[],
+  isAuthor: boolean,
+  handlePush: () => void,
+  handleDelete: () => void,
+  handleLike: () => void,
+  handleDislike: () => void,
+  handleDeclaration: () => void,
+}) {
+  console.log(props.data);
   return (
     <>
       {
         <div className={style.replySection}>
-          <div>
-            <div className={style.profile}>
-              <Image className={style.userImage1} src={"/assets/images/mypage/userImg.png"} alt={"userImg"} width={40} height={40} priority />
-              <div>
-                <p>김태근</p>
-                <p className={style.date}>23-05-12 22:01</p>
-              </div>
-            </div>
-          </div>
+          {
+            props.data &&
+            props.data.map((item, idx) => (
+              item.childId &&
+                item.childId > 0 ?
+                <Comment
+                  key={idx}
+                  data={item}
+                  isAuthor={props.isAuthor}
+                  handlePush={props.handlePush}
+                  handleDelete={props.handleDelete}
+                  handleLike={props.handleLike}
+                  handleDislike={props.handleDislike}
+                  handleDeclaration={props.handleDeclaration}
+                /> : ""
+            ))
+          }
         </div>
       }
     </>

@@ -1,12 +1,12 @@
-import Layout from "@/components/layouts/layout"
 import { NextPageWithLayout } from "@/pages/_app"
-import BlcokChargeTopSection from "@/components/pages/blockcharge/BlcokChargeTopSection"
 import TransactionHistorySection from "@/components/pages/blockpurchase/TransactionHistorySection"
+import BlockChargeLayout from "@/components/layouts/BlockChargeLayout"
+import BlockPurchaseTopSection from "@/components/pages/blockpurchase/BlockPurchaseTopSection"
 
 const blockpurchase: NextPageWithLayout = () => {
   return (
     <>
-      <BlcokChargeTopSection />
+      <BlockPurchaseTopSection />
       <TransactionHistorySection />
     </>
   )
@@ -14,9 +14,9 @@ const blockpurchase: NextPageWithLayout = () => {
 
 blockpurchase.getLayout = function getLayout(blockpurchase: React.ReactElement) {
   return (
-    <Layout>
+    <BlockChargeLayout>
       {blockpurchase}
-    </Layout>
+    </BlockChargeLayout>
   )
 }
 

@@ -1,4 +1,4 @@
-import Layout from "@/components/layouts/layout"
+import TotalLayout from "@/components/layouts/TotalLayout"
 import ChangeWebtoonMiddleSection from "@/components/pages/changewebtoon/ChangeWebtoonMiddleSection"
 import ChangeWebtoonTopSection from "@/components/pages/changewebtoon/ChangeWebtoonTopSection"
 import { NextPageWithLayout } from "@/pages/_app"
@@ -14,9 +14,9 @@ const ChangeWebtoon: NextPageWithLayout = () => {
 
 ChangeWebtoon.getLayout = function getLayout(ChangeWebtoon: React.ReactElement) {
     return (
-        <Layout>
+        <TotalLayout>
             {ChangeWebtoon}
-        </Layout>
+        </TotalLayout>
     )
 }
 

@@ -1,7 +1,7 @@
-import Layout from "@/components/layouts/layout"
 import { NextPageWithLayout } from "@/pages/_app"
 import AuthorWorksListTopSection from "@/components/pages/authorworkslist/AuthorWorksListTopSection"
 import AuthorWorksListMiddleSection from "@/components/pages/authorworkslist/AuthorWorksListMiddleSection"
+import TotalLayout from "@/components/layouts/TotalLayout"
 
 const authorworkslist: NextPageWithLayout = () => {
   return (
@@ -14,9 +14,9 @@ const authorworkslist: NextPageWithLayout = () => {
 
 authorworkslist.getLayout = function getLayout(authorworkslist: React.ReactElement) {
   return (
-    <Layout>
+    <TotalLayout>
       {authorworkslist}
-    </Layout>
+    </TotalLayout>
   )
 }
 

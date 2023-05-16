@@ -1,7 +1,7 @@
-import Layout from "@/components/layouts/layout"
 import { NextPageWithLayout } from "@/pages/_app"
 import WebtoonDeleteTopSection from "@/components/pages/webtoondelete/WebtoonDeleteTopSection"
 import WebtoonDeleteMiddleSection from "@/components/pages/webtoondelete/WebtoonDeleteMiddleSection"
+import TotalLayout from "@/components/layouts/TotalLayout"
 
 const WebToonDelete: NextPageWithLayout = () => {
     return (
@@ -14,9 +14,9 @@ const WebToonDelete: NextPageWithLayout = () => {
 
 WebToonDelete.getLayout = function getLayout(WebToonDelete: React.ReactElement) {
     return (
-        <Layout>
+        <TotalLayout>
             {WebToonDelete}
-        </Layout>
+        </TotalLayout>
     )
 }
 

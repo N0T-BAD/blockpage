@@ -14,7 +14,7 @@ export default function BackBtn() {
         width={20}
         height={20}
         priority
-        onClick={() => router.back()}
+        onClick={() => router.pathname === "/mypage" ? router.push("/") : router.back()}
       />
     </div>
   )

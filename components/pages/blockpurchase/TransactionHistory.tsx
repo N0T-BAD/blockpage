@@ -33,20 +33,21 @@ const TransectionHistory = () => {
           {
             category.name === '충전 내역' ?
               <>
-                {category.chargesubcategories.map((subCategory) => (
-                  <div className={style.subhistorybox} key={subCategory.subCategoryId}>
-                    <p>{subCategory.date}</p>
-                    <div className={style.chargeBlockBox}>
-                      <p>구매</p>
-                      <p className={style.chargeBoxContent}>{subCategory.purchase}</p>
+                {category.chargesubcategories && category.chargesubcategories.map((subCategory) => (
+                  <div className={style.chargeBox}>
+                    <div className={style.subhistorybox} key={subCategory.subCategoryId}>
+                      <p>{subCategory.date}</p>
+                      <div className={style.chargeBlockBox}>
+                        <p>구매</p>
+                        <p className={style.chargeBoxContent}>{subCategory.purchase}</p>
+                      </div>
+                      <div className={style.chargeBlockBox}>
+                        <p>금액</p>
+                        <p className={style.chargeBoxContent}>{subCategory.amount}</p>
+                      </div>
                     </div>
-                    <div className={style.chargeBlockBox}>
-                      <p>잔여</p>
-                      <p className={style.chargeBoxContent}>{subCategory.balance}</p>
-                    </div>
-                    <div className={style.chargeBlockBox}>
-                      <p>금액</p>
-                      <p className={style.chargeBoxContent}>{subCategory.amount}</p>
+                    <div className={style.refundBox}>
+                      <button>환불하기</button>
                     </div>
                   </div>
                 ))}
@@ -54,8 +55,8 @@ const TransectionHistory = () => {
               :
               category.name === '사용 내역' ?
                 <>
-                  {category.chargesubcategories.map((subCategory) => (
-                    <div className={style.subhistorybox} key={subCategory.subCategoryId}>
+                  {category.expensesubcategories && category.expensesubcategories.map((subCategory) => (
+                    <div className={style.UseBox} key={subCategory.subCategoryId}>
                       <p>{subCategory.date}</p>
                       <div>
                         <p>{subCategory.purchase}</p>

@@ -1,7 +1,7 @@
-import Layout from "@/components/layouts/layout"
 import { NextPageWithLayout } from "@/pages/_app"
 import AuthorRegisterSection from "@/components/pages/authorregister/AuthorRegisterSection"
 import style from '@/pages/css/animation.module.css'
+import TotalLayout from "@/components/layouts/TotalLayout"
 
 const authorregister: NextPageWithLayout = () => {
   return (
@@ -13,9 +13,9 @@ const authorregister: NextPageWithLayout = () => {
 
 authorregister.getLayout = function getLayout(authorregister: React.ReactElement) {
   return (
-    <Layout>
+    <TotalLayout>
       {authorregister}
-    </Layout>
+    </TotalLayout>
   )
 }
 

@@ -6,7 +6,6 @@ import { useRouter } from 'next/router'
 import style from '@/components/layouts/header/Header.module.css'
 import { staticMenuData } from '@/data/staticMenuData'
 import { StaticMenuData } from '@/types/staticDataType'
-import CommentHeader from './CommentHeader'
 
 export default function Header() {
   const router = useRouter();
@@ -14,19 +13,6 @@ export default function Header() {
   const handlemain = () => {
     router.push("/");
   }
-
-  const handleBack = () => {
-    router.back();
-  }
-
-  const handlemypageBack = () => {
-    router.push("/mypage");
-  }
-
-  const handleMain = () => {
-    router.push("/");
-  }
-
 
   return (
     router.pathname === '/' ||
@@ -93,9 +79,6 @@ export default function Header() {
                   <div className={style.BlockChargeLogo}>
                     <p>블럭 충전</p>
                   </div>
-                  <div className={style.HomeButton}>
-                    <Image src={"/assets/images/icons/home.svg"} alt={"메인화면 이동"} width={20} height={20} onClick={handleMain} />
-                  </div>
                 </div>
               </header>
               :
@@ -126,9 +109,6 @@ export default function Header() {
                       <div className={style.BlockChargeLogo}>
                         {router.pathname === '/authorregister' ? <p>작가 등록</p> : <p>작품 관리</p>}
                       </div>
-                      <div className={style.HomeButton}>
-                        <Image src={"/assets/images/icons/home.svg"} alt={"메인화면 이동"} width={20} height={20} onClick={handleMain} />
-                      </div>
                     </div>
                   </header>
                   :
@@ -142,9 +122,6 @@ export default function Header() {
                         </div>
                         <div className={style.BlockChargeLogo}>
                           {router.pathname === '/webtooninfo' ? <p>웹툰 등록</p> : router.pathname === '/webtoondelete' ? <p>웹툰 삭제</p> : <p>웹툰 수정</p>}
-                        </div>
-                        <div className={style.HomeButton}>
-                          <Image src={"/assets/images/icons/home.svg"} alt={"메인화면 이동"} width={20} height={20} onClick={handleMain} />
                         </div>
                       </div>
                     </header>
@@ -160,9 +137,6 @@ export default function Header() {
                           <div className={style.EpisodeLogo}>
                             {router.pathname === '/episodelist' ? <p>에피소드 조회</p> : router.pathname === '/episodedelete' ? <p>에피소드 삭제</p> : <p>회원정보 변경</p>}
                           </div>
-                          <div className={style.HomeButton}>
-                            <Image src={"/assets/images/icons/home.svg"} alt={"메인화면 이동"} width={20} height={20} onClick={handleMain} />
-                          </div>
                         </div>
                       </header>
                       :
@@ -175,9 +149,6 @@ export default function Header() {
                             </div>
                             <div className={style.EpisodeLogo}>
                               {router.pathname === '/episodeinfo' ? <p>에피소드 등록</p> : <p>에피소드 수정</p>}
-                            </div>
-                            <div className={style.HomeButton}>
-                              <Image src={"/assets/images/icons/home.svg"} alt={"메인화면 이동"} width={20} height={20} onClick={handleMain} />
                             </div>
                           </div>
                         </header>

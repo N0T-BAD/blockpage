@@ -6,28 +6,29 @@
   border-bottom: 1px solid var(--bp-line-gray);
   height: 2rem;
   margin: 1rem 0;
+  padding: 1rem 0;
 }
 
 .ChargeBlock__title {
   width: 85%;
-  color: var(--bp-blue);
+  color: var(--bp-black);
   text-align: start;
   padding: 0 0.5rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .ChargeBlock_Button {
-  width: 11%;
+  width: 15%;
 }
 
 .ChargeBlock_Button p {
-  background-color: var(--bp-black);
+  background-color: var(--bp-blue);
   color: var(--bp-white);
   text-align: center;
   width: 100%;
   border-radius: 0.5rem;
   height: 1.5rem;
-  font-weight: 500;
+  font-weight: 700;
   font-size: 0.9rem;
   display: flex;
   align-items: center;
