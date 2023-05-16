@@ -15,7 +15,8 @@ export default function ChangeUserInfoSection() {
     return (
         <>
             <section className={style.ChangeUserInfoTopSection}>
-                <UserNickName profileSkinColor={profileSkinColor} setProfileSkinColor={setProfileSkinColor} />
+                {/* <UserNickName profileSkinColor={profileSkinColor} setProfileSkinColor={setProfileSkinColor} /> */}
+                <UserNickName />
             </section>
             <section className={style.ChangeUserInfoMiddleSection}>
                 <ChangeUserInfo profileSkinColor={profileSkinColor} setProfileSkinColor={setProfileSkinColor} />

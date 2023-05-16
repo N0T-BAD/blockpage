@@ -9,12 +9,12 @@ import { useRouter } from 'next/router'
 import { userNickName } from '@/data/userNickName'
 import { creatorNickName } from '@/data/creatorNickName'
 
-interface ChildProps {
-    profileSkinColor: profileskinDataType;
-    setProfileSkinColor: React.Dispatch<React.SetStateAction<profileskinDataType>>;
-}
+// interface ChildProps {
+//     profileSkinColor: profileskinDataType;
+//     setProfileSkinColor: React.Dispatch<React.SetStateAction<profileskinDataType>>;
+// }
 
-export default function UserNickName({ profileSkinColor, setProfileSkinColor }: ChildProps) {
+export default function UserNickName() {
 
     const router = useRouter();
 
@@ -40,18 +40,6 @@ export default function UserNickName({ profileSkinColor, setProfileSkinColor }: 
             nickname: e.target.value,
         });
     };
-
-    // const [userNickname, setUserNickname] = useState<ChangeUserDataType>(
-    //     {
-    //         nickname: '',
-    //     }
-    // );
-
-    // const [authorNickname, setAuthorNickname] = useState<authorNicknameDataType>(
-    //     {
-    //         creator_nickname: '',
-    //     }
-    // );
 
     // useEffect(() => {
     //     axios.get('http://localhost:3000/api/v1/members?type=nickname')

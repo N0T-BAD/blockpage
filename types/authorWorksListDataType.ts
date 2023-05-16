@@ -1,7 +1,6 @@
 export interface transactionHistoryData {
   id: number;
   name: string;
-  webtoonsubcategories: authorwebtoonsubcategories[];
 }
 
 export interface authorwebtoonsubcategories {
