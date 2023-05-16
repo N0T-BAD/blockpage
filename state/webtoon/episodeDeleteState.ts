@@ -1,12 +1,12 @@
-import { atom } from "recoil";
-import { webtoonepisodeDataType } from '@/types/webtoonDataType';
+// import { atom } from "recoil";
+// import { WebToonListDataType } from '@/types/webtoonDataType';
 
-const episodeDeleteState = atom<webtoonepisodeDataType>({
-    key: "episodeDeleteState",
-    default: {
-        id: "",
-        title: "",
-    },
-});
+// const episodeDeleteState = atom<WebToonListDataType>({
+//     key: "episodeDeleteState",
+//     default: {
+//         id: "",
+//         title: "",
+//     },
+// });
 
-export { episodeDeleteState };
+// export { episodeDeleteState };

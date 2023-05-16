@@ -26,3 +26,8 @@ export interface imgListType {
   id: number;
   imgUrl: string;
 }
+
+export interface WebToonDetailDataType {
+  id: number;
+  title: string;
+}
