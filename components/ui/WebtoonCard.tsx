@@ -12,7 +12,6 @@ export default function WebtoonCard(props: { rank: number, data: WebToonListData
   const data = props.data;
 
   return (
-    <div className={style.box}>
       <div
         className={style.imgBox}
         onClick={() => router.push(`/webtoon/${data.id}`)}
@@ -58,6 +57,5 @@ export default function WebtoonCard(props: { rank: number, data: WebToonListData
           </div>
         </div>
       </div>
-    </div>
   )
 }

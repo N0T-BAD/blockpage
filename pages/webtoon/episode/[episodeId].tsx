@@ -1,4 +1,4 @@
-import { NextPageWithLayout } from "../_app"
+import { NextPageWithLayout } from "../../_app"
 
 import Layout from "@/components/layouts/layout"
 import EpisodeViewer from "@/components/pages/episodeviewer/EpisodeViewer"
