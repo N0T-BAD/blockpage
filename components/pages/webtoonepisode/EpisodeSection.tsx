@@ -5,7 +5,7 @@ import { EpisodeListDataType } from '@/types/webtoonDataType';
 import Separator from '@/components/ui/Separator';
 import Episode from './Episode';
 
-export default function EpisodeSection(props: { episodeData: EpisodeListDataType[] }) {
+export default function EpisodeSection(props: { title: string, episodeData: EpisodeListDataType[] }) {
 
   const router = useRouter();
 
@@ -14,7 +14,7 @@ export default function EpisodeSection(props: { episodeData: EpisodeListDataType
       {
         props.episodeData &&
         props.episodeData.map((item) => (
-          <section key={item.id} onClick={() => router.push(`/episode/${item.id}`)}>
+          <section key={item.id} onClick={() => router.push(`/webtoon/${props.title}/episode/${item.id}`)}>
             <Episode
               id={item.id}
               subject={item.subject}
