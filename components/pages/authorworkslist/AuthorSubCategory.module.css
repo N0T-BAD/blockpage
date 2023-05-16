@@ -100,31 +100,6 @@
   font-weight: 600;
 }
 
-.HistoryCategory {
-  width: 100%;
-}
-
-.HistoryCategory nav ul {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.HistoryCategory nav ul li {
-  list-style: none;
-  width: 50%;
-  height: 2rem;
-  text-align: center;
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-.HistoryCategory nav ul li.active {
-  font-weight: 600;
-  color: var(--bp-blue);
-  border-bottom: 0.2rem solid var(--bp-blue);
-}
-
 .chargeBlockBox {
   display: flex;
 }
@@ -153,36 +128,6 @@
 
 .subhistorybox {
   padding-bottom: 1rem;
-}
-
-footer.AuthorFooterWrap {
-  width: 90%;
-  height: 100px;
-  /* background: linear-gradient(180deg, #ffffff00 0%, #ffffff 50%); */
-  position: fixed;
-  bottom: 0rem;
-  z-index: 100;
-  display: flex;
-  justify-content: center;
-}
-
-.footerBtn {
-  width: 80px;
-  height: 80px;
-  background-color: var(--bp-primary);
-  border-radius: 50%;
-  box-shadow: 0px 5px 5px 2px #69d2ff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0.9;
-  filter: contrast(1);
-}
-
-.footerBtn img {
-  width: 30%;
-  height: 30%;
-  filter: brightness(0) invert(1);
 }
 
 .webtoonButton button {
