@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import style from '@/components/pages/authorworkslist/AuthorWorksList.module.css'
 import Image from 'next/image';
-import { authorWorksListData } from '@/data/authorWorksListData';
+import { authorWorksListCategoryData, authorWorksListData } from '@/data/authorWorksListData';
 import AuthorCash from '@/components/pages/authorworkslist/AuthorCash';
 import { useRouter } from 'next/router';
+import { transactionHistoryData } from '@/types/authorWorksListDataType';
 
 const AuthorWorksList = () => {
 
@@ -13,8 +14,8 @@ const AuthorWorksList = () => {
     setActive(name);
   }
 
-  const handleEpisodeClick = () => {
-    router.push("/episodelist");
+  const handleEpisodeClick = (episodeId: number) => {
+    router.push(`/episodelist?episodeid=${episodeId}`);
   }
 
   const router = useRouter();
@@ -24,7 +25,7 @@ const AuthorWorksList = () => {
       <div className={style.HistoryCategory}>
         <nav>
           <ul>
-            {authorWorksListData.map((category) => (
+            {authorWorksListCategoryData.map((category) => (
               <li
                 key={category.id}
                 className={category.name === active ? `${style.active}` : ""}
@@ -37,75 +38,83 @@ const AuthorWorksList = () => {
         </nav>
       </div>
 
-      {authorWorksListData.map((category) => (
+      {authorWorksListCategoryData.map((category) => (
         <div className={category.name === active ? `${style.Clickactive}` : `${style.NoClickactive}`}>
-          {
-            category.name === '웹툰 조회' ?
-              <>
-                <div className={style.webtoonBox}>
-                  <div className={style.webtoonInfoWrap} onClick={handleEpisodeClick}>
-                    <div className={style.ImgWrap}>
-                      <Image src={'/assets/images/Best/image1.png'} alt={'이것이 법이다'} width={140} height={120} />
-                    </div>
-                    <div className={style.contentWrap}>
-                      <div className={style.option}>
-                        <div className={style.views}>
-                          <Image src={'/assets/images/icons/views.svg'} alt={'조회 수'} width={15} height={15} />
-                          <p className={style.viewstxt}>{category.webtoonsubcategories[1].views}</p>
-                        </div>
-                        <div className={style.likes}>
-                          <Image src={'/assets/images/icons/likes.svg'} alt={'좋아요 수'} width={12} height={12} />
-                          <p className={style.likestxt}>{category.webtoonsubcategories[1].likes}</p>
-                        </div>
-                      </div>
-                      <p className={style.title}>{category.webtoonsubcategories[1].title}</p>
-                      <p className={style.author}>{category.webtoonsubcategories[1].author}</p>
-                    </div>
-                  </div>
-                  <div className={style.webtoonButton}>
-                    <button onClick={() => router.push('/changewebtoon')}>수정</button>
-                    <button onClick={() => router.push('/webtoondelete')}>삭제</button>
-                  </div>
-                </div>
-                <footer className={style.AuthorFooterWrap}>
-                  <div className={style.footerBtn}>
-                    <Image
-                      src={'/assets/images/icons/plus.svg'}
-                      alt="footerBtnIcon"
-                      width={50}
-                      height={50}
-                      priority
-                      onClick={() => router.push("/webtooninfo")}
-                    />
-                  </div>
-                </footer>
-              </>
-              :
-              category.name === '정산 & 통계' ?
+          <>
+            {
+              category.name === '웹툰 조회' ?
                 <>
-                  <AuthorCash />
-                  <div className={style.webtoonBox}>
-                    <div className={style.ImgWrap}>
-                      <Image src={'/assets/images/Best/image1.png'} alt={'이것이 법이다'} width={140} height={120} />
-                    </div>
-                    <div className={style.contentWrap}>
-                      <div className={style.option}>
-                        <div className={style.views}>
-                          <Image src={'/assets/images/icons/views.svg'} alt={'조회 수'} width={15} height={15} />
-                          <p className={style.viewstxt}>{category.webtoonsubcategories[1].views}</p>
+                  {authorWorksListData.map((webtoonsubcategory) => (
+                    <>
+                      <div className={style.webtoonBox}>
+                        <div className={style.webtoonInfoWrap}>
+                          <div className={style.ImgWrap}>
+                            <Image src={'/assets/images/Best/image1.png'} alt={'이것이 법이다'} width={140} height={120} />
+                          </div>
+                          <div className={style.contentWrap}>
+                            <div className={style.option}>
+                              <div className={style.views}>
+                                <Image src={'/assets/images/icons/views.svg'} alt={'조회 수'} width={15} height={15} />
+                                <p className={style.viewstxt}>{webtoonsubcategory.views}</p>
+                              </div>
+                              <div className={style.likes}>
+                                <Image src={'/assets/images/icons/likes.svg'} alt={'좋아요 수'} width={12} height={12} />
+                                <p className={style.likestxt}>{webtoonsubcategory.likes}</p>
+                              </div>
+                            </div>
+                            <p className={style.title}>{webtoonsubcategory.title}</p>
+                            <p className={style.author}>{webtoonsubcategory.author}</p>
+                          </div>
                         </div>
-                        <div className={style.likes}>
-                          <Image src={'/assets/images/icons/likes.svg'} alt={'좋아요 수'} width={12} height={12} />
-                          <p className={style.likestxt}>{category.webtoonsubcategories[1].likes}</p>
+                        <div className={style.webtoonButton}>
+                          <button onClick={() => router.push('/changewebtoon')}>수정</button>
+                          <button onClick={() => router.push('/webtoondelete')}>삭제</button>
                         </div>
                       </div>
-                      <p className={style.title}>{category.webtoonsubcategories[3].title}</p>
-                      <p className={style.author}>{category.webtoonsubcategories[3].author}</p>
-                    </div>
-                  </div>
+                      <footer className={style.AuthorFooterWrap}>
+                        <div className={style.footerBtn}>
+                          <Image
+                            src={'/assets/images/icons/plus.svg'}
+                            alt="footerBtnIcon"
+                            width={50}
+                            height={50}
+                            priority
+                            onClick={() => router.push("/webtooninfo")}
+                          />
+                        </div>
+                      </footer>
+                    </>
+                  ))}
                 </>
-                : <></>
-          }
+                :
+                category.name === '정산 & 통계' ?
+                  <>
+                    <AuthorCash />
+                    {authorWorksListData.map((webtoonsubcategory) => (
+                      <div className={style.webtoonBox}>
+                        <div className={style.ImgWrap}>
+                          <Image src={'/assets/images/Best/image1.png'} alt={'이것이 법이다'} width={140} height={120} />
+                        </div>
+                        <div className={style.contentWrap}>
+                          <div className={style.option}>
+                            <div className={style.views}>
+                              <Image src={'/assets/images/icons/views.svg'} alt={'조회 수'} width={15} height={15} />
+                              <p className={style.viewstxt}>{webtoonsubcategory.views}</p>
+                            </div>
+                            <div className={style.likes}>
+                              <Image src={'/assets/images/icons/likes.svg'} alt={'좋아요 수'} width={12} height={12} />
+                              <p className={style.likestxt}>{webtoonsubcategory.likes}</p>
+                            </div>
+                          </div>
+                          <p className={style.title}>{webtoonsubcategory.title}</p>
+                          <p className={style.author}>{webtoonsubcategory.author}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </>
+                  : <></>
+            }
+          </>
         </div>
       ))}
     </>

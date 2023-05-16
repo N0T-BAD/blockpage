@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import { useRecoilState } from 'recoil';
 import { episodeInfoFormDataType } from '@/types/episodeInfoForm';
-import { webtoonepisodeDataType } from '@/types/webtoonDataType';
-import { episodeDeleteState } from '@/state/webtoon/episodeDeleteState';
+import { WebToonDetailDataType, WebToonListDataType } from '@/types/webtoonDataType';
 import Image from 'next/image';
+import { webtoonListData } from '@/data/dummy/webtoonData';
 
 export default function EpisodeInfoForm() {
 
@@ -19,7 +19,7 @@ export default function EpisodeInfoForm() {
     authortalk: '',
   });
 
-  const [webtoonepisode, setWebtoonEpisode] = useRecoilState<webtoonepisodeDataType>(episodeDeleteState);
+  const [webtoonepisode, setWebtoonEpisode] = useState<WebToonDetailDataType>();
 
 
   const [episodeThumbnailImage, setEpisodeThumbnailImage] = useState<File>();
@@ -30,6 +30,19 @@ export default function EpisodeInfoForm() {
   useEffect(() => {
     console.log(episodeInfoData)
   }, [episodeInfoData])
+
+  // useEffect(() => {
+  //   webtoonListData && setWebtoonEpisode({
+  //     id: webtoonepisode.id,
+  //     title: webtoonepisode.title,
+  //   })
+  // }, [])
+
+  // useEffect(() => {
+  //   axios.post(`/api/authorwebtooninfo/${router.query.id}`)
+  //     .then(res => res.data)
+  //     .then(data => setWebtoonEpisode(data))
+  // }, [webtoonepisode])
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -82,12 +95,8 @@ export default function EpisodeInfoForm() {
         episodeImage: episodeImage,
       })
         .then((res) => {
-          setWebtoonEpisode(
-            {
-              id: res.data.id,
-              title: res.data.title,
-            }
-          )
+          console.log(res)
+
           if (res.status === 200) {
             alert('웹툰 정보가 등록되었습니다.')
             router.push('/authorworkslist')
@@ -99,15 +108,19 @@ export default function EpisodeInfoForm() {
   return (
     <>
       <div className={style.WebtoonDeleteInfoWrap}>
+        {webtoonListData.map((webtoon) => (
+          <div key={webtoon.id}>
+            <div className={style.webtoonInfoBox}>
+              <p>작품명 : </p>
+              <p className={style.title}>{webtoon.title}</p>
+            </div>
+            <div className={style.webtoonInfoBox} key={webtoon.episodeData[0].id}>
+              <p>에피소드 회차 : </p>
+              <p className={style.title}>{webtoon.episodeData[0].id} 화</p>
+            </div>
+          </div>
+        ))}
         <form onSubmit={handleSubmit}>
-          <div className={style.webtoonInfoBox}>
-            <p>작품명 : </p>
-            <p className={style.title}>{webtoonepisode.title}</p>
-          </div>
-          <div className={style.webtoonInfoBox}>
-            <p>에피소드 회차 : </p>
-            <p className={style.title}>{webtoonepisode.id}화</p>
-          </div>
           <div className={style.episodeInfoBox}>
             <p>에피소드 명 : </p>
             <input type="text" name="episodetitle" onChange={handleInput} />
