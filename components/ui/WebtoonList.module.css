@@ -7,6 +7,8 @@
   width: 40%;
   position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: center;
 }
 
 .contentWrap {
@@ -28,6 +30,7 @@
 
 .contentWrap .author {
   margin-bottom: 0.4rem;
+  margin-right: 1rem;
   color: var(--bp-font-gray);
   font-size: 0.7rem;
   font-weight: 500;
@@ -59,4 +62,24 @@
   font-size: 0.7rem;
   font-weight: 400;
   margin-left: 0.3rem;
+}
+
+.info {
+  display: flex;
+}
+
+.endDate {
+  color: var(--bp-font-gray);
+  font-size: 0.7rem;
+}
+
+.genre {
+  width: fit-content;
+  padding: 0.2rem 0.4rem;
+  font-size: 0.5rem;
+  font-weight: 400;
+  background: var(--bp-secondary-glow);
+  color: var(--bp-white);
+  border-radius: 1.5rem;
+  margin-bottom: 0.6rem;
 }

@@ -33,6 +33,24 @@ export const staticMenuData = [
   // },
 ];
 
+export const staticArchiveMenuData = [
+  {
+    id: 1,
+    name: "최근 감상",
+    link: "history",
+  },
+  {
+    id: 2,
+    name: "찜한 작품",
+    link: "favorite",
+  },
+  {
+    id: 3,
+    name: "구매 작품",
+    link: "purchase",
+  },
+];
+
 export const staticTopNavData = [
   {
     id: 1,
@@ -236,6 +254,6 @@ export const staticMenuListData = [
   {
     id: 5,
     name: "보관함",
-    link: "/inventory",
+    link: "/webtoonarchive/history",
   },
 ];
