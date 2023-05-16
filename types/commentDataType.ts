@@ -1,8 +1,8 @@
 export interface commentDataType {
   parentsId: number;
   parentsNickname: string;
-  childId?: number;
-  childNickname?: string;
+  childId: number;
+  childNickname: string;
   content: string;
   likesCount: number;
   dislikesCount: number;
@@ -11,4 +11,5 @@ export interface commentDataType {
   erase: boolean;
   pin: boolean;
   date: string;
+  isReply: boolean;
 }

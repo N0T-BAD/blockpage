@@ -14,27 +14,28 @@ export default function GetComment(props: { episodeId: number, }) {
   const [isAuthor] = useState(false);
 
   const handlePush = () => {
-
+    console.log("handlePush onClick");
   }
 
   const handleDelete = () => {
-
+    console.log("handleDelete onClick");
   }
 
   const handleLike = () => {
-
+    console.log("handleLike onClick");
   }
 
   const handleDislike = () => {
-
+    console.log("handleDislike onClick");
   }
 
   const handleView = () => {
     setOpenReply(!openReply);
   }
 
-  const handleDeclaration = () => {
+  const handleReport = () => {
     //신고
+    console.log("handleDeclaration onClick");
   }
 
   return (
@@ -52,7 +53,7 @@ export default function GetComment(props: { episodeId: number, }) {
               handleLike={handleLike}
               handleDislike={handleDislike}
               handleView={handleView}
-              handleDeclaration={handleDeclaration}
+              handleReport={handleReport}
             />
           </div>
         ))
@@ -66,7 +67,7 @@ export default function GetComment(props: { episodeId: number, }) {
             handleDelete={handleDelete}
             handleLike={handleLike}
             handleDislike={handleDislike}
-            handleDeclaration={handleDeclaration}
+            handleReport={handleReport}
           />
           : ""
       }

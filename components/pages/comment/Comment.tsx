@@ -10,13 +10,12 @@ import { commentDataType } from '@/types/commentDataType'
 export default function Comment(props: {
   data: commentDataType,
   isAuthor: boolean,
-  isReply?: boolean,
   handlePush: () => void,
   handleDelete: () => void,
   handleLike: () => void,
   handleDislike: () => void,
   handleView?: () => void,
-  handleDeclaration: () => void,
+  handleReport: () => void,
 }) {
   return (
     <>
@@ -24,7 +23,8 @@ export default function Comment(props: {
         <>
           <div className={style.topSection}>
             {
-              props.isReply ?
+              props.data.isReply &&
+                props.data.isReply ?
                 <>
                   < CommentUserInfo
                     nickname={props.data.childNickname}
@@ -66,7 +66,7 @@ export default function Comment(props: {
                 : <p>답글 달기</p>
             }
             <div className={style.bottomIcon}>
-              <div onClick={props.handleDeclaration}>
+              <div onClick={props.handleReport}>
                 <Image
                   src={"/assets/images/icons/siren.svg"}
                   alt='신고'
