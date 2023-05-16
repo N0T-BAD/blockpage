@@ -1,13 +1,10 @@
 import React, { useState } from 'react'
 
 import style from '@/components/pages/webtoonepisode/WebtoonSummary.module.css'
-import { WebtoonSummaryDataType } from '@/types/webtoonDataType';
-import { webtoonSummaryData } from '@/data/dummy/webtoonData';
 
-export default function WebtoonSummary() {
+export default function WebtoonSummary(props: { summary: string }) {
 
   const [close, setClose] = useState(true);
-  const summaryData = useState<WebtoonSummaryDataType>(webtoonSummaryData);
 
   const handleClose = () => {
     setClose(!close);
@@ -19,7 +16,7 @@ export default function WebtoonSummary() {
         <p>줄거리</p>
       </div>
       <div className={style.summary}>
-        <p className={close ? `${style.close}` : ""}>{summaryData[0].summary}</p>
+        <p className={close ? `${style.close}` : ""}>{props.summary}</p>
       </div>
       <div className={style.shadow}></div>
       <div className={style.summaryMore}>

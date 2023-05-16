@@ -6,17 +6,17 @@ import Image from 'next/image'
 export default function Episode(props: {
   id: number,
   subject: string,
-  imgUrl: string,
+  thumbnail: string,
   rating: number,
   date: string,
 }) {
   return (
     <>
       {
-        <div className={style.episode}>
+        <div key={props.id} className={style.episode}>
           <div className={style.episodeImg}>
             <Image
-              src={props.imgUrl}
+              src={props.thumbnail}
               alt='에피소드 썸네일'
               width={120}
               height={70}

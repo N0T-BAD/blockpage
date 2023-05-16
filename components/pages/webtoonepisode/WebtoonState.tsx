@@ -2,16 +2,12 @@ import React, { useState } from 'react'
 
 import style from '@/components/pages/webtoonepisode/WebtoonState.module.css'
 import Separator from '@/components/ui/Separator'
-import { WebtoonStateDataType } from '@/types/webtoonDataType';
-import { webtoonStateData } from '@/data/dummy/webtoonData';
 
-export default function WebtoonState() {
-
-  const stateData = useState<WebtoonStateDataType>(webtoonStateData);
+export default function WebtoonState(props: { state: string }) {
 
   return (
     <div className={style.state}>
-      <p>{stateData[0].state}</p>
+      <p>{props.state}</p>
       <Separator
         color='black'
         gutter={1}
