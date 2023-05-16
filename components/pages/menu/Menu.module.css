@@ -8,7 +8,7 @@
 }
 
 .userSection {
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .user {
@@ -31,7 +31,6 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-
 }
 
 .btnSection {

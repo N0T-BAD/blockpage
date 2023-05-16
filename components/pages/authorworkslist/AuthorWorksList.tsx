@@ -5,6 +5,8 @@ import { authorWorksListCategoryData, authorWorksListData } from '@/data/authorW
 import AuthorCash from '@/components/pages/authorworkslist/AuthorCash';
 import { useRouter } from 'next/router';
 import { transactionHistoryData } from '@/types/authorWorksListDataType';
+import { webtoonListData } from '@/data/dummy/webtoonData';
+import { WebToonListDataType } from '@/types/webtoonDataType';
 
 const AuthorWorksList = () => {
 
@@ -14,8 +16,8 @@ const AuthorWorksList = () => {
     setActive(name);
   }
 
-  const handleEpisodeClick = (episodeId: number) => {
-    router.push(`/episodelist?episodeid=${episodeId}`);
+  const handleEpisodeClick = () => {
+    router.push(`/episodelist`);
   }
 
   const router = useRouter();
@@ -44,10 +46,10 @@ const AuthorWorksList = () => {
             {
               category.name === '웹툰 조회' ?
                 <>
-                  {authorWorksListData.map((webtoonsubcategory) => (
+                  {webtoonListData.map((webtoonsubcategory) => (
                     <>
                       <div className={style.webtoonBox}>
-                        <div className={style.webtoonInfoWrap}>
+                        <div className={style.webtoonInfoWrap} onClick={handleEpisodeClick}>
                           <div className={style.ImgWrap}>
                             <Image src={'/assets/images/Best/image1.png'} alt={'이것이 법이다'} width={140} height={120} />
                           </div>
@@ -90,7 +92,7 @@ const AuthorWorksList = () => {
                 category.name === '정산 & 통계' ?
                   <>
                     <AuthorCash />
-                    {authorWorksListData.map((webtoonsubcategory) => (
+                    {webtoonListData.map((webtoonsubcategory) => (
                       <div className={style.webtoonBox}>
                         <div className={style.ImgWrap}>
                           <Image src={'/assets/images/Best/image1.png'} alt={'이것이 법이다'} width={140} height={120} />
