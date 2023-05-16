@@ -2,19 +2,16 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 
 import style from '@/components/pages/webtoonepisode/WebtoonInfo.module.css'
-import { WebtoonInfoDataType } from '@/types/webtoonDataType';
-import { webtoonInfoData } from '@/data/dummy/webtoonData';
 import { useRouter } from 'next/router';
 
 import LikeButton from '@/components/ui/LikeButton';
 import LikeViewSection from '@/components/ui/webtoonInfo/LikeViewSection';
+import { WebToonListDataType } from '@/types/webtoonDataType'
 import BackBtn from '@/components/ui/BackBtn';
 
-export default function WebtoonInfo() {
+export default function WebtoonInfo(props: { data: WebToonListDataType }) {
 
-  const router = useRouter();
   const [like, setLike] = useState(false);
-  const infoData = useState<WebtoonInfoDataType>(webtoonInfoData);
 
   const handleLike = () => {
     //api 호출 db 갱신
@@ -35,23 +32,23 @@ export default function WebtoonInfo() {
       {
         <div className={style.bannerwrap}>
           <div className={style.bannerImg}>
-            <Image src={infoData[0].imgUrl} alt={infoData[0].title} width={600} height={600} priority />
+            <Image src={props.data.titleImg} alt={props.data.title} width={600} height={600} priority />
           </div>
           <LikeViewSection
             viewHeight={20}
             viewWidth={20}
-            views={infoData[0].views}
+            views={props.data.views}
             likeHeight={15}
             likeWidth={15}
-            likes={infoData[0].likes}
+            likes={props.data.likes}
           />
-          <h2>{infoData[0].title}</h2>
+          <h2>{props.data.title}</h2>
           <div className={style.info}>
-            <p>{infoData[0].week}</p>
-            <p>{infoData[0].genre}</p>
+            <p>{props.data.week}</p>
+            <p>{props.data.genre}</p>
           </div>
           <div className={style.line}></div>
-          <p className={style.author}>{infoData[0].author}</p>
+          <p className={style.author}>{props.data.author}</p>
         </div>
       }
     </>

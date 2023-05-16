@@ -11,17 +11,15 @@ interface ItemType {
 
 export default function ListviewNavSection() {
 
-  console.log(staticTopNavData)
   const router = useRouter();
   const { categoryName } = router.query;
-  console.log(categoryName)
   return (
     <div className={style.navSection}>
       <nav>
         <ul>
           {
-            staticTopNavData.map((item:ItemType) => (
-              item.link === categoryName ? null :<li key={item.id} onClick={()=>router.push(`/category/${item.link}`)}>{item.name}</li>
+            staticTopNavData.map((item: ItemType) => (
+              item.link === categoryName ? null : <li key={item.id} onClick={() => router.push(`/category/${item.link}`)}>{item.name}</li>
             ))
           }
         </ul>

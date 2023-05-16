@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -7,13 +7,10 @@ import style from '@/components/pages/episodeviewer/FooterViewer.module.css'
 import BackBtn from '@/components/ui/BackBtn';
 import CloseBtn from '@/components/ui/CloseBtn';
 import Episode from '../webtoonepisode/Episode';
-import { EpisodeDataType } from '@/types/webtoonDataType';
-import { episodeData } from '@/data/dummy/webtoonData';
 
 export default function FooterViewer() {
 
   const router = useRouter();
-  const data = useState<EpisodeDataType>(episodeData);
 
   return (
     <footer className={style.viewerFooterWrap}>

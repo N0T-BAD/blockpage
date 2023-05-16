@@ -8,7 +8,6 @@ import { GetServerSideProps } from "next"
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const { categoryName } = context.query;
-  console.log(categoryName);
 
   // server에서 데이터 불러와서 서버사이드에서 렌더링하기 위해 데이터 받아오기
   // const res = fetch(`http://localhost:3000/api/category/${categoryName}`);
