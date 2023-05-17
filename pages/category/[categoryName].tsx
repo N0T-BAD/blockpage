@@ -1,5 +1,4 @@
 import CategoryLayout from "@/components/layouts/categoryLayout"
-import ListviewNavSection from "@/components/pages/listview/ListviewNavSection"
 import ListviewSection from "@/components/pages/listview/ListviewSection"
 
 import { webtoonListData } from "@/data/dummy/webtoonData"
