@@ -7,8 +7,9 @@ import style from '@/components/pages/episodeviewer/FooterViewer.module.css'
 import BackBtn from '@/components/ui/BackBtn';
 import CloseBtn from '@/components/ui/CloseBtn';
 import Episode from '../webtoonepisode/Episode';
+import { EpisodeListDataType } from '@/types/webtoonDataType';
 
-export default function FooterViewer() {
+export default function FooterViewer(props: { data: EpisodeListDataType }) {
 
   const router = useRouter();
 
@@ -35,11 +36,11 @@ export default function FooterViewer() {
       </div>
       <div className={style.nextEpisode}>
         <Episode
-          id={data[0].id}
-          subject={data[0].subject}
-          imgUrl={data[0].imgUrl}
-          rating={data[0].rating}
-          date={data[0].date}
+          id={props.data.id}
+          subject={props.data.subject}
+          thumbnail={props.data.thumbnail}
+          rating={props.data.rating}
+          date={props.data.date}
         />
       </div>
       <div className={style.navFoot}>
