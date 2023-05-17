@@ -25,11 +25,11 @@ export default function BestRankingCard() {
               <div className={style.contentWrap}>
                 <div className={style.option}>
                   <div className={style.views}>
-                    <Image src={'/assets/images/icons/views.svg'} alt={'조회 수'} width={15} height={15} />
+                    <Image src={'/assets/images/icons/views.svg'} alt={'조회 수'} width={15} height={15} priority />
                     <p className={style.viewstxt}>{data.views}</p>
                   </div>
                   <div className={style.likes}>
-                    <Image src={'/assets/images/icons/likes.svg'} alt={'좋아요 수'} width={12} height={12} />
+                    <Image src={'/assets/images/icons/likes.svg'} alt={'좋아요 수'} width={12} height={12} priority />
                     <p className={style.likestxt}>{data.interestCount}</p>
                   </div>
                 </div>
@@ -42,7 +42,7 @@ export default function BestRankingCard() {
               </div>
               <div className={style.bestimg_1}>
                 <div className={style.imgbox}>
-                  <Image src={data.webtoonThumbnail} alt={"베스트 이미지"} width={190} height={170} />
+                  <Image src={data.webtoonThumbnail} alt={"베스트 이미지"} width={190} height={170} priority />
                 </div>
                 <div className={style.bgtxt}>{data.ranking}</div>
               </div>
