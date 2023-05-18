@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
-import style from '@/components/pages/authorworkslist/AuthorWorksList.module.css'
+import style from '@/components/pages/authorworkslist/AuthorSubCategory.module.css';
 import { useRouter } from 'next/router'
 import { episodeListData } from '@/data/episodeListData';
 import { episodeListDataType } from '@/types/episodeListDataType';

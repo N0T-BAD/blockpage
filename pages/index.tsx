@@ -8,11 +8,7 @@ import { GameBannerType } from "@/types/gameBanerType"
 import { mainEventBannerData } from "@/data/dummy/mainEventBannerData"
 import { gameEventData } from "@/data/dummy/mainGameEventData"
 import CategoryFilter from "@/components/pages/main/category/CategoryFilter"
-import BestSection from "@/components/pages/main/best/BestSection"
-import { MainBannerType } from "@/types/mainBannerType"
-import { GameBannerType } from "@/types/gameBanerType"
-import { mainEventBannerData } from "@/data/dummy/mainEventBannerData"
-import { gameEventData } from "@/data/dummy/mainGameEventData"
+
 
 function Main(props: { mainBannerData: MainBannerType, gameBannerData: GameBannerType[] }) {
   console.log(props.gameBannerData)
