@@ -1,7 +1,5 @@
-import Image from 'next/image'
 import React from 'react'
 import style from '@/components/pages/mypage/UserHoldBlock.module.css'
-import { useRouter } from 'next/router'
 import { HoldingBlockData } from '@/types/holdingBlockData';
 import { holdingBlockData } from '@/data/holdingBlockData';
 import BlockChargeButton from '@/components/pages/mypage/BlockChargeButton';

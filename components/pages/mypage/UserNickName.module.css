@@ -7,11 +7,12 @@
 .usernicknameImg {
   display: flex;
   align-items: center;
-  width: 70%;
+  width: 80%;
   justify-content: center;
   flex-direction: column;
-  padding-bottom: 2rem;
+  margin: 2rem 0;
   border-bottom: 1px solid var(--bp-gray);
+  height: 10rem;
 }
 
 .userImage {
@@ -26,12 +27,12 @@ img.userImage1 {
 }
 
 .usernicknameImg .usernickname {
-  padding: 0.5rem 2rem;
+  margin: 0 1rem;
   font-family: var(--bp-font);
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 700;
   border: none;
-  text-align: center;
+  width: 60%;
 }
 
 .usernicknameImg p.usernicknamechange {
@@ -40,11 +41,19 @@ img.userImage1 {
   font-size: 0.8rem;
 }
 
-.uploadBtn {
-  position: fixed;
-  left: 13rem;
-  top: 10rem;
-  z-index: 10;
+.uploadBtn p {
+  border: 2px solid var(--bp-blue);
+  border-radius: 5rem;
+  font-size: 0.8rem;
+}
+
+.basicimg {
+  border: 2px solid var(--bp-blue);
+  border-radius: 5rem;
+  font-size: 0.8rem;
+  height: 1.4rem;
+  display: flex;
+  align-items: center;
 }
 
 .uploadBtn input {
@@ -53,5 +62,28 @@ img.userImage1 {
 
 .userProfileImagePreview {
   border-radius: 5rem;
-  border: 3px solid var(--bp-primary);
+}
+
+.profileskin {
+  width: 40%;
+}
+
+.changeuserinfobox {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+}
+
+.btn_input_box {
+  width: 100%;
+  display: flex;
+  margin: 1rem 1rem;
+}
+
+.infobox {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
