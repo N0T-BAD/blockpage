@@ -62,20 +62,6 @@ export default function FooterViewer(props: { episodeData: EpisodeListDataType, 
           />
         </div>
       }
-      {/* <div
-        className={nextEpisodeData ? `${style.nextEpisode}` : ""}
-        onClick={() => router.push(`/webtoon/${webtoonName}/episode/${nextEpisodeId}`)}
-      >
-        {
-          nextEpisodeData &&
-          <Episode
-            id={nextEpisodeData.id}
-            subject={nextEpisodeData.subject}
-            thumbnail={nextEpisodeData.thumbnail}
-            rating={nextEpisodeData.rating}
-            date={nextEpisodeData.date}
-          />
-        } */}
       <div className={style.navFoot}>
         <div className={style.backBtn}>
           <BackBtn />
