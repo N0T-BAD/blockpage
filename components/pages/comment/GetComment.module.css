@@ -1,3 +1,7 @@
+.commentSection {
+  padding: 1rem 0;
+}
+
 .topSection {
   display: flex;
   justify-content: space-between;
@@ -24,7 +28,7 @@
 }
 
 .commentTxt {
-  padding: 1rem 0;
+  padding: 1.5rem 0;
   font-size: 0.9rem;
 }
 
@@ -37,6 +41,7 @@
 .bottomSection p {
   font-size: 0.9rem;
   color: var(--bp-font-gray);
+  cursor: pointer;
 }
 
 .bottomIcon {
@@ -59,6 +64,10 @@
 
 .replySection {
   background-color: var(--bp-gray);
-  padding: 1rem;
+  padding: 0 1.5rem 0.1rem 1.5rem;
   height: fit-content;
+}
+
+.replyCommentSection {
+  margin: 0 0 1rem 0;
 }

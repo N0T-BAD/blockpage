@@ -40,16 +40,16 @@ export const commentDatas = [
     content: "고양이 귀여워",
     likesCount: 12,
     dislikesCount: 1,
-    replyCount: 0,
+    replyCount: 2,
     report: false,
     erase: false,
     pin: false,
     date: "23-05-12 22:05",
-    isReply: true,
+    isReply: false,
   },
 ];
 
-export const reply = [
+export const replyDatas = [
   {
     id: 1,
     parentsId: 2,
@@ -75,12 +75,12 @@ export const reply = [
     content: "고양이 똑똑하네~ 꼭 위로해주는 것 같네~~",
     likesCount: 124,
     dislikesCount: 11,
-    replyCount: 2,
+    replyCount: 0,
     report: false,
     erase: false,
     pin: false,
     date: "23-05-12 22:03",
-    isReply: false,
+    isReply: true,
   },
   {
     id: 3,
