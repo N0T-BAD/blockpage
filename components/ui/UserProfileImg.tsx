@@ -1,10 +1,11 @@
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import style from '@/components/pages/mypage/UserNickName.module.css'
-import { ChangeUserDataType, ChangeUserImageDataType } from '@/types/changeUserDataType';
+import { ChangeUserDataType, ChangeUserImageDataType, profileskinDataType } from '@/types/changeUserDataType';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { userNickName } from '@/data/userNickName'
+import { BasicImage, userNickName } from '@/data/userNickName'
+import UserIcon from '../pages/mypage/UserIcon';
 
 export default function UserProfileImg() {
 
@@ -25,6 +26,8 @@ export default function UserProfileImg() {
     }
   );
 
+  const [basicimg, setBasicImg] = useState<profileskinDataType>();
+
   const routerPathname = router.pathname === '/mypage' || router.pathname === '/authorworkslist' || router.pathname === '/episodelist' || router.pathname === '/changeepisode' || router.pathname === '/episodedelete' || router.pathname === '/episodeinfo' || router.pathname === '/webtooninfo' || router.pathname === '/changewebtoon' || router.pathname === '/webtoondelete' || router.pathname === '/changeuserinfo' || router.pathname === '/menu';
 
   // useEffect(() => {
@@ -37,6 +40,7 @@ export default function UserProfileImg() {
   //       setUserProfileImg(res.data);
   //     })
   // }, [])
+
 
   const handleuserProfileImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -56,6 +60,9 @@ export default function UserProfileImg() {
     });
   };
 
+  const handleBasicImageChange = () => {
+    setUserProfileImagePreview('');
+  };
 
   return (
     <>
@@ -66,27 +73,40 @@ export default function UserProfileImg() {
 
           {router.pathname === '/changeuserinfo' ?
             <div className={style.changeuserinfobox}>
-              {userProfileImagePreview && <Image src={userProfileImagePreview} className={style.userProfileImagePreview} alt="userProfileImagePreview" width={70} height={70} />}
-              <Image className={style.profileskin} src={"/assets/images/profile/blue.svg"} alt="profileskin" width={70} height={70} />
-              <div className={style.infobox}>
-                <div className={style.btn_input_box}>
-                  <label className={style.uploadBtn}>
-                    <input type="file" accept="image/*" onChange={handleuserProfileImage} />
-                    <p>이미지 업로드</p>
-                  </label>
-                  <p className={style.basicimg}>기본 이미지 변경</p>
-                </div>
-                <div className={style.btn_input_box}>
-                  <p>닉네임</p>
-                  {userNickname &&
-                    <>
-                      {userNickName.map((data) => (
-                        <input className={style.usernickname} type='text' defaultValue={data.nickname} onChange={handleChange} />
-                      ))}
-                    </>
-                  }
-                </div>
-              </div>
+              {BasicImage.map((data) => (
+                <>
+                  <div className={style.profileskin}>
+                    {!userProfileImagePreview && (
+                      <Image src={data.imgUrl} alt="profileskin" width={70} height={70} />
+                    )}
+                    {userProfileImagePreview && (
+                      <Image src={userProfileImagePreview} className={style.userProfileImagePreview} alt="userProfileImagePreview" width={70} height={70} />
+                    )}
+                    <Image className={style.profileskinbox} src={"/assets/images/profile/blue.svg"} alt="profileskin" width={70} height={70} />
+                    <UserIcon />
+                  </div>
+
+                  <div className={style.infobox}>
+                    <div className={style.btn_input_box}>
+                      <label className={style.uploadBtn}>
+                        <input type="file" accept="image/*" onChange={handleuserProfileImage} />
+                        <p>upload</p>
+                      </label>
+                      <p className={style.basicimg} onClick={handleBasicImageChange}>기본 이미지 변경</p>
+                    </div>
+                    <div className={style.btn_input_box}>
+                      <p>닉네임</p>
+                      {userNickname &&
+                        <>
+                          {userNickName.map((data) => (
+                            <input className={style.usernickname2} type='text' defaultValue={data.nickname} onChange={handleChange} />
+                          ))}
+                        </>
+                      }
+                    </div>
+                  </div >
+                </>
+              ))}
             </div>
             :
             <div className={style.userImage}>

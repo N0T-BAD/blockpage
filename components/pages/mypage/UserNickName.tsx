@@ -88,7 +88,11 @@ export default function UserNickName() {
                             }
                         </>
                     }
-                    <UserIcon />
+                    {router.pathname === '/changeuserinfo' ?
+                        <></>
+                        :
+                        <UserIcon />
+                    }
                 </div>
             </div>
         </>
