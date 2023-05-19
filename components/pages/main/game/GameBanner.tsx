@@ -4,18 +4,19 @@ import style from '@/components/pages/main/game/GameBanner.module.css'
 import { gameEventData } from '@/data/dummy/mainGameEventData'
 import { GameBannerType } from '@/types/gameBanerType'
 
-export default function GameBanner() {
-
-  const [data, setData] = useState<GameBannerType>(gameEventData[0])
+export default function GameBanner(props: {data: GameBannerType[]}) {
+  
+  const [data, setData] = useState<GameBannerType>(props.data[0])
   const [count, setCount] = useState<number>(0)
   const [isActive, setActive] = useState<boolean>(false)
 
   useInterval(() => {
     setCount(count + 1)
-    if (count === gameEventData.length - 1) {
+    if (count === props.data.length - 1) {
       setCount(0)
     }
-    setData(gameEventData[count])
+    setData(props.data[count])
+    console.log(props.data[count])
 
   }, 3000)
 

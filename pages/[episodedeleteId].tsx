@@ -1,6 +1,5 @@
 import { NextPageWithLayout } from "@/pages/_app"
 import EpisodeDeleteTopSection from "@/components/pages/episodedelete/EpisodeDeleteTopSection"
-import EpisodeDeleteMiddleSection from "@/components/pages/episodedelete/EpisodeDeleteMiddleSection"
 import TotalLayout from "@/components/layouts/TotalLayout"
 import { useRouter } from "next/router"
 import { episodeData } from "@/types/episodeDeleteDataType"
