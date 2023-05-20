@@ -80,7 +80,7 @@ export default function UserNickName() {
                                 <>
                                     {userNickName.map((data) => (
                                         router.pathname === '/changeuserinfo' ?
-                                            <input className={style.usernickname} type='text' defaultValue={data.nickname} onChange={handleChange} />
+                                            <></>
                                             :
                                             <p className={style.usernickname}>{data.nickname}</p>
                                     ))}
@@ -88,7 +88,11 @@ export default function UserNickName() {
                             }
                         </>
                     }
-                    <UserIcon />
+                    {router.pathname === '/changeuserinfo' ?
+                        <></>
+                        :
+                        <UserIcon />
+                    }
                 </div>
             </div>
         </>

@@ -7,8 +7,8 @@ export default function ChangeUserInfoSection() {
 
     const [profileSkinColor, setProfileSkinColor] = useState<profileskinDataType>(
         {
-            // id: 0,
-            color: '',
+            id: 0,
+            Imgurl: '',
         }
     )
 
