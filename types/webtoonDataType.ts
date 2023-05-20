@@ -31,3 +31,11 @@ export interface WebToonDetailDataType {
   id: number;
   title: string;
 }
+
+export interface webtoonDeleteDataType {
+  deletereason: string;
+}
+
+export interface webtoonTitleDataType {
+  title: string;
+}

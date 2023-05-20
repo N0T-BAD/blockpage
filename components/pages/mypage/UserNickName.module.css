@@ -10,9 +10,9 @@
   width: 80%;
   justify-content: center;
   flex-direction: column;
-  margin: 2rem 0;
+  padding: 1rem 0;
   border-bottom: 1px solid var(--bp-gray);
-  height: 10rem;
+  height: 100%;
 }
 
 .userImage {
