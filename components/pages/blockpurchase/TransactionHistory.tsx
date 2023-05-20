@@ -34,8 +34,8 @@ const TransectionHistory = () => {
             category.name === '충전 내역' ?
               <>
                 {category.chargesubcategories && category.chargesubcategories.map((subCategory) => (
-                  <div className={style.chargeBox}>
-                    <div className={style.subhistorybox} key={subCategory.subCategoryId}>
+                  <div className={style.chargeBox} key={subCategory.subCategoryId}>
+                    <div className={style.subhistorybox}>
                       <p>{subCategory.date}</p>
                       <div className={style.chargeBlockBox}>
                         <p>구매</p>
