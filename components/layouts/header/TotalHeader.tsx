@@ -34,7 +34,7 @@ export default function TotalHeader() {
         } else if (path === '/changeepisode') {
             setTitle('에피소드 수정')
         }
-    })
+    }, [router.pathname])
 
 
     return (

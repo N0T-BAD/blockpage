@@ -1,5 +1,6 @@
 export const userNickName = [
   {
+    id: 1,
     nickname: "김철수",
   },
 ];

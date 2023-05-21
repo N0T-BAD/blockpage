@@ -15,6 +15,7 @@ export default function SearchResult() {
         listviewData.map((data) => (
           <WebtoonList
             data={data}
+            key={data.id}
           />
         ))
       }

@@ -35,7 +35,7 @@ export default function ChangeEpisodeInfoForm() {
     axios(`/api/authorwebtooninfo/${router.query.id}`)
       .then(res => res.data)
       .then(data => setEpisodeInfoData(data))
-  }, [episodeInfoData])
+  }, [episodeInfoData, router.query.id])
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -161,7 +161,7 @@ export default function ChangeEpisodeInfoForm() {
               </div>
               <div className={style.filelist}>
                 {episodeImagePreview.map((preview, index) => (
-                  <div className={style.filename}>
+                  <div className={style.filename} key={index}>
                     <p>{preview.name}</p>
                     <button onClick={() => handleRemoveEpisodeImage(index)}>삭제</button>
                   </div>

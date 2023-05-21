@@ -24,6 +24,7 @@ export default function UserNickName() {
 
     const [userNickname, setUserNickname] = useState<ChangeUserDataType>(
         {
+            id: 0,
             nickname: '',
         }
     );
@@ -82,7 +83,7 @@ export default function UserNickName() {
                                         router.pathname === '/changeuserinfo' ?
                                             <></>
                                             :
-                                            <p className={style.usernickname}>{data.nickname}</p>
+                                            <p className={style.usernickname} key={data.id}>{data.nickname}</p>
                                     ))}
                                 </>
                             }

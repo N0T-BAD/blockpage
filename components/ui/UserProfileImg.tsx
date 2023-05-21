@@ -22,6 +22,7 @@ export default function UserProfileImg() {
 
   const [userNickname, setUserNickname] = useState<ChangeUserDataType>(
     {
+      id: 0,
       nickname: '',
     }
   );
@@ -99,7 +100,7 @@ export default function UserProfileImg() {
                       {userNickname &&
                         <>
                           {userNickName.map((data) => (
-                            <input className={style.usernickname2} type='text' defaultValue={data.nickname} onChange={handleChange} />
+                            <input className={style.usernickname2} type='text' defaultValue={data.nickname} onChange={handleChange} key={data.id} />
                           ))}
                         </>
                       }

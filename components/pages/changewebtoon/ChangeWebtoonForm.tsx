@@ -30,13 +30,13 @@ export default function ChangeWebtoonForm() {
         axios(`api/webtooninfo/${router.query.id}`)
             .then(res => res.data)
             .then(data => setChangeWebtoonData(data))
-    }, [router.query.id])
+    }, [changewebtoonData, router.query.id])
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setWebtoonInfoData({
             ...webtoonInfoData,
-            [name]: value
+            [name]: value,
         });
     };
 
@@ -115,11 +115,6 @@ export default function ChangeWebtoonForm() {
                             <p>일러스트레이터 : </p>
                             <input type="text" name="illustrator" defaultValue={changewebtoonData.illustrator} placeholder='미입력시, 본인으로 등록됩니다.' onChange={handleInput} />
                         </div>
-                        {/* <div className={style.InfoImgBox}>
-                            <p>메인 이미지 : </p>
-                            <input type="file" accept="image/*" onChange={handleMainImage} defaultValue={changewebtoonData.mainImageData} />
-                            {WebtoonMainImagePreview && <Image src={WebtoonMainImagePreview} alt="WebtoonThumbnailImagePreview" width={200} height={200} />}
-                        </div> */}
                         <div className={style.InfoImgBox}>
                             <div className={style.labelBox}>
                                 <p>메인 이미지</p>
@@ -135,11 +130,6 @@ export default function ChangeWebtoonForm() {
                                 : <></>
                             }
                         </div>
-                        {/* <div className={style.InfoImgBox}>
-                            <p>썸네일 이미지 : </p>
-                            <input type="file" accept="image/*" onChange={handleThumbnailImage} defaultValue={changewebtoonData.thumbnailImageData} />
-                            {WebtoonThumbnailImagePreview && <Image src={WebtoonThumbnailImagePreview} alt="WebtoonMainImagePreview" width={200} height={200} />}
-                        </div> */}
                         <div className={style.InfoImgBox}>
                             <div className={style.labelBox}>
                                 <p>썸네일 이미지</p>

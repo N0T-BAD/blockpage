@@ -1,4 +1,5 @@
 export interface ChangeUserDataType {
+  id: number;
   nickname: string;
 }
 

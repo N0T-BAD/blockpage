@@ -20,7 +20,7 @@ export default function AuthorSubCategory({ active }: { active: string }) {
     <>
       {
         authorWorksListCategoryData.map((category) => (
-          <div className={category.name === active ? `${style.Clickactive}` : `${style.NoClickactive}`}>
+          <div className={category.name === active ? `${style.Clickactive}` : `${style.NoClickactive}`} key={category.id}>
             <>
               {
                 category.name === '웹툰 조회' ?
@@ -61,7 +61,7 @@ export default function AuthorSubCategory({ active }: { active: string }) {
                     <>
                       <AuthorCash />
                       {webtoonListData.map((webtoonsubcategory) => (
-                        <div className={style.webtoonBox}>
+                        <div className={style.webtoonBox} key={webtoonsubcategory.id}>
                           <div className={style.ImgWrap}>
                             <Image src={'/assets/images/Best/image1.png'} alt={'이것이 법이다'} width={140} height={120} />
                           </div>
