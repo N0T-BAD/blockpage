@@ -36,7 +36,7 @@ export default function ChangeWebtoonForm() {
         const { name, value } = e.target;
         setWebtoonInfoData({
             ...webtoonInfoData,
-            [name]: value
+            [name]: value,
         });
     };
 
