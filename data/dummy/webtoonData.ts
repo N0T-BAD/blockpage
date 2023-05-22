@@ -16,6 +16,7 @@ export const webtoonListData = [
       {
         id: 1,
         subject: "세화, 가는 길 1화",
+        authorComment: "반갑습니다. 잘 부탁드립니다~",
         thumbnail: "/assets/dummy/01.png",
         imgUrls: [
           {
@@ -37,6 +38,7 @@ export const webtoonListData = [
       {
         id: 2,
         subject: "세화, 가는 길 2화",
+        authorComment: "안녕하세요. 잘 부탁드립니다~",
         thumbnail: "/assets/dummy/01.png",
         imgUrls: [
           {
@@ -53,11 +55,12 @@ export const webtoonListData = [
           },
         ],
         rating: 9.99,
-        date: "2023-04-15",
+        date: "2023-04-22",
       },
       {
         id: 3,
         subject: "세화, 가는 길 3화",
+        authorComment: "잘 부탁드립니다~",
         thumbnail: "/assets/dummy/01.png",
         imgUrls: [
           {
@@ -74,11 +77,12 @@ export const webtoonListData = [
           },
         ],
         rating: 9.99,
-        date: "2023-04-15",
+        date: "2023-04-29",
       },
       {
         id: 4,
         subject: "세화, 가는 길 4화",
+        authorComment: "잘 부탁드립니다~",
         thumbnail: "/assets/dummy/01.png",
         imgUrls: [
           {
@@ -95,11 +99,12 @@ export const webtoonListData = [
           },
         ],
         rating: 9.99,
-        date: "2023-04-30",
+        date: "2023-05-06",
       },
       {
         id: 5,
         subject: "세화, 가는 길 5화",
+        authorComment: "잘 부탁드립니다~",
         thumbnail: "/assets/dummy/01.png",
         imgUrls: [
           {
@@ -116,11 +121,12 @@ export const webtoonListData = [
           },
         ],
         rating: 9.99,
-        date: "2023-04-15",
+        date: "2023-05-13",
       },
       {
         id: 6,
         subject: "세화, 가는 길 6화",
+        authorComment: "잘 부탁드립니다~",
         thumbnail: "/assets/dummy/01.png",
         imgUrls: [
           {
@@ -137,11 +143,12 @@ export const webtoonListData = [
           },
         ],
         rating: 9.99,
-        date: "2023-04-15",
+        date: "2023-05-20",
       },
       {
         id: 7,
         subject: "세화, 가는 길 7화",
+        authorComment: "잘 부탁드립니다~",
         thumbnail: "/assets/dummy/01.png",
         imgUrls: [
           {
@@ -158,11 +165,12 @@ export const webtoonListData = [
           },
         ],
         rating: 9.99,
-        date: "2023-04-15",
+        date: "2023-05-27",
       },
       {
         id: 8,
         subject: "세화, 가는 길 8화",
+        authorComment: "잘 부탁드립니다~",
         thumbnail: "/assets/dummy/01.png",
         imgUrls: [
           {
@@ -179,11 +187,12 @@ export const webtoonListData = [
           },
         ],
         rating: 9.99,
-        date: "2023-04-15",
+        date: "2023-06-03",
       },
       {
         id: 9,
         subject: "세화, 가는 길 9화",
+        authorComment: "잘 부탁드립니다~",
         thumbnail: "/assets/dummy/01.png",
         imgUrls: [
           {
@@ -200,11 +209,12 @@ export const webtoonListData = [
           },
         ],
         rating: 9.99,
-        date: "2023-04-15",
+        date: "2023-06-10",
       },
       {
         id: 10,
         subject: "세화, 가는 길 10화",
+        authorComment: "다음주부터 휴재입니다.",
         thumbnail: "/assets/dummy/01.png",
         imgUrls: [
           {
@@ -221,7 +231,7 @@ export const webtoonListData = [
           },
         ],
         rating: 9.99,
-        date: "2023-04-15",
+        date: "2023-06-17",
       },
     ],
   },
@@ -358,7 +368,7 @@ export const webtoonListData = [
           },
         ],
         rating: 9.99,
-        date: "2023-04-15",
+        date: "2023-04-22",
       },
       {
         id: 3,

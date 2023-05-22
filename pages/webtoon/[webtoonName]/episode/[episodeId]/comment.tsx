@@ -1,6 +1,6 @@
-import { NextPageWithLayout } from "./_app"
+import CommentLayout from "@/components/layouts/CommentLayout"
+import { NextPageWithLayout } from "../../../../_app"
 
-import Layout from "@/components/layouts/layout"
 import CommentInputSection from "@/components/pages/comment/CommentInputSection"
 import GetCommentSection from "@/components/pages/comment/GetCommentSection"
 
@@ -16,9 +16,9 @@ const comment: NextPageWithLayout = () => {
 
 comment.getLayout = function getLayout(comment: React.ReactElement) {
   return (
-    <Layout>
+    <CommentLayout>
       {comment}
-    </Layout>
+    </CommentLayout>
   )
 }
 

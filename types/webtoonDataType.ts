@@ -17,6 +17,7 @@ export interface EpisodeListDataType {
   id: number;
   subject: string;
   thumbnail: string;
+  authorComment: string;
   imgUrls: imgListType[];
   rating: number;
   date: string;

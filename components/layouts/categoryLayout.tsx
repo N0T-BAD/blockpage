@@ -1,14 +1,11 @@
-import { useRouter } from "next/router"
-import Footer from "@/components/layouts/Footer"
-import CommentHeader from "./header/CommentHeader";
-import ListviewNavSection from "../pages/listview/ListviewNavSection";
+import CategoryHeader from "./header/CategoryHeader";
 
 export default function CategoryLayout(props: { children: React.ReactNode }) {
 
   return (
     <>
-        <CommentHeader />
-        <div>{props.children}</div>
+      <CategoryHeader />
+      <div>{props.children}</div>
     </>
   )
 }

@@ -7,9 +7,7 @@ export default function GetCommentSection() {
 
   return (
     <section className={style.getCommentSection}>
-      <GetComment
-        episodeId={1}
-      />
+      <GetComment />
     </section>
   )
 }
