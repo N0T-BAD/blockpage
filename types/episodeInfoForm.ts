@@ -23,5 +23,10 @@ export interface changeEpisodeInfoFormDataType {
 export interface UploadedFile {
   name: string;
   preview: string;
+}
+
+export interface UploadFile {
+  name: string;
+  preview: string;
   file: File;
 }

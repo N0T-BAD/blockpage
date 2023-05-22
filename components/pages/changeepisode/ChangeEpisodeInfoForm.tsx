@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import style from '@/components/pages/episodeinfo/EpisodeInfoForm.module.css'
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { UploadedFile, episodeInfoFormDataType } from '@/types/episodeInfoForm';
+import { UploadFile, episodeInfoFormDataType } from '@/types/episodeInfoForm';
 import Image from 'next/image';
 
 export default function ChangeEpisodeInfoForm() {
@@ -23,7 +23,7 @@ export default function ChangeEpisodeInfoForm() {
   const [episodeThumbnailImage, setEpisodeThumbnailImage] = useState<File>();
   const [episodeImage, setEpisodeImage] = useState<File[]>([]);
   const [episodeThumbnailImagePreview, setEpisodeThumbnailImagePreview] = useState<string>();
-  const [episodeImagePreview, setEpisodeImagePreview] = useState<UploadedFile[]>([]);
+  const [episodeImagePreview, setEpisodeImagePreview] = useState<UploadFile[]>([]);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export default function ChangeEpisodeInfoForm() {
       const uploadedFiles: File[] = Array.from(files);
       setEpisodeImage(uploadedFiles);
 
-      const filePreviews: UploadedFile[] = uploadedFiles.map(file => ({
+      const filePreviews: UploadFile[] = uploadedFiles.map(file => ({
         name: file.name,
         preview: URL.createObjectURL(file),
         file,
