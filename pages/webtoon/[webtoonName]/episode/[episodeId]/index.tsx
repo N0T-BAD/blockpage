@@ -2,15 +2,16 @@ import Layout from "@/components/layouts/layout"
 import EpisodeViewer from "@/components/pages/episodeviewer/EpisodeViewer"
 import FooterViewer from "@/components/pages/episodeviewer/FooterViewer"
 import { webtoonListData } from "@/data/dummy/webtoonData"
-import { EpisodeListDataType } from "@/types/webtoonDataType"
+import { EpisodeListDataType, WebToonListDataType } from "@/types/webtoonDataType"
 
-function EpisodeId(props: { data: EpisodeListDataType }) {
-  const data = props.data;
+function EpisodeId(props: { dummyData: WebToonListDataType[], episodeData: EpisodeListDataType }) {
+  const episodeData = props.episodeData;
+  const dummyData = props.dummyData;
 
   return (
     <>
-      <EpisodeViewer data={data} />
-      <FooterViewer data={data} />
+      <EpisodeViewer episodeData={episodeData} />
+      <FooterViewer episodeData={episodeData} dummyData={dummyData} />
     </>
   )
 }
@@ -29,15 +30,13 @@ export async function getServerSideProps(context: any) {
 
   const { webtoonName } = context.query;
   const { episodeId } = context.query;
-  console.log(webtoonName + " " + episodeId)
+  console.log(webtoonName + " " + episodeId);
 
   const dummyData = webtoonListData;
   const webtoonData = dummyData.find((item) => item.title === webtoonName);
-  const epiData = dummyData.find((item) => item.episodeData.find((item) => item.id) === episodeId)
-
-  console.log(data)
+  const episodeData = webtoonData?.episodeData.find((item) => item.id === Number(episodeId));
 
   return {
-    props: { data }
+    props: { dummyData, episodeData }
   }
 }

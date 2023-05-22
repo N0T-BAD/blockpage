@@ -17,12 +17,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  width: 88%;
+  bottom: 1.5rem;
 }
 
 .top {
   display: flex;
   justify-content: space-between;
-  margin: 2rem 0;
+  margin: 1.3rem 0;
 }
 
 .ratingBtn {
@@ -43,6 +46,11 @@
 .ratingBtn p:last-child {
   font-size: 0.9rem;
   margin-left: 0.5rem;
+}
+
+.close {
+  display: flex;
+  align-items: center;
 }
 
 .authorSection {
@@ -70,5 +78,17 @@
 }
 
 .nextEpisode {
-  margin: 2rem 0;
+  margin: 1.5rem 0;
+  border: 0.1rem solid var(--bp-line-gray);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.5rem;
+}
+
+.nextTxt {
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+}
+
+.hidden {
+  height: 14rem !important;
 }

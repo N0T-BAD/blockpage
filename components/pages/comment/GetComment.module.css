@@ -1,3 +1,13 @@
+.commentSection {
+  padding: 1rem 0;
+}
+
+.pinTxt {
+  color: var(--bp-font-gray);
+  font-size: 0.7rem;
+  padding-bottom: 0.3rem;
+}
+
 .topSection {
   display: flex;
   justify-content: space-between;
@@ -9,6 +19,7 @@
 
 .profile {
   display: flex;
+  align-items: center;
 }
 
 .date {
@@ -19,12 +30,17 @@
   margin-right: 1rem;
 }
 
+.profileTxt p {
+  padding: 0.1rem 0;
+  font-size: 0.9rem;
+}
+
 .topIcon img:last-child {
   margin-left: 1.5rem;
 }
 
 .commentTxt {
-  padding: 1rem 0;
+  padding: 1rem 0 2rem 0;
   font-size: 0.9rem;
 }
 
@@ -37,6 +53,7 @@
 .bottomSection p {
   font-size: 0.9rem;
   color: var(--bp-font-gray);
+  cursor: pointer;
 }
 
 .bottomIcon {
@@ -59,6 +76,10 @@
 
 .replySection {
   background-color: var(--bp-gray);
-  padding: 1rem;
+  padding: 0 1.5rem 0.1rem 1.5rem;
   height: fit-content;
+}
+
+.replyCommentSection {
+  margin: 0 0 1rem 0;
 }

@@ -18,6 +18,8 @@ export default function Footer() {
           alt="footerBtnIcon"
           width={50}
           height={50}
+          placeholder='blur'
+          blurDataURL='/assets/images/icons/search.svg'
           priority
           onClick={handleSearch}
         />

@@ -37,6 +37,7 @@
   margin: 3rem 0 1rem 0;
   display: flex;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .mypageBtn {
@@ -84,6 +85,7 @@
 
 .menuList li {
   width: fit-content;
+  cursor: pointer;
 }
 
 .logoImg {

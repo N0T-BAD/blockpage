@@ -14,7 +14,7 @@ export default function BestTotalButton() {
   return (
     <div className={style.BestTotalButtonBox}>
       <div className={style.BestTotalButton} onClick={onClick}>
-        <Image src="/assets/images/icons/circle.svg" alt={"TotalButton"} width={20} height={20} />
+        <Image src="/assets/images/icons/circle.svg" alt={"TotalButton"} width={20} height={20} priority />
         <p>전체보기</p>
       </div>
     </div>

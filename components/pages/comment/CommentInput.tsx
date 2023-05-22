@@ -5,7 +5,6 @@ import style from '@/components/pages/comment/CommentInput.module.css'
 export default function CommentInput() {
 
   const [btnState, setBtnState] = useState(false);
-  const [commentCnt, setCommentCnt] = useState(0);
   const [inputCount, setInputCount] = useState(0);
   const maxLength = 300;
 
@@ -25,10 +24,9 @@ export default function CommentInput() {
 
   return (
     <div>
-      <p className={style.totalComment}>{commentCnt}개의 댓글</p>
       {
-        btnState
-          ? <form action="">
+        btnState ?
+          <form action="">
             <div className={style.commentDiv}>
               <textarea
                 name="comment"

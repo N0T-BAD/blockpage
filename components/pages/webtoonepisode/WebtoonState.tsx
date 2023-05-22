@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import style from '@/components/pages/webtoonepisode/WebtoonState.module.css'
 import Separator from '@/components/ui/Separator'
