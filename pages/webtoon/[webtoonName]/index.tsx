@@ -1,4 +1,4 @@
-import Layout from "@/components/layouts/layout"
+import WebtoonLayout from "@/components/layouts/WebtoonLayout"
 import WebtoonEpisodeSection from "@/components/pages/webtoonepisode/WebtoonEpisodeSection"
 import WebtoonInfoSection from "@/components/pages/webtoonepisode/WebtoonInfoSection"
 import { webtoonListData } from "@/data/dummy/webtoonData"
@@ -17,9 +17,9 @@ function Webtoon(props: { data: WebToonListDataType }) {
 
 Webtoon.getLayout = function getLayout(webtoon: React.ReactElement) {
   return (
-    <Layout>
+    <WebtoonLayout>
       {webtoon}
-    </Layout>
+    </WebtoonLayout>
   )
 }
 

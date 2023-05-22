@@ -2,33 +2,14 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 
 import style from '@/components/pages/webtoonepisode/WebtoonInfo.module.css'
-import { useRouter } from 'next/router';
 
-import LikeButton from '@/components/ui/LikeButton';
 import LikeViewSection from '@/components/ui/webtoonInfo/LikeViewSection';
 import { WebToonListDataType } from '@/types/webtoonDataType'
-import BackBtn from '@/components/ui/BackBtn';
 
 export default function WebtoonInfo(props: { data: WebToonListDataType }) {
 
-  const [like, setLike] = useState(false);
-
-  const handleLike = () => {
-    //api 호출 db 갱신
-    setLike(!like);
-  }
-
   return (
     <>
-      <div className={style.top}>
-        <BackBtn />
-        <div>
-          <LikeButton
-            like={like}
-            onClick={handleLike}
-          />
-        </div>
-      </div>
       {
         <div className={style.bannerwrap}>
           <div className={style.bannerImg}>

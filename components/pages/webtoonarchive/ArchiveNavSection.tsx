@@ -15,7 +15,7 @@ export default function ArchiveNavSection() {
   console.log(staticArchiveMenuData)
   const router = useRouter();
   const { archiveName } = router.query;
-  console.log(archiveName)
+
   return (
     <div className={style.navSection}>
       <nav>

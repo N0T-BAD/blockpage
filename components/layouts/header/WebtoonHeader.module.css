@@ -1,0 +1,20 @@
+.webtoonHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2rem 1.5rem;
+  position: fixed;
+  z-index: 301;
+  top: 0;
+  background-color: var(--bp-white);
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+}
+
+.likeBtn {
+  display: flex;
+  align-items: center;
+}

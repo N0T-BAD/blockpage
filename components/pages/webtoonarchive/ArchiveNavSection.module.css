@@ -1,3 +1,7 @@
+.navSection {
+  padding: 1rem 0;
+}
+
 .navSection nav ul {
   display: flex;
   justify-content: center;

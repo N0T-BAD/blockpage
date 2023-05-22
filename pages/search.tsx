@@ -1,13 +1,11 @@
 import { NextPageWithLayout } from "@/pages/_app"
 import HistorySection from "@/components/pages/search/HistorySection"
-import SearchBarSection from "@/components/pages/search/SearchBarSection"
 import SearchLayout from "@/components/layouts/SearchLayout"
 
 
 const Search: NextPageWithLayout = () => {
     return (
         <>
-            <SearchBarSection />
             <HistorySection />
         </>
     )
