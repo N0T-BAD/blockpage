@@ -30,7 +30,7 @@ export default function ChangeWebtoonForm() {
         axios(`api/webtooninfo/${router.query.id}`)
             .then(res => res.data)
             .then(data => setChangeWebtoonData(data))
-    }, [changewebtoonData, router.query.id])
+    }, [router.query.id])
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;

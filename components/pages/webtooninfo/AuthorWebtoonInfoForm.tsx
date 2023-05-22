@@ -35,7 +35,7 @@ export default function AuthorWebtoonInfoForm() {
         axios(`api/v1/webtoons`)
             .then(res => res.data)
             .then(data => setAuthorName(data))
-    }, [authorName])
+    }, [])
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;

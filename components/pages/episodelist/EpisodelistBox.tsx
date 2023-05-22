@@ -61,18 +61,6 @@ export default function EpisodelistBox() {
                             <button onClick={() => handleDeleteClick(category.id)}>삭제</button>
                         </div>
                     </div>
-                    <footer className={style.AuthorFooterWrap}>
-                        <div className={style.footerBtn}>
-                            <Image
-                                src={'/assets/images/icons/plus.svg'}
-                                alt="footerBtnIcon"
-                                width={50}
-                                height={50}
-                                priority
-                                onClick={() => router.push("/episodeinfo")}
-                            />
-                        </div>
-                    </footer>
                 </>
             ))}
         </>
