@@ -1,6 +1,6 @@
 import TotalHeader from "@/components/layouts/header/TotalHeader"
 import { useRouter } from "next/router";
-import EpisodeListFooter from "./episodelistfooter/episodelistfooter";
+import EpisodeListFooter from "@/components/layouts/episodelistfooter/EpisodeListFooter";
 
 export default function TotalLayout(props: { children: React.ReactNode }) {
     const router = useRouter();
