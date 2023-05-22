@@ -14,7 +14,7 @@ export default function MypageHeader() {
                     <p>마이페이지</p>
                 </div>
                 <div className={style.rightHead}>
-                    <Image src={"/assets/images/icons/logout.svg"} alt={"로그아웃"} width={20} height={20} />
+                    <Image src={"/assets/images/icons/logout.svg"} alt={"로그아웃"} width={19.5} height={19.5} />
                 </div>
             </div>
         </header >
