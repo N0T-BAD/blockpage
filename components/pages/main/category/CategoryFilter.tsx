@@ -11,10 +11,6 @@ export default function CategoryFilter() {
     setCategoryData(categoryMenuData)
   }, [])
 
-  useEffect(() => {
-    console.log('view', view)
-  }, [view])
-
   return (
     <section className={style.categoryWrap}>
       {

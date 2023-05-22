@@ -1,13 +1,11 @@
+import { NextPageWithLayout } from "@/pages/_app"
 import SearchLayout from "@/components/layouts/SearchLayout"
-import { NextPageWithLayout } from "./_app"
-
 import SearchBarSection from "@/components/pages/search/SearchBarSection"
 import SearchResultSection from "@/components/pages/searchResult/SearchResultSection"
 
 const searchResult: NextPageWithLayout = () => {
   return (
     <>
-      <SearchBarSection />
       <SearchResultSection />
     </>
   )
