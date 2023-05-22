@@ -7,15 +7,13 @@ export default function BackBtn() {
   const router = useRouter();
 
   return (
-    <div>
-      <Image
-        src={'/assets/images/icons/back.svg'}
-        alt="backBtnIcon"
-        width={20}
-        height={20}
-        priority
-        onClick={() => router.pathname === "/mypage" ? router.push("/") : router.back()}
-      />
-    </div>
+    <Image
+      src={'/assets/images/icons/back.svg'}
+      alt="backBtnIcon"
+      width={20}
+      height={20}
+      priority
+      onClick={() => router.pathname === "/mypage" ? router.push("/") : router.back()}
+    />
   )
 }
