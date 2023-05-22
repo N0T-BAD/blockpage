@@ -1,5 +1,5 @@
 import React from 'react'
-import TransectionHistory from './TransactionHistory'
+import TransectionHistory from '@/components/pages/blockpurchase/TransactionHistory'
 import style from '@/components/pages/blockpurchase/TransactionHistorySection.module.css'
 
 

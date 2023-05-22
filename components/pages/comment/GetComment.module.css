@@ -1,0 +1,85 @@
+.commentSection {
+  padding: 1rem 0;
+}
+
+.pinTxt {
+  color: var(--bp-font-gray);
+  font-size: 0.7rem;
+  padding-bottom: 0.3rem;
+}
+
+.topSection {
+  display: flex;
+  justify-content: space-between;
+}
+
+.topIcon {
+  display: flex;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+}
+
+.date {
+  color: var(--bp-secondary);
+}
+
+.profile img {
+  margin-right: 1rem;
+}
+
+.profileTxt p {
+  padding: 0.1rem 0;
+  font-size: 0.9rem;
+}
+
+.topIcon img:last-child {
+  margin-left: 1.5rem;
+}
+
+.commentTxt {
+  padding: 1rem 0 2rem 0;
+  font-size: 0.9rem;
+}
+
+.bottomSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bottomSection p {
+  font-size: 0.9rem;
+  color: var(--bp-font-gray);
+  cursor: pointer;
+}
+
+.bottomIcon {
+  display: flex;
+}
+
+.bottomIcon div {
+  display: flex;
+  align-items: center;
+}
+
+.bottomIcon div:not(:last-of-type):after {
+  content: "|";
+  padding: 0 0.7rem;
+}
+
+.emotion img {
+  margin-right: 0.4rem;
+}
+
+.replySection {
+  background-color: var(--bp-gray);
+  padding: 0 1.5rem 0.1rem 1.5rem;
+  height: fit-content;
+}
+
+.replyCommentSection {
+  margin: 0 0 1rem 0;
+}

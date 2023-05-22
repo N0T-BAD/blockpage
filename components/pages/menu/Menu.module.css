@@ -1,0 +1,93 @@
+.menuSection {
+  padding: 2rem 1.5rem;
+}
+
+.closeBtn {
+  display: flex;
+  justify-content: right;
+}
+
+.userSection {
+  margin-top: 2rem;
+}
+
+.user {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.user p {
+  font-size: 1rem;
+  padding: 0 2rem;
+}
+
+.user p:first-child {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.userSectionTxt {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.btnSection {
+  margin: 3rem 0 1rem 0;
+  display: flex;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.mypageBtn {
+  display: flex;
+  align-items: center;
+  padding: 0.3rem 1.7rem;
+  border-radius: 2rem;
+  background-color: var(--bp-secondary);
+  color: var(--bp-white);
+  z-index: 1;
+}
+
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  padding: 0.3rem 1.7rem 0.3rem 2.6rem;
+  margin-left: -1.9rem;
+  border-radius: 2rem;
+  border: 0.15rem solid var(--bp-secondary);
+  color: var(--bp-secondary);
+}
+
+.menuContents {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3rem;
+}
+
+.menuContents p {
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: 1rem 0 1rem 2.5rem;
+}
+
+.menuList {
+  padding: 1.7rem;
+  font-size: 1.3rem;
+  line-height: 3.5rem;
+  padding-inline-start: 1.5em;
+}
+
+.menuList li::marker {
+  color: var(--bp-blue);
+}
+
+.menuList li {
+  width: fit-content;
+  cursor: pointer;
+}
+
+.logoImg {
+  margin: 2rem 0 0 0.5rem;
+}

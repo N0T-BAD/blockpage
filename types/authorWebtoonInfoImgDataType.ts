@@ -1,13 +1,18 @@
-export interface authorWebtoonInfoImgDataType {
-    mainImage?: File;
-    thumbnailImage?: File;
-}
-
 export interface authorWebtoonInfoDataType {
     title: string;
     description: string;
     genre: string;
     day: string;
-    author: string;
     illustrator?: string;
+}
+
+export interface authorWebtoonInfoStateType {
+    mainImageData: string;
+    thumbnailImageData: string;
+    title: string;
+    description: string;
+    genre: string;
+    day: string;
+    illustrator: string;
+    author: string;
 }

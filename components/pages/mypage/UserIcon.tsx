@@ -5,20 +5,23 @@ import { useRouter } from 'next/router'
 export default function UserIcon() {
     const router = useRouter();
 
+    const RouterUrl = router.pathname === "/webtooninfo" || router.pathname === "/authorworkslist" || router.pathname === "/webtoondelete" || router.pathname === "/episodelist" || router.pathname === "/episodeinfo"
+        || router.pathname === "/episodedelete" || router.pathname === '/changewebtoon';
+
     return (
-        <div className={style.reader_box}>
-            {router.pathname === "/mypage" ?
+        <>
+            {router.pathname === "/mypage" || router.pathname === '/changeuserinfo' ?
                 <div className={style.reader}>
                     <p>독자</p>
                 </div>
                 :
-                router.pathname === "/webtooninfo" || router.pathname === "/authorworkslist" ?
+                RouterUrl ?
                     <div className={style.author}>
                         <p>작가</p>
                     </div>
                     :
                     <></>
             }
-        </div>
+        </>
     )
 }

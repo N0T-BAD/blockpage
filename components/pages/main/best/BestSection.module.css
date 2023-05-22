@@ -1,18 +1,18 @@
 section.bestSection {
-    width: 100%;
-    padding: 0 1.57rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  width: 100%;
+  padding: 0 1.57rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 10rem;
 }
 
 .bestItemWrap {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 -0.5rem;
+  margin: 0 0.3rem;
+  display: flex;
+  flex-direction: column;
 }
 
-.bestItemWrap:nth-child(2n) {
-    flex-direction: row-reverse;
-}
+/* .bestItemWrap:nth-child(2n) {
+  flex-direction: row-reverse;
+} */

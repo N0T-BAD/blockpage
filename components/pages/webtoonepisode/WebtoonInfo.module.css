@@ -1,0 +1,67 @@
+.top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bannerwrap {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.bannerImg {
+  width: 80%;
+  animation: banner 0.5s ease-in-out;
+}
+
+.bannerImg img {
+  width: 100%;
+  height: auto;
+}
+
+.likeViewSection {
+  display: flex;
+  margin: 0.5rem 0;
+}
+
+.likeViewSection p {
+  margin-left: 0.3rem;
+  font-weight: 700;
+}
+
+.views {
+  display: flex;
+  align-items: center;
+  color: var(--bp-primary);
+}
+
+.likes {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+  color: var(--bp-secondary);
+}
+
+.info {
+  display: flex;
+  margin-top: 0.5rem;
+}
+
+.info p:first-child::after {
+  content: "|";
+  margin: 0 0.5rem;
+}
+
+.line {
+  margin: 1rem 0;
+  width: 2.5rem;
+  height: 0.05rem;
+  background-color: var(--bp-primary);
+  animation: banner-slide-down 0.5s ease-in-out;
+}
+
+.author {
+  color: var(--bp-font-gray);
+}

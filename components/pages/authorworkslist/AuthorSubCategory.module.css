@@ -1,0 +1,138 @@
+.webtoonBox {
+  display: flex;
+  width: 100%;
+  border-bottom: 1px solid var(--bp-gray);
+  padding: 0.6rem 0;
+}
+
+.webtoonInfoWrap {
+  width: 85%;
+  display: flex;
+}
+
+.ImgWrap {
+  width: 45%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.contentWrap {
+  margin: 0;
+  width: 55%;
+  align-self: center;
+}
+
+.webtoonButton {
+  width: 15%;
+  align-self: center;
+}
+
+.contentWrap .option {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0.3rem 0;
+}
+
+.contentWrap p.title {
+  margin-bottom: 0.4rem;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.contentWrap p.episodetitle {
+  margin-bottom: 0.4rem;
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.contentWrap .author {
+  margin-bottom: 0.4rem;
+  color: var(--bp-font-gray);
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.contentWrap .option .views {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-right: 1rem;
+}
+
+.contentWrap .option .views p.viewstxt {
+  color: var(--bp-primary);
+  font-size: 0.7rem;
+  font-weight: 400;
+  margin-left: 0.3rem;
+}
+
+.contentWrap .option .likes {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-right: 1rem;
+}
+
+.contentWrap .option .likes p.likestxt {
+  color: var(--bp-secondary);
+  font-size: 0.7rem;
+  font-weight: 400;
+  margin-left: 0.3rem;
+}
+
+.contentWrap p.option2 {
+  width: fit-content;
+  padding: 0.2rem 0.4rem;
+  font-size: 0.5rem;
+  font-weight: 400;
+  background: var(--bp-secondary-glow);
+  color: var(--bp-white);
+  border-radius: 1.5rem;
+  margin-bottom: 0.6rem;
+  height: 1rem;
+}
+
+.contentWrap p.viewmore {
+  color: var(--bp-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.chargeBlockBox {
+  display: flex;
+}
+
+.chargeBlockBox p {
+  padding-right: 0.4rem;
+}
+
+.chargeBlockBox p.chargeBoxContent {
+  color: var(--bp-blue);
+}
+
+.Clickactive {
+  margin: 1rem 0.5rem;
+  border-bottom: 0.1rem solid var(--bp-gray);
+  display: block;
+  width: 100%;
+}
+
+.NoClickactive {
+  margin: 1rem 0.5rem;
+  border-bottom: 0.1rem solid var(--bp-gray);
+  display: none;
+  width: 100%;
+}
+
+.subhistorybox {
+  padding-bottom: 1rem;
+}
+
+.webtoonButton button {
+  width: 100%;
+  margin: 0.5rem 0;
+  border: none;
+  height: 1.5rem;
+}

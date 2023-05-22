@@ -37,16 +37,46 @@
 
 .Clickactive {
   margin: 1rem 0.5rem;
-  border-bottom: 0.1rem solid var(--bp-secondary-gray);
   display: block;
 }
 
 .NoClickactive {
   margin: 1rem 0.5rem;
-  border-bottom: 0.1rem solid var(--bp-secondary-gray);
   display: none;
 }
 
 .subhistorybox {
   padding-bottom: 1rem;
+  width: 80%;
+}
+
+.UseBox {
+  padding-bottom: 1rem;
+  width: 100%;
+  border-bottom: 0.1rem solid var(--bp-gray);
+  margin: 1rem 0;
+}
+
+.chargeBox {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 0.1rem solid var(--bp-gray);
+  margin: 1rem 0;
+}
+
+.refundBox{
+  width: 20%;
+  height: 3rem;
+}
+
+.refundBox button {
+  background-color: var(--bp-blue);
+  border: none;
+  color : var(--bp-white);
+  border-radius: 1rem;
+  width: 100%;
+  height: 60%;
+  font-weight: 700;
 }

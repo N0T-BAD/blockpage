@@ -1,0 +1,157 @@
+.WebtoonDeleteInfoWrap {
+  margin: 3rem 0;
+}
+
+.webtoonInfoBox {
+  display: flex;
+  width: 100%;
+  height: 2rem;
+  margin: 3rem 0;
+}
+
+.webtoonInfoBox p {
+  width: 35%;
+  text-align: center;
+  align-self: center;
+}
+
+.webtoonInfoBox p.title {
+  width: 60%;
+  background-color: var(--bp-gray);
+  border-radius: 1rem;
+  border: none;
+  padding-left: 1rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.episodeInfoBox {
+  display: flex;
+  width: 100%;
+  height: 2rem;
+  margin: 3rem 0;
+}
+
+.episodeInfoBox p {
+  width: 35%;
+  text-align: center;
+  align-self: center;
+}
+
+.episodeInfoBox input {
+  width: 60%;
+  background-color: var(--bp-gray);
+  border-radius: 1rem;
+  border: none;
+  padding-left: 1rem;
+}
+
+.submit {
+  height: 3rem;
+  margin: 1rem;
+  text-align: center;
+}
+
+.submit button {
+  width: 50%;
+  height: 2rem;
+  border: none;
+  background-color: var(--bp-blue);
+  color: var(--bp-white);
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 0.4rem;
+}
+
+.episodeInfoImgBox {
+  display: flex;
+  width: 100%;
+  height: fit-content;
+  margin: 1rem 0;
+  flex-direction: column;
+  align-items: center;
+}
+
+.episodeInfoImgBox input {
+  width: 100%;
+  margin: 1rem 0;
+  display: none;
+}
+
+.ThumbnailBox {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  border: 5px solid var(--bp-gray);
+}
+
+.ThumbnailBox img {
+  width: 80%;
+  margin: 1rem 0;
+}
+
+.ImgPreview {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  overflow-y: scroll;
+  height: 25rem;
+  margin: 1rem 0;
+  border: 5px solid var(--bp-gray);
+}
+
+.labelBox {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.labelBox label {
+  display: flex;
+  justify-content: center;
+  width: 30%;
+}
+
+.uploadbtn {
+  display: flex;
+  margin: 1rem 0;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--bp-blue);
+  width: 100%;
+  font-size: 0.9rem;
+  border-radius: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.uploadbtn:hover {
+  background-color: var(--bp-blue);
+  color: #fff;
+}
+
+.episodeImg {
+  text-align: center;
+}
+
+.filename {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0.2rem 0;
+}
+
+.filelist {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 10rem;
+  overflow-y: scroll;
+  border: 5px solid var(--bp-gray);
+  border-radius: 2rem;
+  align-items: center;
+}

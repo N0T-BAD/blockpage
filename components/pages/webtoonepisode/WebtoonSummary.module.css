@@ -1,0 +1,27 @@
+.summaryHead {
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: 0.6rem 0;
+}
+
+.summaryMore {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.summaryMore p {
+  text-align: center;
+  width: 5rem;
+  border: 0.1rem solid var(--bp-line-gray);
+  padding: 0.5rem;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.summary p.close {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}

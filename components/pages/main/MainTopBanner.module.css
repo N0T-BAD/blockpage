@@ -1,3 +1,28 @@
+@keyframes banner-slide-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes banner {
+  0% {
+    opacity: 0;
+    transform: translateY(1rem);
+    filter: blur(0.5rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
 .bannerWrap {
   width: 100%;
   margin: 0 auto;
@@ -46,6 +71,7 @@
 }
 
 .bannerWrap p.option {
+  margin: 1rem 0;
   width: fit-content;
   padding: 0.3rem 1rem;
   font-size: 0.55rem;

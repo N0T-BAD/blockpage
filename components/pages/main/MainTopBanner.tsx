@@ -22,7 +22,7 @@ export default function MainTopBanner() {
           <h2>{data.eventTitle}</h2>
           <div className={style.line}></div>
           <p>{data.name}</p>
-          <p className={style.option}>{data.freeOption === 24 ? '1일마다무료' : `${data.freeOption}시간마다무료`} . {data.categoryName}</p>
+          <p className={style.option}>{data.categoryName}</p>
         </>
       }
     </div>

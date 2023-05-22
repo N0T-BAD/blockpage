@@ -1,0 +1,170 @@
+@keyframes banner-slide-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.BestRankingCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.contentWrap {
+  margin: 0;
+  animation: banner-slide-down 0.5s ease-in-out;
+  width: 50%;
+}
+
+.contentWrap .option {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0.3rem 0;
+}
+
+.contentWrap p.title {
+  margin-bottom: 0.4rem;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.contentWrap .author {
+  margin-bottom: 0.4rem;
+  color: var(--bp-font-gray);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.contentWrap .option .views {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-right: 1rem;
+}
+
+.contentWrap .option .views p.viewstxt {
+  color: var(--bp-primary);
+  font-size: 0.7rem;
+  font-weight: 400;
+  margin-left: 0.3rem;
+}
+
+.contentWrap .option .likes {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-right: 1rem;
+}
+
+.contentWrap .option .likes p.likestxt {
+  color: var(--bp-secondary);
+  font-size: 0.7rem;
+  font-weight: 400;
+  margin-left: 0.3rem;
+}
+
+.contentWrap p.option2 {
+  width: fit-content;
+  padding: 0.2rem 0.4rem;
+  font-size: 0.5rem;
+  font-weight: 400;
+  background: var(--bp-secondary-glow);
+  color: var(--bp-white);
+  border-radius: 1.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.contentWrap p.viewmore {
+  color: var(--bp-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+@keyframes banner {
+  0% {
+    opacity: 0;
+    transform: translateY(1rem);
+    filter: blur(0.5rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.bestimg_1 {
+  position: relative;
+  width: 50%;
+}
+
+/* .bestimg_1:nth-child(2n) {
+  flex-direction: row-reverse;
+} */
+
+.imgbox {
+  width: 100%;
+  margin-bottom: 1rem;
+  animation: banner 0.5s ease-in-out;
+  position: relative;
+  z-index: 11;
+}
+
+.imgbox img {
+  animation: banner 0.5s ease-in-out;
+}
+
+.bestimg_1 {
+  position: relative;
+}
+
+.bestimg_1 .bgbox {
+  box-sizing: border-box;
+
+  position: absolute;
+  left: 27.74%;
+  right: 7.69%;
+  top: 20.09%;
+  bottom: 4.86%;
+
+  background: #ffffff;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  z-index: 10;
+  width: 70%;
+  height: 75%;
+}
+
+.bestimg_1 .bgbox p.rank {
+  text-align: end;
+  color: var(--bp-secondary);
+  font-size: 0.7rem;
+  animation: banner 0.5s ease-in-out;
+}
+
+.bgtxt {
+  position: absolute;
+  top: 20px;
+  right: 5px;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  font-family: "Roboto";
+  font-weight: 700;
+  font-size: 1rem;
+  background-color: var(--bp-primary);
+  z-index: 1;
+  color: var(--bp-white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: banner 0.5s ease-in-out;
+}

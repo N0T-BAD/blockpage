@@ -1,7 +1,7 @@
-import Layout from "@/components/layouts/layout"
-import { NextPageWithLayout } from "./_app"
+import { NextPageWithLayout } from "@/pages/_app"
 import BlcokChargeTopSection from "@/components/pages/blockcharge/BlcokChargeTopSection"
 import BlockChargeMiddleSection from "@/components/pages/blockcharge/BlockChargeMiddleSection"
+import TotalLayout from "@/components/layouts/TotalLayout"
 
 const blockcharge: NextPageWithLayout = () => {
   return (
@@ -14,9 +14,9 @@ const blockcharge: NextPageWithLayout = () => {
 
 blockcharge.getLayout = function getLayout(blockcharge: React.ReactElement) {
   return (
-    <Layout>
+    <TotalLayout>
       {blockcharge}
-    </Layout>
+    </TotalLayout>
   )
 }
 

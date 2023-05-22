@@ -1,6 +1,6 @@
 import React from 'react'
 import style from '@/components/pages/mypage/UserBottomSection.module.css'
-import UserBottomMenu from './UserBottomMenu'
+import UserBottomMenu from '@/components/pages/mypage/UserBottomMenu'
 
 export default function UserBottomSection() {
     return (

@@ -3,7 +3,7 @@ export const staticMenuData = [
     id: 1,
     name: "SideMenu",
     iconUrl: "/assets/images/icons/menuIcon.svg",
-    path: "/mypage",
+    path: "/menu",
   },
   {
     id: 2,
@@ -33,21 +33,39 @@ export const staticMenuData = [
   // },
 ];
 
+export const staticArchiveMenuData = [
+  {
+    id: 1,
+    name: "최근 감상",
+    link: "history",
+  },
+  {
+    id: 2,
+    name: "찜한 작품",
+    link: "favorite",
+  },
+  {
+    id: 3,
+    name: "구매 작품",
+    link: "purchase",
+  },
+];
+
 export const staticTopNavData = [
   {
     id: 1,
     name: "요일별 웹툰",
-    link: "/week?category=1",
+    link: "week",
   },
   {
     id: 2,
     name: "장르별 웹툰",
-    link: "/genre?category=1",
+    link: "genre",
   },
   {
     id: 3,
     name: "베스트",
-    link: "/best",
+    link: "best",
   },
 ];
 
@@ -209,5 +227,33 @@ export const categoryMenuData = [
         categoryId: 14,
       },
     ],
+  },
+];
+
+export const staticMenuListData = [
+  {
+    id: 1,
+    name: "요일별 웹툰",
+    link: "/category/week",
+  },
+  {
+    id: 2,
+    name: "장르별 웹툰",
+    link: "/category/genre",
+  },
+  {
+    id: 3,
+    name: "인기순 웹툰",
+    link: "/category/best",
+  },
+  {
+    id: 4,
+    name: "게임",
+    link: "/game",
+  },
+  {
+    id: 5,
+    name: "보관함",
+    link: "/webtoonarchive/history",
   },
 ];
