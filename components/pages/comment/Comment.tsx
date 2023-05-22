@@ -47,6 +47,11 @@ export default function Comment(props: {
       {
         <>
           <div className={style.commentSection}>
+            {
+              props.data.pin ?
+                <p className={style.pinTxt}>작가님이 고정함</p>
+                : ""
+            }
             <div className={style.topSection}>
               {
                 props.data.isReply &&
@@ -64,7 +69,9 @@ export default function Comment(props: {
               }
               <div className={style.topIcon}>
                 {
-                  props.isAuthor ?
+                  !props.data.isReply &&
+                    !props.data.pin &&
+                    props.isAuthor ?
                     <Image
                       src={"/assets/images/icons/pushpin.svg"}
                       alt='고정핀'

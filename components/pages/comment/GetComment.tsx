@@ -7,7 +7,7 @@ import Comment from './Comment';
 export default function GetComment() {
 
   const [commentData] = useState<commentDataType[]>(commentDatas);
-  const [isAuthor] = useState(false);
+  const [isAuthor] = useState(true);
 
   return (
     <>

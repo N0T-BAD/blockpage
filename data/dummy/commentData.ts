@@ -11,7 +11,7 @@ export const commentDatas = [
     replyCount: 0,
     report: false,
     erase: false,
-    pin: false,
+    pin: true,
     date: "23-05-12 09:00",
     isReply: false,
   },
