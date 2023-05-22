@@ -3,9 +3,8 @@
   padding: 1rem 1.5rem;
   min-height: 200px;
   margin-top: 200px;
-  /* border: 0.2rem solid var(--bp-primary); */
   border-radius: 1rem 1rem 0 0;
-  box-shadow: 0px 10px 15px 10px var(--bp-primary);
+  box-shadow: 0px -10px 10px -5px var(--bp-primary);
   background-color: var(--bp-white);
   position: relative;
   top: 300px;

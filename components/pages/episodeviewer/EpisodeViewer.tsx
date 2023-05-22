@@ -15,6 +15,7 @@ export default function EpisodeViewer(props: { episodeData: EpisodeListDataType 
             alt={`episode${item.id}`}
             width={390}
             height={400}
+            priority
           />
         ))
       }

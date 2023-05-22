@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -17,6 +17,8 @@ export default function FooterViewer(props: { episodeData: EpisodeListDataType, 
 
   const nextEpisodeId = Number(episodeId) + 1;
 
+  const [viewMore, setViewMore] = useState(false);
+
   const webtoonData = props.dummyData.find((item) => item.title === webtoonName);
   const lastEpisodeId = webtoonData?.episodeData.length;
   const nextEpisodeData = webtoonData?.episodeData.find((item) => item.id === nextEpisodeId);
@@ -26,41 +28,51 @@ export default function FooterViewer(props: { episodeData: EpisodeListDataType, 
   }
 
   return (
-    <footer className={nextEpisodeData ? `${style.viewerFooterWrap}` : `${style.viewerFooterWrap} ${style.hidden}`}>
-      <div className={style.top}>
-        <div className={style.ratingBtn} onClick={handleRating}>
-          <p>★</p>
-          <p>{props.episodeData.rating}</p>
-          <p>별점주기</p>
-        </div>
-        <div className={style.close}>
-          <CloseBtn />
-        </div>
-      </div>
-      <div className={style.authorSection}>
-        <div className={style.authorMent}>
-          <p>작가의 말</p>
-          <p>{webtoonData && webtoonData?.author}</p>
-        </div>
-        <div className={style.authorComment}>
-          <p>{props.episodeData.authorComment}</p>
-        </div>
-      </div>
+    <footer className={
+      !viewMore ?
+        `${style.viewerFooterWrap} ${style.footerHidden}`
+        : nextEpisodeData ? `${style.viewerFooterWrap}`
+          : `${style.viewerFooterWrap} ${style.hidden}`
+    }>
       {
-        nextEpisodeData &&
-        <div
-          className={style.nextEpisode}
-          onClick={() => router.push(`/webtoon/${webtoonName}/episode/${nextEpisodeId}`)}
-        >
-          <p className={style.nextTxt}>다음화</p>
-          <Episode
-            id={nextEpisodeData.id}
-            subject={nextEpisodeData.subject}
-            thumbnail={nextEpisodeData.thumbnail}
-            rating={nextEpisodeData.rating}
-            date={nextEpisodeData.date}
-          />
-        </div>
+        viewMore &&
+        <>
+          <div className={style.top}>
+            <div className={style.ratingBtn} onClick={handleRating}>
+              <p>★</p>
+              <p>{props.episodeData.rating}</p>
+              <p>별점주기</p>
+            </div>
+            <div className={style.close}>
+              <CloseBtn />
+            </div>
+          </div>
+          <div className={style.authorSection}>
+            <div className={style.authorMent}>
+              <p>작가의 말</p>
+              <p>{webtoonData && webtoonData?.author}</p>
+            </div>
+            <div className={style.authorComment}>
+              <p>{props.episodeData.authorComment}</p>
+            </div>
+          </div>
+          {
+            nextEpisodeData &&
+            <div
+              className={style.nextEpisode}
+              onClick={() => router.push(`/webtoon/${webtoonName}/episode/${nextEpisodeId}`)}
+            >
+              <p className={style.nextTxt}>다음화</p>
+              <Episode
+                id={nextEpisodeData.id}
+                subject={nextEpisodeData.subject}
+                thumbnail={nextEpisodeData.thumbnail}
+                rating={nextEpisodeData.rating}
+                date={nextEpisodeData.date}
+              />
+            </div>
+          }
+        </>
       }
       <div className={style.navFoot}>
         <div className={style.backBtn}>
@@ -85,6 +97,6 @@ export default function FooterViewer(props: { episodeData: EpisodeListDataType, 
           />
         </div>
       </div>
-    </footer>
+    </footer >
   )
 }

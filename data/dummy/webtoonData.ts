@@ -237,7 +237,7 @@ export const webtoonListData = [
   },
   {
     id: 2,
-    title: "세화, 가는 길",
+    title: "세화, 가는 길2",
     author: "한혜연",
     illustrator: "",
     titleImg: "/assets/dummy/01.png",
@@ -316,7 +316,7 @@ export const webtoonListData = [
   },
   {
     id: 3,
-    title: "세화, 가는 길",
+    title: "세화, 가는 길3",
     author: "한혜연",
     illustrator: "",
     titleImg: "/assets/dummy/01.png",
@@ -395,7 +395,7 @@ export const webtoonListData = [
   },
   {
     id: 4,
-    title: "세화, 가는 길",
+    title: "세화, 가는 길4",
     author: "한혜연",
     illustrator: "",
     titleImg: "/assets/dummy/01.png",
@@ -621,7 +621,7 @@ export const webtoonListData = [
   },
   {
     id: 5,
-    title: "세화, 가는 길",
+    title: "세화, 가는 길5",
     author: "한혜연",
     illustrator: "",
     titleImg: "/assets/dummy/01.png",
@@ -700,7 +700,7 @@ export const webtoonListData = [
   },
   {
     id: 6,
-    title: "세화, 가는 길",
+    title: "세화, 가는 길6",
     author: "한혜연",
     illustrator: "",
     titleImg: "/assets/dummy/01.png",
