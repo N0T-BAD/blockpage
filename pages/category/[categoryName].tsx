@@ -40,4 +40,3 @@ Category.getLayout = function getLayout(week: React.ReactElement) {
 }
 
 export default Category
-
