@@ -1,4 +1,4 @@
-import CategoryLayout from "@/components/layouts/CategoryLayout"
+import CategoryLayout from "@/components/layouts/categoryLayout"
 import ListviewSection from "@/components/pages/listview/ListviewSection"
 
 import { webtoonListData } from "@/data/dummy/webtoonData"
@@ -40,4 +40,3 @@ Category.getLayout = function getLayout(week: React.ReactElement) {
 }
 
 export default Category
-

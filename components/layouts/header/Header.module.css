@@ -3,6 +3,7 @@
     opacity: 0;
     transform: translateX(-100%);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0);
@@ -91,7 +92,7 @@
   justify-content: space-between;
 }
 
-.blockMainHeader nav ul.innerMenu > li {
+.blockMainHeader nav ul.innerMenu>li {
   list-style: none;
   width: 1.4rem;
   margin-left: 1.5rem;
@@ -118,28 +119,10 @@
   justify-content: space-between;
 }
 
-.blockHeader nav ul.innerMenu > li {
+.blockHeader nav ul.innerMenu>li {
   list-style: none;
   width: 1.4rem;
   margin-left: 1.5rem;
-}
-
-.searchlogo {
-  margin: auto;
-  width: 8rem;
-  position: relative;
-  z-index: 101;
-  margin-top: 1rem;
-  align-items: center;
-}
-
-.searchlogo img {
-  width: 100%;
-  height: auto;
-}
-
-.searchlogo h1 {
-  font-size: 0;
 }
 
 .BlockChargeBack {
@@ -201,6 +184,7 @@
   align-items: center;
   justify-content: space-between;
 }
+
 .AnimationHeader nav ul li {
   list-style: none;
 }

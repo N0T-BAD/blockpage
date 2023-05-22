@@ -6,7 +6,6 @@ import { useRouter } from 'next/router'
 import style from '@/components/layouts/header/Header.module.css'
 import { staticMenuData } from '@/data/staticMenuData'
 import { StaticMenuData } from '@/types/staticDataType'
-import CommentHeader from './CommentHeader'
 
 export default function Header() {
   const router = useRouter();
@@ -52,18 +51,6 @@ export default function Header() {
           </nav>
         </header>
       )
-      :
-      router.pathname === "/comment" ?
-        <CommentHeader />
-        :
-        router.pathname === "/search" ||
-          router.pathname === "/searchresult" ?
-          <header>
-            <div className={style.searchlogo}>
-              <Image src={'/assets/images/logo/logo.svg'} alt="logo" width={200} height={77} onClick={handlemain} />
-            </div>
-          </header>
-          :
-          <></>
+      : <></>
   )
 }

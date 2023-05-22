@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
+import Image from 'next/image';
+
 import style from '@/components/pages/search/HistoryKeyword.module.css'
 import { Keyword } from '@/types/searchKeywords';
-import Image from 'next/image';
 
 export default function HistoryKeyword() {
     const [keywords, setKeywords] = useState<Keyword[]>([]);
-
 
     const handleRemoveKeyword = (id: number) => {
         const updatedKeywords = keywords.filter((keyword) => keyword.id !== id);
@@ -25,6 +25,30 @@ export default function HistoryKeyword() {
                 <p>전체 삭제</p>
             </div>
             <div className={style.historyBoxs}>
+                <div className={style.historyBox}>
+                    <div className={style.history}>
+                        <p>이것이 법이다</p>
+                        <Image src={"/assets/images/icons/close.svg"} alt={"close"} width={20} height={20} />
+                    </div>
+                </div>
+                <div className={style.historyBox}>
+                    <div className={style.history}>
+                        <p>이것이</p>
+                        <Image src={"/assets/images/icons/close.svg"} alt={"close"} width={20} height={20} />
+                    </div>
+                </div>
+                <div className={style.historyBox}>
+                    <div className={style.history}>
+                        <p>이</p>
+                        <Image src={"/assets/images/icons/close.svg"} alt={"close"} width={20} height={20} />
+                    </div>
+                </div>
+                <div className={style.historyBox}>
+                    <div className={style.history}>
+                        <p>이</p>
+                        <Image src={"/assets/images/icons/close.svg"} alt={"close"} width={20} height={20} />
+                    </div>
+                </div>
                 <div className={style.historyBox}>
                     <div className={style.history}>
                         <p>이것이 법이다</p>
