@@ -1,53 +1,44 @@
 .historyBoxs {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  margin-right: 1rem;
 }
 
 .historyBox {
   background: var(--bp-gray);
-  border-radius: 10px;
-  width: 48%;
-  margin: 10px 0px;
-  height: 25px;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem 0.5rem 0;
 }
 
 .history {
-  width: 100%;
   display: flex;
-  justify-content: space-around;
-  height: 100%;
+  justify-content: space-between;
   align-items: center;
 }
 
 .history img {
-  width: 7%;
-  height: 50%;
+  display: flex;
+  align-items: center;
+  padding: 0.2rem;
 }
 
 .history p {
-  width: fit-content;
-  height: 100%;
-  margin: 0;
-  font-family: var(--bp-font);
   color: var(--bp-black);
   font-size: 0.8rem;
   display: flex;
   align-items: center;
+  margin-right: 0.5rem;
 }
 
 .KeyWordTitle {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: var(--bp-font);
   color: var(--bp-gray);
   font-size: 0.8rem;
 }
 
 .KeyWordTitle p {
-  font-family: var(--bp-font);
   color: var(--bp-black);
 }

@@ -1,7 +1,7 @@
 import { NextPageWithLayout } from "@/pages/_app"
 import HistorySection from "@/components/pages/search/HistorySection"
-import Layout from "@/components/layouts/layout"
 import SearchBarSection from "@/components/pages/search/SearchBarSection"
+import SearchLayout from "@/components/layouts/SearchLayout"
 
 
 const Search: NextPageWithLayout = () => {
@@ -15,11 +15,10 @@ const Search: NextPageWithLayout = () => {
 
 Search.getLayout = function getLayout(Search: React.ReactElement) {
     return (
-        <Layout>
+        <SearchLayout>
             {Search}
-        </Layout>
+        </SearchLayout>
     )
 }
 
 export default Search
-

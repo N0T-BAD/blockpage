@@ -1,5 +1,5 @@
+import SearchLayout from "@/components/layouts/SearchLayout"
 import { NextPageWithLayout } from "./_app"
-import Layout from "@/components/layouts/layout"
 
 import SearchBarSection from "@/components/pages/search/SearchBarSection"
 import SearchResultSection from "@/components/pages/searchResult/SearchResultSection"
@@ -15,9 +15,9 @@ const searchResult: NextPageWithLayout = () => {
 
 searchResult.getLayout = function getLayout(searchResult: React.ReactElement) {
   return (
-    <Layout>
+    <SearchLayout>
       {searchResult}
-    </Layout>
+    </SearchLayout>
   )
 }
 
