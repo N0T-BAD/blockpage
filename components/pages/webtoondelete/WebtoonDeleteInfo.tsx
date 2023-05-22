@@ -25,7 +25,7 @@ export default function WebtoonDeleteInfo() {
         axios(`/api/authorwebtooninfo/${router.query.id}`)
             .then(res => res.data)
             .then(data => setWebtoonTitle(data))
-    }, [webtoonTitle, router.query.id])
+    }, [router.query.id])
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
