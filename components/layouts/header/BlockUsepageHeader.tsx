@@ -1,8 +1,9 @@
-import BackBtn from '@/components/ui/BackBtn'
-import Link from 'next/link'
 import React from 'react'
-import style from '@/components/layouts/header/BlockUsepageHeader.module.css'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
+
+import style from '@/components/layouts/header/BlockUsepageHeader.module.css'
+import BackBtn from '@/components/ui/BackBtn'
 
 export default function BlockUsepageHeader() {
 
@@ -13,7 +14,7 @@ export default function BlockUsepageHeader() {
             <div className={style.BlockChargeBox}>
                 <div className={style.leftHead}>
                     <BackBtn
-                        onClick={() => router.back}
+                        onClick={() => router.back()}
                     />
                 </div>
                 <div className={style.centerHead}>

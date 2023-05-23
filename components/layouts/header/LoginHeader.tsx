@@ -1,7 +1,8 @@
-import BackBtn from '@/components/ui/BackBtn'
 import React from 'react'
-import style from '@/components/layouts/header/LoginHeader.module.css'
 import { useRouter } from 'next/router'
+
+import BackBtn from '@/components/ui/BackBtn'
+import style from '@/components/layouts/header/LoginHeader.module.css'
 
 export default function LoginHeader() {
 
@@ -11,7 +12,7 @@ export default function LoginHeader() {
             <div className={style.LoginHeader}>
                 <div className={style.leftHead}>
                     <BackBtn
-                        onClick={() => router.back}
+                        onClick={() => router.back()}
                     />
                 </div>
                 <div className={style.centerHead}>

@@ -1,8 +1,8 @@
 import React from 'react'
-
-import BackBtn from '@/components/ui/BackBtn'
-import style from '@/components/layouts/header/CommentHeader.module.css'
 import { useRouter } from 'next/router'
+
+import style from '@/components/layouts/header/CommentHeader.module.css'
+import BackBtn from '@/components/ui/BackBtn'
 
 export default function CommentHeader() {
 
@@ -15,7 +15,7 @@ export default function CommentHeader() {
       <div className={style.TotalHeader}>
         <div className={style.leftHead}>
           <BackBtn
-            onClick={() => back}
+            onClick={() => back()}
           />
         </div>
         <div className={style.centerHead}>

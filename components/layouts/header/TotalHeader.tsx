@@ -1,7 +1,9 @@
-import BackBtn from '@/components/ui/BackBtn'
 import React, { useEffect, useState } from 'react'
-import style from '@/components/layouts/header/TotalHeader.module.css'
+
 import { useRouter } from 'next/router';
+
+import BackBtn from '@/components/ui/BackBtn'
+import style from '@/components/layouts/header/TotalHeader.module.css'
 
 export default function TotalHeader() {
 
@@ -43,7 +45,7 @@ export default function TotalHeader() {
             <div className={style.TotalHeader}>
                 <div className={style.leftHead}>
                     <BackBtn
-                        onClick={() => router.back}
+                        onClick={() => router.back()}
                     />
                 </div>
                 <div className={style.centerHead}>

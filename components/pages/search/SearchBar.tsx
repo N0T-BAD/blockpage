@@ -18,7 +18,7 @@ export default function SearchBar() {
         <div className={style.SearchBar}>
             <div className={style.backBtn}>
                 <BackBtn
-                    onClick={() => router.back}
+                    onClick={() => router.back()}
                 />
             </div>
             <div className={style.searchbarbg}>
