@@ -6,7 +6,7 @@ export default function UserIcon() {
     const router = useRouter();
 
     const RouterUrl = router.pathname === "/webtooninfo" || router.pathname === "/authorworkslist" || router.pathname === "/webtoondelete" || router.pathname === "/episodelist" || router.pathname === "/episodeinfo"
-        || router.pathname === "/episodedelete" || router.pathname === '/changewebtoon';
+        || router.pathname === "/episodedelete" || router.pathname === '/changewebtoon' || router.pathname === '/changeepisode';
 
     return (
         <>

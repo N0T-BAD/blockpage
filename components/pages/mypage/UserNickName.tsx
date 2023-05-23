@@ -63,37 +63,26 @@ export default function UserNickName() {
                 <div className={style.usernicknameImg}>
                     <UserProfileImg />
                     {RouterUrl ?
+                        authorNickName &&
                         <>
-                            {
-                                authorNickName &&
+                            {creatorNickName.map((data) => (
                                 <>
-                                    {creatorNickName.map((data) => (
-                                        <>
-                                            <p className={style.usernickname}>{data.creator_nickname}</p>
-                                        </>
-                                    ))}
+                                    <p className={style.usernickname}>{data.creator_nickname}</p>
                                 </>
-                            }
+                            ))}
                         </>
-                        :
-                        <>
+                        : <>
                             {userNickname &&
                                 <>
                                     {userNickName.map((data) => (
-                                        router.pathname === '/changeuserinfo' ?
-                                            <></>
-                                            :
-                                            <p className={style.usernickname} key={data.id}>{data.nickname}</p>
+                                        <p className={style.usernickname} key={data.id}>{data.nickname}</p>
                                     ))}
                                 </>
                             }
                         </>
                     }
-                    {router.pathname === '/changeuserinfo' ?
-                        <></>
-                        :
-                        <UserIcon />
-                    }
+
+                    <UserIcon />
                 </div>
             </div>
         </>

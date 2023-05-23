@@ -178,7 +178,7 @@ export default function EpisodeInfoForm() {
               {episodeImagePreview.map((preview, index) => (
                 <div className={style.filename} key={index}>
                   <p>{preview.name}</p>
-                  <button onClick={() => handleRemoveEpisodeImage(index)}>삭제</button>
+                  <button type="button" onClick={() => handleRemoveEpisodeImage(index)}>삭제</button>
                 </div>
               ))}
             </div>
