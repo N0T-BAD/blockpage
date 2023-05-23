@@ -26,7 +26,7 @@ export default function ArchiveHeader() {
       <div className={style.navHeader}>
         <div className={style.leftHead}>
           <BackBtn
-            onClick={() => router.back}
+            onClick={() => router.back()}
           />
         </div>
         <div className={style.centerHead}>

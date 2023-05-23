@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
+import { useRouter } from 'next/router';
 
 import style from '@/components/layouts/header/WebtoonHeader.module.css'
 
 import BackBtn from '@/components/ui/BackBtn'
 import LikeButton from '@/components/ui/LikeButton'
-import { useRouter } from 'next/router';
 
 export default function WebtoonHeader() {
 
@@ -20,7 +20,7 @@ export default function WebtoonHeader() {
     <header className={style.webtoonHeader}>
       <div className={style.backBtn}>
         <BackBtn
-          onClick={() => back}
+          onClick={() => back()}
         />
       </div>
       <div className={style.likeBtn}>
