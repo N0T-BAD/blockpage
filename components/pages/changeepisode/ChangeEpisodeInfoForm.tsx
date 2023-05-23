@@ -24,12 +24,20 @@ export default function ChangeEpisodeInfoForm() {
   const [episodeImage, setEpisodeImage] = useState<File[]>([]);
   const [episodeThumbnailImagePreview, setEpisodeThumbnailImagePreview] = useState<string>();
   const [episodeImagePreview, setEpisodeImagePreview] = useState<UploadFile[]>([]);
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
 
   useEffect(() => {
     axios(`/api/authorwebtooninfo/${router.query.id}`)
       .then(res => res.data)
-      .then(data => setEpisodeInfoData(data))
+      .then(data => {
+        setEpisodeInfoData(data);
+        setEpisodeThumbnailImagePreview(data.episodeThumbnail);
+        setEpisodeImagePreview(data.episodeImage.map((url: string, index: number) => ({
+          name: `Episode ${index + 1}`,
+          preview: url,
+          file: null,
+        })));
+      })
   }, [episodeInfoData, router.query.id])
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,22 +84,16 @@ export default function ChangeEpisodeInfoForm() {
     setEpisodeImagePreview(updatedPreviews);
   };
 
-  const handleFileSelectCheckbox = (file: File) => {
-    if (selectedFiles.includes(file)) {
-      setSelectedFiles(selectedFiles.filter((selectedFile) => selectedFile !== file));
-    } else {
-      setSelectedFiles([...selectedFiles, file]);
-    }
-  };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (episodeInfoData.episodetitle === '' || episodeInfoData.episodedescription === '' || episodeInfoData.day === '' || episodeInfoData.authortalk === '') {
       alert('에피소드 정보를 입력해주세요.')
-    } else if (selectedFiles.length === 0) {
-      alert('웹툰 이미지를 입력해주세요.')
     } else if (!episodeThumbnailImage) {
       alert('웹툰 썸네일 이미지를 입력해주세요.')
+    } else if (regex.test(episodeThumbnailImage.name)) {
+      alert('해당 파일은 업로드할 수 없습니다.');
+    } else if (episodeImage.some((file) => regex.test(file.name))) {
+      alert('해당 파일은 업로드할 수 없습니다.');
     } else {
       try {
         const formData = new FormData();
@@ -99,9 +101,19 @@ export default function ChangeEpisodeInfoForm() {
         formData.append('episodedescription', episodeInfoData.episodedescription);
         formData.append('day', episodeInfoData.day);
         formData.append('authortalk', episodeInfoData.authortalk);
-        formData.append('episodeThumbnailImage', episodeThumbnailImage);
-        episodeImage.forEach((file) => {
-          formData.append('episodeImage', file);
+
+        if (episodeThumbnailImage && episodeInfoData.episodeThumbnail !== episodeThumbnailImagePreview) {
+          formData.append('episodeThumbnailImage', episodeThumbnailImage);
+        } else {
+          formData.append('episodeThumbnailImage', episodeInfoData.episodeThumbnail);
+        }
+
+        episodeImagePreview.forEach((preview) => {
+          if (preview.file) {
+            formData.append('episodeImage', preview.file);
+          } else {
+            formData.append('episodeImagePreview', preview.preview);
+          }
         });
 
         const res = await axios.post(`/api/authorwebtooninfo/${router.query.id}`, formData, {
@@ -117,28 +129,9 @@ export default function ChangeEpisodeInfoForm() {
         }
       } catch (error) {
         console.error(error);
-        // Handle error
       }
     }
   };
-
-  //     axios.post('/api/authorwebtooninfo', {
-  //       episodetitle: episodeInfoData.episodetitle,
-  //       episodedescription: episodeInfoData.episodedescription,
-  //       day: episodeInfoData.day,
-  //       authortalk: episodeInfoData.authortalk,
-  //       episodeThumbnailImage: episodeThumbnailImage,
-  //       episodeImage: episodeImage,
-  //     })
-  //       .then((res) => {
-  //         console.log(res)
-  //         if (res.status === 200) {
-  //           alert('웹툰 정보가 등록되었습니다.')
-  //           router.push('/authorworkslist')
-  //         }
-  //       })
-  //   }
-  // };
 
   return (
     <>
@@ -192,14 +185,10 @@ export default function ChangeEpisodeInfoForm() {
                   <input type="file" id="file" name='file' defaultValue={episodeInfoData.episodeImage} accept="image/*" onChange={handleEpisodeImage} multiple />
                 </label>
               </div>
+              <p className={style.episodeinfo}>이미지를 수정하시려면 모든 파일을 올려주세요.</p>
               <div className={style.filelist}>
                 {episodeImagePreview.map((preview, index) => (
                   <div className={style.filename} key={index}>
-                    <input
-                      type="checkbox"
-                      checked={selectedFiles.includes(preview.file)}
-                      onChange={() => handleFileSelectCheckbox(preview.file)}
-                    />
                     <p>{preview.name}</p>
                     <button type="button" onClick={() => handleRemoveEpisodeImage(index)}>삭제</button>
                   </div>
