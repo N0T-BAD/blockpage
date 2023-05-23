@@ -26,22 +26,26 @@ export default function Header() {
           handleModal={handleModal}
         />
       }
-      <header className={style.blockMainHeader}>
-        <div className={style.logo}>
-          <Image src={'/assets/images/logo/logo.svg'} alt="logo" width={200} height={77} onClick={handlemain} priority />
-          <h1>BlockPage</h1>
-        </div>
-        <nav>
-          <ul>
-            <li onClick={handleModal}>
-              <Image src={'/assets/images/icons/menuIcon.svg'} alt={'SideMenu'} width={30} height={30} priority />
-            </li>
-            <li onClick={() => router.push('/login')}>
-              <Image src={'/assets/images/icons/userIcon.svg'} alt={'User'} width={30} height={30} priority />
-            </li>
-          </ul>
-        </nav>
-      </header>
+      {
+        router.pathname === '/' ?
+          <header className={style.blockMainHeader}>
+            <div className={style.logo}>
+              <Image src={'/assets/images/logo/logo.svg'} alt="logo" width={200} height={77} onClick={handlemain} priority />
+              <h1>BlockPage</h1>
+            </div>
+            <nav>
+              <ul>
+                <li onClick={handleModal}>
+                  <Image src={'/assets/images/icons/menuIcon.svg'} alt={'SideMenu'} width={30} height={30} priority />
+                </li>
+                <li onClick={() => router.push('/login')}>
+                  <Image src={'/assets/images/icons/userIcon.svg'} alt={'User'} width={30} height={30} priority />
+                </li>
+              </ul>
+            </nav>
+          </header>
+          : ""
+      }
     </>
   )
 }

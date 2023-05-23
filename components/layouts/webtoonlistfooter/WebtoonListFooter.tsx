@@ -9,14 +9,13 @@ export default function WebtoonListFooter() {
 
   return (
     <footer className={style.AuthorFooterWrap}>
-      <div className={style.footerBtn}>
+      <div className={style.footerBtn} onClick={() => router.push("/webtooninfo")}>
         <Image
           src={'/assets/images/icons/plus.svg'}
           alt="footerBtnIcon"
           width={50}
           height={50}
           priority
-          onClick={() => router.push("/webtooninfo")}
         />
       </div>
     </footer>

@@ -42,7 +42,9 @@ export default function TotalHeader() {
         <header className={style.headerSection}>
             <div className={style.TotalHeader}>
                 <div className={style.leftHead}>
-                    <BackBtn />
+                    <BackBtn
+                        onClick={() => router.back}
+                    />
                 </div>
                 <div className={style.centerHead}>
                     <p>{title}</p>

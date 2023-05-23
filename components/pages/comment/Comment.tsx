@@ -72,23 +72,26 @@ export default function Comment(props: {
                   !props.data.isReply &&
                     !props.data.pin &&
                     props.isAuthor ?
-                    <Image
-                      src={"/assets/images/icons/pushpin.svg"}
-                      alt='고정핀'
-                      width={12}
-                      height={12}
-                      onClick={handlePush}
-                      priority
-                    /> : ""
+                    <div onClick={handlePush}>
+                      <Image
+                        src={"/assets/images/icons/pushpin.svg"}
+                        alt='고정핀'
+                        width={15}
+                        height={15}
+                        priority
+                      />
+                    </div>
+                    : ""
                 }
-                <Image
-                  src={"/assets/images/icons/trash.svg"}
-                  alt='쓰레기통'
-                  width={15}
-                  height={15}
-                  onClick={handleDelete}
-                  priority
-                />
+                <div onClick={handleDelete}>
+                  <Image
+                    src={"/assets/images/icons/trash.svg"}
+                    alt='쓰레기통'
+                    width={17}
+                    height={17}
+                    priority
+                  />
+                </div>
               </div>
             </div>
             <p className={style.commentTxt}>{props.data.content}</p>

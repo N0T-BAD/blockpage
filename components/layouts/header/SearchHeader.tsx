@@ -13,8 +13,8 @@ export default function SearchHeader() {
     <>
       <header className={style.headerTop}>
         <div className={style.searchHeader}>
-          <div className={style.searchlogo}>
-            <Image src={'/assets/images/logo/logo.svg'} alt="logo" width={200} height={77} onClick={() => (push('/'))} priority />
+          <div className={style.searchlogo} onClick={() => (push('/'))}>
+            <Image src={'/assets/images/logo/logo.svg'} alt="logo" width={200} height={77} priority />
           </div>
         </div>
         <SearchBarSection />
