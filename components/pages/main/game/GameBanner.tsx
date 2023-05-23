@@ -4,8 +4,8 @@ import style from '@/components/pages/main/game/GameBanner.module.css'
 import { gameEventData } from '@/data/dummy/mainGameEventData'
 import { GameBannerType } from '@/types/gameBanerType'
 
-export default function GameBanner(props: {data: GameBannerType[]}) {
-  
+export default function GameBanner(props: { data: GameBannerType[] }) {
+
   const [data, setData] = useState<GameBannerType>(props.data[0])
   const [count, setCount] = useState<number>(0)
   const [isActive, setActive] = useState<boolean>(false)
@@ -16,20 +16,18 @@ export default function GameBanner(props: {data: GameBannerType[]}) {
       setCount(0)
     }
     setData(props.data[count])
-    console.log(props.data[count])
-
   }, 3000)
 
   return (
     <div className={style.gamewrap}>
-      <GameBannerItem data={data} isActive={isActive}/>
+      <GameBannerItem data={data} isActive={isActive} />
     </div>
   )
 }
 
-const GameBannerItem = (props: {data:GameBannerType, isActive:boolean}) => {
+const GameBannerItem = (props: { data: GameBannerType, isActive: boolean }) => {
   return (
-    <div className={ props.isActive ? `${style.gameBox} ${style[props.data.color]} ` : `${style.gameBox} ${style[props.data.color]}` }>
+    <div className={props.isActive ? `${style.gameBox} ${style[props.data.color]} ` : `${style.gameBox} ${style[props.data.color]}`}>
       <div className={style.gameText}>
         <p>{props.data.eventTitle}</p>
         <p>{props.data.text}</p>

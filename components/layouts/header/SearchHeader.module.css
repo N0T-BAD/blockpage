@@ -1,6 +1,15 @@
-.searchHeader {
+.headerTop {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   position: fixed;
   top: 0;
+  background-color: var(--bp-white);
+  z-index: 1;
+  padding-bottom: 1rem;
+}
+
+.searchHeader {
   display: flex;
   justify-content: center;
   align-items: center;

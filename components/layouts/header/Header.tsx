@@ -15,14 +15,11 @@ export default function Header() {
   }
 
   return (
-    router.pathname === '/' ||
-      router.pathname === "/best" ||
-      router.pathname === "/week" ||
-      router.pathname === "/genre" ?
+    router.pathname === '/' ?
       (
         <header className={router.pathname === '/' ? style.blockMainHeader : style.blockHeader}>
           <div className={style.logo}>
-            <Image src={'/assets/images/logo/logo.svg'} alt="logo" width={200} height={77} onClick={handlemain} />
+            <Image src={'/assets/images/logo/logo.svg'} alt="logo" width={200} height={77} onClick={handlemain} priority />
             <h1>BlockPage</h1>
           </div>
           <nav>
@@ -35,14 +32,14 @@ export default function Header() {
                         {menu.innerMenu.map((innerMenu: StaticMenuData) => (
                           <li key={innerMenu.id}>
                             <Link href={innerMenu.path}>
-                              <Image src={innerMenu.iconUrl} alt={innerMenu.name} width={30} height={30} />
+                              <Image src={innerMenu.iconUrl} alt={innerMenu.name} width={30} height={30} priority />
                             </Link>
                           </li>
                         ))}
                       </ul>
                       :
                       <Link href={menu.path}>
-                        <Image src={menu.iconUrl} alt={menu.name} width={30} height={30} />
+                        <Image src={menu.iconUrl} alt={menu.name} width={30} height={30} priority />
                       </Link>
                   }
                 </li>
