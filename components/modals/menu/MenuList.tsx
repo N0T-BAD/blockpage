@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 
-import style from "@/components/pages/menu/Menu.module.css"
+import style from "@/components/modals/menu/Menu.module.css"
 import { StaticMenuListDataType } from '@/types/staticDataType';
 import { staticMenuListData } from '@/data/staticMenuData';
 

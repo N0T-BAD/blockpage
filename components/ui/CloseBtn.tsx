@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import React from 'react'
 
-export default function CloseBtn() {
+export default function CloseBtn(props: { width: number, height: number, onClick?: () => void }) {
 
   const router = useRouter();
 
@@ -11,10 +11,10 @@ export default function CloseBtn() {
       <Image
         src={'/assets/images/icons/close.svg'}
         alt="closeBtnIcon"
-        width={20}
-        height={20}
+        width={props.width}
+        height={props.height}
         priority
-        onClick={() => router.back()}
+        onClick={props.onClick}
       />
     </div>
   )
