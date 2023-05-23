@@ -7,7 +7,7 @@ export const bestRankingData = [
     creator: "조석",
     ranking: "1",
     genre: "일상",
-    webtoonThumbnail: "/assets/images/best/image1.png",
+    webtoonThumbnail: "/assets/images/Best/image1.png",
   },
   {
     webtoonId: 2,
@@ -17,7 +17,7 @@ export const bestRankingData = [
     creator: "세화",
     ranking: "2",
     genre: "판타지",
-    webtoonThumbnail: "/assets/images/best/image2.png",
+    webtoonThumbnail: "/assets/images/Best/image2.png",
   },
   {
     webtoonId: 3,
@@ -48,7 +48,7 @@ export const bestRankingData = [
     creator: "조석",
     ranking: "5",
     genre: "일상",
-    webtoonThumbnail: "/assets/images/best/image1.png",
+    webtoonThumbnail: "/assets/images/Best/image1.png",
   },
   {
     webtoonId: 6,
@@ -59,7 +59,7 @@ export const bestRankingData = [
     ranking: "6",
     illustrator: "두부",
     genre: "판타지",
-    webtoonThumbnail: "/assets/images/best/image2.png",
+    webtoonThumbnail: "/assets/images/Best/image2.png",
   },
   {
     webtoonId: 7,
@@ -90,7 +90,7 @@ export const bestRankingData = [
     creator: "조석",
     ranking: "9",
     genre: "일상",
-    webtoonThumbnail: "/assets/images/best/image1.png",
+    webtoonThumbnail: "/assets/images/Best/image1.png",
   },
   {
     webtoonId: 10,
@@ -101,7 +101,7 @@ export const bestRankingData = [
     ranking: "10",
     illustrator: "두부",
     genre: "판타지",
-    webtoonThumbnail: "/assets/images/best/image2.png",
+    webtoonThumbnail: "/assets/images/Best/image2.png",
   },
   {
     webtoonId: 11,

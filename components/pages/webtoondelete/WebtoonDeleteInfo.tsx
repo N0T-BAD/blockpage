@@ -45,7 +45,7 @@ export default function WebtoonDeleteInfo() {
             })
                 .then((res) => {
                     console.log(res)
-                    alert('웹툰 삭제 요첨이 완료되었습니다.')
+                    alert('웹툰 삭제 요청이 완료되었습니다.')
                     router.push('/authorworkslist')
                 })
         }

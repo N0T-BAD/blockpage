@@ -2,10 +2,8 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import style from '@/components/pages/episodeinfo/EpisodeInfoForm.module.css'
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { useRecoilState } from 'recoil';
-import { UploadedFile, changeEpisodeInfoFormDataType, episodeInfoFormDataType } from '@/types/episodeInfoForm';
+import { UploadFile, episodeInfoFormDataType } from '@/types/episodeInfoForm';
 import Image from 'next/image';
-import { changeEpisodeInfoState } from '@/state/episode/changeEpisodeInfoState';
 
 export default function ChangeEpisodeInfoForm() {
 
@@ -25,16 +23,21 @@ export default function ChangeEpisodeInfoForm() {
   const [episodeThumbnailImage, setEpisodeThumbnailImage] = useState<File>();
   const [episodeImage, setEpisodeImage] = useState<File[]>([]);
   const [episodeThumbnailImagePreview, setEpisodeThumbnailImagePreview] = useState<string>();
-  const [episodeImagePreview, setEpisodeImagePreview] = useState<UploadedFile[]>([]);
-
-  useEffect(() => {
-    console.log(episodeInfoData)
-  }, [episodeInfoData])
+  const [episodeImagePreview, setEpisodeImagePreview] = useState<UploadFile[]>([]);
+  const regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
 
   useEffect(() => {
     axios(`/api/authorwebtooninfo/${router.query.id}`)
       .then(res => res.data)
-      .then(data => setEpisodeInfoData(data))
+      .then(data => {
+        setEpisodeInfoData(data);
+        setEpisodeThumbnailImagePreview(data.episodeThumbnail);
+        setEpisodeImagePreview(data.episodeImage.map((url: string, index: number) => ({
+          name: `Episode ${index + 1}`,
+          preview: url,
+          file: null,
+        })));
+      })
   }, [episodeInfoData, router.query.id])
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,13 +61,14 @@ export default function ChangeEpisodeInfoForm() {
 
   const handleEpisodeImage = (event: ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
-    if (files && files.length > 0) { // 파일이 존재하고, 길이가 1 이상인지 확인
+    if (files && files.length > 0) {
       const uploadedFiles: File[] = Array.from(files);
       setEpisodeImage(uploadedFiles);
 
-      const filePreviews: UploadedFile[] = uploadedFiles.map(file => ({
+      const filePreviews: UploadFile[] = uploadedFiles.map(file => ({
         name: file.name,
         preview: URL.createObjectURL(file),
+        file,
       }));
       setEpisodeImagePreview(filePreviews);
     }
@@ -84,26 +88,48 @@ export default function ChangeEpisodeInfoForm() {
     e.preventDefault();
     if (episodeInfoData.episodetitle === '' || episodeInfoData.episodedescription === '' || episodeInfoData.day === '' || episodeInfoData.authortalk === '') {
       alert('에피소드 정보를 입력해주세요.')
-    } else if (!episodeImage) {
-      alert('웹툰 이미지를 입력해주세요.')
     } else if (!episodeThumbnailImage) {
       alert('웹툰 썸네일 이미지를 입력해주세요.')
+    } else if (regex.test(episodeThumbnailImage.name)) {
+      alert('해당 파일은 업로드할 수 없습니다.');
+    } else if (episodeImage.some((file) => regex.test(file.name))) {
+      alert('해당 파일은 업로드할 수 없습니다.');
     } else {
-      axios.post('/api/authorwebtooninfo', {
-        episodetitle: episodeInfoData.episodetitle,
-        episodedescription: episodeInfoData.episodedescription,
-        day: episodeInfoData.day,
-        authortalk: episodeInfoData.authortalk,
-        episodeThumbnailImage: episodeThumbnailImage,
-        episodeImage: episodeImage,
-      })
-        .then((res) => {
-          console.log(res)
-          if (res.status === 200) {
-            alert('웹툰 정보가 등록되었습니다.')
-            router.push('/authorworkslist')
+      try {
+        const formData = new FormData();
+        formData.append('episodetitle', episodeInfoData.episodetitle);
+        formData.append('episodedescription', episodeInfoData.episodedescription);
+        formData.append('day', episodeInfoData.day);
+        formData.append('authortalk', episodeInfoData.authortalk);
+
+        if (episodeThumbnailImage && episodeInfoData.episodeThumbnail !== episodeThumbnailImagePreview) {
+          formData.append('episodeThumbnailImage', episodeThumbnailImage);
+        } else {
+          formData.append('episodeThumbnailImage', episodeInfoData.episodeThumbnail);
+        }
+
+        episodeImagePreview.forEach((preview) => {
+          if (preview.file) {
+            formData.append('episodeImage', preview.file);
+          } else {
+            formData.append('episodeImagePreview', preview.preview);
           }
-        })
+        });
+
+        const res = await axios.post(`/api/authorwebtooninfo/${router.query.id}`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+
+        console.log(res);
+        if (res.status === 200) {
+          alert('웹툰 정보가 등록되었습니다.');
+          router.push('/authorworkslist');
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -159,6 +185,7 @@ export default function ChangeEpisodeInfoForm() {
                   <input type="file" id="file" name='file' defaultValue={episodeInfoData.episodeImage} accept="image/*" onChange={handleEpisodeImage} multiple />
                 </label>
               </div>
+              <p className={style.episodeinfo}>이미지를 수정하시려면 모든 파일을 올려주세요.</p>
               <div className={style.filelist}>
                 {episodeImagePreview.map((preview, index) => (
                   <div className={style.filename} key={index}>
