@@ -17,7 +17,9 @@ export default function SearchBar() {
     return (
         <div className={style.SearchBar}>
             <div className={style.backBtn}>
-                <BackBtn />
+                <BackBtn
+                    onClick={() => router.back}
+                />
             </div>
             <div className={style.searchbarbg}>
                 <input className={style.searchinput} placeholder='검색어를 입력해주세요.'></input>
