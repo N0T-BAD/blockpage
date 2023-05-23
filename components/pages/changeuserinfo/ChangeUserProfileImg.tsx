@@ -1,12 +1,18 @@
 import { ChangeUserDataType, profileskinDataType } from '@/types/changeUserDataType';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import UserIcon from '../mypage/UserIcon';
 import { BasicImage, userNickName } from '@/data/userNickName';
 import style from '@/components/pages/mypage/UserNickName.module.css'
+import { profileskinData } from '@/data/profileskinData';
 
-export default function ChangeUserProfileImg() {
+interface ChildProps {
+  profileSkinColor: profileskinDataType;
+  setProfileSkinColor: React.Dispatch<React.SetStateAction<profileskinDataType>>;
+}
+
+export default function ChangeUserProfileImg({ profileSkinColor, setProfileSkinColor }: ChildProps) {
 
   // const [userprofileImg, setUserProfileImg] = useState<ChangeUserImageDataType>(
   //   {
@@ -27,6 +33,11 @@ export default function ChangeUserProfileImg() {
   );
 
   const [basicimg, setBasicImg] = useState<profileskinDataType>();
+
+
+  useEffect(() => {
+    setProfileSkinColor(profileSkinColor);
+  }, [])
 
   // useEffect(() => {
   //   axios.get('http://localhost:3000/api/v1/members?type=profileimage')
@@ -73,7 +84,12 @@ export default function ChangeUserProfileImg() {
                 {userProfileImagePreview &&
                   <Image src={userProfileImagePreview} className={style.userProfileImagePreview} alt="userProfileImagePreview" width={70} height={70} />
                 }
-                <Image className={style.profileskinbox} src={"/assets/images/profile/blue.svg"} alt="profileskin" width={70} height={70} />
+                {
+                  profileSkinColor ?
+                    <Image className={style.profileskinbox} src={profileSkinColor.imgurl} alt={profileSkinColor.color} width={70} height={70} key={profileSkinColor.id} />
+                    :
+                    null
+                }
                 <UserIcon />
               </div>
 
