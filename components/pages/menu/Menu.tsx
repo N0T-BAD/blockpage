@@ -19,7 +19,10 @@ export default function Menu() {
   return (
     <section className={style.menuSection}>
       <div className={style.closeBtn}>
-        <CloseBtn />
+        <CloseBtn
+          width={20}
+          height={20}
+        />
       </div>
       <section className={style.userSection}>
         <div className={style.user} onClick={handleLogin}>

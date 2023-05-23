@@ -8,6 +8,7 @@ import BackBtn from '@/components/ui/BackBtn';
 import CloseBtn from '@/components/ui/CloseBtn';
 import Episode from '../webtoonepisode/Episode';
 import { EpisodeListDataType, WebToonListDataType } from '@/types/webtoonDataType';
+import RatingModal from '@/components/modals/RatingModal';
 
 export default function FooterViewer(props: { episodeData: EpisodeListDataType, dummyData: WebToonListDataType[] }) {
 
@@ -15,16 +16,21 @@ export default function FooterViewer(props: { episodeData: EpisodeListDataType, 
   const { webtoonName } = router.query;
   const { episodeId } = router.query;
 
+  const [showModal, setShowModal] = useState(false);
+
   const nextEpisodeId = Number(episodeId) + 1;
 
-  const [viewMore, setViewMore] = useState(false);
+  const [viewMore, setViewMore] = useState(true);
 
   const webtoonData = props.dummyData.find((item) => item.title === webtoonName);
-  const lastEpisodeId = webtoonData?.episodeData.length;
   const nextEpisodeData = webtoonData?.episodeData.find((item) => item.id === nextEpisodeId);
 
   const handleRating = () => {
-    //modal
+    setShowModal(!showModal);
+  }
+
+  const handleViewMore = () => {
+    setViewMore(!viewMore);
   }
 
   return (
@@ -37,6 +43,12 @@ export default function FooterViewer(props: { episodeData: EpisodeListDataType, 
       {
         viewMore &&
         <>
+          {
+            showModal &&
+            <RatingModal
+              handleRating={handleRating}
+            />
+          }
           <div className={style.top}>
             <div className={style.ratingBtn} onClick={handleRating}>
               <p>★</p>
@@ -44,7 +56,11 @@ export default function FooterViewer(props: { episodeData: EpisodeListDataType, 
               <p>별점주기</p>
             </div>
             <div className={style.close}>
-              <CloseBtn />
+              <CloseBtn
+                width={20}
+                height={20}
+                onClick={handleViewMore}
+              />
             </div>
           </div>
           <div className={style.authorSection}>
