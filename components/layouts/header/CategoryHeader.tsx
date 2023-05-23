@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/router';
 
 import style from '@/components/layouts/header/CategoryHeader.module.css'
 import BackBtn from '@/components/ui/BackBtn'
-import { useRouter } from 'next/router';
 import ListviewNavSection from '@/components/pages/listview/ListviewNavSection';
 
 export default function CategoryHeader() {
@@ -25,7 +25,9 @@ export default function CategoryHeader() {
     <header className={style.headerSection}>
       <div className={style.navHeader}>
         <div className={style.leftHead}>
-          <BackBtn />
+          <BackBtn
+            onClick={() => router.push('/')}
+          />
         </div>
         <div className={style.centerHead}>
           <p>{title}</p>

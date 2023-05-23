@@ -1,7 +1,8 @@
 import React from 'react'
+import { useRouter } from 'next/router';
+
 import style from '@/components/pages/listview/ListviewNavSection.module.css'
 import { staticTopNavData } from '@/data/staticMenuData'
-import { useRouter } from 'next/router';
 
 interface ItemType {
   id: number;

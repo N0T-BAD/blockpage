@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 
-import style from "@/components/pages/menu/Menu.module.css"
+import style from "@/components/modals/menu/Menu.module.css"
 
 export default function BtnSection() {
 

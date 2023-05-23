@@ -16,7 +16,9 @@ export default function CategoryFilter() {
       {
         categoryData && categoryData.map((item: CategoryMenuDataType) => {
           return (
+
             <CategoryItem key={item.id} data={item} view={view} setView={setView} />
+
           )
         })
       }
@@ -42,19 +44,21 @@ const CategoryItem = (props: { data: CategoryMenuDataType, view: boolean, setVie
   }
 
   return (
-    <div className={props.data.id === 2 ? `${style.categoryRow} ${style.blue}` : style.categoryRow}>
-      <h2 onClick={handleView} className={isView ? style.active : ''}>{props.data.name}</h2>
-      <div className={isView ? style.innerContainer : `${style.innerContainer} ${style.active}`}>
-        {
-          props.data.data.map((data: CategoryDataType) => {
-            return (
+    <>
+      <div className={props.data.id === 2 ? `${style.categoryRow} ${style.blue}` : style.categoryRow}>
+        <h2 onClick={handleView} className={isView ? style.active : ''}>
+          {props.data.name}
+        </h2>
+        <div className={isView ? style.innerContainer : `${style.innerContainer} ${style.active}`}>
+          {
+            props.data.data.map((data: CategoryDataType) => (
               <div className={style.item} key={data.id}>
                 <p>{data.name}</p>
               </div>
-            )
-          })
-        }
+            ))
+          }
+        </div>
       </div>
-    </div>
+    </>
   )
 }
