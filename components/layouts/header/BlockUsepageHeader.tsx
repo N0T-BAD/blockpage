@@ -1,14 +1,21 @@
-import BackBtn from '@/components/ui/BackBtn'
-import Link from 'next/link'
 import React from 'react'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
+
 import style from '@/components/layouts/header/BlockUsepageHeader.module.css'
+import BackBtn from '@/components/ui/BackBtn'
 
 export default function BlockUsepageHeader() {
+
+    const router = useRouter();
+
     return (
         <header className={style.headerSection}>
             <div className={style.BlockChargeBox}>
                 <div className={style.leftHead}>
-                    <BackBtn />
+                    <BackBtn
+                        onClick={() => router.back()}
+                    />
                 </div>
                 <div className={style.centerHead}>
                     <p>블럭 이용 내역</p>

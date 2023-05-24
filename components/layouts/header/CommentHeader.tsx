@@ -1,12 +1,12 @@
 import React from 'react'
-
-import BackBtn from '@/components/ui/BackBtn'
-import style from '@/components/layouts/header/CommentHeader.module.css'
 import { useRouter } from 'next/router'
+
+import style from '@/components/layouts/header/CommentHeader.module.css'
+import BackBtn from '@/components/ui/BackBtn'
 
 export default function CommentHeader() {
 
-  const { query } = useRouter();
+  const { query, back } = useRouter();
   const webtoonName = query.webtoonName;
   const episodeId = query.episodeId;
 
@@ -14,7 +14,9 @@ export default function CommentHeader() {
     <header className={style.headerSection}>
       <div className={style.TotalHeader}>
         <div className={style.leftHead}>
-          <BackBtn />
+          <BackBtn
+            onClick={() => back()}
+          />
         </div>
         <div className={style.centerHead}>
           <p>{webtoonName} {episodeId}화</p>

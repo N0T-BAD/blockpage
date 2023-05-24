@@ -12,7 +12,7 @@ export default function Footer() {
 
   return (
     <footer className={style.mainFooterWrap}>
-      <div className={style.footerBtn}>
+      <div className={style.footerBtn} onClick={handleSearch}>
         <Image
           src={'/assets/images/icons/search.svg'}
           alt="footerBtnIcon"
@@ -21,7 +21,6 @@ export default function Footer() {
           placeholder='blur'
           blurDataURL='/assets/images/icons/search.svg'
           priority
-          onClick={handleSearch}
         />
       </div>
     </footer>

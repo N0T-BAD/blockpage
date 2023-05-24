@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useRouter } from 'next/router';
 
 import style from '@/components/layouts/header/WebtoonHeader.module.css'
 
@@ -8,6 +9,7 @@ import LikeButton from '@/components/ui/LikeButton'
 export default function WebtoonHeader() {
 
   const [like, setLike] = useState(false);
+  const { back } = useRouter();
 
   const handleLike = () => {
     //api 호출 db 갱신
@@ -17,7 +19,9 @@ export default function WebtoonHeader() {
   return (
     <header className={style.webtoonHeader}>
       <div className={style.backBtn}>
-        <BackBtn />
+        <BackBtn
+          onClick={() => back()}
+        />
       </div>
       <div className={style.likeBtn}>
         <LikeButton
