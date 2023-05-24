@@ -29,7 +29,7 @@ export const staticTopNavData = [
   },
   {
     id: 3,
-    name: "베스트",
+    name: "베스트 웹툰",
     link: "best",
   },
 ];
@@ -208,7 +208,7 @@ export const staticMenuListData = [
   },
   {
     id: 3,
-    name: "인기순 웹툰",
+    name: "베스트 웹툰",
     link: "/category/best",
   },
   {
