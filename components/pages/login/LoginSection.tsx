@@ -1,29 +1,74 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import style from '@/components/pages/login/LoginSection.module.css'
 import Image from 'next/image'
 import { signIn, useSession, signOut, getCsrfToken } from 'next-auth/react'
+import DataFetchingLoader from '@/components/widgets/DataFetchingLoader'
 
 export default function LoginSection() {
 
-  const { data } = useSession()
-  console.log(data)
-  console.log(data?.id)
+  const { data:session, update } = useSession()
+  const [kakaoLoginData, setKakaoLoginData] = useState<any>(null)
+  console.log(session)
+
+  const getUserData = async () => {
+    const res = await fetch('https://kapi.kakao.com/v2/user/me', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${session?.accessToken}`,
+      }
+    })
+    const kakaoData = await res.json()
+    console.log(kakaoData)
+    setKakaoLoginData(kakaoData)
+    triggerJwtCallback(kakaoData.kakao_account.profile.nickname)
+  }
 
   useEffect(() => {
-    console.log(data)
-    if (data) {
-      console.log(data.accessToken)
-      // 카카오 유저 정보 받아오기
-      fetch('https://kapi.kakao.com/v2/user/me', {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${data.accessToken}`,
-        }
-      })
-      .then((res) => res.json())
-      .then((res) => console.log(res))
+    if(!session) return
+    getUserData()
+  }, [session?.accessToken])
+
+
+  useEffect(()=>{
+    if(!kakaoLoginData?.id) return
+    try {
+      const postUser = async () => {
+        const res = await fetch('http://10.10.10.27:8082/v1/members', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: kakaoLoginData.kakao_account.email,
+            nickname: kakaoLoginData.kakao_account.profile.nickname,
+            profileImage: kakaoLoginData.kakao_account.profile.profile_image_url,
+            gender: kakaoLoginData.kakao_account.gender,
+          })
+        })
+        const data = await res.json()
+        console.log(data)
+      }
+      postUser()
+    } catch (error) {
+      console.log(error)
     }
-  }, [data])
+  },[kakaoLoginData?.id])
+
+
+  const triggerJwtCallback = async (name: string) => {
+    const updatedSession = {
+        ...session,
+        nickname: name,
+    };
+    await update(updatedSession);
+  };
+  
+  if(kakaoLoginData?.id) {
+    
+    return (
+      <DataFetchingLoader text={'kakao login'}/>  
+    )
+  }
 
 
   return (
@@ -40,3 +85,4 @@ export default function LoginSection() {
     </section>
   )
 }
+
