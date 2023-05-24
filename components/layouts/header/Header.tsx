@@ -4,6 +4,8 @@ import { useRouter } from 'next/router'
 
 import style from '@/components/layouts/header/Header.module.css'
 import MenuModal from '@/components/modals/menu/MenuModal'
+import SlidingPane from "react-sliding-pane";
+import "react-sliding-pane/dist/react-sliding-pane.css";
 
 export default function Header() {
   const router = useRouter();
@@ -20,12 +22,23 @@ export default function Header() {
 
   return (
     <>
-      {
-        showModal &&
-        <MenuModal
-          handleModal={handleModal}
-        />
-      }
+      <SlidingPane
+          className="some-custom-class"
+          overlayClassName="some-custom-overlay-class"
+          width='80%'
+          from ='left'  
+          isOpen={showModal}
+          hideHeader={true}
+          onRequestClose={() => {
+            setShowModal(false);
+          }}
+        >
+          <>
+          <MenuModal
+            handleModal={handleModal}
+          />
+          </>
+      </SlidingPane>
       <header className={style.blockMainHeader}>
         <div className={style.logo}>
           <Image src={'/assets/images/logo/logo.svg'} alt="logo" width={200} height={77} onClick={handlemain} priority />

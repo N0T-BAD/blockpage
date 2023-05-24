@@ -6,7 +6,14 @@
 
 .episodeImg {
   width: 40%;
-  text-align: center;
+  height: 80px;
+  overflow: hidden;
+  margin-right: 1rem;  
+}
+
+.episodeImg img {
+  width: 100%;
+  height: auto;
 }
 
 .episodeContents {
