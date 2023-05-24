@@ -5,7 +5,7 @@ import style from './BackBtn.module.css'
 
 export default function BackBtn(props: { onClick: () => void }) {
   return (
-    <div className={style.backbtn} onClick={() => router.pathname === "/mypage" ? router.push("/") : router.back()}>
+    <div className={style.backbtn} onClick={props.onClick}>
       <Image
         src={'/assets/images/icons/back.svg'}
         alt="backBtnIcon"
