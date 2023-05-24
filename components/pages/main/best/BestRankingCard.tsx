@@ -4,9 +4,11 @@ import Image from 'next/image'
 import { bestRankingData } from '@/data/bestRankingData';
 import { BestRankingDataType } from '@/types/bestRankingDataType';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 export default function BestRankingCard() {
 
+  const router = useRouter();
   const [data, setData] = useState<BestRankingDataType>();
 
   // useEffect(() => {
@@ -15,13 +17,17 @@ export default function BestRankingCard() {
   //     .then(data => setData(data))
   // }, [data])
 
+  const handler = (name:string) => {
+    router.push(`/webtoon/${name}`)
+  }
+
   return (
     <>
       {
         bestRankingData && bestRankingData
           .filter((data) => parseInt(data.ranking) <= 10)
           .map((data) => (
-            <div className={style.BestRankingCard} key={data.webtoonId}>
+            <div className={style.BestRankingCard} key={data.webtoonId} onClick={()=>handler(data.webtoonTitle)}>
               <div className={style.contentWrap}>
                 <div className={style.option}>
                   <div className={style.views}>

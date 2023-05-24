@@ -39,3 +39,12 @@ body {
 a {
   text-decoration: none;
 }
+
+/* slide panel */
+.some-custom-overlay-class {
+  z-index: 1000;
+  overflow: hidden;
+}
+.slide-pane {
+  border-radius: 0 0.5rem 0.5rem 0 !important;
+}
