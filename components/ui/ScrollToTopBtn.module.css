@@ -1,0 +1,60 @@
+.scrollWrap {
+  position: fixed;
+  width: 100%;
+  bottom: 2rem;
+  z-index: 400;
+  opacity: 0;
+  /* transition: all 0.3s ease-in-out; */
+}
+
+.scrollWrap.active {
+  animation: slideUp 0.3s ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+.scrollWrap.close {
+  animation: slideDown 0.5s ease-in-out;
+  /* animation-fill-mode: forwards; */
+}
+
+
+.scrollBtn {
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #00d293;
+  margin: 0 auto;
+  filter: contrast(120%) brightness(1.4);
+  box-shadow: 0 5px 0.5rem #04674a50;
+  opacity: 0.9;
+
+}
+
+.scrollBtn img {
+  transform: rotate(90deg);
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(-30px);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-30px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+}
