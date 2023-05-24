@@ -7,14 +7,13 @@ export default function CloseBtn(props: { width: number, height: number, onClick
   const router = useRouter();
 
   return (
-    <div>
+    <div onClick={props.onClick}>
       <Image
         src={'/assets/images/icons/close.svg'}
         alt="closeBtnIcon"
         width={props.width}
         height={props.height}
         priority
-        onClick={props.onClick}
       />
     </div>
   )

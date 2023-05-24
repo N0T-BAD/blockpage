@@ -6,15 +6,15 @@ import BlockChargeButton from '@/components/pages/mypage/BlockChargeButton';
 
 export default function UserHoldBlock() {
 
-    return (
-        <>
-            {holdingBlockData.map((haveBlock: HoldingBlockData) => (
-                <div className={style.HoldChargeBlock} key={haveBlock.id}>
-                    <p className={style.HoldBlock}>{haveBlock.number}</p>
-                    <p className={style.HoldBlocktxt}>보유 블럭</p>
-                    <BlockChargeButton />
-                </div>
-            ))}
-        </>
-    )
+  return (
+    <>
+      {holdingBlockData.map((haveBlock: HoldingBlockData) => (
+        <div className={style.HoldChargeBlock} key={haveBlock.id}>
+          <p className={style.HoldBlock}>{haveBlock.number}</p>
+          <p className={style.HoldBlocktxt}>보유 블럭</p>
+          <BlockChargeButton />
+        </div>
+      ))}
+    </>
+  )
 }

@@ -92,7 +92,9 @@ export default function FooterViewer(props: { episodeData: EpisodeListDataType, 
       }
       <div className={style.navFoot}>
         <div className={style.backBtn}>
-          <BackBtn />
+          <BackBtn
+            onClick={() => router.back()}
+          />
         </div>
         <div className={style.commentBtn} onClick={() => router.push(`/webtoon/${webtoonName}/episode/${episodeId}/comment`)}>
           <Image

@@ -1,12 +1,9 @@
 import Image from 'next/image'
-import { useRouter } from 'next/router'
 import React from 'react'
+
 import style from './BackBtn.module.css'
 
-export default function BackBtn() {
-
-  const router = useRouter();
-
+export default function BackBtn(props: { onClick: () => void }) {
   return (
     <div className={style.backbtn} onClick={() => router.pathname === "/mypage" ? router.push("/") : router.back()}>
       <Image
