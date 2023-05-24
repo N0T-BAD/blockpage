@@ -10,8 +10,8 @@ export default function MainSection(props: { data: MainBannerType }) {
 
   return (
     <section className={style.mainSection}>
-      {/* <MainTopBanner /> */}
-      <MainBanner />
+      <MainTopBanner />
+      {/* <MainBanner /> */}
     </section>
   )
 }
