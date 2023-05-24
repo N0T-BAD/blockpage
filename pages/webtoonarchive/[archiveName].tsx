@@ -1,20 +1,25 @@
+import { GetServerSideProps } from "next"
+
 import ArchiveLayout from "@/components/layouts/ArchiveLayout"
 import ArchiveDataSection from "@/components/pages/webtoonarchive/ArchiveDataSection"
 
-import { webtoonListData } from "@/data/dummy/webtoonData"
-import { WebToonListDataType } from "@/types/webtoonDataType"
-import { GetServerSideProps } from "next"
+import { favoriteListContentData, historyListContentData, purchaseListContentData } from "@/data/dummy/listviewData"
+import { listviewDataType } from "@/types/listviewDataType"
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const { archiveName } = context.query;
-  console.log(archiveName);
 
   // server에서 데이터 불러와서 서버사이드에서 렌더링하기 위해 데이터 받아오기
   // const res = fetch(`http://localhost:3000/api/webtoonArchive/${archiveName}`);
   // const data = await res.data.json();
-  const dummyData = webtoonListData;
-  if (archiveName === 'history') {
-    const data = dummyData.filter((item) => item.week !== '');
+  const dummyData = historyListContentData;
+  if (archiveName === 'favorite') {
+    const data = favoriteListContentData;
+    return {
+      props: { data }
+    }
+  } else if (archiveName === 'purchase') {
+    const data = purchaseListContentData;
     return {
       props: { data }
     }
@@ -25,10 +30,11 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
   }
 }
 
-function WebtoonArchive(props: { data: WebToonListDataType[] }) {
+function WebtoonArchive(props: { data: listviewDataType[] }) {
   return (
-    // <ListviewSection data={props.data} />
-    <ArchiveDataSection />
+    <ArchiveDataSection
+      data={props.data}
+    />
   )
 }
 

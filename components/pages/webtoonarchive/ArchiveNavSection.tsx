@@ -12,7 +12,6 @@ interface ItemType {
 
 export default function ArchiveNavSection() {
 
-  console.log(staticArchiveMenuData)
   const router = useRouter();
   const { archiveName } = router.query;
 
