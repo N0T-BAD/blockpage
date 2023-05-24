@@ -2,12 +2,11 @@ import React from 'react'
 
 import style from '@/components/pages/webtoonarchive/ArchiveDataSection.module.css'
 import WebtoonList from '@/components/ui/WebtoonList';
-import { listviewContentData } from '@/data/dummy/listviewData';
+import { listviewDataType } from '@/types/listviewDataType';
 
-export default function ArchiveDataSection() {
+export default function ArchiveDataSection(props: { data: listviewDataType[] }) {
 
-  const listviewData = listviewContentData;
-  console.log("ArchiveDataSection")
+  const listviewData = props.data;
 
   return (
     <section className={style.archiveSection}>
@@ -15,7 +14,7 @@ export default function ArchiveDataSection() {
         listviewData &&
         listviewData.map((data) => (
           <WebtoonList
-            key={data.id}
+            key={data.webtoonId}
             data={data}
           />
         ))
