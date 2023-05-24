@@ -1,0 +1,30 @@
+.loaderContainer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--color-primary);
+  background-image: url('/assets/images/logo/logo.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.loader{
+  margin-top: 100px;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
