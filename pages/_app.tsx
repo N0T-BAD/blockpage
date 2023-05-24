@@ -19,25 +19,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     <SessionProvider session={pageProps.session}>
       <RecoilRoot>
         {
-          // Component.auth ? 
-          //   <Auth>
-          //     {getLayout(<Component {...pageProps} />)}
-          //   </Auth>
-          //  : 
           getLayout(<Component {...pageProps} />)
         }
       </RecoilRoot>
     </SessionProvider>
   )
 }
-
-// function Auth({ children }) {
-//   // if `{ required: true }` is supplied, `status` can only be "loading" or "authenticated"
-//   const { status } = useSession({ required: true })
-
-//   if (status === "loading") {
-//     return <div>Loading...</div>
-//   }
-
-//   return children
-// }
