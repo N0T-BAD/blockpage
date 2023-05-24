@@ -16,7 +16,7 @@ export default function MainBanner() {
     <div className={style.bannerWrap}>
       <div className={style.bannerCardBox}>
         {mainEventBannerData.map((data: MainBannerType) => (
-          <div className={style.bannerCard}>
+          <div className={style.bannerCard} key={data.id}>
             <div className={style.bannerImg}>
               <Image src={data.imgUrl} alt={data.name} width={200} height={200} priority />
             </div>

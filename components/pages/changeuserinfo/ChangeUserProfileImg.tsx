@@ -37,7 +37,7 @@ export default function ChangeUserProfileImg({ profileSkinColor, setProfileSkinC
 
   useEffect(() => {
     setProfileSkinColor(profileSkinColor);
-  }, [])
+  }, [profileSkinColor, setProfileSkinColor])
 
   // useEffect(() => {
   //   axios.get('http://localhost:3000/api/v1/members?type=profileimage')

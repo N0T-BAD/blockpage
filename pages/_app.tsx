@@ -16,28 +16,28 @@ type AppPropsWithLayout = AppProps & {
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page)
   return (
-    <SessionProvider session = {pageProps.session}>
+    <SessionProvider session={pageProps.session}>
       <RecoilRoot>
-      {
-      Component.auth ? 
-        <Auth>
-          {getLayout(<Component {...pageProps} />)}
-        </Auth>
-       : 
-        getLayout(<Component {...pageProps} />)
-      }
+        {
+          // Component.auth ? 
+          //   <Auth>
+          //     {getLayout(<Component {...pageProps} />)}
+          //   </Auth>
+          //  : 
+          getLayout(<Component {...pageProps} />)
+        }
       </RecoilRoot>
     </SessionProvider>
   )
 }
 
-function Auth({ children }) {
-  // if `{ required: true }` is supplied, `status` can only be "loading" or "authenticated"
-  const { status } = useSession({ required: true })
+// function Auth({ children }) {
+//   // if `{ required: true }` is supplied, `status` can only be "loading" or "authenticated"
+//   const { status } = useSession({ required: true })
 
-  if (status === "loading") {
-    return <div>Loading...</div>
-  }
+//   if (status === "loading") {
+//     return <div>Loading...</div>
+//   }
 
-  return children
-}
+//   return children
+// }
