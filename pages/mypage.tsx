@@ -3,24 +3,27 @@ import { NextPageWithLayout } from "@/pages/_app"
 import UserMiddleSection from "@/components/pages/mypage/UserMiddleSection"
 import UserBottomSection from "@/components/pages/mypage/UserBottomSection"
 import MypageLayout from "@/components/layouts/MypageLayout"
+import { useRouter } from "next/router"
+import { useSession } from "next-auth/react"
 
+const Mypage: NextPageWithLayout = () => {
 
-const mypage: NextPageWithLayout = () => {
-    return (
-        <>
-            <UserTopSection />
-            <UserMiddleSection />
-            <UserBottomSection />
-        </>
-    )
+  return (
+    <>
+      <UserTopSection />
+      <UserMiddleSection />
+      <UserBottomSection />
+    </>
+  )
 }
 
-mypage.getLayout = function getLayout(mypage: React.ReactElement) {
-    return (
-        <MypageLayout>
-            {mypage}
-        </MypageLayout>
-    )
+Mypage.getLayout = function getLayout(mypage: React.ReactElement) {
+
+  return (
+    <MypageLayout>
+      {mypage}
+    </MypageLayout>
+  )
 }
 
-export default mypage
+export default Mypage

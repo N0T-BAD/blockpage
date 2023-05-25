@@ -32,13 +32,13 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   )
 }
 
-function Auth({ children: page }: { children: ReactNode }) {
-  // if `{ required: true }` is supplied, `status` can only be "loading" or "authenticated"
-  const { status } = useSession({ required: true })
+// function Auth({ children: page }: { children: ReactNode }) {
+//   // if `{ required: true }` is supplied, `status` can only be "loading" or "authenticated"
+//   const { status } = useSession({ required: true })
 
-  if (status === "loading") {
-    return <div>Loading...</div>
-  }
+//   if (status === "loading") {
+//     return <div>Loading...</div>
+//   }
 
-  return <>{page}</>
-}
+//   return <>{page}</>
+// }

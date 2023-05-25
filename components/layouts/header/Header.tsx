@@ -10,13 +10,9 @@ import "react-sliding-pane/dist/react-sliding-pane.css";
 
 
 export default function Header() {
-  const router = useRouter();
+  const { push } = useRouter();
   const { data: session } = useSession();
   const [showModal, setShowModal] = useState(false);
-
-  const handlemain = () => {
-    router.push("/");
-  }
 
   const handleModal = () => {
     setShowModal(!showModal);
@@ -43,7 +39,7 @@ export default function Header() {
       </SlidingPane>
       <header className={style.blockMainHeader}>
         <div className={style.logo}>
-          <Image src={'/assets/images/logo/logo.svg'} alt="logo" width={200} height={77} onClick={handlemain} priority />
+          <Image src={'/assets/images/logo/logo.svg'} alt="logo" width={200} height={77} onClick={() => push("/")} priority />
           <h1>BlockPage</h1>
         </div>
         <nav>
@@ -51,15 +47,9 @@ export default function Header() {
             <li onClick={handleModal}>
               <Image src={'/assets/images/icons/menuIcon.svg'} alt={'SideMenu'} width={30} height={30} priority />
             </li>
-            {session ? (
-              <li onClick={() => signOut()}>
-                <Image src={'/assets/images/icons/logout.svg'} alt={'Logout'} width={30} height={30} priority />
-              </li>
-            ) : (
-              <li onClick={() => router.push('/login')}>
-                <Image src={'/assets/images/icons/userIcon.svg'} alt={'User'} width={30} height={30} priority />
-              </li>
-            )}
+            <li onClick={() => push('/mypage')}>
+              <Image src={'/assets/images/icons/userIcon.svg'} alt={'User'} width={30} height={30} priority />
+            </li>
           </ul>
         </nav>
       </header>
