@@ -6,13 +6,14 @@ import CloseBtn from '../ui/CloseBtn';
 
 export default function RatingModal(props: { handleShowRating: () => void, handleIsRating: () => void }) {
 
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState<number>();
   const MAX_VALUE = 10;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = parseInt(e.target.value);
+    const regex = /^[0-9]+$/;
 
-    if (newValue > MAX_VALUE) {
+    if (regex.test(e.target.value) && newValue > MAX_VALUE) {
       setValue(MAX_VALUE);
     } else {
       setValue(newValue);
@@ -43,7 +44,17 @@ export default function RatingModal(props: { handleShowRating: () => void, handl
         </div>
         <div className={style.formBox}>
           <form action="">
-            <input type="number" name='rating' className={style.rating} placeholder='10' onChange={handleChange} />
+            <input
+              type="text"
+              name='rating'
+              className={style.rating}
+              min="1"
+              max={MAX_VALUE}
+              maxLength={2}
+              value={value || ''}
+              placeholder='10'
+              onChange={handleChange}
+            />
             <Separator
               color='var(--bp-line-gray)'
               gutter={0}
