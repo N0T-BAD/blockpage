@@ -47,15 +47,9 @@ export default function Header() {
             <li onClick={handleModal}>
               <Image src={'/assets/images/icons/menuIcon.svg'} alt={'SideMenu'} width={30} height={30} priority />
             </li>
-            {session ? (
-              <li onClick={() => signOut()}>
-                <Image src={'/assets/images/icons/logout.svg'} alt={'Logout'} width={30} height={30} priority />
-              </li>
-            ) : (
-              <li onClick={() => push('/login')}>
-                <Image src={'/assets/images/icons/userIcon.svg'} alt={'User'} width={30} height={30} priority />
-              </li>
-            )}
+            <li onClick={() => push('/mypage')}>
+              <Image src={'/assets/images/icons/userIcon.svg'} alt={'User'} width={30} height={30} priority />
+            </li>
           </ul>
         </nav>
       </header>
