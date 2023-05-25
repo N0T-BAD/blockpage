@@ -13,6 +13,10 @@ export default function MypageHeader() {
 
   const { data: session } = useSession();
 
+  if (!session) {
+    router.push('/login');
+  }
+
   const handleLogout = () => {
     if (!session) {
       router.push('/');

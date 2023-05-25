@@ -5,19 +5,8 @@ import UserBottomSection from "@/components/pages/mypage/UserBottomSection"
 import MypageLayout from "@/components/layouts/MypageLayout"
 import { useRouter } from "next/router"
 import { useSession } from "next-auth/react"
-import { useEffect } from "react"
-import Swal from "sweetalert2"
-
 
 const Mypage: NextPageWithLayout = () => {
-
-  const { push } = useRouter();
-
-  const { data: session } = useSession();
-
-  if (!session) {
-    push("/login");
-  }
 
   return (
     <>
