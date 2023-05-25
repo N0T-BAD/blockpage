@@ -11,25 +11,12 @@ import Swal from "sweetalert2"
 
 const Mypage: NextPageWithLayout = () => {
 
-  const router = useRouter();
+  const { push } = useRouter();
 
   const { data: session } = useSession();
 
-  useEffect(() => {
-    if (!session) {
-      Swal.fire({
-        icon: 'error',
-        title: '로그인이 필요합니다.',
-        showConfirmButton: false,
-        timer: 1500
-      })
-      router.push("/login");
-    }
-  }, [session, router]);
-
-  // 세션이 없는 경우 아무것도 렌더링하지 않음
   if (!session) {
-    return null;
+    push("/login");
   }
 
   return (
