@@ -16,9 +16,9 @@ type AppPropsWithLayout = AppProps & {
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page)
   return (
-    <SessionProvider session = {pageProps.session}>
+    <SessionProvider session={pageProps.session}>
       <RecoilRoot>
-      {/* {
+        {/* {
       Component.auth ? 
         <Auth>
           {getLayout(<Component {...pageProps} />)}
@@ -26,7 +26,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
        : 
         getLayout(<Component {...pageProps} />)
       } */}
-      {getLayout(<Component {...pageProps} />)}
+        {getLayout(<Component {...pageProps} />)}
       </RecoilRoot>
     </SessionProvider>
   )
