@@ -22,6 +22,7 @@ export default function ScrollToTopBtn() {
 
   useEffect(() => {
     console.log(scrollY)
+
     if (scrollY > 100) {
       setIsActive(true);
     } else {

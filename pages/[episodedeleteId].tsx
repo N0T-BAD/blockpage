@@ -14,15 +14,15 @@ const EpisodeDelete: NextPageWithLayout = () => {
 
     const [episodeData, setEpisodeData] = useState<episodeData>();
 
-    useEffect(() => {
-        const getFetch = async () => {
-            const res = await axios.get("`${baseUrl}/api/v1/episode/get/${query.episodeId}`")
-            console.log(res.data)
-            setEpisodeData(res.data.data)
-        }
+    // useEffect(() => {
+    //     const getFetch = async () => {
+    //         const res = await axios.get("`${baseUrl}/api/v1/episode/get/${query.episodeId}`")
+    //         console.log(res.data)
+    //         setEpisodeData(res.data.data)
+    //     }
 
-        getFetch()
-    }, [])
+    //     getFetch()
+    // }, [])
 
     return (
         <>

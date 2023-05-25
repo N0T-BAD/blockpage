@@ -6,13 +6,14 @@ import style from '@/components/layouts/header/LoginHeader.module.css'
 
 export default function LoginHeader() {
 
-    const router = useRouter();
+    const { push } = useRouter();
+
     return (
         <header className={style.headerSection}>
             <div className={style.LoginHeader}>
                 <div className={style.leftHead}>
                     <BackBtn
-                        onClick={() => router.back()}
+                        onClick={() => push("/")}
                     />
                 </div>
                 <div className={style.centerHead}>
