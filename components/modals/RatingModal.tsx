@@ -1,10 +1,23 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import style from '@/components/modals/RatingModal.module.css'
 import Separator from '@/components/ui/Separator'
 import CloseBtn from '../ui/CloseBtn';
 
-export default function RatingModal(props: { handleRating: () => void }) {
+export default function RatingModal(props: { handleShowRating: () => void, handleIsRating: () => void }) {
+
+  const [value, setValue] = useState(0);
+  const MAX_VALUE = 10;
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = parseInt(e.target.value);
+
+    if (newValue > MAX_VALUE) {
+      setValue(MAX_VALUE);
+    } else {
+      setValue(newValue);
+    }
+  };
 
   useEffect(() => {
     document.body.style.cssText = `
@@ -22,7 +35,7 @@ export default function RatingModal(props: { handleRating: () => void }) {
   return (
     <div className={style.modalBox}>
       <div className={style.modal}>
-        <div className={style.closeBtn} onClick={props.handleRating}>
+        <div className={style.closeBtn} onClick={props.handleShowRating}>
           <CloseBtn
             height={20}
             width={20}
@@ -30,14 +43,14 @@ export default function RatingModal(props: { handleRating: () => void }) {
         </div>
         <div className={style.formBox}>
           <form action="">
-            <input type="text" className={style.rating} placeholder='10' />
+            <input type="number" name='rating' className={style.rating} placeholder='10' onChange={handleChange} />
             <Separator
               color='var(--bp-line-gray)'
               gutter={0}
             />
             <p className={style.description}>최소 0점에서 10점까지</p>
             <div className={style.confirmBox}>
-              <button type='submit' className={style.confirm}>확인</button>
+              <button type='button' className={style.confirm} onClick={props.handleIsRating}>확인</button>
             </div>
           </form>
         </div>
