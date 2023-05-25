@@ -9,7 +9,7 @@ export default function BackBtn(props: { onClick: () => void }) {
   const router = useRouter();
 
   return (
-    <div className={style.backbtn} onClick={() => router.pathname === "/mypage" || router.pathname === "/login" ? router.push("/") : router.back()}>
+    <div className={style.backbtn} onClick={props.onClick}>
       <Image
         src={'/assets/images/icons/back.svg'}
         alt="backBtnIcon"
