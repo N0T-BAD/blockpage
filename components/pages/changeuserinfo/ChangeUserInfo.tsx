@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import style from '@/components/pages/changeuserinfo/ChangeUserInfo.module.css'
 import { profileskinDataType } from '@/types/changeUserDataType'
-import { profileskinData, profileskinbtnData } from '@/data/profileskinData'
-import ChangeUserProfileImg from './ChangeUserProfileImg';
+import { profileskinData } from '@/data/profileskinData'
 import Image from 'next/image';
 
 interface ChildProps {

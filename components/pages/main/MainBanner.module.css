@@ -1,16 +1,32 @@
 .bannerWrap {
-  width: 90vw;
+  width: 100vw;
   height: 100%;
-  margin: 0 auto;
+  margin: 0 3rem;
   position: relative;
   padding : 10px;
   overflow: hidden;
 }
 
-.bannerCardBox {
+/* .bannerCardBox {
   overflow-x: auto;
   display: grid;
   grid-auto-flow: column;
+  display: flex;
+  justify-content: center;
+  overscroll-behavior-inline: contain;
+  scroll-behavior: smooth;
+  height: 90%;
+  scroll-snap-type: inline mandatory;
+  scroll-padding-inline: 1rem;
+  align-items: center;
+} */
+
+.bannerCardBox {
+  overflow-x: auto;
+  /* display: grid;
+  grid-auto-flow: column; */
+  display: flex;
+  justify-content: center;
   overscroll-behavior-inline: contain;
   scroll-behavior: smooth;
   height: 90%;
@@ -25,11 +41,12 @@
 
 .bannerCard {
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
-  width: 300px;
+  width: 200px;
   height: 100%;
   background-color: #fff;
   border-radius: 10px;
-  margin: 10px;
+  padding: 0 1rem;
+  margin : 0 3rem;
   font-size: 30px;
   letter-spacing: 1px;
   display: flex;

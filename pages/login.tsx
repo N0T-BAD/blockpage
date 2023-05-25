@@ -1,21 +1,20 @@
 import { NextPageWithLayout } from "@/pages/_app"
 import LoginSection from "@/components/pages/login/LoginSection"
 import LoginLayout from "@/components/layouts/LoginLayout"
-import { useSession, signIn, getCsrfToken } from "next-auth/react"
+import { useSession, signIn, getCsrfToken, SessionProvider } from "next-auth/react"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 
-const login: NextPageWithLayout = () => {
+const Login: NextPageWithLayout = () => {
 
   const { data } = useSession()
-  
-  
+
   return (
     <LoginSection />
   )
 }
 
-login.getLayout = function getLayout(login: React.ReactElement) {
+Login.getLayout = function getLayout(login: React.ReactElement) {
   return (
     <LoginLayout>
       {login}
@@ -23,5 +22,5 @@ login.getLayout = function getLayout(login: React.ReactElement) {
   )
 }
 
-export default login
+export default Login
 

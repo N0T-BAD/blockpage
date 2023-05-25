@@ -9,12 +9,12 @@ export default function ScrollToTopBtn() {
 
   const scrollToTop = () => {
     window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+      top: 0,
+      behavior: "smooth"
     });
   };
 
-  if( typeof window !== "undefined" ) {
+  if (typeof window !== "undefined") {
     window.addEventListener("scroll", () => {
       setScrollY(window.scrollY);
     });
@@ -22,7 +22,7 @@ export default function ScrollToTopBtn() {
 
   useEffect(() => {
     console.log(scrollY)
-    if(scrollY > 30) {
+    if (scrollY > 30) {
       setIsActive(true);
     } else {
       setIsActive(false);
@@ -30,7 +30,7 @@ export default function ScrollToTopBtn() {
   }, [scrollY])
 
   return (
-    <div className={isActive ? `${style.scrollWrap} ${style.active}` :`${style.scrollWrap} ${style.close}`} onClick={scrollToTop}>
+    <div className={isActive ? `${style.scrollWrap} ${style.active}` : `${style.scrollWrap} ${style.close}`} onClick={scrollToTop}>
       <div className={style.scrollBtn}>
         <Image
           src={'/assets/images/icons/back.svg'}
