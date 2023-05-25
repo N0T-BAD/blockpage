@@ -2,8 +2,11 @@ import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import style from '@/components/pages/mypage/UserNickName.module.css'
 import { ChangeUserDataType, ChangeUserImageDataType, profileskinDataType } from '@/types/changeUserDataType';
+import { useSession } from 'next-auth/react';
 
 export default function UserProfileImg() {
+
+  const { data: session } = useSession();
 
   const [userprofileImg, setUserProfileImg] = useState<ChangeUserImageDataType>(
     {
@@ -27,7 +30,21 @@ export default function UserProfileImg() {
 
   return (
     <div className={style.userImage}>
-      <Image src={"/assets/images/mypage/userImg.png"} alt="userProfileImagePreview" width={70} height={70} />
+      {
+        session ?
+          <Image
+            src={userprofileImg.profileimage}
+            alt="userProfileImagePreview"
+            width={70}
+            height={70}
+          />
+          : <Image
+            src={"/assets/images/mypage/userImg.png"}
+            alt="userProfileImagePreview"
+            width={70}
+            height={70}
+          />
+      }
     </div>
   )
 }
