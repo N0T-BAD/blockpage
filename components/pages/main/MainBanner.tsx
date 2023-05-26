@@ -13,8 +13,19 @@ export default function MainBanner() {
   // }, [])
 
   return (
-    <div className={style.bannerWrap}>
+    <div className={style.mainBanner}>
       <div className={style.bannerCardBox}>
+        {mainEventBannerData.map((data: MainBannerType) => (
+          <div className={style.bannerCard} key={data.id}>
+            <div className={style.bannerImg}>
+              <Image src={data.imgUrl} alt={data.name} width={200} height={200} priority />
+            </div>
+            <h2>{data.eventTitle}</h2>
+            <div className={style.line}></div>
+            <p>{data.name}</p>
+            <p className={style.option}>{data.categoryName}</p>
+          </div>
+        ))}
         {mainEventBannerData.map((data: MainBannerType) => (
           <div className={style.bannerCard} key={data.id}>
             <div className={style.bannerImg}>
