@@ -35,7 +35,7 @@ export default function LoginSection() {
     if (!kakaoLoginData?.id) return
     try {
       const postUser = async () => {
-        const res = await fetch('http://10.10.10.27:9000/v1/members', {
+        const res = await fetch('http://10.10.10.27:8082/member-service/v1/members', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -61,9 +61,10 @@ export default function LoginSection() {
     if (user) {
       console.log(user);
       userRoleCallback(user.data.role);
+      console.log(userRoleCallback(user.data.role))
 
       axios
-        .get('http://10.10.10.27:9000/v1/members/log', {
+        .get('http://10.10.10.27:8082/member-service/v1/members/log', {
           headers: {
             'Content-Type': 'application/json',
             email: kakaoLoginData.kakao_account.email,
