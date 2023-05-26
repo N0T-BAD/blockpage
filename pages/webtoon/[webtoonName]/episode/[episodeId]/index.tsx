@@ -16,14 +16,6 @@ function EpisodeId(props: { dummyData: WebToonListDataType[], episodeData: Episo
   )
 }
 
-EpisodeId.getLayout = function getLayout(episodeViewer: React.ReactElement) {
-  return (
-    <Layout>
-      {episodeViewer}
-    </Layout>
-  )
-}
-
 export default EpisodeId
 
 export async function getServerSideProps(context: any) {
