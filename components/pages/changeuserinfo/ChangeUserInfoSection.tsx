@@ -13,14 +13,6 @@ export default function ChangeUserInfoSection() {
     }
   )
 
-  const [profileSkinColorBtn, setProfileSkinColorBtn] = useState<profileskinDataType>(
-    {
-      id: 0,
-      color: '',
-      imgurl: '',
-    }
-  )
-
   return (
     <>
       <section className={style.ChangeUserInfoTopSection}>

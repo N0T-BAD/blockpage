@@ -1,27 +1,17 @@
 export const chargeBlockData = [
     {
-        id: 1,
-        number: "10",
-        path: '/block/10',
+        itemName: "블럭 20개",
+        blockQuantity: 20,
+        totalAmount: 1000,
     },
     {
-        id: 2,
-        number: '20',
-        path: '/block/20',
+        itemName: '블럭 40개',
+        blockQuantity: 40,
+        totalAmount: 2000,
     },
     {
-        id: 3,
-        number: '50',
-        path: '/block/50',
-    },
-    {
-        id: 4,
-        number: '100',
-        path: '/block/100',
-    },
-    {
-        id: 5,
-        number: '200',
-        path: '/block/200',
+        itemName: '블럭 (100 + 10)개',
+        blockQuantity: 110,
+        totalAmount: 5000,
     }
 ];

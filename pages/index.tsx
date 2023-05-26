@@ -8,8 +8,8 @@ import { mainEventBannerData } from "@/data/dummy/mainEventBannerData"
 import { gameEventData } from "@/data/dummy/mainGameEventData"
 import CategoryFilter from "@/components/pages/main/category/CategoryFilter"
 
-
 function Main(props: { mainBannerData: MainBannerType, gameBannerData: GameBannerType[] }) {
+
   return (
     <>
       <MainSection

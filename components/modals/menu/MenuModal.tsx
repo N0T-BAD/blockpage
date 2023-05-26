@@ -30,40 +30,34 @@ export default function MenuModal(props: { handleModal: () => void }) {
   }, []);
 
   return (
-    <div className={style.box}>
-      <div className={style.modalBox}>
-        <div className={style.modal}>
-          <section className={style.menuSection}>
-            <div className={style.closeBtn}>
-              <CloseBtn
-                width={20}
-                height={20}
-                onClick={props.handleModal}
-              />
-            </div>
-            <section className={style.userSection}>
-              <div className={style.user} onClick={handleLogin}>
-                <UserProfileImg />
-                <div className={style.userSectionTxt}>
-                  <p>404님</p>
-                  <p>오늘도 좋은 하루입니다.</p>
-                </div>
-              </div>
-            </section>
-            <BtnSection />
-            <MenuList />
-            <div className={style.logoImg}>
-              <Image
-                src={'/assets/images/logo/logo.svg'}
-                alt='logo'
-                width={120}
-                height={60}
-                priority
-              />
-            </div>
-          </section>
-        </div>
+    <section className={style.menuSection}>
+      <div className={style.closeBtn}>
+        <CloseBtn
+          width={20}
+          height={20}
+          onClick={props.handleModal}
+        />
       </div>
-    </div>
+      <section className={style.userSection}>
+        <div className={style.user} onClick={handleLogin}>
+          <UserProfileImg />
+          <div className={style.userSectionTxt}>
+            <p>404님</p>
+            <p>오늘도 좋은 하루입니다.</p>
+          </div>
+        </div>
+      </section>
+      <BtnSection />
+      <MenuList />
+      <div className={style.logoImg}>
+        <Image
+          src={'/assets/images/logo/logo.svg'}
+          alt='logo'
+          width={120}
+          height={60}
+          priority
+        />
+      </div>
+    </section>
   )
 }

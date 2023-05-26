@@ -10,22 +10,27 @@ import Episode from '../webtoonepisode/Episode';
 import { EpisodeListDataType, WebToonListDataType } from '@/types/webtoonDataType';
 import RatingModal from '@/components/modals/RatingModal';
 
-export default function FooterViewer(props: { episodeData: EpisodeListDataType, dummyData: WebToonListDataType[] }) {
+export default function FooterViewer(props: { episodeData: EpisodeListDataType, dummyData: WebToonListDataType[] , isViewer: boolean}) {
 
   const router = useRouter();
   const { webtoonName } = router.query;
   const { episodeId } = router.query;
 
   const [showModal, setShowModal] = useState(false);
+  const [viewMore, setViewMore] = useState(true);
+  const [isRating, setIsRating] = useState(false);
 
   const nextEpisodeId = Number(episodeId) + 1;
-
-  const [viewMore, setViewMore] = useState(true);
 
   const webtoonData = props.dummyData.find((item) => item.title === webtoonName);
   const nextEpisodeData = webtoonData?.episodeData.find((item) => item.id === nextEpisodeId);
 
-  const handleRating = () => {
+  const handleShowRating = () => {
+    setShowModal(!showModal);
+  }
+
+  const handleIsRating = () => {
+    setIsRating(!isRating);
     setShowModal(!showModal);
   }
 
@@ -33,27 +38,34 @@ export default function FooterViewer(props: { episodeData: EpisodeListDataType, 
     setViewMore(!viewMore);
   }
 
+  console.log(isRating);
+
   return (
     <footer className={
-      !viewMore ?
+      !props.isViewer ?
         `${style.viewerFooterWrap} ${style.footerHidden}`
         : nextEpisodeData ? `${style.viewerFooterWrap}`
           : `${style.viewerFooterWrap} ${style.hidden}`
     }>
       {
-        viewMore &&
+        !props.isViewer &&
         <>
           {
             showModal &&
             <RatingModal
-              handleRating={handleRating}
+              handleShowRating={handleShowRating}
+              handleIsRating={handleIsRating}
             />
           }
           <div className={style.top}>
-            <div className={style.ratingBtn} onClick={handleRating}>
+            <div className={style.ratingBtn} onClick={isRating ? undefined : handleShowRating}>
               <p>★</p>
               <p>{props.episodeData.rating}</p>
-              <p>별점주기</p>
+              {
+                isRating ?
+                  <p>참여완료</p>
+                  : <p>별점주기</p>
+              }
             </div>
             <div className={style.close}>
               <CloseBtn

@@ -1,6 +1,7 @@
 import '@/styles/globals.css'
 import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
+import { SessionProvider, useSession } from 'next-auth/react'
 import type { ReactElement, ReactNode } from 'react'
 import { RecoilRoot } from 'recoil'
 
@@ -15,8 +16,29 @@ type AppPropsWithLayout = AppProps & {
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page)
   return (
-    <RecoilRoot>
-      {getLayout(<Component {...pageProps} />)}
-    </RecoilRoot>
+    <SessionProvider session={pageProps.session}>
+      <RecoilRoot>
+        {/* {
+      Component.auth ? 
+        <Auth>
+          {getLayout(<Component {...pageProps} />)}
+        </Auth>
+       : 
+        getLayout(<Component {...pageProps} />)
+      } */}
+        {getLayout(<Component {...pageProps} />)}
+      </RecoilRoot>
+    </SessionProvider>
   )
 }
+
+// function Auth({ children: page }: { children: ReactNode }) {
+//   // if `{ required: true }` is supplied, `status` can only be "loading" or "authenticated"
+//   const { status } = useSession({ required: true })
+
+//   if (status === "loading") {
+//     return <div>Loading...</div>
+//   }
+
+//   return <>{page}</>
+// }
