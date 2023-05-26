@@ -7,9 +7,24 @@ import { GameBannerType } from "@/types/gameBanerType"
 import { mainEventBannerData } from "@/data/dummy/mainEventBannerData"
 import { gameEventData } from "@/data/dummy/mainGameEventData"
 import CategoryFilter from "@/components/pages/main/category/CategoryFilter"
+import { useEffect, useState } from "react"
 
 
 function Main(props: { mainBannerData: MainBannerType, gameBannerData: GameBannerType[] }) {
+
+  const [scroll, setScroll] = useState(false);
+
+  useEffect(() => {
+      window.addEventListener('scroll', handleScroll);
+      return () => {
+        window.removeEventListener('scroll', handleScroll); //clean up
+      };
+    }, []);
+
+  const handleScroll = () => {
+  console.log("window.scrollY : ", window.scrollY)
+  };
+
   return (
     <>
       <MainSection

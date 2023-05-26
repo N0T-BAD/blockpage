@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import style from '@/components/pages/login/LoginSection.module.css'
 import Image from 'next/image'
 import { signIn, useSession, signOut, getCsrfToken } from 'next-auth/react'
+import DataFetchingLoader from '@/components/widgets/DataFetchingLoader'
 
 export default function LoginSection() {
 
@@ -21,9 +22,32 @@ export default function LoginSection() {
         }
       })
       .then((res) => res.json())
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res)
+        // fetch('/api/auth/login', {
+        //   method: 'POST',
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //   },
+        //   body: JSON.stringify({
+        //     email: res.kakao_acount.email,
+        //     nickname: res.kakao_account.profile.nickname,
+        //     profileImage: res.kakao_account.profile.profile_image_url,
+        //   })
+        // })
+      })
+
+      // server login
+      
     }
   }, [data])
+
+  if(data) {
+    return (
+      <DataFetchingLoader text={'loading'} />
+    )
+  }
+
 
 
   return (
