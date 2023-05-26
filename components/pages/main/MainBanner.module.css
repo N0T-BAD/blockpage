@@ -41,7 +41,7 @@
 }
 
 .bannerImg {
-  width: 55vw;
+  width: 50vw;
   height: 150px;
   overflow: hidden;
 }
@@ -54,7 +54,7 @@
   margin-top: 1rem;
   max-width: 100%;
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-family: var(--bp-font);
   color: var(--bp-secondary);
   font-weight: 300;
@@ -72,11 +72,12 @@
 }
 
 .bannerCard p {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-family: var(--bp-font);
   color: var(--bp-black);
   font-weight: 700;
   animation: banner-slide-down 0.5s ease-in-out;
+  margin-bottom: 0.5rem;
 }
 
 .bannerCard p.option {
