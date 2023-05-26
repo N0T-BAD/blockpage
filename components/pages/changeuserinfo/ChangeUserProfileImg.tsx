@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react'
 import UserIcon from '../mypage/UserIcon';
 import { BasicImage, userNickName } from '@/data/userNickName';
 import style from '@/components/pages/mypage/UserNickName.module.css'
-import { profileskinData } from '@/data/profileskinData';
 
 interface ChildProps {
   profileSkinColor: profileskinDataType;
@@ -37,7 +36,7 @@ export default function ChangeUserProfileImg({ profileSkinColor, setProfileSkinC
 
   useEffect(() => {
     setProfileSkinColor(profileSkinColor);
-  }, [])
+  }, [profileSkinColor, setProfileSkinColor])
 
   // useEffect(() => {
   //   axios.get('http://localhost:3000/api/v1/members?type=profileimage')
@@ -88,7 +87,7 @@ export default function ChangeUserProfileImg({ profileSkinColor, setProfileSkinC
                   profileSkinColor ?
                     <Image className={style.profileskinbox} src={profileSkinColor.imgurl} alt={profileSkinColor.color} width={70} height={70} key={profileSkinColor.id} />
                     :
-                    null
+                    <Image className={style.profileskinbox} src={"/assets/images/profile/purple.svg"} alt={"프로필 스킨"} width={70} height={70} />
                 }
                 <UserIcon />
               </div>

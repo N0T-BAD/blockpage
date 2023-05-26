@@ -1,5 +1,5 @@
 export interface ChargeBlockData {
-    id: number;
-    number: string;
-    path: string;
+    itemName: string;
+    blockQuantity: number;
+    totalAmount: number;
 }
