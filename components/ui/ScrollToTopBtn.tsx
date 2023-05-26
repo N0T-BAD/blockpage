@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import style from '@/components/ui/ScrollToTopBtn.module.css'
 import Image from 'next/image'
+
+import style from '@/components/ui/ScrollToTopBtn.module.css'
 
 export default function ScrollToTopBtn() {
 
@@ -21,8 +22,6 @@ export default function ScrollToTopBtn() {
   }
 
   useEffect(() => {
-    console.log(scrollY)
-
     if (scrollY > 100) {
       setIsActive(true);
     } else {
