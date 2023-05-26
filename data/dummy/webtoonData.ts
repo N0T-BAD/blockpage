@@ -21,7 +21,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -43,7 +43,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -65,7 +65,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -87,7 +87,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -109,7 +109,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -131,7 +131,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -153,7 +153,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -175,7 +175,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -197,7 +197,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -219,7 +219,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -256,7 +256,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -277,7 +277,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -298,7 +298,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -335,7 +335,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -356,7 +356,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -377,7 +377,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -414,7 +414,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -435,7 +435,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -456,7 +456,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -477,7 +477,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -498,7 +498,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -519,7 +519,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -540,7 +540,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -561,7 +561,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -582,7 +582,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -603,7 +603,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -640,7 +640,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -661,7 +661,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -682,7 +682,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -719,7 +719,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -740,7 +740,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,
@@ -761,7 +761,7 @@ export const webtoonListData = [
         imgUrls: [
           {
             id: 1,
-            imgUrl: "/assets/dummy/01.png",
+            imgUrl: "/assets/dummy/dummy.jpeg",
           },
           {
             id: 2,

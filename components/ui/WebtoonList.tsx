@@ -11,7 +11,7 @@ export default function WebtoonList(props: { data: listviewDataType }) {
     <div>
       <div className={style.webtoonBox}>
         <div className={style.ImgWrap} >
-          <Image src={props.data.webtoonMainImage} alt={props.data.webtoonTitle} width={100} height={90} priority />
+          <Image src={props.data.thumbnail} alt={props.data.webtoonTitle} width={100} height={90} priority />
         </div>
         <div className={style.contentWrap} >
           {

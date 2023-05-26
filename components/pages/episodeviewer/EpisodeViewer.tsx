@@ -9,14 +9,15 @@ export default function EpisodeViewer(props: { episodeData: EpisodeListDataType 
     <section className={style.viewer}>
       {
         props.episodeData.imgUrls.map((item) => (
+          <div className={style.episodeImg} key={item.id}>
           <Image
-            key={item.id}
             src={item.imgUrl}
             alt={`episode${item.id}`}
             width={390}
             height={400}
             priority
           />
+          </div>
         ))
       }
     </section>
