@@ -1,9 +1,7 @@
-import TotalLayout from "@/components/layouts/TotalLayout"
+import Layout from "@/components/layouts/layout"
 import { NextPageWithLayout } from "@/pages/_app"
 import axios from "axios"
 import { useRouter } from "next/router"
-import { useState } from "react"
-
 
 const chargeresult: NextPageWithLayout = () => {
 
@@ -21,7 +19,6 @@ const chargeresult: NextPageWithLayout = () => {
             },
         }
         )
-            // console.log(pgToken)
 
             // axios.post('https://blockpage.site/block-service/v1/blocks?type=cash')
             .then((res) => {
@@ -29,24 +26,22 @@ const chargeresult: NextPageWithLayout = () => {
                     router.push('/completepayment')
                 }
             })
-
-
     }
 
 
     return (
-        <>
+        <div>
             <p>충전 결과</p>
             <button onClick={handlego}>확인</button>
-        </>
+        </div>
     )
 }
 
 chargeresult.getLayout = function getLayout(page: React.ReactElement) {
     return (
-        <TotalLayout>
+        <Layout>
             {page}
-        </TotalLayout>
+        </Layout>
     )
 }
 
