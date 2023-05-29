@@ -32,6 +32,11 @@ const authOptions: NextAuthOptions = {
         clientSecret: process.env.KAKAO_CLIENT_SECRET || '' as string,
       }),
     ],
+    pages: {
+      // signIn: '/auth/signin',
+      // signOut: '/auth/signout',
+      error: '/auth/error',
+    },
     
     callbacks: {
       async session({ session, token }) {

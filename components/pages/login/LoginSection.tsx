@@ -78,6 +78,7 @@ export default function LoginSection() {
       userLogIn(data.data.role).then(() => {
         console.log('userLogIn')
         router.push('/')
+        console.log(session)
       })
     }
   }
