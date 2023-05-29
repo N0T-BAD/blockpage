@@ -37,7 +37,7 @@ export default function LoginSection() {
         'Authorization': `Bearer ${session?.accessToken}`,
       }
     })
-    if(res.status === 401) {
+    if (res.status === 401) {
       signOut()
       return
     } else if (res.status === 403) {
@@ -55,10 +55,10 @@ export default function LoginSection() {
     }
   }
 
-  const postUser = async (kakaoLoginData:any) => {
+  const postUser = async (kakaoLoginData: any) => {
     console.log('kakaoLoginData', kakaoLoginData)
     console.log('now session', session)
-    const res = await fetch('http://10.10.10.27:8082/member-service/v1/members', {
+    const res = await fetch('https://blockpage.site/member-service/v1/members', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -72,20 +72,21 @@ export default function LoginSection() {
     })
     const data = await res.json()
     console.log(data.data.role)
-    update( { ...session, role: data.data.role } )
-    if(data.data.role) {
+    update({ ...session, role: data.data.role })
+    if (data.data.role) {
       sessionStorage.setItem('role', data.data.role)
       userLogIn(data.data.role).then(() => {
         console.log('userLogIn')
         router.push('/')
+        console.log(session)
       })
     }
   }
 
-  const userLogIn = async (role:string) => {
+  const userLogIn = async (role: string) => {
     console.log('userLogIn', role, session?.email)
     if (!session?.email) return
-    const res = await fetch('http://10.10.10.27:8082/member-service/v1/members/log', {
+    const res = await fetch('https://blockpage.site/member-service/v1/members/log', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -93,6 +94,8 @@ export default function LoginSection() {
         role: role,
       },
     })
+    const data = await res.json()
+    console.log('userLogIn', data)
   }
 
   useEffect(() => {
@@ -110,7 +113,7 @@ export default function LoginSection() {
   return (
     <section className={style.loginSection}>
       <div className={style.logo}>
-        
+
         <Image src={"/assets/images/logo/logoimg.png"} alt={"로고"} width={200} height={77} />
       </div>
       <div className={style.kakaoLogin} onClick={() => signIn("kakao")}>

@@ -4,12 +4,16 @@ import { useRouter } from 'next/router';
 import style from '@/components/layouts/header/CategoryHeader.module.css'
 import BackBtn from '@/components/ui/BackBtn'
 import ListviewNavSection from '@/components/pages/listview/ListviewNavSection';
+import ListviewSubNav from '@/components/pages/listview/ListviewSubNav';
+import { staticWeekNavData } from '@/data/staticMenuData';
 
 export default function CategoryHeader() {
 
   const router = useRouter();
   const { categoryName } = router.query;
   const [title, setTitle] = useState<string>('');
+
+  const listType = staticWeekNavData;
 
   useEffect(() => {
     if (categoryName === 'week') {
@@ -35,6 +39,13 @@ export default function CategoryHeader() {
         <div className={style.rightHead}></div>
       </div>
       <ListviewNavSection />
+      {
+        title === '요일별 웹툰' ?
+          <ListviewSubNav
+            listType={listType}
+          />
+          : ""
+      }
     </header>
   )
 }
