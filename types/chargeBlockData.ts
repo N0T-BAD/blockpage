@@ -13,3 +13,12 @@ export interface ChargeBlockResponse {
     blockQuantity: number;
   };
 }
+
+export interface BlockPurchase {
+  data: {
+    itemName: string;
+    totalAmount: number;
+    paymentTime: string;
+    blockGainType: string;
+  };
+}

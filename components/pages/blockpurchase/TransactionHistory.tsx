@@ -1,10 +1,39 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import style from '@/components/pages/blockpurchase/TransactionHistory.module.css'
 import { TransactionHistoryData } from '@/data/transactionHistoryData'
+import { BlockPurchase } from '@/types/chargeBlockData';
+import axios from 'axios';
+import { useSession } from 'next-auth/react';
 
 const TransectionHistory = () => {
 
+  const { data: session } = useSession()
+  // const role = sessionStorage.getItem('role');
   const [active, setActive] = useState('');
+  const [chargeBlock, setChargeBlock] = useState<BlockPurchase>(
+    {
+      data: {
+        itemName: '',
+        totalAmount: 0,
+        paymentTime: '',
+        blockGainType: '',
+      },
+    }
+  )
+
+  useEffect(() => {
+    axios.get("https://blockpage.site/block-service/v1/payments?type=gain", {
+      headers: {
+        'Content-Type': 'application/json',
+        memberId: session?.email,
+        // role: role,
+      },
+    })
+      .then((res) => {
+        console.log(res.data)
+        setChargeBlock(res.data)
+      })
+  }, [])
 
   const handleCategoryClick = (name: string) => {
     setActive(name);
