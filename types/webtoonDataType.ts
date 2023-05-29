@@ -40,3 +40,14 @@ export interface webtoonDeleteDataType {
 export interface webtoonTitleDataType {
   title: string;
 }
+
+export interface webtoonListGetDataType {
+  webtoonId: number;
+  webtoonTitle: string;
+  webtoonThumbnail: string;
+  creator: string;
+  illustrator: string;
+  views: number;
+  interestCount: number;
+  genreType: number;
+}

@@ -3,6 +3,7 @@ import style from '@/components/pages/blockcharge/BlockCharge.module.css'
 import { chargeBlockData } from '@/data/chargeBlockData'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import { useSession } from 'next-auth/react'
 
 type ChargeBlockData = {
   itemName: string;
@@ -13,6 +14,8 @@ type ChargeBlockData = {
 export default function BlockCharge() {
 
   const [block, setBlock] = useState<ChargeBlockData[]>([])
+  const { data: session } = useSession()
+  // const role = sessionStorage.getItem('role');
 
   useEffect(() => {
     setBlock(chargeBlockData)
@@ -27,6 +30,8 @@ export default function BlockCharge() {
       }, {
         headers: {
           'Content-Type': 'application/json',
+          memberId: session?.email,
+          // role: role,
         },
       });
 
