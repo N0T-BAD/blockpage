@@ -17,9 +17,6 @@ export default function ListviewSubNav(props: { listType: StaticNavData[] }) {
 
   const name = "/category/week/mon";
 
-  console.log(name.split("/")[3])
-  console.log(week)
-
   return (
     <div className={style.listviewWrap}>
       <ul className={style.listviewContent}>

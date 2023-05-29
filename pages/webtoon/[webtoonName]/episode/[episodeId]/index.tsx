@@ -1,8 +1,9 @@
+import { useEffect, useState } from "react";
+
 import EpisodeViewer from "@/components/pages/episodeviewer/EpisodeViewer"
 import FooterViewer from "@/components/pages/episodeviewer/FooterViewer"
 import { webtoonListData } from "@/data/dummy/webtoonData"
 import { EpisodeListDataType, WebToonListDataType } from "@/types/webtoonDataType"
-import { useEffect, useState } from "react";
 
 function EpisodeId(props: { dummyData: WebToonListDataType[], episodeData: EpisodeListDataType }) {
   const episodeData = props.episodeData;

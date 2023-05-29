@@ -14,13 +14,20 @@ export default function ListviewNavSection() {
 
   const router = useRouter();
   const { categoryName } = router.query;
+
   return (
     <div className={style.navSection}>
       <nav>
         <ul>
           {
             staticTopNavData.map((item: ItemType) => (
-              item.link === categoryName ? null : <li key={item.id} onClick={() => router.push(`/category/${item.link}`)}>{item.name}</li>
+              item.link === categoryName ? null :
+                <li
+                  key={item.id}
+                  onClick={item.link === 'week' ? () => router.push(`/category/${item.link}/mon`) : () => router.push(`/category/${item.link}`)}
+                >
+                  {item.name}
+                </li>
             ))
           }
         </ul>

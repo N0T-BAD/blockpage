@@ -37,6 +37,16 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
     return {
       props: { data }
     }
+  } else if (categoryName === 'genre') {
+    const data = dummyData.filter((item) => item.week !== '');
+    return {
+      props: { data }
+    }
+  } else if (categoryName === 'best') {
+    const data = dummyData.filter((item) => item.week !== '');
+    return {
+      props: { data }
+    }
   }
   const data = "";
   return {
