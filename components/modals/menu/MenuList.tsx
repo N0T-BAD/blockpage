@@ -9,6 +9,7 @@ export default function MenuList() {
 
   const router = useRouter();
   const [menuData] = useState<StaticMenuListDataType[]>(staticMenuListData);
+  console.log(menuData)
 
   return (
     <ul className={style.menuList}>

@@ -42,12 +42,16 @@ export interface webtoonTitleDataType {
 }
 
 export interface webtoonListGetDataType {
-  webtoonId: number;
-  webtoonTitle: string;
-  webtoonThumbnail: string;
-  creator: string;
-  illustrator: string;
-  views: number;
-  interestCount: number;
-  genreType: number;
+  data: [
+    {
+      webtoonId: number;
+      webtoonTitle: string;
+      webtoonThumbnail: string;
+      creator: string;
+      illustrator: string;
+      views: number;
+      interestCount: number;
+      genreType: number;
+    }
+  ];
 }

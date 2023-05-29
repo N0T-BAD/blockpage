@@ -15,7 +15,7 @@ export default function ListviewSubNav(props: { listType: StaticNavData[] }) {
   const router = useRouter();
   const week = router.query.week;
 
-  const name = "/category/week/mon";
+  const name = "/category/week/0";
 
   return (
     <div className={style.listviewWrap}>
