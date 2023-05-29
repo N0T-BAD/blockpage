@@ -1,20 +1,18 @@
 import Image from 'next/image'
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react';
 
 import style from "@/components/modals/menu/Menu.module.css"
 import CloseBtn from '@/components/ui/CloseBtn';
 import UserProfileImg from '@/components/ui/UserProfileImg';
 import MenuList from './MenuList';
-import BtnSection from './BtnSection';
+import MenuBtnSection from './MenuBtnSection';
 
 export default function MenuModal(props: { handleModal: () => void }) {
 
   const router = useRouter();
-
-  const handleLogin = () => {
-    router.push("/login");
-  }
+  const { data: session } = useSession();
 
   useEffect(() => {
     document.body.style.cssText = `
@@ -39,15 +37,19 @@ export default function MenuModal(props: { handleModal: () => void }) {
         />
       </div>
       <section className={style.userSection}>
-        <div className={style.user} onClick={handleLogin}>
+        <div className={style.user} onClick={session ? undefined : () => router.push("/login")}>
           <UserProfileImg />
-          <div className={style.userSectionTxt}>
-            <p>404님</p>
-            <p>오늘도 좋은 하루입니다.</p>
-          </div>
+          {
+            session ?
+              <div className={style.userSectionTxt}>
+                <p>404님</p>
+                <p>오늘도 좋은 하루입니다.</p>
+              </div>
+              : <p>로그인을 해주세요.</p>
+          }
         </div>
       </section>
-      <BtnSection />
+      <MenuBtnSection />
       <MenuList />
       <div className={style.logoImg}>
         <Image
@@ -58,6 +60,6 @@ export default function MenuModal(props: { handleModal: () => void }) {
           priority
         />
       </div>
-    </section>
+    </section >
   )
 }
