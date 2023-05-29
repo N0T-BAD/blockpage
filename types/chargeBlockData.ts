@@ -15,10 +15,19 @@ export interface ChargeBlockResponse {
 }
 
 export interface BlockPurchase {
-  data: {
+  data: [{
     itemName: string;
     totalAmount: number;
     paymentTime: string;
     blockGainType: string;
-  };
+  }];
+}
+
+export interface UseBlock {
+  data: [{
+    itemName: string;
+    blockQuantity: number;
+    paymentTime: string;
+    blockLossType: string;
+  }];
 }
