@@ -17,13 +17,23 @@
   padding: 0.3rem 0;
 }
 
+.block {
+  width: 90%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 0 1rem;
+}
+
 .MyBlock p {
   font-size: 1rem;
   color: var(--bp-white);
   font-weight: 500;
   text-align: start;
-  width: 90%;
-  padding: 0 1rem;
+  width: 30%;
+  height: 21px;
+  display: flex;
+  align-items: flex-end;
 }
 
 .MyBuyBlock {
