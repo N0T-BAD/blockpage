@@ -1,8 +1,9 @@
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
-import style from '@/components/pages/mypage/UserNickName.module.css'
-import { ChangeUserDataType, ChangeUserImageDataType, profileskinDataType } from '@/types/changeUserDataType';
 import { useSession } from 'next-auth/react';
+
+import style from '@/components/pages/mypage/UserNickName.module.css'
+import { ChangeUserImageDataType, profileskinDataType } from '@/types/changeUserDataType';
 
 export default function UserProfileImg() {
 

@@ -1,8 +1,8 @@
 import React from 'react'
 import { useRouter } from 'next/router'
+import { signOut, useSession } from 'next-auth/react';
 
 import style from "@/components/modals/menu/Menu.module.css"
-import { signOut, useSession } from 'next-auth/react';
 
 export default function MenuBtnSection() {
 

@@ -1,13 +1,13 @@
 import Image from 'next/image'
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react';
 
 import style from "@/components/modals/menu/Menu.module.css"
 import CloseBtn from '@/components/ui/CloseBtn';
 import UserProfileImg from '@/components/ui/UserProfileImg';
 import MenuList from './MenuList';
 import MenuBtnSection from './MenuBtnSection';
-import { useSession } from 'next-auth/react';
 
 export default function MenuModal(props: { handleModal: () => void }) {
 
