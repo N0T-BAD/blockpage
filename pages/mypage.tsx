@@ -25,3 +25,5 @@ Mypage.getLayout = function getLayout(mypage: React.ReactElement) {
 }
 
 export default Mypage
+
+Mypage.auth = true
