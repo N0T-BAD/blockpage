@@ -1,9 +1,9 @@
 import React from 'react'
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 import style from '@/components/ui/WebtoonCard.module.css'
 import { WebToonListDataType } from '@/types/webtoonDataType';
-import { useRouter } from 'next/router';
 
 export default function WebtoonCard(props: { rank: number, data: WebToonListDataType }) {
 

@@ -1,9 +1,9 @@
 import MenuCategoryLayout from "@/components/layouts/MenuCategoryLayout"
 import ListviewSection from "@/components/pages/listview/ListviewSection"
+import { GetServerSideProps } from "next"
 
 import { webtoonListData } from "@/data/dummy/webtoonData"
 import { WebToonListDataType } from "@/types/webtoonDataType"
-import { GetServerSideProps } from "next"
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const { categoryName } = context.query;

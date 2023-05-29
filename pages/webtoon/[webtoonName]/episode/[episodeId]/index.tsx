@@ -1,8 +1,9 @@
+import { useEffect, useState } from "react";
+
 import EpisodeViewer from "@/components/pages/episodeviewer/EpisodeViewer"
 import FooterViewer from "@/components/pages/episodeviewer/FooterViewer"
 import { webtoonListData } from "@/data/dummy/webtoonData"
 import { EpisodeListDataType, WebToonListDataType } from "@/types/webtoonDataType"
-import { useEffect, useState } from "react";
 
 function EpisodeId(props: { dummyData: WebToonListDataType[], episodeData: EpisodeListDataType }) {
   const episodeData = props.episodeData;
@@ -17,11 +18,11 @@ function EpisodeId(props: { dummyData: WebToonListDataType[], episodeData: Episo
   }, []);
 
   const handleScroll = () => {
-  console.log("window.scrollY : ", window.scrollY)
-  // console.log("window.innerHeight : ", window.innerHeight)
-  // console.log("document.body.offsetHeight : ", document.body.offsetHeight)
-  // console.log("window.scrollY + window.innerHeight : ", window.scrollY + window.innerHeight)
-  // console.log("document.body.offsetHeight - 100 : ", document.body.offsetHeight - 100)
+    console.log("window.scrollY : ", window.scrollY)
+    // console.log("window.innerHeight : ", window.innerHeight)
+    // console.log("document.body.offsetHeight : ", document.body.offsetHeight)
+    // console.log("window.scrollY + window.innerHeight : ", window.scrollY + window.innerHeight)
+    // console.log("document.body.offsetHeight - 100 : ", document.body.offsetHeight - 100)
     if (window.scrollY + window.innerHeight > document.body.offsetHeight - 100) {
       console.log("isViewer : ", isViewer)
       setIsViewer(true);
@@ -35,7 +36,7 @@ function EpisodeId(props: { dummyData: WebToonListDataType[], episodeData: Episo
   return (
     <>
       <EpisodeViewer episodeData={episodeData} />
-      <FooterViewer episodeData={episodeData} dummyData={dummyData} isViewer = {isViewer}/>
+      <FooterViewer episodeData={episodeData} dummyData={dummyData} isViewer={isViewer} />
     </>
   )
 }

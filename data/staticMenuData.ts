@@ -199,7 +199,7 @@ export const staticMenuListData = [
   {
     id: 1,
     name: "요일별 웹툰",
-    link: "/category/week",
+    link: "/category/week/mon",
   },
   {
     id: 2,
