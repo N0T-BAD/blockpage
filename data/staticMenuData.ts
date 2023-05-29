@@ -36,39 +36,39 @@ export const staticTopNavData = [
 
 export const staticWeekNavData = [
   {
-    id: 1,
+    id: 0,
     name: "월",
-    link: "/week?category=1",
+    link: "/category/week/mon",
+  },
+  {
+    id: 1,
+    name: "화",
+    link: "/category/week/tue",
   },
   {
     id: 2,
-    name: "화",
-    link: "/week?category=2",
+    name: "수",
+    link: "/category/week/wed",
   },
   {
     id: 3,
-    name: "수",
-    link: "/week?category=3",
+    name: "목",
+    link: "/category/week/thr",
   },
   {
     id: 4,
-    name: "목",
-    link: "/week?category=4",
+    name: "금",
+    link: "/category/week/fri",
   },
   {
     id: 5,
-    name: "금",
-    link: "/week?category=5",
+    name: "토",
+    link: "/category/week/sat",
   },
   {
     id: 6,
-    name: "토",
-    link: "/week?category=6",
-  },
-  {
-    id: 7,
     name: "일",
-    link: "/week?category=7",
+    link: "/category/week/sun",
   },
 ];
 
