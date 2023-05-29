@@ -34,7 +34,7 @@ const TransectionHistory = () => {
         .then((res) => {
           console.log(res.data)
           setChargeBlock(res.data)
-          console.log(chargeBlock)
+          console.log(chargeBlock.data)
         })
     }
   }
