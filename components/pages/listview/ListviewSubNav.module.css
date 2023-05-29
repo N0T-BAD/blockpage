@@ -1,0 +1,21 @@
+.listviewWrap {
+  padding: 0 1rem;
+}
+
+.listviewContent {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: var(--bp-font-gray);
+}
+
+.listviewContent li {
+  padding: 0 0.8rem;
+}
+
+.active {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--bp-black);
+}

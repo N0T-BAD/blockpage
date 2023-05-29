@@ -10,7 +10,7 @@ import Episode from '../webtoonepisode/Episode';
 import { EpisodeListDataType, WebToonListDataType } from '@/types/webtoonDataType';
 import RatingModal from '@/components/modals/RatingModal';
 
-export default function FooterViewer(props: { episodeData: EpisodeListDataType, dummyData: WebToonListDataType[] }) {
+export default function FooterViewer(props: { episodeData: EpisodeListDataType, dummyData: WebToonListDataType[] , isViewer: boolean}) {
 
   const router = useRouter();
   const { webtoonName } = router.query;
@@ -42,13 +42,13 @@ export default function FooterViewer(props: { episodeData: EpisodeListDataType, 
 
   return (
     <footer className={
-      !viewMore ?
+      !props.isViewer ?
         `${style.viewerFooterWrap} ${style.footerHidden}`
         : nextEpisodeData ? `${style.viewerFooterWrap}`
           : `${style.viewerFooterWrap} ${style.hidden}`
     }>
       {
-        viewMore &&
+        !props.isViewer &&
         <>
           {
             showModal &&

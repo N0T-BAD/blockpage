@@ -1,11 +1,11 @@
 import React from 'react'
 import Image from 'next/image';
-
-import style from '@/components/ui/WebtoonCard.module.css'
-import { webtoonListGetDataType } from '@/types/webtoonDataType';
 import { useRouter } from 'next/router';
 
-export default function WebtoonCard(props: { rank: number, data: webtoonListGetDataType }) {
+import style from '@/components/ui/WebtoonCard.module.css'
+import { WebToonListDataType } from '@/types/webtoonDataType';
+
+export default function WebtoonCard(props: { rank: number, data: WebToonListDataType }) {
 
   const router = useRouter();
   const query = router.query;
@@ -14,7 +14,7 @@ export default function WebtoonCard(props: { rank: number, data: webtoonListGetD
   return (
     <div
       className={style.imgBox}
-      onClick={() => router.push(`/webtoon/${data.webtoonTitle}`)}
+      onClick={() => router.push(`/webtoon/${data.title}`)}
     >
       {
         query.categoryName === 'best' ?
@@ -25,8 +25,8 @@ export default function WebtoonCard(props: { rank: number, data: webtoonListGetD
       }
       <div className={style.contentBox}>
         <Image
-          src={data.webtoonThumbnail}
-          alt={data.webtoonTitle}
+          src={data.titleImg}
+          alt={data.title}
           width={110}
           height={110}
           priority
@@ -49,11 +49,11 @@ export default function WebtoonCard(props: { rank: number, data: webtoonListGetD
                 width={12}
                 height={12}
               />
-              <p className={style.likestxt}>{data.interestCount}</p>
+              <p className={style.likestxt}>{data.likes}</p>
             </div>
           </div>
-          <p className={style.title}>{data.webtoonTitle}</p>
-          <p className={style.creator} >{props.data.creator} / {props.data.illustrator}</p>
+          <p className={style.title}>{data.title}</p>
+          <p className={style.author}>{data.author}</p>
         </div>
       </div>
     </div>

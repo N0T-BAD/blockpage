@@ -8,7 +8,6 @@ export default function DataFetchingLoader(props:{text:string}) {
       <div className={style.loader}>
         <Image src='/assets/images/icons/loading.svg' alt='loading' width={30} height={30} />
       </div>
-      {/* <p>{props.text}</p> */}
     </div>
   )
 }
