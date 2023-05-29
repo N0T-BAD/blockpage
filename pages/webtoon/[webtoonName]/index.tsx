@@ -4,7 +4,6 @@ import WebtoonInfoSection from "@/components/pages/webtoonepisode/WebtoonInfoSec
 import ScrollToTopBtn from "@/components/ui/ScrollToTopBtn"
 import { webtoonListData } from "@/data/dummy/webtoonData"
 import { WebToonListDataType } from "@/types/webtoonDataType"
-import { useRef } from "react"
 
 function Webtoon(props: { data: WebToonListDataType }) {
   const data = props.data;
