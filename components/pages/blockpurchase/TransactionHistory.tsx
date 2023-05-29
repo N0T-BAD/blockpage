@@ -59,10 +59,7 @@ const TransectionHistory = () => {
         },
       })
         .then((res) => {
-          console.log(res.data)
           setUseBlock(res.data)
-          console.log(useBlock)
-          console.log(useBlock.data[0])
         })
         .catch((err) => {
           console.log(err)
@@ -110,9 +107,13 @@ const TransectionHistory = () => {
                         <p className={style.chargeBoxContent}>{chargeItem.blockGainType}</p>
                       </div>
                     </div>
-                    <div className={style.refundBox}>
-                      <button>환불하기</button>
-                    </div>
+                    {chargeItem.blockGainType === "CASH" ? (
+                      <div className={style.refundBox}>
+                        <button>환불하기</button>
+                      </div>
+                    )
+                      : ""
+                    }
                   </div>
                 ))}
               </>
