@@ -1,0 +1,23 @@
+section.chargeresultsection{
+  margin : 18rem 1rem 0 1rem;
+}
+
+.chargeresult{
+  text-align: center;
+}
+
+.chargeresult p {
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 1rem 0;
+}
+
+.chargeresult button {
+  width: 50%;
+  margin: 3rem 0;
+  height: 1.6rem;
+  background-color: var(--bp-primary);
+  border: none;
+  border-radius: 1rem;
+  color: var(--bp-white);
+}

@@ -13,31 +13,22 @@ export default function MainBanner() {
   // }, [])
 
   return (
-    <div className={style.mainBanner}>
-      <div className={style.bannerCardBox}>
-        {mainEventBannerData.map((data: MainBannerType) => (
-          <div className={style.bannerCard} key={data.id}>
-            <div className={style.bannerImg}>
-              <Image src={data.imgUrl} alt={data.name} width={200} height={200} priority />
-            </div>
-            <h2>{data.eventTitle}</h2>
-            <div className={style.line}></div>
-            <p>{data.name}</p>
-            <p className={style.option}>{data.categoryName}</p>
+    // <div className={style.mainBanner}>
+    //   <div className={style.bannerCardBox}>
+    <div className={style.mainbannerbox} data-slick='{"slidesToShow": 3, "slidesToScroll": 3}'>
+      {mainEventBannerData.map((data: MainBannerType) => (
+        <div className={style.bannerCard} key={data.id}>
+          <div className={style.bannerImg}>
+            <Image src={data.imgUrl} alt={data.name} width={200} height={200} priority />
           </div>
-        ))}
-        {mainEventBannerData.map((data: MainBannerType) => (
-          <div className={style.bannerCard} key={data.id}>
-            <div className={style.bannerImg}>
-              <Image src={data.imgUrl} alt={data.name} width={200} height={200} priority />
-            </div>
-            <h2>{data.eventTitle}</h2>
-            <div className={style.line}></div>
-            <p>{data.name}</p>
-            <p className={style.option}>{data.categoryName}</p>
-          </div>
-        ))}
-      </div>
+          <h2>{data.eventTitle}</h2>
+          <div className={style.line}></div>
+          <p>{data.name}</p>
+          <p className={style.option}>{data.categoryName}</p>
+        </div>
+      ))}
     </div>
+    //   </div>
+    // </div>
   )
 }

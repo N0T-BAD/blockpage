@@ -41,8 +41,8 @@
 }
 
 .bannerImg {
-  width: 50vw;
-  height: 150px;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 .bannerImg img {
@@ -52,7 +52,7 @@
 
 .bannerCard h2 {
   margin-top: 1rem;
-  max-width: 100%;
+  /* max-width: 100%; */
   text-align: center;
   font-size: 0.8rem;
   font-family: var(--bp-font);
@@ -99,4 +99,11 @@
   100% {
     transform: translateX(-100%);
   }
+}
+
+.mainbannerbox {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow-x: scroll;
 }

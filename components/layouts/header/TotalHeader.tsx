@@ -13,7 +13,7 @@ export default function TotalHeader() {
 
     useEffect(() => {
         const path = router.pathname;
-        if (path === '/blockcharge') {
+        if (path === '/blockcharge' || path === '/chargeresult' || path === '/completepayment') {
             setTitle('블럭 충전')
         } else if (path === '/authorregister') {
             setTitle('작가 등록')
@@ -44,9 +44,13 @@ export default function TotalHeader() {
         <header className={style.headerSection}>
             <div className={style.TotalHeader}>
                 <div className={style.leftHead}>
-                    <BackBtn
-                        onClick={() => router.back()}
-                    />
+                    {router.pathname === '/completepayment' ?
+                        ""
+                        :
+                        <BackBtn
+                            onClick={() => router.back()}
+                        />
+                    }
                 </div>
                 <div className={style.centerHead}>
                     <p>{title}</p>
