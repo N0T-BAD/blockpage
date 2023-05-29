@@ -31,3 +31,9 @@ export interface UseBlock {
     blockLossType: string;
   }];
 }
+
+export interface TotalBlock {
+  data: {
+    totalBlocks: number;
+  }
+}

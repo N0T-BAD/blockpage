@@ -14,7 +14,7 @@ export default function BlockUsepageHeader() {
             <div className={style.BlockChargeBox}>
                 <div className={style.leftHead}>
                     <BackBtn
-                        onClick={() => router.back()}
+                        onClick={() => router.push("/mypage")}
                     />
                 </div>
                 <div className={style.centerHead}>
