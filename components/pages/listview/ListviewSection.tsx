@@ -13,7 +13,7 @@ export default function ListviewSection(props: { data: webtoonListGetDataType })
   console.log(router.query.categoryName)
 
   return (
-    <section className={router.query.categoryName === 'week' ? `${style.listviewSection} ${style.listviewMargin} ` : `${style.listviewSection}`}>
+    <section className={router.query.categoryName !== 'best' ? `${style.listviewSection} ${style.listviewMargin} ` : `${style.listviewSection}`}>
       <div className={style.CardWrap}>
         {
           data &&

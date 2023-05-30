@@ -6,7 +6,7 @@
   list-style-type: none;
   display: flex;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: var(--bp-font-gray);
 }
 
@@ -15,7 +15,28 @@
 }
 
 .active {
-  font-size: 1.rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  color: var(--bp-black);
+  color: var(--bp-secondary);
+}
+
+.listviewGenreContent {
+  justify-content: flex-start;
+  white-space: nowrap;
+  overflow-x: scroll;
+  font-size: 1rem;
+}
+
+.listviewGenreContent::-webkit-scrollbar {
+  display: none;
+}
+
+ul.listviewGenreContent li {
+  padding: 0 0.5rem;
+}
+
+.listviewGenreContent .active {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--bp-secondary);
 }
