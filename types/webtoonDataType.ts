@@ -1,16 +1,23 @@
 export interface WebToonListDataType {
-  id: number;
-  title: string;
-  author: string;
-  illustrator: string;
-  titleImg: string;
-  views: number;
-  likes: number;
-  week: string;
-  genre: string;
-  summary: string;
-  state: string;
-  episodeData: EpisodeListDataType[];
+  data: {
+    webtoonTitle: string;
+    creator: string;
+    illustrator: string;
+    publicationDays: string;
+    genre: string;
+    webtoonThumbnail: string;
+    episodeViewList: EpisodeViewListType[];
+  };
+  meta: {
+    sort: string;
+  };
+}
+
+export interface EpisodeViewListType {
+  episodeTitle: string;
+  episodeThumbnail: string;
+  uploadDate: string;
+  totalScore: string;
 }
 
 export interface EpisodeListDataType {

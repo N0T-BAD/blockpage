@@ -7,29 +7,37 @@ import LikeViewSection from '@/components/ui/webtoonInfo/LikeViewSection';
 import { WebToonListDataType } from '@/types/webtoonDataType'
 
 export default function WebtoonInfo(props: { data: WebToonListDataType }) {
-
+  const data = props.data.data;
+  console.log(props.data)
   return (
     <>
       {
         <div className={style.bannerwrap}>
           <div className={style.bannerImg}>
-            <Image src={props.data.titleImg} alt={props.data.title} width={600} height={600} priority />
+            <Image src={data.webtoonThumbnail} alt={data.webtoonTitle} width={600} height={600} priority />
           </div>
-          <LikeViewSection
+          {/* <LikeViewSection
             viewHeight={20}
             viewWidth={20}
-            views={props.data.views}
+            views={data.views}
             likeHeight={15}
             likeWidth={15}
-            likes={props.data.likes}
-          />
-          <h2>{props.data.title}</h2>
+            likes={data.likes}
+          /> */}
+          <h2>{data.webtoonTitle}</h2>
           <div className={style.info}>
-            <p>{props.data.week}</p>
-            <p>{props.data.genre}</p>
+            <p>{data.publicationDays}</p>
+            <p>{data.genre}</p>
           </div>
           <div className={style.line}></div>
-          <p className={style.author}>{props.data.author}</p>
+          <div className={style.author}>
+            <p className={style.creator}>{data.creator}</p>
+            {
+              data.illustrator !== "" ?
+                <p className={style.illustrator}>{data.illustrator}</p>
+                : ""
+            }
+          </div>
         </div>
       }
     </>
