@@ -209,12 +209,12 @@ export const staticMenuListData = [
   {
     id: 2,
     name: "장르별 웹툰",
-    link: "/category/genre",
+    link: "/category/genre/0",
   },
   {
     id: 3,
     name: "베스트 웹툰",
-    link: "/category/best",
+    link: "/category/best/0",
   },
   {
     id: 4,

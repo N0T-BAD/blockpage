@@ -37,6 +37,8 @@ export default function TotalHeader() {
             setTitle('에피소드 수정')
         } else if (path === '/completepayment') {
             setTitle('결제 완료')
+        } else if (path === '/game') {
+            setTitle('게임')
         }
     }, [router.pathname])
 
