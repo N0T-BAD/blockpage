@@ -77,4 +77,5 @@
 
 .author p:last-child::before {
   content: '/';
+  padding: 0 0.3rem;
 }

@@ -3,12 +3,13 @@ import { useEffect, useState } from "react";
 import EpisodeViewer from "@/components/pages/episodeviewer/EpisodeViewer"
 import FooterViewer from "@/components/pages/episodeviewer/FooterViewer"
 import { webtoonListData } from "@/data/dummy/webtoonData"
-import { EpisodeListDataType, WebToonListDataType } from "@/types/webtoonDataType"
+import { EpisodeListDataType, EpisodeViewDataType, WebToonListDataType } from "@/types/webtoonDataType"
 import DataFetchingLoader from "@/components/widgets/DataFetchingLoader";
+import axios from "axios";
+import { useRouter } from "next/router";
 
-function EpisodeId(props: { dummyData: WebToonListDataType[], episodeData: EpisodeListDataType }) {
-  const episodeData = props.episodeData;
-  const dummyData = props.dummyData;
+function EpisodeId(props: { data: EpisodeViewDataType }) {
+  const data = props.data;
   const [isViewer, setIsViewer] = useState<boolean>(false);
 
   useEffect(() => {
@@ -29,8 +30,8 @@ function EpisodeId(props: { dummyData: WebToonListDataType[], episodeData: Episo
 
   return (
     <>
-      <EpisodeViewer episodeData={episodeData} />
-      <FooterViewer episodeData={episodeData} dummyData={dummyData} isViewer={isViewer} setIsViewer={setIsViewer} />
+      <EpisodeViewer episodeData={data} />
+      <FooterViewer episodeData={data} isViewer={isViewer} setIsViewer={setIsViewer} />
     </>
   )
 }
@@ -39,16 +40,20 @@ export default EpisodeId
 
 export async function getServerSideProps(context: any) {
 
-  const { webtoonName } = context.query;
+  const { webtoonId } = context.query;
+  const { episodeNumber } = context.query;
   const { episodeId } = context.query;
-  console.log(webtoonName + " " + episodeId);
 
-  const dummyData = webtoonListData;
-  const webtoonData = dummyData.find((item) => item.title === webtoonName);
-  const episodeData = webtoonData?.episodeData.find((item) => item.id === Number(episodeId));
+  console.log(webtoonId)
+  console.log(episodeNumber)
+  console.log(episodeId)
+
+  const res = await axios.get(`https://blockpage.site/webtoon-service/v1/episodes/view?episodeId=${episodeId}&webtoonId=${webtoonId}&episodeNumber=${episodeNumber}`)
+  const data = res.data;
+  console.log(data);
 
   return {
-    props: { dummyData, episodeData }
+    props: { data }
   }
 }
 

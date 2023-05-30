@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import style from '@/components/ui/WebtoonCard.module.css'
-import { WebToonListDataType, webtoonListGetDataType } from '@/types/webtoonDataType';
 
 export default function WebtoonCard(props: { rank: number, data: any }) {
 
@@ -14,7 +13,7 @@ export default function WebtoonCard(props: { rank: number, data: any }) {
   return (
     <div
       className={style.imgBox}
-      onClick={() => router.push(`/webtoon/${data.webtoonTitle}`)}
+      onClick={() => router.push(`/webtoon/${data.webtoonId}`)}
     >
       {
         query.categoryName === 'best' ?
