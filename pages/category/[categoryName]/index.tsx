@@ -1,28 +1,23 @@
-import MenuCategoryLayout from "@/components/layouts/MenuCategoryLayout"
-import ListviewSection from "@/components/pages/listview/ListviewSection"
-import { webtoonListData } from "@/data/dummy/webtoonData"
-
-import { WebToonListDataType, webtoonListGetDataType } from "@/types/webtoonDataType"
 import axios from "axios"
 import { GetServerSideProps } from "next"
 
+import MenuCategoryLayout from "@/components/layouts/MenuCategoryLayout"
+import ListviewSection from "@/components/pages/listview/ListviewSection"
+import { webtoonListGetDataType } from "@/types/webtoonDataType"
+
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
-  const { categoryName } = context.query;
-  const { week } = context.query;
+  const genre = context.query.genre;
+  console.log(genre);
+  console.log(context.query);
 
-  console.log(week);
-
-  axios(`https://blockpage.site/webtoon-service/v1/webtoons?weekdays=${week}`)
-    .then((res) => {
-      console.log(res.data)
-      const data = res.data;
-      return {
-        props: { data }
-      }
-    })
-    .catch((e) => {
-      console.log(`${categoryName} 실패`)
-    });
+  const res = await axios.get(`https://blockpage.site/webtoon-service/v1/webtoons?genre=${0}`)
+  console.log(res.data)
+  const data = res.data;
+  return {
+    props: {
+      data: data,
+    }
+  }
 
   // server에서 데이터 불러와서 서버사이드에서 렌더링하기 위해 데이터 받아오기
   // const res = fetch(`http://localhost:3000/api/category/${categoryName}`);
@@ -48,23 +43,18 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
   //     props: { data }
   //   }
   // }
-  const data = "";
-  return {
-    props: { data }
-  }
 }
 
 function Category(props: { data: webtoonListGetDataType }) {
-
   return (
     <ListviewSection data={props.data} />
   )
 }
 
-Category.getLayout = function getLayout(week: React.ReactElement) {
+Category.getLayout = function getLayout(genre: React.ReactElement) {
   return (
     <MenuCategoryLayout>
-      {week}
+      {genre}
     </MenuCategoryLayout>
   )
 }

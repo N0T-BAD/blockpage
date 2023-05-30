@@ -1,5 +1,5 @@
 .listviewWrap {
-  padding: 0 1rem;
+  padding: 0.5rem 1rem;
 }
 
 .listviewContent {
@@ -15,7 +15,7 @@
 }
 
 .active {
-  font-size: 1.3rem;
+  font-size: 1.rem;
   font-weight: 700;
   color: var(--bp-black);
 }

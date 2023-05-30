@@ -25,6 +25,7 @@ export default function WebtoonCard(props: { rank: number, data: any }) {
       }
       <div className={style.contentBox}>
         <Image
+          className={style.webtoonThumbnail}
           src={data.webtoonThumbnail}
           alt={data.webtoonTitle}
           width={110}
@@ -53,7 +54,14 @@ export default function WebtoonCard(props: { rank: number, data: any }) {
             </div>
           </div>
           <p className={style.title}>{data.webtoonTitle}</p>
-          <p className={style.author}>{data.creator}</p>
+          <div className={style.author}>
+            <p className={style.creator}>{data.creator}</p>
+            {
+              data.illustrator !== "" ?
+                <p className={style.illustrator}>{data.illustrator}</p>
+                : ""
+            }
+          </div>
         </div>
       </div>
     </div>
