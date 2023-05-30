@@ -3,9 +3,9 @@ import style from '@/components/pages/blockcharge/BlockChargeMiddleSection.modul
 import BlockCharge from '@/components/pages/blockcharge/BlockCharge'
 
 export default function BlockChargeMiddleSection() {
-    return (
-        <section className={style.BlockChargeMiddleSection}>
-            <BlockCharge />
-        </section>
-    )
+  return (
+    <section className={style.BlockChargeMiddleSection}>
+      <BlockCharge />
+    </section>
+  )
 }

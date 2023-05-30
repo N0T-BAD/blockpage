@@ -49,9 +49,17 @@ export default function TotalHeader() {
                     {router.pathname === '/completepayment' ?
                         ""
                         :
-                        <BackBtn
-                            onClick={() => router.back()}
-                        />
+                        <>
+                            {router.pathname === '/blockcharge' ?
+                                <BackBtn
+                                    onClick={() => router.push('/mypage')}
+                                />
+                                :
+                                <BackBtn
+                                    onClick={() => router.back()}
+                                />
+                            }
+                        </>
                     }
                 </div>
                 <div className={style.centerHead}>

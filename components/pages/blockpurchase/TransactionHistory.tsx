@@ -13,8 +13,8 @@ const TransectionHistory = () => {
   const [chargeBlock, setChargeBlock] = useState<BlockPurchase>(
     {
       data: [{
-        itemName: '',
-        totalAmount: 0,
+        orderId: '',
+        blockQuantity: 0,
         paymentTime: '',
         blockGainType: '',
       }],
@@ -98,12 +98,12 @@ const TransectionHistory = () => {
                     <div className={style.subhistorybox}>
                       <p>{chargeItem.paymentTime}</p>
                       <div className={style.chargeBlockBox}>
-                        <p>상품명</p>
-                        <p className={style.chargeBoxContent}>{chargeItem.itemName}</p>
+                        <p>주문 번호</p>
+                        <p className={style.chargeBoxContent}>{chargeItem.orderId}</p>
                       </div>
                       <div className={style.chargeBlockBox}>
-                        <p>충전 금액</p>
-                        <p className={style.chargeBoxContent}>{chargeItem.totalAmount}</p>
+                        <p>블럭 개수</p>
+                        <p className={style.chargeBoxContent}>{chargeItem.blockQuantity} 개</p>
                       </div>
                       <div className={style.chargeBlockBox}>
                         <p>충전 타입</p>
