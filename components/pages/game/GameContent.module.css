@@ -1,0 +1,32 @@
+.gameSection {
+  margin-top: 6rem;
+  padding: 0 1.5rem;
+}
+
+.nameTxt {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.gameDiv {
+  width: 100%;
+  height: 20rem;
+  margin: 1rem 0;
+  border: 0.1rem solid var(--bp-line-gray);
+}
+
+.btnDiv {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn {
+  width: 5rem;
+  height: 2rem;
+  border-radius: 2rem;
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--bp-white);
+  background-color: var(--bp-blue);
+}
