@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Image from 'next/image'
 
 import style from '@/components/pages/webtoonepisode/WebtoonInfo.module.css'
@@ -14,16 +14,16 @@ export default function WebtoonInfo(props: { data: WebToonListDataType }) {
       {
         <div className={style.bannerwrap}>
           <div className={style.bannerImg}>
-            <Image src={data.webtoonThumbnail} alt={data.webtoonTitle} width={600} height={600} priority />
+            <Image src={data.webtoonMainImage} alt={data.webtoonTitle} width={600} height={600} priority />
           </div>
-          {/* <LikeViewSection
+          <LikeViewSection
             viewHeight={20}
             viewWidth={20}
             views={data.views}
             likeHeight={15}
             likeWidth={15}
-            likes={data.likes}
-          /> */}
+            likes={data.interestCount}
+          />
           <h2>{data.webtoonTitle}</h2>
           <div className={style.info}>
             <p>{data.publicationDays}</p>

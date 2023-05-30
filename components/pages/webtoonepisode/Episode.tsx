@@ -1,19 +1,23 @@
 import React from 'react'
+import Image from 'next/image'
+import moment from 'moment'
 
 import style from '@/components/pages/webtoonepisode/Episode.module.css'
-import Image from 'next/image'
 
 export default function Episode(props: {
-  id: number,
+  id?: number,
   subject: string,
   thumbnail: string,
-  rating: number,
-  date: string,
+  rating?: number,
+  date?: string,
 }) {
+
+  const date = moment(props.date).format('YYYY-MM-DD');
+
   return (
     <>
       {
-        <div key={props.id} className={style.episode}>
+        <div className={style.episode}>
           <div className={style.episodeImg}>
             <Image
               src={props.thumbnail}
@@ -26,8 +30,12 @@ export default function Episode(props: {
           <div className={style.episodeContents}>
             <p className={style.subject}>{props.subject}</p>
             <div className={style.episodeOption}>
-              <p className={style.rating}>평점 {props.rating}</p>
-              <p className={style.date}>{props.date}</p>
+              {props.date &&
+                <>
+                  <p className={style.rating}>평점 {props.rating}</p>
+                  <p className={style.date}>{date}</p>
+                </>
+              }
             </div>
           </div>
         </div>

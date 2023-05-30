@@ -1,22 +1,24 @@
 import Image from 'next/image'
 import React from 'react'
 
-import { EpisodeListDataType } from '@/types/webtoonDataType'
+import { EpisodeViewDataType, ImagesType } from '@/types/webtoonDataType'
 import style from '@/components/pages/episodeviewer/EpisodeViewer.module.css'
 
-export default function EpisodeViewer(props: { episodeData: EpisodeListDataType }) {
+export default function EpisodeViewer(props: { episodeData: EpisodeViewDataType }) {
+  const data = props.episodeData.data;
+  console.log(data);
   return (
     <section className={style.viewer}>
       {
-        props.episodeData.imgUrls.map((item) => (
-          <div className={style.episodeImg} key={item.id}>
-          <Image
-            src={item.imgUrl}
-            alt={`episode${item.id}`}
-            width={390}
-            height={400}
-            priority
-          />
+        data.images.map((item: ImagesType, index) => (
+          <div className={style.episodeImg} key={index}>
+            <Image
+              src={item.imageUrl}
+              alt={`episode image ${index}`}
+              width={390}
+              height={500}
+              priority
+            />
           </div>
         ))
       }

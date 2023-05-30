@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
@@ -7,22 +6,23 @@ import style from '@/components/pages/episodeviewer/FooterViewer.module.css'
 import BackBtn from '@/components/ui/BackBtn';
 import CloseBtn from '@/components/ui/CloseBtn';
 import Episode from '../webtoonepisode/Episode';
-import { EpisodeListDataType, WebToonListDataType } from '@/types/webtoonDataType';
+import { EpisodeViewDataType } from '@/types/webtoonDataType';
 import RatingModal from '@/components/modals/RatingModal';
 
-export default function FooterViewer(props: { episodeData: EpisodeListDataType, dummyData: WebToonListDataType[], isViewer: boolean, setIsViewer: React.Dispatch<React.SetStateAction<boolean>> }) {
+export default function FooterViewer(props: { episodeData: EpisodeViewDataType, isViewer: boolean, setIsViewer: React.Dispatch<React.SetStateAction<boolean>> }) {
 
   const router = useRouter();
-  const { webtoonName } = router.query;
+  const data = props.episodeData.data;
+
+  const { webtoonId } = router.query;
   const { episodeId } = router.query;
+  const { episodeNumber } = router.query;
 
   const [showModal, setShowModal] = useState(false);
   const [isRating, setIsRating] = useState(false);
 
-  const nextEpisodeId = Number(episodeId) + 1;
-
-  const webtoonData = props.dummyData.find((item) => item.title === webtoonName);
-  const nextEpisodeData = webtoonData?.episodeData.find((item) => item.id === nextEpisodeId);
+  const nextId = Number(episodeId) + 1;
+  const nextNumber = Number(episodeNumber) + 1;
 
   const handleShowRating = () => {
     setShowModal(!showModal);
@@ -33,67 +33,66 @@ export default function FooterViewer(props: { episodeData: EpisodeListDataType, 
     setShowModal(!showModal);
   }
 
-  console.log(isRating);
+  console.log(data.nextEpisodeThumbnail);
 
   return (
     <>
-      <footer className={
-        !props.isViewer ?
-          `${style.viewerFooterWrap}`
-          : `${style.viewerFooterWrap} ${style.view}`
-      }>
-        <>
-          {
-            showModal &&
-            <RatingModal
-              handleShowRating={handleShowRating}
-              handleIsRating={handleIsRating}
+      {
+        showModal &&
+        <RatingModal
+          handleShowRating={handleShowRating}
+          handleIsRating={handleIsRating}
+        />
+      }
+      <footer
+        className={
+          props.isViewer ? `${style.viewerFooterWrap} ${style.view}` : `${style.viewerFooterWrap}`
+        }
+      >
+        <div className={style.top}>
+          <div className={style.ratingBtn} onClick={isRating ? undefined : handleShowRating}>
+            <p>★</p>
+            <p>{data.rating}</p>
+            {
+              isRating ?
+                <p>참여완료</p>
+                : <p>별점주기</p>
+            }
+          </div>
+          <div className={style.close}>
+            <CloseBtn
+              width={20}
+              height={20}
+              onClick={() => props.setIsViewer(false)}
             />
-          }
-          <div className={style.top}>
-            <div className={style.ratingBtn} onClick={isRating ? undefined : handleShowRating}>
-              <p>★</p>
-              <p>{props.episodeData.rating}</p>
-              {
-                isRating ?
-                  <p>참여완료</p>
-                  : <p>별점주기</p>
-              }
-            </div>
-            <div className={style.close}>
-              <CloseBtn
-                width={20}
-                height={20}
-                onClick={() => props.setIsViewer(false)}
-              />
-            </div>
           </div>
-          <div className={style.authorSection}>
-            <div className={style.authorMent}>
-              <p>작가의 말</p>
-              <p>{webtoonData && webtoonData?.author}</p>
-            </div>
-            <div className={style.authorComment}>
-              <p>{props.episodeData.authorComment}</p>
-            </div>
+        </div>
+        <div className={style.authorSection}>
+          <div className={style.authorMent}>
+            <p>작가의 말</p>
+            <p>{data.author}</p>
           </div>
-          {
-            nextEpisodeData &&
+          <div className={style.authorComment}>
+            <p>{data.authorWords}</p>
+          </div>
+        </div>
+        {
+          data.nextEpisodeThumbnail !== "" ?
             <div
               className={style.nextEpisode}
-              onClick={() => router.push(`/webtoon/${webtoonName}/episode/${nextEpisodeId}`)}
+              onClick={() => router.push(`/webtoon/${webtoonId}/episode/${nextNumber}/episode/${nextId}`)}
             >
               <p className={style.nextTxt}>다음화</p>
               <Episode
-                id={nextEpisodeData.id}
-                subject={nextEpisodeData.subject}
-                thumbnail={nextEpisodeData.thumbnail}
-                rating={nextEpisodeData.rating}
-                date={nextEpisodeData.date}
+                subject={data.nextEpisodeTitle}
+                thumbnail={data.nextEpisodeThumbnail}
               />
             </div>
-          }
-        </>
+            :
+            <div>
+              <p>마지막화입니다.</p>
+            </div>
+        }
       </footer >
       <NavFooter />
     </>
@@ -102,8 +101,9 @@ export default function FooterViewer(props: { episodeData: EpisodeListDataType, 
 
 const NavFooter = () => {
   const router = useRouter();
-  const { webtoonName } = router.query;
+  const { webtoonId } = router.query;
   const { episodeId } = router.query;
+  const { episodeNumber } = router.query;
 
   const [isViewer, setIsViewer] = useState<boolean>(false);
 
@@ -134,7 +134,7 @@ const NavFooter = () => {
           onClick={() => router.back()}
         />
       </div>
-      <div className={style.btn} onClick={() => router.push(`/webtoon/${webtoonName}/episode/${episodeId}/comment`)}>
+      <div className={style.btn} onClick={() => router.push(`/webtoon/${webtoonId}/episode/${episodeId}/episode/${episodeNumber}/comment`)}>
         <Image
           src={'/assets/images/icons/comment.svg'}
           alt="commentBtnIcon"
@@ -143,14 +143,7 @@ const NavFooter = () => {
           priority
         />
       </div>
-      <div className={style.btn} onClick={() => router.push(`/webtoon/${webtoonName}`)}>
-        <Image
-          src={'/assets/images/icons/list.svg'}
-          alt="listBtnIcon"
-          width={25}
-          height={22}
-          priority
-        />
+      <div className={style.btn}>
       </div>
     </div>
   )

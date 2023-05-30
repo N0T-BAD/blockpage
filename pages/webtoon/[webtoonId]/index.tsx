@@ -32,7 +32,7 @@ export default Webtoon
 export async function getServerSideProps(context: any) {
 
   const { webtoonId } = context.query;
-  const sort = 'ASC';
+  const sort = 'DESC';
   console.log(webtoonId)
 
   const res = await axios.get(`https://blockpage.site/webtoon-service/v1/episodes?webtoonId=${webtoonId}&sort=${sort}`)

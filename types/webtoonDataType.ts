@@ -3,9 +3,12 @@ export interface WebToonListDataType {
     webtoonTitle: string;
     creator: string;
     illustrator: string;
+    description: string;
     publicationDays: string;
     genre: string;
-    webtoonThumbnail: string;
+    webtoonMainImage: string;
+    views: number;
+    interestCount: number;
     episodeViewList: EpisodeViewListType[];
   };
   meta: {
@@ -14,10 +17,29 @@ export interface WebToonListDataType {
 }
 
 export interface EpisodeViewListType {
+  episodeId: number;
+  episodeNumber: number;
   episodeTitle: string;
   episodeThumbnail: string;
   uploadDate: string;
-  totalScore: string;
+  totalScore: number;
+}
+
+export interface EpisodeViewDataType {
+  data: {
+    images: ImagesType[];
+    episodeId: number;
+    commentCount: number;
+    rating: number;
+    author: string;
+    authorWords: string;
+    nextEpisodeTitle: string;
+    nextEpisodeThumbnail: string;
+  };
+}
+
+export interface ImagesType {
+  imageUrl: string;
 }
 
 export interface EpisodeListDataType {
