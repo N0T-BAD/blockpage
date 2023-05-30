@@ -20,11 +20,13 @@ export interface BlockPurchase {
     blockQuantity: number;
     paymentTime: string;
     blockGainType: string;
+    validState: boolean;
   }];
 }
 
 export interface UseBlock {
   data: [{
+    totalAmount?: number;
     orderId: string;
     blockQuantity: number;
     paymentTime: string;
@@ -42,5 +44,6 @@ export interface TotalBlock {
 export interface RefundBlock {
   data: [{
     orderId: string;
+    validState: boolean;
   }];
 }
