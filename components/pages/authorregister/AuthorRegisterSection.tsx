@@ -8,7 +8,7 @@ export default function AuthorRegisterSection() {
 
 
   const [inputData, setInputData] = useState<authorNicknameDataType>({
-    creator_nickname: '',
+    creatorNickname: '',
   });
 
   return (

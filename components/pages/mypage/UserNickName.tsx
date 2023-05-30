@@ -31,7 +31,7 @@ export default function UserNickName() {
 
   const [authorNickName, setauthorNickName] = useState<authorNicknameDataType>(
     {
-      creator_nickname: '',
+      creatorNickname: '',
     }
   );
 
@@ -43,14 +43,14 @@ export default function UserNickName() {
   };
 
   // useEffect(() => {
-  //     axios.get('http://localhost:3000/api/v1/members?type=nickname')
+  //     ('http://localhost:3000/api/v1/members?type=nickname')
   //         .then((res) => {
   //             setUserNickname(res.data);
   //         })
   // }, [])
 
   // useEffect(() => {
-  //     axios.get('http://localhost:3000/api/v1/members?type=author')
+  //     ('http://localhost:3000/api/v1/members?type=author')
   //         .then((res) => {
   //             setAuthorNickname(res.data);
   //         })

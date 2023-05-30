@@ -2,7 +2,7 @@ import React from 'react'
 import style from '@/components/pages/authorregister/AuthorNicknameAgreement.module.css'
 import { useRouter } from 'next/router';
 import { authorNicknameDataType } from '@/types/authorNameDataType';
-import axios from 'axios';
+import { useSession } from 'next-auth/react';
 
 interface ChildProps {
   inputData: authorNicknameDataType;
@@ -12,23 +12,36 @@ interface ChildProps {
 export default function AuthorNicknameAgreement({ inputData, setInputData }: ChildProps) {
 
   const router = useRouter();
+  console.log(inputData.creatorNickname)
 
-  const handleAuthorSignup = () => {
-    axios.post('http://localhost:3000/api/v1/members?type=author', {
-      creator_nickname: inputData.creator_nickname,
-    })
-      .then((res) => {
-        if (res.data === true) {
-          alert("작가 등록이 완료되었습니다.")
-          router.push('/authorworkslist')
-        } else {
-          alert('작가 등록에 실패하였습니다.');
-        }
-      })
-      .catch((err) => {
-        alert("서버 에러가 발생하였습니다.")
-      })
-  }
+  const { data: session } = useSession()
+  // const role = sessionStorage.getItem('role');
+
+  const handleAuthorSignup = async () => {
+    try {
+      const formData = new FormData();
+      formData.append('requestMember', JSON.stringify({ creatorNickname: inputData.creatorNickname }));
+
+      const res = await fetch('https://blockpage.site/member-service/v1/members?type=author', {
+        method: 'PUT',
+        body: formData,
+        headers: {
+          memberId: session?.email || '',
+        },
+
+      });
+
+      if (res.status === 200) {
+        alert('작가 등록이 완료되었습니다.');
+        router.push('/authorworkslist');
+      } else {
+        alert('작가 등록에 실패하였습니다.');
+      }
+    } catch (err) {
+      console.log(err);
+      alert('작가 등록에 실패하였습니다.');
+    }
+  };
 
   return (
     <>
@@ -39,7 +52,7 @@ export default function AuthorNicknameAgreement({ inputData, setInputData }: Chi
       </div>
       <div className={style.AuthorButton}>
         <div className={style.AuthorSignupButtonBox}>
-          <button className={style.AuthorSignupButton} onClick={handleAuthorSignup}>작가 등록</button>
+          <button type="button" className={style.AuthorSignupButton} onClick={handleAuthorSignup}>작가 등록</button>
         </div>
       </div>
     </>
