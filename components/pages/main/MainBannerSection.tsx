@@ -30,7 +30,7 @@ export default function MainBannerSection(props: { data: MainBannerType }) {
     const data = props.data;
 
     const sliderSettings = {
-        dots: true,
+        dots: false,
         infinite: true,
         speed: 500,
         slidesToShow: 1,
@@ -50,7 +50,6 @@ export default function MainBannerSection(props: { data: MainBannerType }) {
                             <div className={style.bannerImg}>
                                 <Image src={data.imgUrl} alt={data.name} width={200} height={200} priority />
                             </div>
-                            {/* <h2>{data.eventTitle}</h2> */}
                             <div className={style.line}></div>
                             <p>{data.name}</p>
                             <p className={style.option}>{data.categoryName}</p>

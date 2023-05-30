@@ -1,10 +1,5 @@
-import NextAuth, {
-  DefaultSession,
-  DefaultUser,
-  NextAuthOptions,
-  User,
-} from "next-auth";
-import KakaoProvider from "next-auth/providers/kakao";
+import NextAuth, { DefaultSession, DefaultUser, NextAuthOptions, User } from 'next-auth';
+import KakaoProvider from 'next-auth/providers/kakao';
 
 declare module "next-auth" {
   export interface Session extends DefaultSession {
@@ -26,15 +21,15 @@ declare module "next-auth" {
 }
 export const authOptions: NextAuthOptions = {
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
   },
   jwt: {
-    secret: "secret",
+    secret: 'secret',
   },
   providers: [
     KakaoProvider({
-      clientId: process.env.KAKAO_CLIENT_ID || ("" as string),
-      clientSecret: process.env.KAKAO_CLIENT_SECRET || ("" as string),
+      clientId: process.env.KAKAO_CLIENT_ID || '' as string,
+      clientSecret: process.env.KAKAO_CLIENT_SECRET || '' as string,
     }),
   ],
   pages: {
@@ -66,6 +61,7 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
   },
+
 };
 
 export default NextAuth(authOptions);
