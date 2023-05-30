@@ -3,9 +3,9 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import style from '@/components/ui/WebtoonCard.module.css'
-import { WebToonListDataType } from '@/types/webtoonDataType';
+import { WebToonListDataType, webtoonListGetDataType } from '@/types/webtoonDataType';
 
-export default function WebtoonCard(props: { rank: number, data: WebToonListDataType }) {
+export default function WebtoonCard(props: { rank: number, data: any }) {
 
   const router = useRouter();
   const query = router.query;
@@ -14,7 +14,7 @@ export default function WebtoonCard(props: { rank: number, data: WebToonListData
   return (
     <div
       className={style.imgBox}
-      onClick={() => router.push(`/webtoon/${data.title}`)}
+      onClick={() => router.push(`/webtoon/${data.webtoonTitle}`)}
     >
       {
         query.categoryName === 'best' ?
@@ -25,8 +25,9 @@ export default function WebtoonCard(props: { rank: number, data: WebToonListData
       }
       <div className={style.contentBox}>
         <Image
-          src={data.titleImg}
-          alt={data.title}
+          className={style.webtoonThumbnail}
+          src={data.webtoonThumbnail}
+          alt={data.webtoonTitle}
           width={110}
           height={110}
           priority
@@ -49,11 +50,18 @@ export default function WebtoonCard(props: { rank: number, data: WebToonListData
                 width={12}
                 height={12}
               />
-              <p className={style.likestxt}>{data.likes}</p>
+              <p className={style.likestxt}>{data.interestCount}</p>
             </div>
           </div>
-          <p className={style.title}>{data.title}</p>
-          <p className={style.author}>{data.author}</p>
+          <p className={style.title}>{data.webtoonTitle}</p>
+          <div className={style.author}>
+            <p className={style.creator}>{data.creator}</p>
+            {
+              data.illustrator !== "" ?
+                <p className={style.illustrator}>{data.illustrator}</p>
+                : ""
+            }
+          </div>
         </div>
       </div>
     </div>

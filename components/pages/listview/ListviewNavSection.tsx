@@ -24,7 +24,9 @@ export default function ListviewNavSection() {
               item.link === categoryName ? null :
                 <li
                   key={item.id}
-                  onClick={item.link === 'week' ? () => router.push(`/category/${item.link}/mon`) : () => router.push(`/category/${item.link}`)}
+                  onClick={
+                    () => router.push(`/category/${item.link}/0`)
+                  }
                 >
                   {item.name}
                 </li>

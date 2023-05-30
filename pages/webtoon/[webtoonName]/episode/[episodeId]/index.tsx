@@ -19,7 +19,6 @@ function EpisodeId(props: { dummyData: WebToonListDataType[], episodeData: Episo
   }, []);
 
   const handleScroll = () => {
-    console.log("window.scrollY : ", window.scrollY)
     if (window.scrollY + window.innerHeight > document.body.offsetHeight - 100) {
       console.log("isViewer : ", isViewer)
       setIsViewer(true);
@@ -28,7 +27,6 @@ function EpisodeId(props: { dummyData: WebToonListDataType[], episodeData: Episo
     }
   };
 
-
   return (
     <>
       <EpisodeViewer episodeData={episodeData} />
@@ -36,14 +34,6 @@ function EpisodeId(props: { dummyData: WebToonListDataType[], episodeData: Episo
     </>
   )
 }
-
-// EpisodeId.getLayout = function getLayout(episodeViewer: React.ReactElement) {
-//   return (
-//     <Layout>
-//       {episodeViewer}
-//     </Layout>
-//   )
-// }
 
 export default EpisodeId
 
@@ -62,10 +52,8 @@ export async function getServerSideProps(context: any) {
   }
 }
 
-
-
-EpisodeId.auth = {
-  // role: "admin",
-  loading: <DataFetchingLoader text="load" />,
-  unauthorized: '/login', // redirect to this url
-}
+// EpisodeId.auth = {
+//   // role: "admin",
+//   loading: <DataFetchingLoader text="load" />,
+//   unauthorized: '/login', // redirect to this url
+// }

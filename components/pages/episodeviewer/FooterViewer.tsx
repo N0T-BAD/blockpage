@@ -10,7 +10,7 @@ import Episode from '../webtoonepisode/Episode';
 import { EpisodeListDataType, WebToonListDataType } from '@/types/webtoonDataType';
 import RatingModal from '@/components/modals/RatingModal';
 
-export default function FooterViewer(props: { episodeData: EpisodeListDataType, dummyData: WebToonListDataType[] , isViewer: boolean, setIsViewer: React.Dispatch<React.SetStateAction<boolean>>}) {
+export default function FooterViewer(props: { episodeData: EpisodeListDataType, dummyData: WebToonListDataType[], isViewer: boolean, setIsViewer: React.Dispatch<React.SetStateAction<boolean>> }) {
 
   const router = useRouter();
   const { webtoonName } = router.query;
@@ -37,12 +37,11 @@ export default function FooterViewer(props: { episodeData: EpisodeListDataType, 
 
   return (
     <>
-    <footer className={
-      !props.isViewer ?
-        `${style.viewerFooterWrap}`
-        : `${style.viewerFooterWrap} ${style.view}`
-    }>
-     
+      <footer className={
+        !props.isViewer ?
+          `${style.viewerFooterWrap}`
+          : `${style.viewerFooterWrap} ${style.view}`
+      }>
         <>
           {
             showModal &&
@@ -65,7 +64,7 @@ export default function FooterViewer(props: { episodeData: EpisodeListDataType, 
               <CloseBtn
                 width={20}
                 height={20}
-                onClick={()=>props.setIsViewer(false)}
+                onClick={() => props.setIsViewer(false)}
               />
             </div>
           </div>
@@ -95,8 +94,8 @@ export default function FooterViewer(props: { episodeData: EpisodeListDataType, 
             </div>
           }
         </>
-    </footer >
-    <NavFooter />
+      </footer >
+      <NavFooter />
     </>
   )
 }
@@ -112,14 +111,13 @@ const NavFooter = () => {
     const handleTouch = (e: TouchEvent) => {
       if (e.touches[0].clientY > 100) {
         setIsViewer(true);
-      } 
+      }
     };
     window.addEventListener("touchmove", handleTouch);
     return () => {
       window.removeEventListener("touchmove", handleTouch);
     };
   }, []);
-
 
   // interval 3s for slide down
   useEffect(() => {

@@ -38,75 +38,80 @@ export const staticWeekNavData = [
   {
     id: 0,
     name: "월",
-    link: "/category/week/mon",
+    link: "/category/week/0",
   },
   {
     id: 1,
     name: "화",
-    link: "/category/week/tue",
+    link: "/category/week/1",
   },
   {
     id: 2,
     name: "수",
-    link: "/category/week/wed",
+    link: "/category/week/2",
   },
   {
     id: 3,
     name: "목",
-    link: "/category/week/thr",
+    link: "/category/week/3",
   },
   {
     id: 4,
     name: "금",
-    link: "/category/week/fri",
+    link: "/category/week/4",
   },
   {
     id: 5,
     name: "토",
-    link: "/category/week/sat",
+    link: "/category/week/5",
   },
   {
     id: 6,
     name: "일",
-    link: "/category/week/sun",
+    link: "/category/week/6",
   },
 ];
 
 export const staticGenreNavData = [
   {
+    id: 0,
+    name: "판타지 드라마",
+    link: "/category/genre/0",
+  },
+  {
     id: 1,
     name: "로맨스",
-    link: "/genre?category=1",
+    link: "/category/genre/1",
   },
   {
     id: 2,
-    name: "액션",
-    link: "/genre?category=2",
+    name: "판타지",
+    link: "/category/genre/2",
   },
   {
     id: 3,
-    name: "무협",
-    link: "/genre?category=3",
+    name: "로맨스 판타지",
+    link: "/category/genre/3",
   },
   {
     id: 4,
-    name: "드라마",
-    link: "/genre?category=4",
+    name: "액션",
+    link: "/category/genre/4",
   },
   {
     id: 5,
-    name: "판타지",
-    link: "/genre?category=5",
+    name: "드라마",
+    link: "/category/genre/5",
   },
   {
     id: 6,
-    name: "로맨스 판타지",
-    link: "/genre?category=6",
+    name: "공포",
+    link: "/category/genre/6",
   },
   {
     id: 7,
-    name: "성인",
-    link: "/genre?category=7",
+    name: "코믹",
+    link: "/category/genre/7",
   },
 ];
 
@@ -199,7 +204,7 @@ export const staticMenuListData = [
   {
     id: 1,
     name: "요일별 웹툰",
-    link: "/category/week/mon",
+    link: "/category/week/0",
   },
   {
     id: 2,
