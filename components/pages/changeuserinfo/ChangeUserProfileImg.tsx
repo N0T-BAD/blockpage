@@ -34,6 +34,7 @@ export default function ChangeUserProfileImg({ profileSkinColor, setProfileSkinC
   const [basicimg, setBasicImg] = useState<profileskinDataType>();
 
 
+
   useEffect(() => {
     setProfileSkinColor(profileSkinColor);
   }, [profileSkinColor, setProfileSkinColor])
@@ -77,42 +78,40 @@ export default function ChangeUserProfileImg({ profileSkinColor, setProfileSkinC
         {/* {userprofileImg?.profileskin ?
             <> */}
         <div className={style.changeuserinfobox}>
-          {BasicImage.map((data) => (
-            <>
-              <div className={style.profileskin}>
-                {userProfileImagePreview &&
-                  <Image src={userProfileImagePreview} className={style.userProfileImagePreview} alt="userProfileImagePreview" width={70} height={70} />
-                }
-                {
-                  profileSkinColor ?
-                    <Image className={style.profileskinbox} src={profileSkinColor.imgurl} alt={profileSkinColor.color} width={70} height={70} key={profileSkinColor.id} />
-                    :
-                    <Image className={style.profileskinbox} src={"/assets/images/profile/purple.svg"} alt={"프로필 스킨"} width={70} height={70} />
-                }
-                <UserIcon />
-              </div>
+          <>
+            <div className={style.profileskin}>
+              {userProfileImagePreview &&
+                <Image src={userProfileImagePreview} className={style.userProfileImagePreview} alt="userProfileImagePreview" width={70} height={70} />
+              }
+              {
+                profileSkinColor ?
+                  <Image className={style.profileskinbox} src={profileSkinColor.imgurl} alt={profileSkinColor.color} width={70} height={70} key={profileSkinColor.id} />
+                  :
+                  <Image className={style.profileskinbox} src={"/assets/images/profile/purple.svg"} alt={"프로필 스킨"} width={70} height={70} />
+              }
+              <UserIcon />
+            </div>
 
-              <div className={style.infobox}>
-                <div className={style.btn_input_box}>
-                  <label className={style.uploadBtn}>
-                    <input type="file" accept="image/*" onChange={handleuserProfileImage} />
-                    <p>upload</p>
-                  </label>
-                  <p className={style.basicimg} onClick={handleBasicImageChange}>기본 이미지 변경</p>
-                </div>
-                <div className={style.btn_input_box}>
-                  <p>닉네임</p>
-                  {userNickname &&
-                    <>
-                      {userNickName.map((data) => (
-                        <input className={style.usernickname2} type='text' defaultValue={data.nickname} onChange={handleChange} key={data.id} />
-                      ))}
-                    </>
-                  }
-                </div>
-              </div >
-            </>
-          ))}
+            <div className={style.infobox}>
+              <div className={style.btn_input_box}>
+                <label className={style.uploadBtn}>
+                  <input type="file" accept="image/*" onChange={handleuserProfileImage} />
+                  <p>upload</p>
+                </label>
+                <p className={style.basicimg} onClick={handleBasicImageChange}>기본 이미지 변경</p>
+              </div>
+              <div className={style.btn_input_box}>
+                <p>닉네임</p>
+                {userNickname &&
+                  <>
+                    {userNickName.map((data) => (
+                      <input className={style.usernickname2} type='text' defaultValue={data.nickname} onChange={handleChange} key={data.id} />
+                    ))}
+                  </>
+                }
+              </div>
+            </div >
+          </>
         </div>
       </div>
     </div>

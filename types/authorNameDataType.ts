@@ -3,5 +3,5 @@ export interface authorNameDataType {
 }
 
 export interface authorNicknameDataType {
-    creator_nickname: string;
+    creatorNickname: string;
 }

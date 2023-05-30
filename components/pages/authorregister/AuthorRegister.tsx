@@ -3,6 +3,7 @@ import style from '@/components/pages/authorregister/AuthorRegister.module.css'
 import { AuthorSignupDataType } from '@/types/authorSignupDataType'
 import { authorNicknameDataType } from '@/types/authorNameDataType'
 import axios from 'axios';
+import { useSession } from 'next-auth/react';
 
 interface ChildProps {
   inputData: authorNicknameDataType;
@@ -10,6 +11,9 @@ interface ChildProps {
 }
 
 export default function AuthorRegister({ inputData, setInputData }: ChildProps) {
+
+  const { data: session } = useSession()
+  // const role = sessionStorage.getItem('role');
 
   const [errMsg, setErrMsg] = useState<AuthorSignupDataType>({
     nicknameErr: '',
@@ -21,7 +25,7 @@ export default function AuthorRegister({ inputData, setInputData }: ChildProps) 
     const { value } = e.target;
     setInputData({
       ...inputData,
-      creator_nickname: value
+      creatorNickname: value
     })
     if (value.length < 2 || value.length > 10) {
       setErrMsg({ ...errMsg, nicknameErr: "작가명은 2자 이상 10자 이하로 입력해주세요." })
@@ -32,40 +36,46 @@ export default function AuthorRegister({ inputData, setInputData }: ChildProps) 
     }
   }
 
-  const handleAuthorRegister = () => {
-    if (inputData.creator_nickname === "") {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (inputData.creatorNickname === "") {
       alert('작가명을 입력해주세요.')
     } else {
-      axios.post('http://localhost:3000/api/v1/members?type=author', {
-        creator_nickname: inputData.creator_nickname,
-      })
-        .then((res) => {
-          if (res.data === true) {
-            alert("사용 가능한 작가명입니다.")
-            setErrMsg({ ...errMsg, nicknameErr: "" })
-          } else if (inputData.creator_nickname.length < 2 || inputData.creator_nickname.length > 10 || regex.test(inputData.creator_nickname)) {
-            alert('사용 불가능한 작가명입니다.');
-            setErrMsg({ ...errMsg, nicknameErr: '이미 사용 중인 작가명입니다.' });
+      axios.get('https://blockpage.site/member-service/v1/members?type=nickname',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            memberId: session?.email,
+            // role: role,
+          },
+          params: {
+            creatorNickname: inputData.creatorNickname,
           }
         })
+        .then((res) => {
+          console.log(res)
+          alert("사용 가능한 작가명입니다.")
+        })
         .catch((err) => {
-          alert("서버 에러가 발생하였습니다.")
+          if (err.response.status === 409) {
+            alert("이미 사용 중인 작가명입니다.")
+          }
         })
     }
   }
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className={style.AuthorRegister}>
         <div className={style.AuthorName}>
           <p>작가명 :</p>
         </div>
         <div className={style.AuthorInput}>
-          <input type='text' name="creator_nickname" placeholder='작가명을 입력해주세요.' onChange={handleNicknameChange} />
+          <input type='text' name="creatorNickname" placeholder='작가명을 입력해주세요.' onChange={handleNicknameChange} />
           <p>{errMsg.nicknameErr}</p>
         </div>
         <div className={style.AuthorButton}>
-          <button onClick={handleAuthorRegister}>중복 체크</button>
+          <button type='submit'>중복 체크</button>
         </div>
       </div>
     </form>
