@@ -2,6 +2,7 @@ import React from 'react'
 import style from '@/components/pages/authorregister/AuthorNicknameAgreement.module.css'
 import { useRouter } from 'next/router';
 import { authorNicknameDataType } from '@/types/authorNameDataType';
+import axios from 'axios';
 import { useSession } from 'next-auth/react';
 
 interface ChildProps {
@@ -18,30 +19,74 @@ export default function AuthorNicknameAgreement({ inputData, setInputData }: Chi
   // const role = sessionStorage.getItem('role');
 
   const handleAuthorSignup = async () => {
+
     try {
       const formData = new FormData();
-      formData.append('requestMember', JSON.stringify({ creatorNickname: inputData.creatorNickname }));
+      formData.append("creatorNickname", inputData.creatorNickname);
+
+      console.log(inputData.creatorNickname)
+      console.log(session)
+
+      //put - formdata 못 넣음. 데이터를 넣을때 사용.
+
+      console.log(formData.get('creatorNickname'))
 
       const res = await fetch('https://blockpage.site/member-service/v1/members?type=author', {
         method: 'PUT',
         body: formData,
         headers: {
           memberId: session?.email || '',
+          // role: role,
         },
+      })
 
-      });
-
-      if (res.status === 200) {
-        alert('작가 등록이 완료되었습니다.');
-        router.push('/authorworkslist');
+      const data = await res.json()
+      console.log(data)
+      if (data) {
+        alert("작가 등록이 완료되었습니다.")
+        router.push('/authorworkslist')
       } else {
         alert('작가 등록에 실패하였습니다.');
       }
     } catch (err) {
-      console.log(err);
+      console.log(err)
       alert('작가 등록에 실패하였습니다.');
     }
-  };
+
+    // try {
+    //   const formData = new FormData();
+    //   formData.append("creatorNickname", inputData.creatorNickname);
+
+    //   console.log(inputData.creatorNickname)
+    //   console.log(session)
+
+    //   //put - formdata 못 넣음. 데이터를 넣을때 사용.
+
+    //   console.log(formData.get('creatorNickname'))
+
+    //   const res = await fetch('https://blockpage.site/member-service/v1/members/test?type=author', {
+    //     method: 'POST',
+    //     body: formData,
+    //     headers: {
+    //       memberId: session?.email || '',
+    //       // role: role,
+    //     },
+    //   })
+
+    //   const data = await res.json()
+    //   console.log(data)
+    //   if (data) {
+    //     alert("작가 등록이 완료되었습니다.")
+    //     router.push('/authorworkslist')
+    //   } else {
+    //     alert('작가 등록에 실패하였습니다.');
+    //   }
+    // } catch (err) {
+    //   console.log(err)
+    //   alert('작가 등록에 실패하였습니다.');
+    // }
+  }
+
 
   return (
     <>

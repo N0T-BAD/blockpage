@@ -1,6 +1,7 @@
 export interface ChangeUserDataType {
-  id: number;
-  nickname: string;
+  data: {
+    nickname: string;
+  }
 }
 
 export interface ChangeUserImageDataType {
@@ -12,4 +13,10 @@ export interface profileskinDataType {
   id: number;
   color: string;
   imgurl: string;
+}
+
+export interface UserImgData {
+  data: {
+    profileImage: string;
+  }
 }

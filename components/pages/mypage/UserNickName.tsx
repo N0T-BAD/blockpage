@@ -4,10 +4,11 @@ import UserIcon from './UserIcon'
 import UserProfileImg from '@/components/ui/UserProfileImg'
 import axios from 'axios'
 import { ChangeUserDataType, profileskinDataType } from '@/types/changeUserDataType'
-import { authorNicknameDataType } from '@/types/authorNameDataType'
+import { authorNickname, authorNicknameDataType } from '@/types/authorNameDataType'
 import { useRouter } from 'next/router'
-import { userNickName } from '@/data/userNickName'
-import { creatorNickName } from '@/data/creatorNickName'
+import { useSession } from 'next-auth/react'
+import { authornickname, usernickname } from '@/state/mypage/usernickname'
+import { useRecoilState } from 'recoil'
 
 // interface ChildProps {
 //     profileSkinColor: profileskinDataType;
@@ -16,31 +17,52 @@ import { creatorNickName } from '@/data/creatorNickName'
 
 export default function UserNickName() {
 
+  const { data: session } = useSession()
+  // const role = sessionStorage.getItem('role');
   const router = useRouter();
 
   const RouterUrl = router.pathname === "/webtooninfo" || router.pathname === "/authorworkslist" || router.pathname === "/webtoondelete" || router.pathname === "/episodelist" || router.pathname === "/episodeinfo"
     || router.pathname === "/episodedelete" || router.pathname === '/changewebtoon';
 
 
-  const [userNickname, setUserNickname] = useState<ChangeUserDataType>(
-    {
-      id: 0,
-      nickname: '',
-    }
-  );
+  const [userNickname, setUserNickname] = useRecoilState<ChangeUserDataType>(usernickname);
 
-  const [authorNickName, setauthorNickName] = useState<authorNicknameDataType>(
-    {
-      creatorNickname: '',
-    }
-  );
+  const [authorNickName, setauthorNickName] = useRecoilState<authorNickname>(authornickname);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserNickname({
-      ...userNickname,
-      nickname: e.target.value,
-    });
-  };
+  console.log(authorNickName.data.creatorNickname)
+
+  useEffect(() => {
+    axios.get('https://blockpage.site/member-service/v1/members?type=detail', {
+      headers: {
+        memberId: session?.email || '',
+        // role: role,
+      },
+    })
+      .then((res) => {
+        const nickname = res.data.data.nickname;
+        const creatorNickname = res.data.data.creatorNickname;
+        setUserNickname({
+          data: {
+            nickname,
+          },
+        });
+        setauthorNickName({
+          data: {
+            creatorNickname,
+          },
+        });
+        console.log(res.data)
+        console.log(userNickname)
+        console.log(authorNickName)
+      })
+  }, [])
+
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setUserNickname({
+  //     ...userNickname,
+  //     nickname: e.target.value,
+  //   });
+  // };
 
   // useEffect(() => {
   //     ('http://localhost:3000/api/v1/members?type=nickname')
@@ -63,25 +85,24 @@ export default function UserNickName() {
         <div className={style.usernicknameImg}>
           <UserProfileImg />
           {RouterUrl ?
-            authorNickName &&
             <>
-              {creatorNickName.map((data) => (
+              {
+                authorNickName.data.creatorNickname &&
                 <>
-                  <p className={style.usernickname}>{data.creator_nickname}</p>
+                  <>
+                    <p className={style.usernickname}>{authorNickName.data.creatorNickname}</p>
+                  </>
                 </>
-              ))}
+              }
             </>
             : <>
-              {userNickname &&
+              {userNickname.data.nickname &&
                 <>
-                  {userNickName.map((data) => (
-                    <p className={style.usernickname} key={data.id}>{data.nickname}</p>
-                  ))}
+                  <p className={style.usernickname}>{userNickname.data.nickname}</p>
                 </>
               }
             </>
           }
-
           <UserIcon />
         </div>
       </div>

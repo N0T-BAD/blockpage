@@ -10,24 +10,24 @@ import Swal from 'sweetalert2';
 export default function MypageHeader() {
 
   const router = useRouter();
-  
+
   return (
     <header className={style.headerSection}>
       <div className={style.MypageHeader}>
         <div className={style.leftHead}>
           <BackBtn
-            onClick={() => router.back()}
+            onClick={() => router.push('/')}
           />
         </div>
         <div className={style.centerHead}>
           <p>마이페이지</p>
         </div>
         {
-          router.asPath !== '/mypage' ? <div className={style.rightHead} onClick={()=>signOut()}>
+          router.pathname === '/mypage' ? <div className={style.rightHead} onClick={() => signOut()}>
             <Image src={"/assets/images/icons/logout.svg"} alt={"로그아웃"} width={19.5} height={19.5} />
-          </div> : 
-          <div className={style.rightHead}>
-          </div>
+          </div> :
+            <div className={style.rightHead}>
+            </div>
         }
       </div>
     </header >
