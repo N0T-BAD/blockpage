@@ -6,7 +6,6 @@ import axios from 'axios';
 import { authorNameDataType } from '@/types/authorNameDataType';
 import { useRecoilState } from 'recoil';
 import Image from 'next/image';
-import { webtoonAuthorState } from '@/state/webtoon/webtoonAuthorState';
 import { useSession } from 'next-auth/react';
 import { authornickname } from '@/state/mypage/usernickname';
 
@@ -19,8 +18,8 @@ export default function AuthorWebtoonInfoForm() {
   const [webtoonInfoData, setWebtoonInfoData] = useState<authorWebtoonInfoDataType>({
     webtoonTitle: '',
     webtoonDescription: '',
-    genre: '',
-    publicationDays: '',
+    genre: 0,
+    publicationDays: 0,
     illustrator: '',
   });
 
@@ -60,11 +59,11 @@ export default function AuthorWebtoonInfoForm() {
   //         .then(data => setAuthorName(data))
   // }, [setAuthorName])
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInput = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     const { name, value } = e.target;
     setWebtoonInfoData({
       ...webtoonInfoData,
-      [name]: value
+      [name]: Number(value) || value,
     });
   };
 
@@ -90,9 +89,11 @@ export default function AuthorWebtoonInfoForm() {
     }
   };
 
+  console.log(webtoonInfoData)
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (webtoonInfoData.webtoonTitle === '' || webtoonInfoData.webtoonDescription === '' || webtoonInfoData.genre === '' || webtoonInfoData.publicationDays === '') {
+    if (webtoonInfoData.webtoonTitle === '' || webtoonInfoData.webtoonDescription === '' || !webtoonInfoData.genre || !webtoonInfoData.publicationDays) {
       alert('웹툰 정보를 입력해주세요.')
     } else if (!WebtoonThumbnailImagePreview || !WebtoonMainImagePreview) {
       alert('웹툰 이미지를 입력해주세요.')
@@ -106,8 +107,8 @@ export default function AuthorWebtoonInfoForm() {
       }
       formData.append('webtoonTitle', webtoonInfoData.webtoonTitle);
       formData.append('webtoonDescription', webtoonInfoData.webtoonDescription);
-      formData.append('genre', webtoonInfoData.genre);
-      formData.append('publicationDays', webtoonInfoData.publicationDays);
+      formData.append('genre', String(webtoonInfoData.genre));
+      formData.append('publicationDays', String(webtoonInfoData.publicationDays));
       if (webtoonInfoData.illustrator === '') {
         formData.append('illustrator', authorName.data.creatorNickname);
       } else if (webtoonInfoData.illustrator !== undefined) {
@@ -117,12 +118,6 @@ export default function AuthorWebtoonInfoForm() {
 
       axios.post('https://blockpage.site/webtoon-service/v1/demands?target=webtoon&type=enroll',
         formData,
-        // webtoonTitle: webtoonInfoData.webtoonTitle,
-        // webtoonDescription: webtoonInfoData.webtoonDescription,
-        // genre: webtoonInfoData.genre,
-        // publicationDays: webtoonInfoData.publicationDays,
-        // illustrator: authorName.data.creatorNickname,
-        // creatorNickname: authorName.data.creatorNickname,
         {
           headers: {
             'Content-Type': 'multipart/form-data',
@@ -140,6 +135,27 @@ export default function AuthorWebtoonInfoForm() {
     }
   };
 
+  const genreOptions = [
+    { label: '판타지 드라마', value: 0 },
+    { label: '로맨스', value: 1 },
+    { label: '판타지', value: 2 },
+    { label: '로맨스 판타지', value: 3 },
+    { label: '액션', value: 4 },
+    { label: '드라마', value: 5 },
+    { label: '공포', value: 6 },
+    { label: '코믹', value: 7 },
+  ];
+
+  const dayOptions = [
+    { label: '월', value: 0 },
+    { label: '화', value: 1 },
+    { label: '수', value: 2 },
+    { label: '목', value: 3 },
+    { label: '금', value: 4 },
+    { label: '토', value: 5 },
+    { label: '일', value: 6 },
+  ];
+
   return (
     <>
       <div className={style.WebtoonInfoWrap}>
@@ -154,11 +170,25 @@ export default function AuthorWebtoonInfoForm() {
           </div>
           <div className={style.InfoBox}>
             <p>장르 : </p>
-            <input type="text" name="genre" onChange={handleInput} />
+            <select name="genre" onChange={handleInput}>
+              <option value="">장르를 선택하세요</option>
+              {genreOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
           </div>
           <div className={style.InfoBox}>
             <p>요일 : </p>
-            <input type="text" name="publicationDays" onChange={handleInput} />
+            <select name="publicationDays" onChange={handleInput}>
+              <option value="">요일을 선택하세요</option>
+              {dayOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
           </div>
           {authorName.data &&
             <div className={style.InfoBox}>

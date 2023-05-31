@@ -8,13 +8,35 @@ import CloseBtn from '@/components/ui/CloseBtn';
 import UserProfileImg from '@/components/ui/UserProfileImg';
 import MenuList from './MenuList';
 import MenuBtnSection from './MenuBtnSection';
+import axios from 'axios';
+import { userprofile } from '@/state/mypage/userprofile';
+import { UserImgData } from '@/types/changeUserDataType';
+import { useRecoilState } from 'recoil';
 
 export default function MenuModal(props: { handleModal: () => void }) {
 
   const router = useRouter();
   const { data: session } = useSession();
+  const [userImg, setUserImg] = useRecoilState<UserImgData>(userprofile);
 
   useEffect(() => {
+    if (session) {
+      axios.get('https://blockpage.site/member-service/v1/members?type=detail', {
+        headers: {
+          memberId: session?.email || '',
+          // role: role,
+        },
+      })
+        .then((res) => {
+          const profileImage = res.data.data.profileImage;
+          setUserImg({
+            data: {
+              profileImage,
+            }
+          })
+          console.log(res.data)
+        })
+    }
     document.body.style.cssText = `
       position: fixed; 
       top: -${window.scrollY}px;
@@ -38,7 +60,7 @@ export default function MenuModal(props: { handleModal: () => void }) {
       </div>
       <section className={style.userSection}>
         <div className={style.user} onClick={session ? undefined : () => router.push("/login")}>
-          <UserProfileImg />
+          <UserProfileImg userImg={userImg} setUserImg={setUserImg} />
           {
             session ?
               <div className={style.userSectionTxt}>

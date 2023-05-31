@@ -1,8 +1,8 @@
 export interface authorWebtoonInfoDataType {
     webtoonTitle: string;
     webtoonDescription: string;
-    genre: string;
-    publicationDays: string;
+    genre: number;
+    publicationDays: number;
     illustrator?: string;
 }
 
