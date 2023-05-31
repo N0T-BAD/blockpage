@@ -106,8 +106,9 @@ const TransectionHistory = () => {
                 icon: 'success',
                 title: '환불이 완료되었습니다.',
                 showConfirmButton: false,
-                timer: 1500
+                timer: 3000
               })
+              window.location.reload();
             }
           })
       } else if (result.isDenied) {
@@ -163,7 +164,7 @@ const TransectionHistory = () => {
                             <button onClick={() => handlerefund(index)}>환불하기</button>
                           </div>
                           :
-                          <div className={style.refundBox}>
+                          <div className={style.refund}>
                             <button>환불완료</button>
                           </div>
                         }

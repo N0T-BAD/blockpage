@@ -4,9 +4,10 @@ import { atom } from 'recoil';
 const blockrefund = atom<RefundBlock>({
   key: 'blockrefund',
   default: {
-    data: {
+    data: [{
       orderId: '',
-    }
+      validState: false,
+    }]
   }
 });
 

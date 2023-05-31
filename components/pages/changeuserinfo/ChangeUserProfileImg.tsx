@@ -1,10 +1,12 @@
-import { ChangeUserDataType, profileskinDataType } from '@/types/changeUserDataType';
+import { ChangeUserDataType, UserImgData, profileskinDataType } from '@/types/changeUserDataType';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import UserIcon from '../mypage/UserIcon';
 import { BasicImage, userNickName } from '@/data/userNickName';
 import style from '@/components/pages/mypage/UserNickName.module.css'
+import axios from 'axios';
+import { useSession } from 'next-auth/react';
 
 interface ChildProps {
   profileSkinColor: profileskinDataType;
@@ -12,6 +14,9 @@ interface ChildProps {
 }
 
 export default function ChangeUserProfileImg({ profileSkinColor, setProfileSkinColor }: ChildProps) {
+
+  const { data: session } = useSession()
+  // const role = sessionStorage.getItem('role');
 
   // const [userprofileImg, setUserProfileImg] = useState<ChangeUserImageDataType>(
   //   {
@@ -26,8 +31,17 @@ export default function ChangeUserProfileImg({ profileSkinColor, setProfileSkinC
 
   const [userNickname, setUserNickname] = useState<ChangeUserDataType>(
     {
-      id: 0,
-      nickname: '',
+      data: {
+        nickname: '',
+      }
+    }
+  );
+
+  const [userImg, setUserImg] = useState<UserImgData>(
+    {
+      data: {
+        profileImage: '',
+      }
     }
   );
 
@@ -50,6 +64,23 @@ export default function ChangeUserProfileImg({ profileSkinColor, setProfileSkinC
   //     })
   // }, [])
 
+  useEffect(() => {
+    if (userImg.data.profileImage) {
+      axios.get('https://blockpage.site/member-service/v1/members?type=detail', {
+        headers: {
+          memberId: session?.email || '',
+          // role: role,
+        },
+      })
+        .then((res) => {
+          setUserImg(res.data);
+          console.log(res.data)
+          console.log(userImg)
+          console.log(userImg.data.profileImage)
+        })
+    }
+  }, [])
+
   const handleuserProfileImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const reader = new FileReader();
@@ -63,8 +94,9 @@ export default function ChangeUserProfileImg({ profileSkinColor, setProfileSkinC
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserNickname({
-      ...userNickname,
-      nickname: e.target.value,
+      data: {
+        nickname: e.target.value,
+      }
     });
   };
 
@@ -80,8 +112,14 @@ export default function ChangeUserProfileImg({ profileSkinColor, setProfileSkinC
         <div className={style.changeuserinfobox}>
           <>
             <div className={style.profileskin}>
-              {userProfileImagePreview &&
-                <Image src={userProfileImagePreview} className={style.userProfileImagePreview} alt="userProfileImagePreview" width={70} height={70} />
+              {userImg.data.profileImage ?
+                <Image src={userImg.data.profileImage} className={style.userProfileImagePreview} alt="userImg" width={70} height={70} />
+                :
+                <>
+                  {userProfileImagePreview &&
+                    <Image src={userProfileImagePreview} className={style.userProfileImagePreview} alt="userProfileImagePreview" width={70} height={70} />
+                  }
+                </>
               }
               {
                 profileSkinColor ?
