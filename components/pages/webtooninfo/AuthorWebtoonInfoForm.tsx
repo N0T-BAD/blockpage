@@ -8,6 +8,7 @@ import { useRecoilState } from 'recoil';
 import Image from 'next/image';
 import { webtoonAuthorState } from '@/state/webtoon/webtoonAuthorState';
 import { useSession } from 'next-auth/react';
+import { authornickname } from '@/state/mypage/usernickname';
 
 export default function AuthorWebtoonInfoForm() {
 
@@ -28,11 +29,7 @@ export default function AuthorWebtoonInfoForm() {
   const [WebtoonThumbnailImagePreview, setWebtoonThumbnailImagePreview] = useState<string>();
   const [WebtoonMainImagePreview, setWebtoonMainImagePreview] = useState<string>();
 
-  const [authorName, setAuthorName] = useState<authorNameDataType>({
-    data: {
-      creatorNickname: '',
-    }
-  });
+  const [authorName, setAuthorName] = useRecoilState<authorNameDataType>(authornickname);
 
   useEffect(() => {
     axios.get('https://blockpage.site/member-service/v1/members?type=detail', {
@@ -42,7 +39,12 @@ export default function AuthorWebtoonInfoForm() {
       },
     })
       .then((res) => {
-        setAuthorName(res.data);
+        const creatorNickname = res.data.data.creatorNickname;
+        setAuthorName({
+          data: {
+            creatorNickname,
+          },
+        });
         console.log(res.data)
         console.log(authorName)
       })
@@ -112,12 +114,18 @@ export default function AuthorWebtoonInfoForm() {
         formData.append('illustrator', webtoonInfoData.illustrator);
       }
       formData.append('creatorNickname', authorName.data.creatorNickname);
-      console.log(formData.get('webtoonTitle'))
 
       axios.post('https://blockpage.site/webtoon-service/v1/demands?target=webtoon&type=enroll',
         formData,
+        // webtoonTitle: webtoonInfoData.webtoonTitle,
+        // webtoonDescription: webtoonInfoData.webtoonDescription,
+        // genre: webtoonInfoData.genre,
+        // publicationDays: webtoonInfoData.publicationDays,
+        // illustrator: authorName.data.creatorNickname,
+        // creatorNickname: authorName.data.creatorNickname,
         {
           headers: {
+            'Content-Type': 'multipart/form-data',
             email: session?.email,
             // role: role,
           },

@@ -7,6 +7,8 @@ import { ChangeUserDataType, profileskinDataType } from '@/types/changeUserDataT
 import { authorNickname, authorNicknameDataType } from '@/types/authorNameDataType'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
+import { authornickname, usernickname } from '@/state/mypage/usernickname'
+import { useRecoilState } from 'recoil'
 
 // interface ChildProps {
 //     profileSkinColor: profileskinDataType;
@@ -23,17 +25,9 @@ export default function UserNickName() {
     || router.pathname === "/episodedelete" || router.pathname === '/changewebtoon';
 
 
-  const [userNickname, setUserNickname] = useState<ChangeUserDataType>({
-    data: {
-      nickname: '',
-    }
-  });
+  const [userNickname, setUserNickname] = useRecoilState<ChangeUserDataType>(usernickname);
 
-  const [authorNickName, setauthorNickName] = useState<authorNickname>({
-    data: {
-      creatorNickname: '',
-    }
-  });
+  const [authorNickName, setauthorNickName] = useRecoilState<authorNickname>(authornickname);
 
   console.log(authorNickName.data.creatorNickname)
 
@@ -45,8 +39,18 @@ export default function UserNickName() {
       },
     })
       .then((res) => {
-        setUserNickname(res.data);
-        setauthorNickName(res.data);
+        const nickname = res.data.data.nickname;
+        const creatorNickname = res.data.data.creatorNickname;
+        setUserNickname({
+          data: {
+            nickname,
+          },
+        });
+        setauthorNickName({
+          data: {
+            creatorNickname,
+          },
+        });
         console.log(res.data)
         console.log(userNickname)
         console.log(authorNickName)
