@@ -144,10 +144,6 @@ const TransectionHistory = () => {
                   <div className={style.chargeBox} key={index}>
                     <div className={style.subhistorybox}>
                       <p>{chargeItem.paymentTime}</p>
-                      {/* <div className={style.chargeBlockBox}>
-                        <p>주문 번호</p>
-                        <p className={style.chargeBoxContent}>{chargeItem.orderId}</p>
-                      </div> */}
                       <div className={style.chargeBlockBox}>
                         <p>블럭 개수</p>
                         <p className={style.chargeBoxContent}>{chargeItem.blockQuantity} 개</p>

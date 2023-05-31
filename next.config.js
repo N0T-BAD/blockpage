@@ -13,7 +13,10 @@ const nextConfig = {
       use: ["@svgr/webpack"]
     });
     return config;
-  }
-}
+  },
+  images: {
+    domains: ['k.kakaocdn.net'],
+  },
+};
 
 module.exports = nextConfig
