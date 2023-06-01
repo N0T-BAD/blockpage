@@ -1,20 +1,34 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
+import axios from 'axios'
 
 import style from '@/components/pages/comment/GetComment.module.css'
 import Separator from '@/components/ui/Separator'
 import CommentUserInfo from './CommentUserInfo'
-
-import { CommentDataMapType } from '@/types/commentDataType'
-import { replyDatas } from '@/data/dummy/commentData'
+import { CommentDataType, CommentUserDataType } from '@/types/commentDataType'
 import CommentInput from './CommentInput'
 
 export default function Comment(props: {
-  commentData: CommentDataMapType,
+  nickNameData: CommentUserDataType,
+  commentData: CommentDataType,
   // isAuthor: boolean,
 }) {
   const commentData = props.commentData;
+  const [replyData, setReplyData] = useState<CommentDataType[]>([]);
   console.log(commentData)
+
+  useEffect(() => {
+    axios.get(`https://blockpage.site/comment-service/v1/comments/reply/${commentData.commentId}`)
+      .then((res) => {
+        console.log(res);
+        setReplyData(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }, []);
+
+
 
   // const [replyData] = useState<CommentDataType[]>(replyDatas);
   const [openReply, setOpenReply] = useState<boolean>(false);
@@ -70,8 +84,8 @@ export default function Comment(props: {
               }
               <div className={style.topIcon}>
                 {
-                  // !commentData.isReply &&
-                  // !commentData.pin &&
+                  !commentData.childId &&
+                  !commentData.pin &&
                   // props.isAuthor ?
                   <div onClick={handlePush}>
                     <Image
@@ -98,9 +112,11 @@ export default function Comment(props: {
             <p className={style.commentTxt}>{commentData.content}</p>
             <div className={style.bottomSection}>
               {
-                commentData.replyCount > 0
-                  ? <p onClick={handleView}>답글 {commentData.replyCount}</p>
-                  : commentData.childId ? <p></p> : <p>답글 달기</p>
+                commentData.replyCount > 0 ?
+                  <p onClick={handleView}>답글 {commentData.replyCount}</p> :
+                  commentData.childId ?
+                    <p></p> :
+                    <p>답글 달기</p>
               }
               <div className={style.bottomIcon}>
                 <div onClick={handleReport}>
@@ -143,23 +159,26 @@ export default function Comment(props: {
         </>
       }
       {
-        // openReply &&
-        // <section className={style.replyCommentSection}>
-        //   <div className={style.replySection}>
-        //     {
-        //       commentData.childId &&
-        //       replyData.map((childData) => (
-        //         commentData.parentsId === childData.parentsId &&
-        //         <Comment
-        //           key={childData.id}
-        //           data={childData}
-        //         // isAuthor={props.isAuthor}
-        //         />
-        //       ))
-        //     }
-        //     {/* <CommentInput /> */}
-        //   </div>
-        // </section>
+        openReply &&
+        <section className={style.replyCommentSection}>
+          <div className={style.replySection}>
+            {
+              replyData &&
+              replyData.map((childData) => (
+                commentData.parentsId === childData.parentsId &&
+                <Comment
+                  key={childData.commentId}
+                  nickNameData={props.nickNameData}
+                  commentData={childData}
+                // isAuthor={props.isAuthor}
+                />
+              ))
+            }
+            <CommentInput
+              nickNameData={props.nickNameData}
+            />
+          </div>
+        </section>
       }
     </>
   )

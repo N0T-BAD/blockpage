@@ -1,14 +1,13 @@
-import CommentLayout from "@/components/layouts/CommentLayout"
-import { NextPageWithLayout } from "@/pages/_app"
-
-import CommentInputSection from "@/components/pages/comment/CommentInputSection"
-import GetCommentSection from "@/components/pages/comment/GetCommentSection"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { useSession } from "next-auth/react"
+
+import CommentLayout from "@/components/layouts/CommentLayout"
+import CommentInputSection from "@/components/pages/comment/CommentInputSection"
+import GetCommentSection from "@/components/pages/comment/GetCommentSection"
 import { CommentDataType, CommentUserDataType } from "@/types/commentDataType"
 
-function Comment(props: { commentData: CommentDataType }) {
+function Comment(props: { commentData: CommentDataType[] }) {
 
   const { data: session } = useSession();
   const [nickNameData, setNickNameData] = useState<CommentUserDataType>({
@@ -16,24 +15,7 @@ function Comment(props: { commentData: CommentDataType }) {
       nickname: '',
     },
   });
-  const [commentData, setCommentData] = useState<CommentDataType>({
-    data: [
-      {
-        episodeId: 0,
-        commentId: 0,
-        dateTime: '',
-        parentsId: '',
-        parentsNickname: '',
-        content: '',
-        likesCount: 0,
-        dislikesCount: 0,
-        replyCount: 0,
-        report: false,
-        erase: false,
-        pin: false,
-      }
-    ]
-  });
+  const [commentData, setCommentData] = useState<CommentDataType[]>([]);
 
   useEffect(() => {
     setCommentData(props.commentData);
@@ -73,7 +55,8 @@ export async function getServerSideProps(context: any) {
   const { episodeId } = context.query;
 
   const res = await axios.get(`https://blockpage.site/comment-service/v1/comments/${episodeId}`)
-  const commentData = res.data;
+  const commentData = res.data.data;
+  console.log(res.data)
 
   return {
     props: { commentData }
