@@ -20,3 +20,9 @@ export interface CommentUserDataType {
     nickname: string;
   };
 }
+
+export interface ParentsCommentType {
+  parentsId: string;
+  parentsNickname: string;
+  parentsCommentId: number;
+}

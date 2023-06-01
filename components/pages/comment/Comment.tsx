@@ -5,16 +5,30 @@ import axios from 'axios'
 import style from '@/components/pages/comment/GetComment.module.css'
 import Separator from '@/components/ui/Separator'
 import CommentUserInfo from './CommentUserInfo'
-import { CommentDataType, CommentUserDataType } from '@/types/commentDataType'
+import { CommentDataType, CommentUserDataType, ParentsCommentType } from '@/types/commentDataType'
 import CommentInput from './CommentInput'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 export default function Comment(props: {
   nickNameData: CommentUserDataType,
   commentData: CommentDataType,
   // isAuthor: boolean,
 }) {
+  const { data: session } = useSession();
+  const router = useRouter();
+  const { episodeId } = router.query;
   const commentData = props.commentData;
   const [replyData, setReplyData] = useState<CommentDataType[]>([]);
+  const [openReply, setOpenReply] = useState<boolean>(false);
+  const parentsJson: ParentsCommentType = {
+    parentsId: commentData.parentsId,
+    parentsNickname: commentData.parentsNickname,
+    parentsCommentId: commentData.commentId,
+  }
+  const [likeState, setLikeState] = useState<boolean>();
+  const [disLikeState, setDisLikeState] = useState<boolean>();
+
   console.log(commentData)
 
   useEffect(() => {
@@ -28,34 +42,119 @@ export default function Comment(props: {
       })
   }, []);
 
-
-
-  // const [replyData] = useState<CommentDataType[]>(replyDatas);
-  const [openReply, setOpenReply] = useState<boolean>(false);
-
   const handleView = () => {
     setOpenReply(!openReply);
   }
 
   const handlePush = () => {
+    // pin
     console.log("handlePush onClick");
+    axios.patch(`https://blockpage.site/comment-service/v1/comments/${commentData.commentId}`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   const handleDelete = () => {
     console.log("handleDelete onClick");
+    axios.delete(`https://blockpage.site/comment-service/v1/comments/${commentData.commentId}`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   const handleLike = () => {
     console.log("handleLike onClick");
+    if (likeState) {
+      axios.post(`https://blockpage.site/member-service/v1/emotions`, {
+        episodeId: episodeId,
+        commentId: commentData.commentId,
+        emotion: true,
+      }, {
+        headers: {
+          email: session?.email,
+        }
+      })
+        .then((res) => {
+          console.log(res);
+          setLikeState(!likeState);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    } else if (!likeState) {
+      // axios.post(`https://blockpage.site/member-service/v1/emotions${emotionId}`, {
+      //   headers: {
+      //     email: session?.email,
+      //   }
+      // })
+      //   .then((res) => {
+      //     console.log(res);
+      //     setLikeState(!likeState);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   })
+    }
   }
 
   const handleDislike = () => {
     console.log("handleDislike onClick");
+    if (disLikeState) {
+      axios.post(`https://blockpage.site/member-service/v1/emotions`, {
+        episodeId: episodeId,
+        commentId: commentData.commentId,
+        emotion: false,
+      }, {
+        headers: {
+          email: session?.email,
+        }
+      })
+        .then((res) => {
+          console.log(res);
+          setLikeState(!disLikeState);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    } else if (!disLikeState) {
+      // axios.post(`https://blockpage.site/member-service/v1/emotions${emotionId}`, {
+      //   headers: {
+      //     email: session?.email,
+      //   }
+      // })
+      //   .then((res) => {
+      //     console.log(res);
+      //     setLikeState(!disLikeState);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   })
+    }
   }
 
   const handleReport = () => {
     //신고
     console.log("handleDeclaration onClick");
+    axios.post(`https://blockpage.site/comment-service/v1/reports`, {
+      comment_id: commentData.commentId,
+    }, {
+      headers: {
+        memberId: session?.email,
+      }
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   return (
@@ -112,11 +211,12 @@ export default function Comment(props: {
             <p className={style.commentTxt}>{commentData.content}</p>
             <div className={style.bottomSection}>
               {
-                commentData.replyCount > 0 ?
-                  <p onClick={handleView}>답글 {commentData.replyCount}</p> :
-                  commentData.childId ?
-                    <p></p> :
-                    <p>답글 달기</p>
+                // commentData.replyCount > 0 ?
+                <p onClick={handleView}>답글 {commentData.replyCount}</p>
+                // :
+                // commentData.childId ?
+                //   <p></p> :
+                //   <p>답글 달기</p>
               }
               <div className={style.bottomIcon}>
                 <div onClick={handleReport}>
@@ -176,6 +276,7 @@ export default function Comment(props: {
             }
             <CommentInput
               nickNameData={props.nickNameData}
+              parents={parentsJson}
             />
           </div>
         </section>

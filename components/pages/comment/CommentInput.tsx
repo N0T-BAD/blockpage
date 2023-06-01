@@ -1,20 +1,19 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 
 import style from '@/components/pages/comment/CommentInput.module.css'
-import { CommentUserDataType } from '@/types/commentDataType';
+import { CommentUserDataType, ParentsCommentType } from '@/types/commentDataType';
 
-export default function CommentInput(props: { nickNameData: CommentUserDataType }) {
+export default function CommentInput(props: {
+  nickNameData: CommentUserDataType,
+  parents?: ParentsCommentType,
+}) {
   const { data: session } = useSession();
   const router = useRouter();
   const { episodeId } = router.query;
   const nickNameData = props.nickNameData;
-
-  // const email = session?.email || "";
-  // const nickName = props.nickName;
-
   const [btnState, setBtnState] = useState(false);
   const [inputCount, setInputCount] = useState(0);
   const [inputText, setInputText] = useState("");
@@ -27,11 +26,6 @@ export default function CommentInput(props: { nickNameData: CommentUserDataType 
   const handleReg = async () => {
     setBtnState(!btnState);
     setInputCount(0);
-
-    // const encodedMemberId = encodeURIComponent(session?.email);
-    // const encodedNickName = encodeURIComponent(nickNameData);
-
-    // const encodedNickName = Buffer.from(props.nickName, 'utf-8').toString('iso-8859-1');
 
     //댓글등록
     console.log(typeof (Number(episodeId)));
