@@ -13,7 +13,6 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
 
   const router = useRouter();
   const data = props.episodeData.data;
-
   const { webtoonId } = router.query;
   const { episodeId } = router.query;
   const { episodeNumber } = router.query;
@@ -92,12 +91,14 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
             </div>
         }
       </footer >
-      <NavFooter />
+      <NavFooter
+        author={data.author}
+      />
     </>
   )
 }
 
-const NavFooter = () => {
+const NavFooter = (props: { author: string }) => {
   const router = useRouter();
   const { webtoonId } = router.query;
   const { episodeId } = router.query;
@@ -132,7 +133,12 @@ const NavFooter = () => {
           onClick={() => router.back()}
         />
       </div>
-      <div className={style.btn} onClick={() => router.push(`/webtoon/${webtoonId}/episode/${episodeId}/episode/${episodeNumber}/comment`)}>
+      <div className={style.btn} onClick={() => router.push(
+        {
+          pathname: `/webtoon/${webtoonId}/episode/${episodeId}/episode/${episodeNumber}/comment?${props.author}`,
+          query: { pid: props.author },
+        }
+      )}>
         <Image
           src={'/assets/images/icons/comment.svg'}
           alt="commentBtnIcon"
@@ -143,6 +149,6 @@ const NavFooter = () => {
       </div>
       <div className={style.btn}>
       </div>
-    </div>
+    </div >
   )
 }

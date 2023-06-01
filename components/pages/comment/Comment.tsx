@@ -30,6 +30,7 @@ export default function Comment(props: {
   const [disLikeState, setDisLikeState] = useState<boolean>();
 
   console.log(commentData)
+  console.log(session?.email)
 
   useEffect(() => {
     axios.get(`https://blockpage.site/comment-service/v1/comments/reply/${commentData.commentId}`)
@@ -197,26 +198,39 @@ export default function Comment(props: {
                   </div>
                   // : ""
                 }
-                <div onClick={handleDelete}>
-                  <Image
-                    src={"/assets/images/icons/trash.svg"}
-                    alt='쓰레기통'
-                    width={17}
-                    height={17}
-                    priority
-                  />
-                </div>
+                {
+                  session?.email === commentData.childId ?
+                    <div onClick={handleDelete}>
+                      <Image
+                        src={"/assets/images/icons/trash.svg"}
+                        alt='쓰레기통'
+                        width={17}
+                        height={17}
+                        priority
+                      />
+                    </div> :
+                    session?.email === commentData.parentsId ?
+                      <div onClick={handleDelete}>
+                        <Image
+                          src={"/assets/images/icons/trash.svg"}
+                          alt='쓰레기통'
+                          width={17}
+                          height={17}
+                          priority
+                        />
+                      </div>
+                      : ""
+                }
               </div>
             </div>
             <p className={style.commentTxt}>{commentData.content}</p>
             <div className={style.bottomSection}>
               {
-                // commentData.replyCount > 0 ?
-                <p onClick={handleView}>답글 {commentData.replyCount}</p>
-                // :
-                // commentData.childId ?
-                //   <p></p> :
-                //   <p>답글 달기</p>
+                commentData.replyCount > 0 ?
+                  <p onClick={handleView}>답글 {commentData.replyCount}</p> :
+                  commentData.childId ?
+                    <p></p> :
+                    <p>답글 달기</p>
               }
               <div className={style.bottomIcon}>
                 <div onClick={handleReport}>

@@ -2,11 +2,8 @@ import { useEffect, useState } from "react";
 
 import EpisodeViewer from "@/components/pages/episodeviewer/EpisodeViewer"
 import FooterViewer from "@/components/pages/episodeviewer/FooterViewer"
-import { webtoonListData } from "@/data/dummy/webtoonData"
-import { EpisodeListDataType, EpisodeViewDataType, WebToonListDataType } from "@/types/webtoonDataType"
-import DataFetchingLoader from "@/components/widgets/DataFetchingLoader";
+import { EpisodeViewDataType } from "@/types/webtoonDataType"
 import axios from "axios";
-import { useRouter } from "next/router";
 
 function EpisodeId(props: { data: EpisodeViewDataType }) {
   const data = props.data;
