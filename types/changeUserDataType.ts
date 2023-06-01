@@ -10,11 +10,31 @@ export interface ChangeUserImageDataType {
 }
 
 export interface profileskinDataType {
-  imgurl: string;
+  data: {
+    profileSkin: string;
+  }
+}
+
+export interface ChangeProfileSkin {
+  data: [{
+    memberHasProfileSkinId: number;
+    profileSkinDetail: {
+      profileSkinImage: string;
+    }
+  }]
 }
 
 export interface UserImgData {
   data: {
     profileImage: string;
   }
+}
+
+export interface changeProfileSkin {
+  data: [{
+    memberHasProfileSkinId: number;
+    profileSkinDetail: {
+      profileSkinImage: string;
+    }
+  }]
 }
