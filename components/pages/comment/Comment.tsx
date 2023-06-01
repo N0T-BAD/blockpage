@@ -56,8 +56,7 @@ export default function Comment(props: {
             }
             <div className={style.topSection}>
               {
-                commentData.childId &&
-                  commentData.childNickname ?
+                commentData.childNickname ?
                   <>
                     < CommentUserInfo
                       nickname={commentData.childNickname}
@@ -148,13 +147,13 @@ export default function Comment(props: {
         // <section className={style.replyCommentSection}>
         //   <div className={style.replySection}>
         //     {
-        //       replyData &&
+        //       commentData.childId &&
         //       replyData.map((childData) => (
         //         commentData.parentsId === childData.parentsId &&
         //         <Comment
         //           key={childData.id}
         //           data={childData}
-        //           isAuthor={props.isAuthor}
+        //         // isAuthor={props.isAuthor}
         //         />
         //       ))
         //     }

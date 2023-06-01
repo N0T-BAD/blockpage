@@ -18,7 +18,7 @@ export default function CommentInput(props: { nickNameData: CommentUserDataType 
   const [btnState, setBtnState] = useState(false);
   const [inputCount, setInputCount] = useState(0);
   const [inputText, setInputText] = useState("");
-  const maxLength = 300;
+  const maxLength = 200;
 
   const handleBtn = () => {
     setBtnState(!btnState);
@@ -29,7 +29,7 @@ export default function CommentInput(props: { nickNameData: CommentUserDataType 
     setInputCount(0);
 
     // const encodedMemberId = encodeURIComponent(session?.email);
-    const encodedNickName = encodeURIComponent(nickNameData);
+    // const encodedNickName = encodeURIComponent(nickNameData);
 
     // const encodedNickName = Buffer.from(props.nickName, 'utf-8').toString('iso-8859-1');
 
@@ -43,10 +43,10 @@ export default function CommentInput(props: { nickNameData: CommentUserDataType 
     axios.post(`https://blockpage.site/comment-service/v1/comments`, {
       episodeId: episodeId,
       content: inputText,
+      nickname: nickNameData,
     }, {
       headers: {
         memberId: session?.email,
-        nickName: encodedNickName,
       }
     })
       .then((res) => {

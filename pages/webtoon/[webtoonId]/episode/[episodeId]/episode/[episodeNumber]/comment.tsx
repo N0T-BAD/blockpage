@@ -45,7 +45,6 @@ function Comment(props: { commentData: CommentDataType }) {
         memberId: session?.email || '',
       },
     }).then((res) => {
-      console.log(res);
       setNickNameData(res.data.data.nickname);
     }).catch((err) => {
       console.log(err);

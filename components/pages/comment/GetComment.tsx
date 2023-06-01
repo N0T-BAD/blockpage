@@ -6,7 +6,6 @@ import Comment from './Comment';
 
 export default function GetComment(props: { commentData: CommentDataType }) {
   const commentData = props.commentData;
-  console.log(commentData);
   return (
     <>
       {
