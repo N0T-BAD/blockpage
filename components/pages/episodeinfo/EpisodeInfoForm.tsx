@@ -13,14 +13,11 @@ export default function EpisodeInfoForm() {
   const router = useRouter();
 
   const [episodeInfoData, setEpisodeInfoData] = useState<episodeInfoFormDataType>({
-    id: '',
-    title: '',
-    episodetitle: '',
-    episodedescription: '',
-    day: '',
-    authortalk: '',
-    episodeThumbnail: '',
-    episodeImage: '',
+    webtoonId: 0,
+    episodeNumber: 0,
+    episodeTitle: '',
+    uploadDate: '',
+    authorWords: '',
   });
 
   const [webtoonepisode, setWebtoonEpisode] = useState<WebToonDetailDataType>();
@@ -93,7 +90,7 @@ export default function EpisodeInfoForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (episodeInfoData.episodetitle === '' || episodeInfoData.episodedescription === '' || episodeInfoData.day === '' || episodeInfoData.authortalk === '') {
+    if (episodeInfoData.episodeTitle === '' || episodeInfoData.uploadDate === '' || episodeInfoData.authorWords === '') {
       alert('에피소드 정보를 입력해주세요.')
     } else if (!episodeImage) {
       alert('웹툰 이미지를 입력해주세요.')
@@ -101,10 +98,9 @@ export default function EpisodeInfoForm() {
       alert('웹툰 썸네일 이미지를 입력해주세요.')
     } else {
       axios.post('/api/authorwebtooninfo', {
-        episodetitle: episodeInfoData.episodetitle,
-        episodedescription: episodeInfoData.episodedescription,
-        day: episodeInfoData.day,
-        authortalk: episodeInfoData.authortalk,
+        episodetitle: episodeInfoData.episodeTitle,
+        episodedescription: episodeInfoData.uploadDate,
+        day: episodeInfoData.authorWords,
         episodeThumbnailImage: episodeThumbnailImage,
         episodeImage: episodeImage,
       })
@@ -138,10 +134,6 @@ export default function EpisodeInfoForm() {
           <div className={style.episodeInfoBox}>
             <p>에피소드 명 : </p>
             <input type="text" name="episodetitle" onChange={handleInput} />
-          </div>
-          <div className={style.episodeInfoBox}>
-            <p>에피소드 내용 : </p>
-            <input type="text" name="episodedescription" onChange={handleInput} />
           </div>
           <div className={style.episodeInfoBox}>
             <p>업로드 일 : </p>
