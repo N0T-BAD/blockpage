@@ -1,12 +1,9 @@
 export interface episodeInfoFormDataType {
-  id: string;
-  title: string;
-  episodetitle: string;
-  episodedescription: string;
-  day: string;
-  authortalk: string;
-  episodeThumbnail: string;
-  episodeImage: string;
+  webtoonId: number;
+  episodeNumber: number;
+  episodeTitle: string;
+  uploadDate: string;
+  authorWords: string;
 }
 
 export interface changeEpisodeInfoFormDataType {
