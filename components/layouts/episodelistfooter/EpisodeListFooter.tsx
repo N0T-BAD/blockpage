@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router';
 import React from 'react'
 import style from '@/components/layouts/episodelistfooter/EpisodeListFooter.module.css'
+import { WebToonListDataType } from '@/types/webtoonDataType';
 
 export default function EpisodeListFooter() {
   const router = useRouter();
@@ -14,7 +15,7 @@ export default function EpisodeListFooter() {
           width={50}
           height={50}
           priority
-          onClick={() => router.push("/episodeinfo")}
+          onClick={() => router.push(`/episodeinfo`)}
         />
       </div>
     </footer>

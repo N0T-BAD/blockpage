@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
-import axios from 'axios';
-import { WebToonListDataType } from '@/types/webtoonDataType';
-import { NextPageWithLayout } from '@/pages/_app';
-import EpisodeTopSection from '@/components/pages/episodelist/EpisodeTopSection';
-import EpisodeMiddleSection from '@/components/pages/episodelist/EpisodeMiddleSection';
-import EpisodeLayout from '@/components/layouts/episodeheader/EpisodeLayout';
+import { NextPageWithLayout } from "@/pages/_app"
+import EpisodeInfoTopSection from "@/components/pages/episodeinfo/EpisodeInfoTopSection"
+import EpisodeInfoBottomSection from "@/components/pages/episodeinfo/EpisodeInfoBottomSection"
+import TotalLayout from "@/components/layouts/TotalLayout"
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { WebToonListDataType } from "@/types/webtoonDataType";
+import { useSession } from "next-auth/react";
 
 interface EpisodeListProps {
     webtoonId: number;
 }
 
-const EpisodeListPage: NextPageWithLayout<EpisodeListProps> = ({ webtoonId }) => {
+const EpisodeInfo: NextPageWithLayout<EpisodeListProps> = ({ webtoonId }) => {
+
     const { data: session } = useSession();
     const sort = 'DESC';
     const [episodeData, setEpisodeData] = useState<WebToonListDataType>({
@@ -58,21 +59,21 @@ const EpisodeListPage: NextPageWithLayout<EpisodeListProps> = ({ webtoonId }) =>
 
     return (
         <>
-            <EpisodeTopSection />
-            <EpisodeMiddleSection episodeData={episodeData} />
+            <EpisodeInfoTopSection />
+            <EpisodeInfoBottomSection episodeData={episodeData} webtoonId={webtoonId} />
         </>
-    );
-};
-
-EpisodeListPage.getLayout = function getLayout(page: React.ReactElement) {
-    return (
-        <EpisodeLayout webtoonId={page.props.webtoonId}>
-            {page}
-        </EpisodeLayout>
     )
 }
 
-export default EpisodeListPage;
+EpisodeInfo.getLayout = function getLayout(EpisodeInfo: React.ReactElement) {
+    return (
+        <TotalLayout>
+            {EpisodeInfo}
+        </TotalLayout>
+    )
+}
+
+export default EpisodeInfo
 
 export async function getServerSideProps({ query }: any) {
     const webtoonId = parseInt(query.webtoonId as string);

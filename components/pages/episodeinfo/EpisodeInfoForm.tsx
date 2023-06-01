@@ -7,10 +7,17 @@ import { UploadedFile, episodeInfoFormDataType } from '@/types/episodeInfoForm';
 import { WebToonDetailDataType, WebToonListDataType } from '@/types/webtoonDataType';
 import Image from 'next/image';
 import { webtoonListData } from '@/data/dummy/webtoonData';
+import { useSession } from 'next-auth/react';
 
-export default function EpisodeInfoForm() {
+interface EpisodeInfoProps {
+  episodeData: WebToonListDataType;
+  webtoonId: number;
+}
+
+export default function EpisodeInfoForm({ episodeData, webtoonId }: EpisodeInfoProps) {
 
   const router = useRouter();
+  const { data: session } = useSession();
 
   const [episodeInfoData, setEpisodeInfoData] = useState<episodeInfoFormDataType>({
     webtoonId: 0,
@@ -20,30 +27,10 @@ export default function EpisodeInfoForm() {
     authorWords: '',
   });
 
-  const [webtoonepisode, setWebtoonEpisode] = useState<WebToonDetailDataType>();
-
-
-  const [episodeThumbnailImage, setEpisodeThumbnailImage] = useState<File>();
+  const [episodeThumbnailImage, setEpisodeThumbnailImage] = useState<File | null>(null);
   const [episodeImage, setEpisodeImage] = useState<File[]>([]);
   const [episodeThumbnailImagePreview, setEpisodeThumbnailImagePreview] = useState<string>();
   const [episodeImagePreview, setEpisodeImagePreview] = useState<UploadedFile[]>([]);
-
-  useEffect(() => {
-    console.log(episodeInfoData)
-  }, [episodeInfoData])
-
-  // useEffect(() => {
-  //   webtoonListData && setWebtoonEpisode({
-  //     id: webtoonepisode.id,
-  //     title: webtoonepisode.title,
-  //   })
-  // }, [])
-
-  useEffect(() => {
-    axios.post(`/api/authorwebtooninfo/${router.query.id}`)
-      .then(res => res.data)
-      .then(data => setWebtoonEpisode(data))
-  }, [webtoonepisode, router.query.id])
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -51,6 +38,7 @@ export default function EpisodeInfoForm() {
       ...episodeInfoData,
       [name]: value
     });
+    console.log(episodeInfoData)
   };
 
   const handleThumbnailImage = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,26 +78,40 @@ export default function EpisodeInfoForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (episodeInfoData.episodeTitle === '' || episodeInfoData.uploadDate === '' || episodeInfoData.authorWords === '') {
+    if (episodeInfoData.episodeNumber === 0 || episodeInfoData.episodeTitle === '' || episodeInfoData.uploadDate === '' || episodeInfoData.authorWords === '') {
       alert('에피소드 정보를 입력해주세요.')
     } else if (!episodeImage) {
-      alert('웹툰 이미지를 입력해주세요.')
+      alert('에피소드 이미지를 입력해주세요.')
     } else if (!episodeThumbnailImage) {
       alert('웹툰 썸네일 이미지를 입력해주세요.')
     } else {
-      axios.post('/api/authorwebtooninfo', {
-        episodetitle: episodeInfoData.episodeTitle,
-        episodedescription: episodeInfoData.uploadDate,
-        day: episodeInfoData.authorWords,
-        episodeThumbnailImage: episodeThumbnailImage,
-        episodeImage: episodeImage,
-      })
+      const formData = new FormData();
+      formData.append('webtoonId', String(webtoonId));
+      formData.append('episodeNumber', String(episodeInfoData.episodeNumber));
+      formData.append('episodeTitle', episodeInfoData.episodeTitle);
+      formData.append('uploadDate', episodeInfoData.uploadDate);
+      formData.append('authorWords', episodeInfoData.authorWords);
+      if (episodeThumbnailImage) {
+        formData.append('episodeThumbnailImage', episodeThumbnailImage);
+      }
+      episodeImage.forEach((file) => {
+        formData.append('episodeImage', file);
+      });
+      axios.post(`https://blockpage.site/webtoon-service/v1/demands?target=episode&type=enroll`,
+        formData,
+        {
+          headers: {
+            email: session?.email,
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+      )
         .then((res) => {
           console.log(res)
 
           if (res.status === 200) {
-            alert('웹툰 정보가 등록되었습니다.')
-            router.push('/authorworkslist')
+            alert('에피소드 정보가 등록되었습니다.')
+            router.back();
           }
         })
     }
@@ -118,34 +120,32 @@ export default function EpisodeInfoForm() {
   return (
     <>
       <div className={style.WebtoonDeleteInfoWrap}>
-        {webtoonepisode &&
-          <div key={webtoonepisode.id}>
-            <div className={style.webtoonInfoBox}>
-              <p>작품명 : </p>
-              <p className={style.title}>{webtoonepisode.title}</p>
-            </div>
-            <div className={style.webtoonInfoBox} key={webtoonepisode.id}>
-              <p>에피소드 회차 : </p>
-              <p className={style.title}>{webtoonepisode.id} 화</p>
-            </div>
+        {/* {episodeData?.data?.webtoonTitle && (
+          <div className={style.webtoonInfoBox}>
+            <p>작품명 : </p>
+            <p className={style.title}>{episodeData.data.webtoonTitle}</p>
           </div>
-        }
+        )} */}
         <form onSubmit={handleSubmit}>
           <div className={style.episodeInfoBox}>
+            <p>에피소드 회차 : </p>
+            <input type="text" name="episodeNumber" onChange={handleInput} />
+          </div>
+          <div className={style.episodeInfoBox}>
             <p>에피소드 명 : </p>
-            <input type="text" name="episodetitle" onChange={handleInput} />
+            <input type="text" name="episodeTitle" onChange={handleInput} />
           </div>
           <div className={style.episodeInfoBox}>
             <p>업로드 일 : </p>
-            <input type="text" name="day" onChange={handleInput} />
+            <input type="text" name="uploadDate" onChange={handleInput} />
           </div>
           <div className={style.episodeInfoBox}>
             <p>작가의 말 : </p>
-            <input type="text" name="authortalk" onChange={handleInput} />
+            <input type="text" name="authorWords" onChange={handleInput} />
           </div>
           <div className={style.episodeInfoImgBox}>
             <div className={style.labelBox}>
-              <p>회차 썸네일 이미지</p>
+              <p>에피소드 썸네일 이미지</p>
               <label>
                 <div className={style.uploadbtn}>upload</div>
                 <input type="file" name='file' id="file" accept="image/*" onChange={handleThumbnailImage} />
