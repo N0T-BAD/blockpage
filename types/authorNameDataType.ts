@@ -1,7 +1,21 @@
 export interface authorNameDataType {
-    author: string;
+  data: {
+    creatorNickname: string;
+  }
+}
+
+export interface authorRoleDataType {
+  data: {
+    role: string;
+  }
+}
+
+export interface authorNickname {
+  data: {
+    creatorNickname: string;
+  }
 }
 
 export interface authorNicknameDataType {
-    creator_nickname: string;
+  creatorNickname: string;
 }

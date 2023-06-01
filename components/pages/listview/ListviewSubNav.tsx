@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { StaticNavData } from '@/types/staticDataType';
@@ -13,20 +12,19 @@ interface ItemType {
 export default function ListviewSubNav(props: { listType: StaticNavData[] }) {
 
   const router = useRouter();
-  const week = router.query.week;
-
-  const name = "/category/week/mon";
+  const { categoryName } = router.query;
+  const { typeId } = router.query;
 
   return (
     <div className={style.listviewWrap}>
-      <ul className={style.listviewContent}>
+      <ul className={categoryName === 'genre' ? `${style.listviewContent} ${style.listviewGenreContent}` : style.listviewContent}>
         {
           props.listType &&
           props.listType.map((nav: ItemType) => (
             <li
               key={nav.id}
               className={
-                week === nav.link.split("/")[3]
+                typeId === nav.link.split("/")[3]
                   ? `${style.active}`
                   : ""
               }

@@ -37,6 +37,8 @@ export default function TotalHeader() {
             setTitle('에피소드 수정')
         } else if (path === '/completepayment') {
             setTitle('결제 완료')
+        } else if (path === '/game') {
+            setTitle('게임')
         }
     }, [router.pathname])
 
@@ -49,9 +51,17 @@ export default function TotalHeader() {
                     {router.pathname === '/completepayment' ?
                         ""
                         :
-                        <BackBtn
-                            onClick={() => router.back()}
-                        />
+                        <>
+                            {router.pathname === '/blockcharge' || router.pathname === '/authorworkslist' || router.pathname === '/authorregister' ?
+                                <BackBtn
+                                    onClick={() => router.push('/mypage')}
+                                />
+                                :
+                                <BackBtn
+                                    onClick={() => router.back()}
+                                />
+                            }
+                        </>
                     }
                 </div>
                 <div className={style.centerHead}>

@@ -1,26 +1,28 @@
 import React from 'react'
 import { useRouter } from 'next/router';
 
-import { EpisodeListDataType } from '@/types/webtoonDataType';
+import { EpisodeListDataType, EpisodeViewListType } from '@/types/webtoonDataType';
 import Separator from '@/components/ui/Separator';
 import Episode from './Episode';
 
-export default function EpisodeSection(props: { title: string, episodeData: EpisodeListDataType[] }) {
+export default function EpisodeSection(props: { episodeViewList: EpisodeViewListType[] }) {
 
   const router = useRouter();
+  const { webtoonId } = router.query;
+  const data = props.episodeViewList;
 
   return (
     <>
       {
-        props.episodeData &&
-        props.episodeData.map((item) => (
-          <section key={item.id} onClick={() => router.push(`/webtoon/${props.title}/episode/${item.id}`)}>
+        data &&
+        data.map((item) => (
+          <section key={item.episodeNumber} onClick={() => router.push(`/webtoon/${webtoonId}/episode/${item.episodeNumber}/episode/${item.episodeId}`)}>
             <Episode
-              id={item.id}
-              subject={item.subject}
-              thumbnail={item.thumbnail}
-              rating={item.rating}
-              date={item.date}
+              id={item.episodeNumber}
+              subject={item.episodeTitle}
+              thumbnail={item.episodeThumbnail}
+              rating={item.totalScore}
+              date={item.uploadDate}
             />
             <Separator
               color='var(--bp-line-gray)'

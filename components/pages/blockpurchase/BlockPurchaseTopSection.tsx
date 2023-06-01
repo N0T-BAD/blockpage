@@ -3,9 +3,9 @@ import style from '@/components/pages/blockpurchase/BlockPurchaseTopSection.modu
 import MyBlock from '@/components/pages/blockcharge/MyBlock'
 
 export default function BlockPurchaseTopSection() {
-    return (
-        <section className={style.BlockPurchaseTopSection}>
-            <MyBlock />
-        </section>
-    )
+  return (
+    <section className={style.BlockPurchaseTopSection}>
+      <MyBlock />
+    </section>
+  )
 }

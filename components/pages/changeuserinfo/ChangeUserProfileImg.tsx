@@ -1,41 +1,33 @@
-import { ChangeUserDataType, profileskinDataType } from '@/types/changeUserDataType';
+import { ChangeUserDataType, UserImgData, profileskinDataType } from '@/types/changeUserDataType';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import UserIcon from '../mypage/UserIcon';
 import { BasicImage, userNickName } from '@/data/userNickName';
 import style from '@/components/pages/mypage/UserNickName.module.css'
+import axios from 'axios';
+import { useSession } from 'next-auth/react';
+import { useRecoilState } from 'recoil';
+import { usernickname } from '@/state/mypage/usernickname';
 
 interface ChildProps {
   profileSkinColor: profileskinDataType;
   setProfileSkinColor: React.Dispatch<React.SetStateAction<profileskinDataType>>;
+  userImg: UserImgData;
+  userNickname: ChangeUserDataType;
+  setUserNickname: React.Dispatch<React.SetStateAction<ChangeUserDataType>>;
 }
 
-export default function ChangeUserProfileImg({ profileSkinColor, setProfileSkinColor }: ChildProps) {
-
-  // const [userprofileImg, setUserProfileImg] = useState<ChangeUserImageDataType>(
-  //   {
-  //     profileimage: '',
-  //     profileskin: '',
-  //   }
-  // );
+export default function ChangeUserProfileImg({ profileSkinColor, setProfileSkinColor, userImg, userNickname, setUserNickname }: ChildProps) {
 
   const router = useRouter();
   const [userProfileImage, setUserProfileImage] = useState<File>();
   const [userProfileImagePreview, setUserProfileImagePreview] = useState<string>();
 
-  const [userNickname, setUserNickname] = useState<ChangeUserDataType>(
-    {
-      id: 0,
-      nickname: '',
-    }
-  );
-
   const [basicimg, setBasicImg] = useState<profileskinDataType>();
 
-
   useEffect(() => {
-    setProfileSkinColor(profileSkinColor);
+    setProfileSkinColor(profileSkinColor)
   }, [profileSkinColor, setProfileSkinColor])
 
   // useEffect(() => {
@@ -62,8 +54,9 @@ export default function ChangeUserProfileImg({ profileSkinColor, setProfileSkinC
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserNickname({
-      ...userNickname,
-      nickname: e.target.value,
+      data: {
+        nickname: e.target.value,
+      }
     });
   };
 
@@ -77,42 +70,42 @@ export default function ChangeUserProfileImg({ profileSkinColor, setProfileSkinC
         {/* {userprofileImg?.profileskin ?
             <> */}
         <div className={style.changeuserinfobox}>
-          {BasicImage.map((data) => (
-            <>
-              <div className={style.profileskin}>
-                {userProfileImagePreview &&
-                  <Image src={userProfileImagePreview} className={style.userProfileImagePreview} alt="userProfileImagePreview" width={70} height={70} />
-                }
-                {
-                  profileSkinColor ?
-                    <Image className={style.profileskinbox} src={profileSkinColor.imgurl} alt={profileSkinColor.color} width={70} height={70} key={profileSkinColor.id} />
-                    :
-                    <Image className={style.profileskinbox} src={"/assets/images/profile/purple.svg"} alt={"프로필 스킨"} width={70} height={70} />
-                }
-                <UserIcon />
-              </div>
-
-              <div className={style.infobox}>
-                <div className={style.btn_input_box}>
-                  <label className={style.uploadBtn}>
-                    <input type="file" accept="image/*" onChange={handleuserProfileImage} />
-                    <p>upload</p>
-                  </label>
-                  <p className={style.basicimg} onClick={handleBasicImageChange}>기본 이미지 변경</p>
-                </div>
-                <div className={style.btn_input_box}>
-                  <p>닉네임</p>
-                  {userNickname &&
-                    <>
-                      {userNickName.map((data) => (
-                        <input className={style.usernickname2} type='text' defaultValue={data.nickname} onChange={handleChange} key={data.id} />
-                      ))}
-                    </>
+          <>
+            <div className={style.profileskin}>
+              {!userProfileImagePreview ?
+                <Image src={userImg.data.profileImage} className={style.userProfileImagePreview} alt="userImg" width={70} height={70} />
+                :
+                <>
+                  {userProfileImagePreview &&
+                    <Image src={userProfileImagePreview} className={style.userProfileImagePreview} alt="userProfileImagePreview" width={70} height={70} />
                   }
-                </div>
-              </div >
-            </>
-          ))}
+                </>
+              }
+              {
+                profileSkinColor &&
+                <Image className={style.profileskinbox} src={profileSkinColor.imgurl} alt={profileSkinColor.imgurl} width={70} height={70} />
+              }
+              <UserIcon />
+            </div>
+
+            <div className={style.infobox}>
+              <div className={style.btn_input_box}>
+                <label className={style.uploadBtn}>
+                  <input type="file" accept="image/*" onChange={handleuserProfileImage} />
+                  <p>upload</p>
+                </label>
+                <p className={style.basicimg} onClick={handleBasicImageChange}>기본 이미지 변경</p>
+              </div>
+              <div className={style.btn_input_box}>
+                <p>닉네임</p>
+                {userNickname.data.nickname && userNickname.data.nickname.length > 0 ?
+                  <input className={style.usernickname2} type='text' defaultValue={userNickname.data.nickname} onChange={handleChange} />
+                  :
+                  <input className={style.usernickname2} type='text' onChange={handleChange} />
+                }
+              </div>
+            </div >
+          </>
         </div>
       </div>
     </div>

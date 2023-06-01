@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: false,
+  images: {
+    domains: [
+      "storage.googleapis.com",
+    ],
+  },
   webpack: config => {
     config.module.rules.push({
       test: /\.svg$/i,
@@ -8,7 +13,10 @@ const nextConfig = {
       use: ["@svgr/webpack"]
     });
     return config;
-  }
-}
+  },
+  images: {
+    domains: ['k.kakaocdn.net'],
+  },
+};
 
 module.exports = nextConfig

@@ -4,28 +4,38 @@ import style from '@/components/pages/mypage/UserBottomMenu.module.css'
 import { UserBottomMenuData } from '@/types/userBottomMenuData'
 import { userBottomMenuData } from '@/data/userBottomMenuData'
 import Link from 'next/link'
-import { authorNameDataType } from '@/types/authorNameDataType'
+import { authorRoleDataType } from '@/types/authorNameDataType'
 import axios from 'axios'
+import { useSession } from 'next-auth/react'
 
 export default function UserBottomMenu() {
 
-  const [authorNickname, setAuthorNickname] = useState<authorNameDataType>(
-    {
-      author: '',
-    }
-  );
+  const { data: session } = useSession()
+  // const role = sessionStorage.getItem('role');
+
+  const [authorNickname, setAuthorNickname] = useState<authorRoleDataType>({
+    data: {
+      role: '',
+    },
+  });
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/v1/members?type=author')
+    axios.get('https://blockpage.site/member-service/v1/members?type=detail', {
+      headers: {
+        memberId: session?.email || '',
+        // role: role,
+      },
+    })
       .then((res) => {
         setAuthorNickname(res.data);
+        console.log(res.data)
+        console.log(authorNickname)
       })
   }, [])
 
-
   return (
     <div className={style.UserBottomMenulist}>
-      {authorNickname.author ?
+      {authorNickname.data.role === "AUTHOR" ?
         <>
           {userBottomMenuData.map((data: UserBottomMenuData) => (
             <div className={style.UserMenu} key={data.id}>

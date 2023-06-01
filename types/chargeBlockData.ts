@@ -16,19 +16,22 @@ export interface ChargeBlockResponse {
 
 export interface BlockPurchase {
   data: [{
-    itemName: string;
-    totalAmount: number;
+    orderId: string;
+    blockQuantity: number;
     paymentTime: string;
     blockGainType: string;
+    validState: boolean;
   }];
 }
 
 export interface UseBlock {
   data: [{
-    itemName: string;
+    totalAmount?: number;
+    orderId: string;
     blockQuantity: number;
     paymentTime: string;
     blockLossType: string;
+    episodeBMDetail: string;
   }];
 }
 
@@ -36,4 +39,11 @@ export interface TotalBlock {
   data: {
     totalBlocks: number;
   }
+}
+
+export interface RefundBlock {
+  data: [{
+    orderId: string;
+    validState: boolean;
+  }];
 }

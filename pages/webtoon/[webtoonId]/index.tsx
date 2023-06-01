@@ -1,11 +1,13 @@
+import axios from "axios"
+
 import WebtoonLayout from "@/components/layouts/WebtoonLayout"
 import WebtoonEpisodeSection from "@/components/pages/webtoonepisode/WebtoonEpisodeSection"
 import WebtoonInfoSection from "@/components/pages/webtoonepisode/WebtoonInfoSection"
 import ScrollToTopBtn from "@/components/ui/ScrollToTopBtn"
-import { webtoonListData } from "@/data/dummy/webtoonData"
-import { WebToonListDataType } from "@/types/webtoonDataType"
+import { EpisodeViewListType, WebToonListDataType } from "@/types/webtoonDataType"
 
 function Webtoon(props: { data: WebToonListDataType }) {
+
   const data = props.data;
 
   return (
@@ -29,12 +31,18 @@ export default Webtoon
 
 export async function getServerSideProps(context: any) {
 
-  const { webtoonName } = context.query;
-  console.log(context)
+  const { webtoonId } = context.query;
+  const sort = 'DESC';
+  console.log(webtoonId)
 
-  const dummyData = webtoonListData;
-  const data = dummyData.find((item) => item.title === webtoonName);
-  console.log(data)
+  const res = await axios.get(`https://blockpage.site/webtoon-service/v1/episodes?webtoonId=${webtoonId}&sort=${sort}`)
+  const data = res.data;
+  console.log(data);
+
+  data.data.episodeViewList.map((item: EpisodeViewListType) => (
+    console.log(item)
+  ));
+
   return {
     props: { data }
   }

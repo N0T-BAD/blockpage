@@ -1,16 +1,45 @@
 export interface WebToonListDataType {
-  id: number;
-  title: string;
-  author: string;
-  illustrator: string;
-  titleImg: string;
-  views: number;
-  likes: number;
-  week: string;
-  genre: string;
-  summary: string;
-  state: string;
-  episodeData: EpisodeListDataType[];
+  data: {
+    webtoonTitle: string;
+    creator: string;
+    illustrator: string;
+    description: string;
+    publicationDays: string;
+    genre: string;
+    webtoonMainImage: string;
+    views: number;
+    interestCount: number;
+    episodeViewList: EpisodeViewListType[];
+  };
+  meta: {
+    sort: string;
+  };
+}
+
+export interface EpisodeViewListType {
+  episodeId: number;
+  episodeNumber: number;
+  episodeTitle: string;
+  episodeThumbnail: string;
+  uploadDate: string;
+  totalScore: number;
+}
+
+export interface EpisodeViewDataType {
+  data: {
+    images: ImagesType[];
+    episodeId: number;
+    commentCount: number;
+    rating: number;
+    author: string;
+    authorWords: string;
+    nextEpisodeTitle: string;
+    nextEpisodeThumbnail: string;
+  };
+}
+
+export interface ImagesType {
+  imageUrl: string;
 }
 
 export interface EpisodeListDataType {
@@ -42,12 +71,16 @@ export interface webtoonTitleDataType {
 }
 
 export interface webtoonListGetDataType {
-  webtoonId: number;
-  webtoonTitle: string;
-  webtoonThumbnail: string;
-  creator: string;
-  illustrator: string;
-  views: number;
-  interestCount: number;
-  genreType: number;
+  data: [
+    {
+      webtoonId: number;
+      webtoonTitle: string;
+      webtoonThumbnail: string;
+      creator: string;
+      illustrator: string;
+      views: number;
+      interestCount: number;
+      genreType: number;
+    }
+  ];
 }

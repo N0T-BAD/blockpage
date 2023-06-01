@@ -1,7 +1,7 @@
 import NextAuth, { DefaultSession, DefaultUser, NextAuthOptions, User } from 'next-auth';
 import KakaoProvider from 'next-auth/providers/kakao';
 
-declare module 'next-auth' {
+declare module "next-auth" {
   export interface Session extends DefaultSession {
     id: string;
     accessToken: string;
@@ -35,7 +35,7 @@ export const authOptions: NextAuthOptions = {
   pages: {
     // signIn: '/auth/signin',
     // signOut: '/auth/signout',
-    error: '/auth/error',
+    error: "/auth/error",
   },
 
   callbacks: {

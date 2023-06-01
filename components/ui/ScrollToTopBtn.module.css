@@ -1,10 +1,9 @@
 .scrollWrap {
   position: fixed;
-  width: 100%;
+  width: auto;
   bottom: 2rem;
   z-index: 400;
   opacity: 0;
-  /* transition: all 0.3s ease-in-out; */
 }
 
 .scrollWrap.active {
@@ -14,7 +13,6 @@
 
 .scrollWrap.close {
   animation: slideDown 0.5s ease-in-out;
-  /* animation-fill-mode: forwards; */
 }
 
 
@@ -42,6 +40,7 @@
     transform: translateY(0);
     opacity: 0;
   }
+
   100% {
     transform: translateY(-30px);
     opacity: 1;
@@ -53,6 +52,7 @@
     transform: translateY(-30px);
     opacity: 1;
   }
+
   100% {
     transform: translateY(0);
     opacity: 0;

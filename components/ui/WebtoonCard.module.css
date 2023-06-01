@@ -30,6 +30,10 @@
   height: 67%;
 }
 
+.contentBox .webtoonThumbnail {
+  border: 0.01rem solid var(--bp-line-gray);
+}
+
 .contentWrap {
   padding: 0.5rem 0.3rem 0 0.3rem;
 }
@@ -65,7 +69,13 @@
   margin-bottom: 0.3rem;
 }
 
-.creator {
+.author {
+  display: flex;
   color: var(--bp-font-gray);
   font-size: 0.7rem;
+}
+
+.author p:last-child::before {
+  content: '/';
+  padding: 0 0.3rem;
 }

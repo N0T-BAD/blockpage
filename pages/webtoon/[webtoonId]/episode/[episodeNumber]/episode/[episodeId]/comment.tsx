@@ -1,5 +1,5 @@
 import CommentLayout from "@/components/layouts/CommentLayout"
-import { NextPageWithLayout } from "../../../../_app"
+import { NextPageWithLayout } from "@/pages/_app"
 
 import CommentInputSection from "@/components/pages/comment/CommentInputSection"
 import GetCommentSection from "@/components/pages/comment/GetCommentSection"
