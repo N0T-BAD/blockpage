@@ -23,7 +23,7 @@ export default function ChangeUserInfo({ profileSkinColor, setProfileSkinColor }
           <div className={style.profileSkinBox}>
             <div className={style.ProfileSkinButtonBox}>
               {profileSkinColor && profileskinData.map((btnData) => (
-                <button onClick={() => handleProfileSkinColor(btnData.imgurl)}>
+                <button key={btnData.imgurl} onClick={() => handleProfileSkinColor(btnData.imgurl)}>
                   <Image src={btnData.imgurl} alt={btnData.imgurl} width={50} height={50} />
                 </button>
               ))}
