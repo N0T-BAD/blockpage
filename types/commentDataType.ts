@@ -16,9 +16,7 @@ export interface CommentDataType {
 }
 
 export interface CommentUserDataType {
-  data: {
-    nickname: string;
-  };
+  nickname: string;
 }
 
 export interface ParentsCommentType {

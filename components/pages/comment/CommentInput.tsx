@@ -4,16 +4,17 @@ import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 
 import style from '@/components/pages/comment/CommentInput.module.css'
-import { CommentUserDataType, ParentsCommentType } from '@/types/commentDataType';
+import { ParentsCommentType } from '@/types/commentDataType';
 
 export default function CommentInput(props: {
-  nickNameData: CommentUserDataType,
+  nickNameData: string,
   parents?: ParentsCommentType,
 }) {
   const { data: session } = useSession();
   const router = useRouter();
   const { episodeId } = router.query;
   const nickNameData = props.nickNameData;
+  const parents = props.parents;
   const [btnState, setBtnState] = useState(false);
   const [inputCount, setInputCount] = useState(0);
   const [inputText, setInputText] = useState("");
@@ -34,21 +35,44 @@ export default function CommentInput(props: {
     console.log(session?.nickname);
     console.log(nickNameData);
 
-    axios.post(`https://blockpage.site/comment-service/v1/comments`, {
-      episodeId: episodeId,
-      content: inputText,
-      nickname: nickNameData,
-    }, {
-      headers: {
-        memberId: session?.email,
+    if (inputText !== "") {
+      if (parents) {
+        axios.post(`https://blockpage.site/comment-service/v1/comments`, {
+          parentsId: parents.parentsId,
+          parentsNickname: parents.parentsNickname,
+          parentsCommentId: parents.parentsCommentId,
+          episodeId: episodeId,
+          content: inputText,
+          nickname: nickNameData,
+        }, {
+          headers: {
+            memberId: session?.email,
+          }
+        })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        axios.post(`https://blockpage.site/comment-service/v1/comments`, {
+          episodeId: episodeId,
+          content: inputText,
+          nickname: nickNameData,
+        }, {
+          headers: {
+            memberId: session?.email,
+          }
+        })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }
   }
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -57,7 +81,7 @@ export default function CommentInput(props: {
   }
 
   return (
-    <div>
+    <div className={style.commentInput}>
       {
         btnState ?
           <form>

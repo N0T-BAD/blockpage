@@ -5,19 +5,21 @@ import axios from 'axios'
 import style from '@/components/pages/comment/GetComment.module.css'
 import Separator from '@/components/ui/Separator'
 import CommentUserInfo from './CommentUserInfo'
-import { CommentDataType, CommentUserDataType, ParentsCommentType } from '@/types/commentDataType'
+import { CommentDataType, ParentsCommentType } from '@/types/commentDataType'
 import CommentInput from './CommentInput'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
+import ReportModal from '@/components/modals/ReportModal'
 
 export default function Comment(props: {
-  nickNameData: CommentUserDataType,
+  nickNameData: string,
   commentData: CommentDataType,
-  // isAuthor: boolean,
 }) {
   const { data: session } = useSession();
   const router = useRouter();
   const { episodeId } = router.query;
+  const { author } = router.query;
+  const nickNameData = props.nickNameData;
   const commentData = props.commentData;
   const [replyData, setReplyData] = useState<CommentDataType[]>([]);
   const [openReply, setOpenReply] = useState<boolean>(false);
@@ -29,8 +31,7 @@ export default function Comment(props: {
   const [likeState, setLikeState] = useState<boolean>();
   const [disLikeState, setDisLikeState] = useState<boolean>();
 
-  console.log(commentData)
-  console.log(session?.email)
+  const [showCommentModal, setShowCommentModal] = useState<boolean>();
 
   useEffect(() => {
     axios.get(`https://blockpage.site/comment-service/v1/comments/reply/${commentData.commentId}`)
@@ -50,7 +51,9 @@ export default function Comment(props: {
   const handlePush = () => {
     // pin
     console.log("handlePush onClick");
-    axios.patch(`https://blockpage.site/comment-service/v1/comments/${commentData.commentId}`)
+    axios.patch(`https://blockpage.site/comment-service/v1/comments/${commentData.commentId}`, {
+      withCredentials: true
+    })
       .then((res) => {
         console.log(res);
       })
@@ -141,10 +144,13 @@ export default function Comment(props: {
   }
 
   const handleReport = () => {
-    //신고
     console.log("handleDeclaration onClick");
     axios.post(`https://blockpage.site/comment-service/v1/reports`, {
-      comment_id: commentData.commentId,
+      memberId: session?.email,
+      commentId: commentData.commentId,
+      memberNickname: nickNameData,
+      content: commentData.content,
+      reportType: 0,
     }, {
       headers: {
         memberId: session?.email,
@@ -152,14 +158,26 @@ export default function Comment(props: {
     })
       .then((res) => {
         console.log(res);
+        setShowCommentModal(!showCommentModal);
       })
       .catch((err) => {
         console.log(err);
       })
   }
 
+  const handleShowReportModal = () => {
+    setShowCommentModal(!showCommentModal);
+  }
+
   return (
     <>
+      {
+        showCommentModal &&
+        <ReportModal
+          handleShowReportModal={handleShowReportModal}
+          handleReport={handleReport}
+        />
+      }
       {
         <>
           <div className={style.commentSection}>
@@ -185,18 +203,18 @@ export default function Comment(props: {
               <div className={style.topIcon}>
                 {
                   !commentData.childId &&
-                  !commentData.pin &&
-                  // props.isAuthor ?
-                  <div onClick={handlePush}>
-                    <Image
-                      src={"/assets/images/icons/pushpin.svg"}
-                      alt='고정핀'
-                      width={15}
-                      height={15}
-                      priority
-                    />
-                  </div>
-                  // : ""
+                    !commentData.pin &&
+                    author == nickNameData ?
+                    <div onClick={handlePush}>
+                      <Image
+                        src={"/assets/images/icons/pushpin.svg"}
+                        alt='고정핀'
+                        width={15}
+                        height={15}
+                        priority
+                      />
+                    </div>
+                    : ""
                 }
                 {
                   session?.email === commentData.childId ?
@@ -209,7 +227,8 @@ export default function Comment(props: {
                         priority
                       />
                     </div> :
-                    session?.email === commentData.parentsId ?
+                    !commentData.childId &&
+                      session?.email === commentData.parentsId ?
                       <div onClick={handleDelete}>
                         <Image
                           src={"/assets/images/icons/trash.svg"}
@@ -230,10 +249,10 @@ export default function Comment(props: {
                   <p onClick={handleView}>답글 {commentData.replyCount}</p> :
                   commentData.childId ?
                     <p></p> :
-                    <p>답글 달기</p>
+                    <p onClick={handleView}>답글 달기</p>
               }
               <div className={style.bottomIcon}>
-                <div onClick={handleReport}>
+                <div onClick={handleShowReportModal}>
                   <Image
                     src={"/assets/images/icons/siren.svg"}
                     alt='신고'
@@ -284,7 +303,6 @@ export default function Comment(props: {
                   key={childData.commentId}
                   nickNameData={props.nickNameData}
                   commentData={childData}
-                // isAuthor={props.isAuthor}
                 />
               ))
             }

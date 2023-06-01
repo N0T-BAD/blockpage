@@ -5,18 +5,14 @@ import { useSession } from "next-auth/react"
 import CommentLayout from "@/components/layouts/CommentLayout"
 import CommentInputSection from "@/components/pages/comment/CommentInputSection"
 import GetCommentSection from "@/components/pages/comment/GetCommentSection"
-import { CommentDataType, CommentUserDataType } from "@/types/commentDataType"
+import { CommentDataType } from "@/types/commentDataType"
 
 function Comment(props: { commentData: CommentDataType[] }) {
 
   const { data: session } = useSession();
-  const [nickNameData, setNickNameData] = useState<CommentUserDataType>({
-    data: {
-      nickname: '',
-    },
-  });
+  const [nickNameData, setNickNameData] = useState<string>('');
   const [commentData, setCommentData] = useState<CommentDataType[]>([]);
-
+  console.log(nickNameData)
   useEffect(() => {
     setCommentData(props.commentData);
   }, []);

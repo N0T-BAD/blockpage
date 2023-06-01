@@ -3,7 +3,7 @@ import React from 'react'
 import { CommentDataType, CommentUserDataType } from '@/types/commentDataType';
 import Comment from './Comment';
 
-export default function GetComment(props: { commentData: CommentDataType[], nickNameData: CommentUserDataType }) {
+export default function GetComment(props: { commentData: CommentDataType[], nickNameData: string }) {
   return (
     <>
       {
@@ -14,7 +14,6 @@ export default function GetComment(props: { commentData: CommentDataType[], nick
             key={parentsData.commentId}
             nickNameData={props.nickNameData}
             commentData={parentsData}
-          // isAuthor={isAuthor}
           />
         ))
       }

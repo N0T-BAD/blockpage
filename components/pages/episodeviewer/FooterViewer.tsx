@@ -135,8 +135,8 @@ const NavFooter = (props: { author: string }) => {
       </div>
       <div className={style.btn} onClick={() => router.push(
         {
-          pathname: `/webtoon/${webtoonId}/episode/${episodeId}/episode/${episodeNumber}/comment?${props.author}`,
-          query: { pid: props.author },
+          pathname: `/webtoon/${webtoonId}/episode/${episodeId}/episode/${episodeNumber}/comment`,
+          query: { author: props.author },
         }
       )}>
         <Image
