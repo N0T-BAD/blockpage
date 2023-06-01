@@ -6,7 +6,6 @@ import style from '@/components/pages/episodeviewer/EpisodeViewer.module.css'
 
 export default function EpisodeViewer(props: { episodeData: EpisodeViewDataType }) {
   const data = props.episodeData.data;
-  console.log(data);
   return (
     <section className={style.viewer}>
       {

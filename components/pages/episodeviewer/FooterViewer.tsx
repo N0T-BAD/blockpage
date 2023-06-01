@@ -33,8 +33,6 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
     setShowModal(!showModal);
   }
 
-  console.log(data.nextEpisodeThumbnail);
-
   return (
     <>
       {
@@ -80,7 +78,7 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
           data.nextEpisodeThumbnail !== "" ?
             <div
               className={style.nextEpisode}
-              onClick={() => router.push(`/webtoon/${webtoonId}/episode/${nextNumber}/episode/${nextId}`)}
+              onClick={() => router.push(`/webtoon/${webtoonId}/episode/${nextId}/episode/${nextNumber}`)}
             >
               <p className={style.nextTxt}>다음화</p>
               <Episode

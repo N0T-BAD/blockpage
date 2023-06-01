@@ -16,7 +16,7 @@ export default function EpisodeSection(props: { episodeViewList: EpisodeViewList
       {
         data &&
         data.map((item) => (
-          <section key={item.episodeNumber} onClick={() => router.push(`/webtoon/${webtoonId}/episode/${item.episodeNumber}/episode/${item.episodeId}`)}>
+          <section key={item.episodeNumber} onClick={() => router.push(`/webtoon/${webtoonId}/episode/${item.episodeId}/episode/${item.episodeNumber}`)}>
             <Episode
               id={item.episodeNumber}
               subject={item.episodeTitle}

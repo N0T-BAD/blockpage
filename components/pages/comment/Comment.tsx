@@ -5,16 +5,18 @@ import style from '@/components/pages/comment/GetComment.module.css'
 import Separator from '@/components/ui/Separator'
 import CommentUserInfo from './CommentUserInfo'
 
-import { commentDataType } from '@/types/commentDataType'
+import { CommentDataMapType } from '@/types/commentDataType'
 import { replyDatas } from '@/data/dummy/commentData'
 import CommentInput from './CommentInput'
 
 export default function Comment(props: {
-  data: commentDataType,
-  isAuthor: boolean,
+  commentData: CommentDataMapType,
+  // isAuthor: boolean,
 }) {
+  const commentData = props.commentData;
+  console.log(commentData)
 
-  const [replyData] = useState<commentDataType[]>(replyDatas);
+  // const [replyData] = useState<CommentDataType[]>(replyDatas);
   const [openReply, setOpenReply] = useState<boolean>(false);
 
   const handleView = () => {
@@ -48,40 +50,40 @@ export default function Comment(props: {
         <>
           <div className={style.commentSection}>
             {
-              props.data.pin ?
+              commentData.pin ?
                 <p className={style.pinTxt}>작가님이 고정함</p>
                 : ""
             }
             <div className={style.topSection}>
               {
-                props.data.isReply &&
-                  props.data.isReply ?
+                commentData.childId &&
+                  commentData.childNickname ?
                   <>
                     < CommentUserInfo
-                      nickname={props.data.childNickname}
-                      date={props.data.date}
+                      nickname={commentData.childNickname}
+                      date={commentData.dateTime}
                     />
                   </> :
                   < CommentUserInfo
-                    nickname={props.data.parentsNickname}
-                    date={props.data.date}
+                    nickname={commentData.parentsNickname}
+                    date={commentData.dateTime}
                   />
               }
               <div className={style.topIcon}>
                 {
-                  !props.data.isReply &&
-                    !props.data.pin &&
-                    props.isAuthor ?
-                    <div onClick={handlePush}>
-                      <Image
-                        src={"/assets/images/icons/pushpin.svg"}
-                        alt='고정핀'
-                        width={15}
-                        height={15}
-                        priority
-                      />
-                    </div>
-                    : ""
+                  // !commentData.isReply &&
+                  // !commentData.pin &&
+                  // props.isAuthor ?
+                  <div onClick={handlePush}>
+                    <Image
+                      src={"/assets/images/icons/pushpin.svg"}
+                      alt='고정핀'
+                      width={15}
+                      height={15}
+                      priority
+                    />
+                  </div>
+                  // : ""
                 }
                 <div onClick={handleDelete}>
                   <Image
@@ -94,12 +96,12 @@ export default function Comment(props: {
                 </div>
               </div>
             </div>
-            <p className={style.commentTxt}>{props.data.content}</p>
+            <p className={style.commentTxt}>{commentData.content}</p>
             <div className={style.bottomSection}>
               {
-                props.data.replyCount > 0
-                  ? <p onClick={handleView}>답글 {props.data.replyCount}</p>
-                  : props.data.isReply ? <p></p> : <p>답글 달기</p>
+                commentData.replyCount > 0
+                  ? <p onClick={handleView}>답글 {commentData.replyCount}</p>
+                  : commentData.childId ? <p></p> : <p>답글 달기</p>
               }
               <div className={style.bottomIcon}>
                 <div onClick={handleReport}>
@@ -120,7 +122,7 @@ export default function Comment(props: {
                     onClick={handleLike}
                     priority
                   />
-                  <p>{props.data.likesCount}</p>
+                  <p>{commentData.likesCount}</p>
                 </div>
                 <div className={style.emotion}>
                   <Image
@@ -131,7 +133,7 @@ export default function Comment(props: {
                     onClick={handleDislike}
                     priority
                   />
-                  <p>{props.data.dislikesCount}</p>
+                  <p>{commentData.dislikesCount}</p>
                 </div>
               </div>
             </div>
@@ -142,23 +144,23 @@ export default function Comment(props: {
         </>
       }
       {
-        openReply &&
-        <section className={style.replyCommentSection}>
-          <div className={style.replySection}>
-            {
-              replyData &&
-              replyData.map((childData) => (
-                props.data.parentsId === childData.parentsId &&
-                <Comment
-                  key={childData.id}
-                  data={childData}
-                  isAuthor={props.isAuthor}
-                />
-              ))
-            }
-            <CommentInput />
-          </div>
-        </section>
+        // openReply &&
+        // <section className={style.replyCommentSection}>
+        //   <div className={style.replySection}>
+        //     {
+        //       replyData &&
+        //       replyData.map((childData) => (
+        //         commentData.parentsId === childData.parentsId &&
+        //         <Comment
+        //           key={childData.id}
+        //           data={childData}
+        //           isAuthor={props.isAuthor}
+        //         />
+        //       ))
+        //     }
+        //     {/* <CommentInput /> */}
+        //   </div>
+        // </section>
       }
     </>
   )

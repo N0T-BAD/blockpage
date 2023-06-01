@@ -1,24 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-import { commentDataType } from '@/types/commentDataType';
+import { CommentDataType } from '@/types/commentDataType';
 import { commentDatas } from '@/data/dummy/commentData';
 import Comment from './Comment';
 
-export default function GetComment() {
-
-  const [commentData] = useState<commentDataType[]>(commentDatas);
-  const [isAuthor] = useState(true);
-
+export default function GetComment(props: { commentData: CommentDataType }) {
+  const commentData = props.commentData;
+  console.log(commentData);
   return (
     <>
       {
         commentData &&
-        commentData.map((parentsData) => (
+        commentData.data.map((parentsData) => (
           !parentsData.childId &&
           <Comment
-            key={parentsData.id}
-            data={parentsData}
-            isAuthor={isAuthor}
+            key={parentsData.commentId}
+            commentData={parentsData}
+          // isAuthor={isAuthor}
           />
         ))
       }
