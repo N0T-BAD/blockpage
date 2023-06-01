@@ -14,7 +14,7 @@ p.profileSkinchangetxt {
   width: 100%;
   height: 5rem;
   display: flex;
-  overflow-x: scroll;
+  
   margin: 1rem 0;
   background-color: var(--bp-gray);
 }
@@ -29,6 +29,11 @@ p.profileSkintxt {
   height: 100%;
   align-items: center;
   margin: 0 1rem;
+  overflow-x: scroll;
+}
+
+.ProfileSkinButtonBox::-webkit-scrollbar{
+  display: none;
 }
 
 .ProfileSkinButtonBox button {
@@ -39,42 +44,6 @@ p.profileSkintxt {
   height: 100%;
   align-items: center;
   background-color: var(--bp-gray);
-}
-
-.profileSkinItemPurple {
-  width: 1.5rem;
-  height: 1.5rem;
-  margin: 0.5rem;
-  background-color: var(--bp-secondary);
-  border-radius: 3rem;
-  border: none;
-}
-
-.profileSkinItemPink {
-  width: 1.5rem;
-  height: 1.5rem;
-  margin: 0.5rem;
-  background-color: var(--bp-red);
-  border-radius: 3rem;
-  border: none;
-}
-
-.profileSkinItemGreen {
-  width: 1.5rem;
-  height: 1.5rem;
-  margin: 0.5rem;
-  background-color: var(--bp-green);
-  border-radius: 3rem;
-  border: none;
-}
-
-.profileSkinItemblue {
-  width: 1.5rem;
-  height: 1.5rem;
-  margin: 0.5rem;
-  background-color: var(--bp-blue);
-  border-radius: 3rem;
-  border: none;
 }
 
 .certificationBox {
@@ -117,4 +86,128 @@ button.ChangeButton {
   font-size: 0.9rem;
   font-weight: 700;
   font-family: var(--bp-font);
+}
+
+section.ChangeUserInfoTopSection {
+  margin: 6rem 1rem 2rem 1rem;
+}
+
+section.ChangeUserInfoMiddleSection {
+  margin: 3rem 1rem 2rem 1rem;
+}
+
+.usernicknameImgBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.usernicknameImg {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--bp-gray);
+  height: 100%;
+}
+
+.userImage {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin:1rem 0;
+}
+
+.userImage img{
+  border-radius: 5rem;
+}
+
+img.userImage1 {
+  display: flex;
+}
+
+.usernicknameImg .usernickname {
+  padding-bottom: 1rem;
+  font-family: var(--bp-font);
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  width: 70%;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.usernicknameImg .usernickname2 {
+  font-family: var(--bp-font);
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  width: 60%;
+}
+
+.usernicknameImg p.usernicknamechange {
+  margin: 0.5rem 0;
+  color: var(--bp-font-gray);
+  font-size: 0.8rem;
+}
+
+.uploadBtn p {
+  border: 2px solid var(--bp-blue);
+  border-radius: 5rem;
+  font-size: 0.8rem;
+  padding: 0 0.5rem;
+}
+
+.basicimg {
+  border: 2px solid var(--bp-blue);
+  border-radius: 5rem;
+  font-size: 0.7rem;
+  height: 1.2rem;
+  display: flex;
+}
+
+.uploadBtn input {
+  width: 0;
+}
+
+.userProfileImagePreview {
+  border-radius: 5rem;
+}
+
+.profileskin {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.profileskin img {
+  position: absolute;
+  top: 15%;
+}
+
+.changeuserinfobox {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.btn_input_box {
+  width: 100%;
+  display: flex;
+  padding: 1rem 1rem;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.infobox {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
 }

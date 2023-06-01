@@ -1,16 +1,16 @@
 import TotalLayout from "@/components/layouts/TotalLayout"
-import ChangeUserInfoSection from "@/components/pages/changeuserinfo/ChangeUserInfoSection"
+import ChangeUserInfo from "@/components/pages/changeuserinfo/ChangeUserInfo"
 import { NextPageWithLayout } from "@/pages/_app"
 
-const ChangeUserInfo: NextPageWithLayout = () => {
+const ChangeUserInfoPage: NextPageWithLayout = () => {
   return (
     <>
-      <ChangeUserInfoSection />
+      <ChangeUserInfo />
     </>
   )
 }
 
-ChangeUserInfo.getLayout = function getLayout(ChangeUserInfo: React.ReactElement) {
+ChangeUserInfoPage.getLayout = function getLayout(ChangeUserInfo: React.ReactElement) {
   return (
     <TotalLayout>
       {ChangeUserInfo}
@@ -18,5 +18,5 @@ ChangeUserInfo.getLayout = function getLayout(ChangeUserInfo: React.ReactElement
   )
 }
 
-export default ChangeUserInfo
+export default ChangeUserInfoPage
 
