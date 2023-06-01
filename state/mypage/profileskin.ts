@@ -1,10 +1,12 @@
 import { atom } from "recoil";
 
 const profileskin = atom({
-  key: "profileskin",
-  default: {
-    imgurl: '/assets/images/profile/Transparency.png',
-  },
+    key: "profileskin",
+    default: {
+        data: {
+            profileSkin: "",
+        },
+    },
 });
 
 export { profileskin };
