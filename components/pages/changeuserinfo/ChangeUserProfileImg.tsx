@@ -7,50 +7,27 @@ import { BasicImage, userNickName } from '@/data/userNickName';
 import style from '@/components/pages/mypage/UserNickName.module.css'
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
+import { useRecoilState } from 'recoil';
+import { usernickname } from '@/state/mypage/usernickname';
 
 interface ChildProps {
   profileSkinColor: profileskinDataType;
   setProfileSkinColor: React.Dispatch<React.SetStateAction<profileskinDataType>>;
+  userImg: UserImgData;
+  userNickname: ChangeUserDataType;
+  setUserNickname: React.Dispatch<React.SetStateAction<ChangeUserDataType>>;
 }
 
-export default function ChangeUserProfileImg({ profileSkinColor, setProfileSkinColor }: ChildProps) {
-
-  const { data: session } = useSession()
-  // const role = sessionStorage.getItem('role');
-
-  // const [userprofileImg, setUserProfileImg] = useState<ChangeUserImageDataType>(
-  //   {
-  //     profileimage: '',
-  //     profileskin: '',
-  //   }
-  // );
+export default function ChangeUserProfileImg({ profileSkinColor, setProfileSkinColor, userImg, userNickname, setUserNickname }: ChildProps) {
 
   const router = useRouter();
   const [userProfileImage, setUserProfileImage] = useState<File>();
   const [userProfileImagePreview, setUserProfileImagePreview] = useState<string>();
 
-  const [userNickname, setUserNickname] = useState<ChangeUserDataType>(
-    {
-      data: {
-        nickname: '',
-      }
-    }
-  );
-
-  const [userImg, setUserImg] = useState<UserImgData>(
-    {
-      data: {
-        profileImage: '',
-      }
-    }
-  );
-
   const [basicimg, setBasicImg] = useState<profileskinDataType>();
 
-
-
   useEffect(() => {
-    setProfileSkinColor(profileSkinColor);
+    setProfileSkinColor(profileSkinColor)
   }, [profileSkinColor, setProfileSkinColor])
 
   // useEffect(() => {
@@ -63,23 +40,6 @@ export default function ChangeUserProfileImg({ profileSkinColor, setProfileSkinC
   //       setUserProfileImg(res.data);
   //     })
   // }, [])
-
-  useEffect(() => {
-    if (userImg.data.profileImage) {
-      axios.get('https://blockpage.site/member-service/v1/members?type=detail', {
-        headers: {
-          memberId: session?.email || '',
-          // role: role,
-        },
-      })
-        .then((res) => {
-          setUserImg(res.data);
-          console.log(res.data)
-          console.log(userImg)
-          console.log(userImg.data.profileImage)
-        })
-    }
-  }, [])
 
   const handleuserProfileImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -112,7 +72,7 @@ export default function ChangeUserProfileImg({ profileSkinColor, setProfileSkinC
         <div className={style.changeuserinfobox}>
           <>
             <div className={style.profileskin}>
-              {userImg.data.profileImage ?
+              {!userProfileImagePreview ?
                 <Image src={userImg.data.profileImage} className={style.userProfileImagePreview} alt="userImg" width={70} height={70} />
                 :
                 <>
@@ -122,10 +82,8 @@ export default function ChangeUserProfileImg({ profileSkinColor, setProfileSkinC
                 </>
               }
               {
-                profileSkinColor ?
-                  <Image className={style.profileskinbox} src={profileSkinColor.imgurl} alt={profileSkinColor.color} width={70} height={70} key={profileSkinColor.id} />
-                  :
-                  <Image className={style.profileskinbox} src={"/assets/images/profile/purple.svg"} alt={"프로필 스킨"} width={70} height={70} />
+                profileSkinColor &&
+                <Image className={style.profileskinbox} src={profileSkinColor.imgurl} alt={profileSkinColor.imgurl} width={70} height={70} />
               }
               <UserIcon />
             </div>
@@ -140,12 +98,10 @@ export default function ChangeUserProfileImg({ profileSkinColor, setProfileSkinC
               </div>
               <div className={style.btn_input_box}>
                 <p>닉네임</p>
-                {userNickname &&
-                  <>
-                    {userNickName.map((data) => (
-                      <input className={style.usernickname2} type='text' defaultValue={data.nickname} onChange={handleChange} key={data.id} />
-                    ))}
-                  </>
+                {userNickname.data.nickname && userNickname.data.nickname.length > 0 ?
+                  <input className={style.usernickname2} type='text' defaultValue={userNickname.data.nickname} onChange={handleChange} />
+                  :
+                  <input className={style.usernickname2} type='text' onChange={handleChange} />
                 }
               </div>
             </div >

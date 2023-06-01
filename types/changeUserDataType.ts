@@ -10,8 +10,6 @@ export interface ChangeUserImageDataType {
 }
 
 export interface profileskinDataType {
-  id: number;
-  color: string;
   imgurl: string;
 }
 

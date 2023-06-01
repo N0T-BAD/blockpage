@@ -11,8 +11,8 @@ interface ChildProps {
 
 export default function ChangeUserInfo({ profileSkinColor, setProfileSkinColor }: ChildProps) {
 
-  const handleProfileSkinColor = (color: string, imgurl: string) => {
-    setProfileSkinColor({ id: 0, color: color, imgurl: imgurl });
+  const handleProfileSkinColor = (imgurl: string) => {
+    setProfileSkinColor({ imgurl: imgurl });
   };
 
   return (
@@ -23,8 +23,8 @@ export default function ChangeUserInfo({ profileSkinColor, setProfileSkinColor }
           <div className={style.profileSkinBox}>
             <div className={style.ProfileSkinButtonBox}>
               {profileSkinColor && profileskinData.map((btnData) => (
-                <button key={btnData.id} onClick={() => handleProfileSkinColor(btnData.color, btnData.imgurl)}>
-                  <Image src={btnData.imgurl} alt={btnData.color} width={50} height={50} />
+                <button onClick={() => handleProfileSkinColor(btnData.imgurl)}>
+                  <Image src={btnData.imgurl} alt={btnData.imgurl} width={50} height={50} />
                 </button>
               ))}
             </div>

@@ -10,14 +10,16 @@ import MenuList from './MenuList';
 import MenuBtnSection from './MenuBtnSection';
 import axios from 'axios';
 import { userprofile } from '@/state/mypage/userprofile';
-import { UserImgData } from '@/types/changeUserDataType';
+import { ChangeUserDataType, UserImgData } from '@/types/changeUserDataType';
 import { useRecoilState } from 'recoil';
+import { usernickname } from '@/state/mypage/usernickname';
 
 export default function MenuModal(props: { handleModal: () => void }) {
 
   const router = useRouter();
   const { data: session } = useSession();
   const [userImg, setUserImg] = useRecoilState<UserImgData>(userprofile);
+  const [userNickname, setUserNickname] = useRecoilState<ChangeUserDataType>(usernickname);
 
   useEffect(() => {
     if (session) {
@@ -29,10 +31,16 @@ export default function MenuModal(props: { handleModal: () => void }) {
       })
         .then((res) => {
           const profileImage = res.data.data.profileImage;
+          const nickname = res.data.data.nickname
           setUserImg({
             data: {
               profileImage,
             }
+          })
+          setUserNickname({
+            data: {
+              nickname,
+            },
           })
           console.log(res.data)
         })
@@ -64,7 +72,7 @@ export default function MenuModal(props: { handleModal: () => void }) {
           {
             session ?
               <div className={style.userSectionTxt}>
-                <p>404님</p>
+                <p>{userNickname.data.nickname} 님</p>
                 <p>오늘도 좋은 하루입니다.</p>
               </div>
               : <p>로그인을 해주세요.</p>
