@@ -121,7 +121,7 @@ export default function AuthorWebtoonInfoForm() {
         {
           headers: {
             'Content-Type': 'multipart/form-data',
-            email: session?.email,
+            memberId: session?.email,
             // role: role,
           },
         },
