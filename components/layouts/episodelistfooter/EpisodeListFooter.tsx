@@ -4,12 +4,13 @@ import React from 'react'
 import style from '@/components/layouts/episodelistfooter/EpisodeListFooter.module.css'
 import { WebToonListDataType } from '@/types/webtoonDataType';
 
-interface EpisodeMiddleSectionProps {
-  webtoonId: number;
-}
 
-export default function EpisodeListFooter(webtoonId: EpisodeMiddleSectionProps) {
+
+export default function EpisodeListFooter() {
   const router = useRouter();
+
+  const { webtoonId } = router.query;
+
   return (
     <footer className={style.AuthorFooterWrap}>
       <div className={style.footerBtn}>
