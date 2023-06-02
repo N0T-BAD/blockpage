@@ -4,6 +4,8 @@ import React, { useState } from 'react'
 import style from '@/components/pages/chargeresult/ChargeResultSection.module.css'
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+import { ChargeBlock, ChargeBlockResponse } from '@/types/chargeBlockData';
+import CompletePayMentSection from './CompletePayMentSection';
 
 export default function ChargeResultSection() {
 
@@ -26,8 +28,23 @@ export default function ChargeResultSection() {
     }
     )
       .then((res) => {
-        localStorage.setItem('orderdata', JSON.stringify(res.data))
-        router.push('/completepayment')
+        console.log(res.data.data)
+        const orderlist = res.data.data
+        axios.post('https://blockpage.site/block-service/v1/blocks?type=cash', {
+          orderId: orderlist.orderId,
+          blockQuantity: orderlist.blockQuantity,
+        }, {
+          headers: {
+            'Content-Type': 'application/json',
+            memberId: session?.email,
+            // role: role,
+          },
+        })
+          .then((res) => {
+            console.log(res)
+            router.push('/completepayment')
+            localStorage.setItem('orderdata', JSON.stringify(orderlist))
+          })
       })
   }
 

@@ -39,26 +39,6 @@ export default function AuthorSubCategory({ active }: { active: string }) {
       })
   }, [])
 
-
-  // const handleEpisodeClick = () => {
-  //   if (webtoonList) {
-  //     webtoonList.data.map((webtoon) => (
-  //       axios.get(`https://blockpage.site/webtoon-service/v1/episodes?${webtoon.webtoonId}&sort=${sort}`,
-  //         {
-  //           headers: {
-  //             memberId: session?.email || '',
-  //             // role: role,
-  //           },
-  //         })
-  //         .then((res) => {
-  //           console.log(res.data.data)
-  //         })
-  //         .catch((err) => {
-  //           console.log(err)
-  //         })
-  //     ))
-  //   }
-
   const handleEpisodeClick = (webtoonId: number) => {
     router.push(`/episodelist/${webtoonId}`);
   };

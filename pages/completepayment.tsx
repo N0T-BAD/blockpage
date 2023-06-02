@@ -1,8 +1,13 @@
 import TotalLayout from "@/components/layouts/TotalLayout"
 import CompletePayMentSection from "@/components/pages/chargeresult/CompletePayMentSection"
 import { NextPageWithLayout } from "@/pages/_app"
+import { ChargeBlockResponse } from "@/types/chargeBlockData"
 
-const Completepayment: NextPageWithLayout = () => {
+interface Props {
+  orderdata: ChargeBlockResponse,
+}
+
+const Completepayment: NextPageWithLayout<Props> = ({ orderdata }) => {
 
   return (
     <>
