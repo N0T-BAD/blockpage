@@ -16,12 +16,19 @@
   transform: translate(-50%, -50%);
 }
 
-.formBox {
+.radioBox {
   width: 100%;
   border: 0.2rem solid var(--bp-line-gray);
   border-radius: 1rem;
   background-color: var(--bp-white);
-  padding: 2rem 4rem;
+  padding: 1rem 3rem;
+}
+
+.radioDiv {
+  display: flex;
+  flex-direction: column;
+  vertical-align: middle;
+  padding: 1rem 0;
 }
 
 .closeBtn {
@@ -43,27 +50,9 @@
   filter: brightness(0) invert(1);
 }
 
-.rating {
-  text-align: center;
-  font-size: 3rem;
-  font-weight: 700;
-  margin: 0;
-  padding: 1rem 1rem;
-  width: 100%;
-  height: auto;
-  border: none;
-}
-
-.description {
-  text-align: center;
-  margin: 1rem 0;
-  color: var(--bp-font-gray);
-}
-
 .confirmBox {
   display: flex;
   justify-content: center;
-  padding-top: 1rem;
 }
 
 .confirm {

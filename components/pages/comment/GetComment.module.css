@@ -83,3 +83,11 @@
 .replyCommentSection {
   margin: 0 0 1rem 0;
 }
+
+p.likeCount {
+  color: var(--bp-primary);
+}
+
+p.disLikeCount {
+  color: var(--bp-secondary);
+}

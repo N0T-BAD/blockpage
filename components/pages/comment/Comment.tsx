@@ -1,77 +1,234 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
+import axios from 'axios'
 
 import style from '@/components/pages/comment/GetComment.module.css'
 import Separator from '@/components/ui/Separator'
 import CommentUserInfo from './CommentUserInfo'
-
-import { commentDataType } from '@/types/commentDataType'
-import { replyDatas } from '@/data/dummy/commentData'
+import { CommentDataType, CommentEmotionDataType, ParentsCommentType } from '@/types/commentDataType'
 import CommentInput from './CommentInput'
+import ReportModal from '@/components/modals/ReportModal'
 
 export default function Comment(props: {
-  data: commentDataType,
-  isAuthor: boolean,
+  nickNameData: string,
+  commentData: CommentDataType,
 }) {
+  const { data: session } = useSession();
 
-  const [replyData] = useState<commentDataType[]>(replyDatas);
+  const router = useRouter();
+  const { episodeId } = router.query;
+  const { author } = router.query;
+
+  const nickNameData = props.nickNameData;
+  const commentData = props.commentData;
+  const [replyData, setReplyData] = useState<CommentDataType[]>([]);
+
   const [openReply, setOpenReply] = useState<boolean>(false);
+
+  const [likeState, setLikeState] = useState<boolean>(false);
+  const [disLikeState, setDisLikeState] = useState<boolean>(false);
+
+  const [showCommentModal, setShowCommentModal] = useState<boolean>();
+  const [reportValue, setReportValue] = useState<number>(0);
+
+  const [commentEmotionData, setCommentEmotionData] = useState<CommentEmotionDataType>({
+    id: 0,
+    commentId: 0,
+    emotion: false,
+    choice: false,
+  });
+
+  const parentsJson: ParentsCommentType = {
+    parentsId: commentData.parentsId,
+    parentsNickname: commentData.parentsNickname,
+    parentsCommentId: commentData.commentId,
+  }
+
+  useEffect(() => {
+    if (session) {
+      axios.all([axios.get(`https://blockpage.site/comment-service/v1/comments/reply/${commentData.commentId}`), axios.get(`https://blockpage.site/member-service/v1/emotions?commentId=${commentData.commentId}`, {
+        headers: {
+          memberId: session?.email,
+        }
+      })]
+      )
+        .then(
+          axios.spread((res1, res2) => {
+            setReplyData(res1.data.data);
+            setCommentEmotionData(res2.data.data);
+          })
+        )
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [session]);
 
   const handleView = () => {
     setOpenReply(!openReply);
   }
 
   const handlePush = () => {
-    console.log("handlePush onClick");
+    // pin
+    axios.patch(`https://blockpage.site/comment-service/v1/comments/${commentData.commentId}`, {
+      withCredentials: true
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   const handleDelete = () => {
-    console.log("handleDelete onClick");
+    axios.delete(`https://blockpage.site/comment-service/v1/comments/${commentData.commentId}`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   const handleLike = () => {
-    console.log("handleLike onClick");
+    if (likeState === false) {
+      axios.post(`https://blockpage.site/member-service/v1/emotions`, {
+        episodeId: episodeId,
+        commentId: commentData.commentId,
+        emotion: true,
+      }, {
+        headers: {
+          memberId: session?.email,
+        }
+      })
+        .then((res) => {
+          console.log(res);
+          setLikeState(!likeState);
+        })
+        .catch((err) => {
+          console.log(err);
+          alert(err.response.data);
+        })
+    }
+    else if (likeState === true) {
+      axios.post(`https://blockpage.site/member-service/v1/emotions${commentEmotionData?.commentId}`, {
+        headers: {
+          email: session?.email,
+        }
+      })
+        .then((res) => {
+          console.log(res);
+          setLikeState(!likeState);
+        })
+        .catch((err) => {
+          console.log(err);
+          alert(err.response.data);
+        })
+    }
   }
 
   const handleDislike = () => {
-    console.log("handleDislike onClick");
+    if (disLikeState === false) {
+      axios.post(`https://blockpage.site/member-service/v1/emotions`, {
+        episodeId: episodeId,
+        commentId: commentData.commentId,
+        emotion: false,
+      }, {
+        headers: {
+          memberId: session?.email,
+        }
+      })
+        .then((res) => {
+          console.log(res);
+          setDisLikeState(!disLikeState);
+        })
+        .catch((err) => {
+          console.log(err);
+          alert(err.response.data);
+        })
+    } else if (disLikeState === true) {
+      axios.post(`https://blockpage.site/member-service/v1/emotions${commentEmotionData?.commentId}`, {
+        headers: {
+          email: session?.email,
+        }
+      })
+        .then((res) => {
+          console.log(res);
+          setDisLikeState(!disLikeState);
+        })
+        .catch((err) => {
+          console.log(err);
+          alert(err.response.data);
+        })
+    }
   }
 
   const handleReport = () => {
-    //신고
-    console.log("handleDeclaration onClick");
+    axios.post(`https://blockpage.site/comment-service/v1/reports`, {
+      memberId: session?.email,
+      commentId: commentData.commentId,
+      memberNickname: nickNameData,
+      content: commentData.content,
+      reportType: reportValue,
+    }, {
+      headers: {
+        memberId: session?.email,
+      }
+    })
+      .then((res) => {
+        console.log(res);
+        setShowCommentModal(!showCommentModal);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  const handleShowReportModal = () => {
+    setShowCommentModal(!showCommentModal);
+    setReportValue(0);
   }
 
   return (
     <>
       {
+        showCommentModal &&
+        <ReportModal
+          handleShowReportModal={handleShowReportModal}
+          handleReport={handleReport}
+          setReportValue={setReportValue}
+        />
+      }
+      {
         <>
           <div className={style.commentSection}>
             {
-              props.data.pin ?
+              commentData.pin ?
                 <p className={style.pinTxt}>작가님이 고정함</p>
                 : ""
             }
             <div className={style.topSection}>
               {
-                props.data.isReply &&
-                  props.data.isReply ?
+                commentData.childNickname ?
                   <>
                     < CommentUserInfo
-                      nickname={props.data.childNickname}
-                      date={props.data.date}
+                      nickname={commentData.childNickname}
+                      date={commentData.dateTime}
                     />
                   </> :
                   < CommentUserInfo
-                    nickname={props.data.parentsNickname}
-                    date={props.data.date}
+                    nickname={commentData.parentsNickname}
+                    date={commentData.dateTime}
                   />
               }
               <div className={style.topIcon}>
                 {
-                  !props.data.isReply &&
-                    !props.data.pin &&
-                    props.isAuthor ?
+                  !commentData.childId &&
+                    !commentData.pin &&
+                    author == nickNameData ?
                     <div onClick={handlePush}>
                       <Image
                         src={"/assets/images/icons/pushpin.svg"}
@@ -83,26 +240,43 @@ export default function Comment(props: {
                     </div>
                     : ""
                 }
-                <div onClick={handleDelete}>
-                  <Image
-                    src={"/assets/images/icons/trash.svg"}
-                    alt='쓰레기통'
-                    width={17}
-                    height={17}
-                    priority
-                  />
-                </div>
+                {
+                  session?.email === commentData.childId ?
+                    <div onClick={handleDelete}>
+                      <Image
+                        src={"/assets/images/icons/trash.svg"}
+                        alt='쓰레기통'
+                        width={17}
+                        height={17}
+                        priority
+                      />
+                    </div> :
+                    !commentData.childId &&
+                      session?.email === commentData.parentsId ?
+                      <div onClick={handleDelete}>
+                        <Image
+                          src={"/assets/images/icons/trash.svg"}
+                          alt='쓰레기통'
+                          width={17}
+                          height={17}
+                          priority
+                        />
+                      </div>
+                      : ""
+                }
               </div>
             </div>
-            <p className={style.commentTxt}>{props.data.content}</p>
+            <p className={style.commentTxt}>{commentData.content}</p>
             <div className={style.bottomSection}>
               {
-                props.data.replyCount > 0
-                  ? <p onClick={handleView}>답글 {props.data.replyCount}</p>
-                  : props.data.isReply ? <p></p> : <p>답글 달기</p>
+                commentData.replyCount > 0 ?
+                  <p onClick={handleView}>답글 {commentData.replyCount}</p> :
+                  commentData.childId ?
+                    <p></p> :
+                    <p onClick={handleView}>답글 달기</p>
               }
               <div className={style.bottomIcon}>
-                <div onClick={handleReport}>
+                <div onClick={handleShowReportModal}>
                   <Image
                     src={"/assets/images/icons/siren.svg"}
                     alt='신고'
@@ -120,7 +294,7 @@ export default function Comment(props: {
                     onClick={handleLike}
                     priority
                   />
-                  <p>{props.data.likesCount}</p>
+                  <p className={commentEmotionData.choice && commentEmotionData.emotion ? `${style.likeCount}` : ""}>{commentData.likesCount}</p>
                 </div>
                 <div className={style.emotion}>
                   <Image
@@ -131,7 +305,7 @@ export default function Comment(props: {
                     onClick={handleDislike}
                     priority
                   />
-                  <p>{props.data.dislikesCount}</p>
+                  <p className={commentEmotionData.choice && !commentEmotionData.emotion ? `${style.disLikeCount}` : ""}>{commentData.dislikesCount}</p>
                 </div>
               </div>
             </div>
@@ -148,15 +322,18 @@ export default function Comment(props: {
             {
               replyData &&
               replyData.map((childData) => (
-                props.data.parentsId === childData.parentsId &&
+                commentData.parentsId === childData.parentsId &&
                 <Comment
-                  key={childData.id}
-                  data={childData}
-                  isAuthor={props.isAuthor}
+                  key={childData.commentId}
+                  nickNameData={props.nickNameData}
+                  commentData={childData}
                 />
               ))
             }
-            <CommentInput />
+            <CommentInput
+              nickNameData={props.nickNameData}
+              parents={parentsJson}
+            />
           </div>
         </section>
       }
