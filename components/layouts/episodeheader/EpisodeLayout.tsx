@@ -1,16 +1,11 @@
 import EpisodeHeader from "./EpisodeHeader";
 
-interface EpisodeListProps {
-    webtoonId: number;
-    children: React.ReactNode
-}
 
-export default function EpisodeLayout(props: EpisodeListProps) {
-    const { webtoonId } = props;
+export default function EpisodeLayout(props: { children: React.ReactNode }) {
 
     return (
         <>
-            <EpisodeHeader webtoonId={webtoonId} />
+            <EpisodeHeader />
             <div>{props.children}</div>
         </>
     )

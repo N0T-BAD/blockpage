@@ -14,6 +14,11 @@ export interface ChargeBlockResponse {
   };
 }
 
+export interface ChargeBlock {
+  orderId: string;
+  blockQuantity: number;
+}
+
 export interface BlockPurchase {
   data: [{
     orderId: string;

@@ -1,85 +1,89 @@
 import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import axios from 'axios';
-import { WebToonListDataType } from '@/types/webtoonDataType';
+import { EpisodeViewListType, WebToonListDataType } from '@/types/webtoonDataType';
 import { NextPageWithLayout } from '@/pages/_app';
 import EpisodeTopSection from '@/components/pages/episodelist/EpisodeTopSection';
 import EpisodeMiddleSection from '@/components/pages/episodelist/EpisodeMiddleSection';
 import EpisodeLayout from '@/components/layouts/episodeheader/EpisodeLayout';
 
 interface EpisodeListProps {
-    webtoonId: number;
+  webtoonId: number;
 }
 
 const EpisodeListPage: NextPageWithLayout<EpisodeListProps> = ({ webtoonId }) => {
-    const { data: session } = useSession();
-    const sort = 'DESC';
-    const [episodeData, setEpisodeData] = useState<WebToonListDataType>({
-        data: {
-            webtoonTitle: '',
-            creator: '',
-            illustrator: '',
-            description: '',
-            publicationDays: '',
-            genre: '',
-            webtoonMainImage: '',
-            views: 0,
-            interestCount: 0,
-            episodeViewList: [],
-        },
-        meta: {
-            sort: '',
-        },
-    });
+  const { data: session } = useSession();
+  const [episodeData, setEpisodeData] = useState<WebToonListDataType>({
+    data: {
+      webtoonTitle: '',
+      creator: '',
+      illustrator: '',
+      description: '',
+      publicationDays: '',
+      genre: '',
+      webtoonMainImage: '',
+      views: 0,
+      interestCount: 0,
+      episodeViewList: [],
+    },
+    meta: {
+      sort: '',
+    },
+  });
+  console.log(episodeData)
 
-    useEffect(() => {
 
-        const fetchEpisodeData = async () => {
-            try {
-                const response = await axios.get(
-                    `https://blockpage.site/webtoon-service/v1/episodes?webtoonId=${webtoonId}&sort=${sort}`,
-                    {
-                        headers: {
-                            memberId: session?.email || '',
-                        },
-                    }
-                );
-                const episodeData: WebToonListDataType = response.data.data;
+  useEffect(() => {
 
-                console.log(episodeData);
-                setEpisodeData(episodeData);
-            } catch (error) {
-                console.error(error);
-            }
-        };
+    const fetchEpisodeData = async () => {
+      try {
+        const response = await axios.get(
+          `https://blockpage.site/webtoon-service/v1/episodes`,
+          {
+            headers: {
+              memberId: session?.email || '',
+            },
+            params: {
+              webtoonId: webtoonId,
+            },
+          }
+        );
+        const episodeData = response.data;
 
-        fetchEpisodeData();
-    }, [webtoonId, session]);
+        console.log(episodeData);
+        setEpisodeData(episodeData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-    return (
-        <>
-            <EpisodeTopSection />
-            <EpisodeMiddleSection episodeData={episodeData} />
-        </>
-    );
+    fetchEpisodeData();
+  }, [webtoonId, session]);
+
+  return (
+    <>
+      <EpisodeTopSection />
+      <EpisodeMiddleSection episodeData={episodeData} webtoonId={webtoonId} />
+    </>
+  );
 };
 
 EpisodeListPage.getLayout = function getLayout(page: React.ReactElement) {
-    return (
-        <EpisodeLayout webtoonId={page.props.webtoonId}>
-            {page}
-        </EpisodeLayout>
-    )
+  return (
+    <EpisodeLayout>
+      {page}
+    </EpisodeLayout>
+  )
 }
 
 export default EpisodeListPage;
 
 export async function getServerSideProps({ query }: any) {
-    const webtoonId = parseInt(query.webtoonId as string);
+  const webtoonId = parseInt(query.webtoonId);
 
-    return {
-        props: {
-            webtoonId,
-        },
-    };
+  return {
+    props: {
+      webtoonId,
+    },
+  };
 }

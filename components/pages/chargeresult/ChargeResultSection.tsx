@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import style from '@/components/pages/chargeresult/ChargeResultSection.module.css'
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+import { ChargeBlock, ChargeBlockResponse } from '@/types/chargeBlockData';
 
 export default function ChargeResultSection() {
 
@@ -13,6 +14,12 @@ export default function ChargeResultSection() {
   const router = useRouter();
   const pgToken = router.query.pg_token;
   console.log(pgToken)
+  const [orderblock, setOrderBlock] = useState<ChargeBlock>(
+    {
+      orderId: '',
+      blockQuantity: 0,
+    }
+  );
 
   const handlego = async () => {
     axios.post('https://blockpage.site/block-service/v1/payments?type=kakao-approve', {
@@ -26,8 +33,25 @@ export default function ChargeResultSection() {
     }
     )
       .then((res) => {
-        localStorage.setItem('orderdata', JSON.stringify(res.data))
-        router.push('/completepayment')
+        console.log(res.data)
+        localStorage.setItem('orderdata', res.data.orderId)
+        setOrderBlock(res.data);
+        axios.post('https://blockpage.site/block-service/v1/blocks?type=cash', {
+          orderId: orderblock.orderId,
+          blockQuantity: orderblock.blockQuantity,
+        }, {
+          headers: {
+            'Content-Type': 'application/json',
+            memberId: session?.email,
+            // role: role,
+          },
+        })
+          .then((res) => {
+            console.log(res)
+            if (res) {
+              router.push('/completepayment')
+            }
+          })
       })
   }
 

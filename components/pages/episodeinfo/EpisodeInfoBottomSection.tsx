@@ -1,10 +1,10 @@
 import React from 'react'
 import EpisodeInfoForm from '@/components/pages/episodeinfo/EpisodeInfoForm'
 import style from '@/components/pages/episodeinfo/EpisodeInfoBottomSection.module.css'
-import { WebToonListDataType } from '@/types/webtoonDataType';
+import { EpisodeViewListType, WebToonListDataType } from '@/types/webtoonDataType';
 
 interface EpisodeInfoProps {
-  episodeData: WebToonListDataType;
+  episodeData: EpisodeViewListType;
   webtoonId: number;
 }
 

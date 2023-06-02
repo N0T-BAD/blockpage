@@ -4,13 +4,13 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 import { useRecoilState } from 'recoil';
 import { UploadedFile, episodeInfoFormDataType } from '@/types/episodeInfoForm';
-import { WebToonDetailDataType, WebToonListDataType } from '@/types/webtoonDataType';
+import { EpisodeViewListType, WebToonDetailDataType, WebToonListDataType } from '@/types/webtoonDataType';
 import Image from 'next/image';
 import { webtoonListData } from '@/data/dummy/webtoonData';
 import { useSession } from 'next-auth/react';
 
 interface EpisodeInfoProps {
-  episodeData: WebToonListDataType;
+  episodeData: EpisodeViewListType;
   webtoonId: number;
 }
 
@@ -127,10 +127,13 @@ export default function EpisodeInfoForm({ episodeData, webtoonId }: EpisodeInfoP
           </div>
         )} */}
         <form onSubmit={handleSubmit}>
-          <div className={style.episodeInfoBox}>
-            <p>에피소드 회차 : </p>
-            <input type="text" name="episodeNumber" onChange={handleInput} />
-          </div>
+          {episodeData.episodeNumber &&
+            <div className={style.episodeInfoBox}>
+              <p>에피소드 회차 : </p>
+              <p>{episodeData.episodeNumber + 1}</p>
+              <input type="text" name="episodeNumber" onChange={handleInput} />
+            </div>
+          }
           <div className={style.episodeInfoBox}>
             <p>에피소드 명 : </p>
             <input type="text" name="episodeTitle" onChange={handleInput} />

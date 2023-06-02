@@ -5,23 +5,9 @@ import { useRouter } from 'next/router';
 import BackBtn from '@/components/ui/BackBtn'
 import style from '@/components/layouts/header/TotalHeader.module.css'
 
-interface EpisodeListProps {
-    webtoonId: number;
-}
-
-export default function TotalHeader({ webtoonId }: EpisodeListProps) {
+export default function TotalHeader() {
 
     const router = useRouter();
-
-    const [title, setTitle] = useState<string>("");
-
-    useEffect(() => {
-        const path = router.pathname;
-        if (path === `/episodelist/${webtoonId}`) {
-            setTitle('에피소드 조회')
-        }
-    }, [router.pathname])
-
 
     return (
 
@@ -33,7 +19,7 @@ export default function TotalHeader({ webtoonId }: EpisodeListProps) {
                     />
                 </div>
                 <div className={style.centerHead}>
-                    <p>{title}</p>
+                    <p>에피소드 조회</p>
                 </div>
                 <div className={style.rightHead}></div>
             </div>

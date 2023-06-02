@@ -4,7 +4,7 @@ import EpisodeInfoBottomSection from "@/components/pages/episodeinfo/EpisodeInfo
 import TotalLayout from "@/components/layouts/TotalLayout"
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { WebToonListDataType } from "@/types/webtoonDataType";
+import { EpisodeViewListType, WebToonListDataType } from "@/types/webtoonDataType";
 import { useSession } from "next-auth/react";
 
 interface EpisodeListProps {
@@ -15,22 +15,14 @@ const EpisodeInfo: NextPageWithLayout<EpisodeListProps> = ({ webtoonId }) => {
 
     const { data: session } = useSession();
     const sort = 'DESC';
-    const [episodeData, setEpisodeData] = useState<WebToonListDataType>({
-        data: {
-            webtoonTitle: '',
-            creator: '',
-            illustrator: '',
-            description: '',
-            publicationDays: '',
-            genre: '',
-            webtoonMainImage: '',
-            views: 0,
-            interestCount: 0,
-            episodeViewList: [],
-        },
-        meta: {
-            sort: '',
-        },
+    const [episodeData, setEpisodeData] = useState<EpisodeViewListType>({
+        episodeId: 0,
+        episodeTitle: '',
+        episodeThumbnail: '',
+        episodeNumber: 0,
+        uploadDate: '',
+        totalScore: 0,
+        authorWords: '',
     });
 
     useEffect(() => {
@@ -45,7 +37,7 @@ const EpisodeInfo: NextPageWithLayout<EpisodeListProps> = ({ webtoonId }) => {
                         },
                     }
                 );
-                const episodeData: WebToonListDataType = response.data.data;
+                const episodeData: EpisodeViewListType = response.data.data;
 
                 console.log(episodeData);
                 setEpisodeData(episodeData);

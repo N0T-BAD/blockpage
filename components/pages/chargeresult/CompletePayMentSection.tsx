@@ -27,34 +27,16 @@ export default function CompletePayMentSection() {
   console.log(orderdata)
 
   useEffect(() => {
-    const orderBlockdata = localStorage.getItem('orderdata')
-    console.log(orderBlockdata)
+    const orderBlockdata = localStorage.getItem('orderdata');
+    console.log(orderBlockdata);
     if (orderBlockdata) {
       setOrderData(JSON.parse(orderBlockdata));
-      console.log(orderdata)
-      console.log(orderdata.data.orderId)
-      return;
+      console.log(orderdata);
     }
-  }, [])
+  }, []);
 
   const HandleSeccess = () => {
-    axios.post('https://blockpage.site/block-service/v1/blocks?type=cash', {
-      orderId: orderdata.data.orderId,
-      blockQuantity: orderdata.data.blockQuantity,
-    }, {
-      headers: {
-        'Content-Type': 'application/json',
-        memberId: session?.email,
-        // role: role,
-      },
-    })
-      .then((res) => {
-        console.log(res)
-        if (res) {
-          localStorage.removeItem('orderdata')
-          router.push('/blockcharge')
-        }
-      })
+    router.push('/blockcharge')
   }
 
   return (
