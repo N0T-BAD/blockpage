@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 import axios from 'axios'
 
 import style from '@/components/pages/comment/GetComment.module.css'
 import Separator from '@/components/ui/Separator'
 import CommentUserInfo from './CommentUserInfo'
-import { CommentDataType, ParentsCommentType } from '@/types/commentDataType'
+import { CommentDataType, CommentEmotionDataType, ParentsCommentType } from '@/types/commentDataType'
 import CommentInput from './CommentInput'
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/router'
 import ReportModal from '@/components/modals/ReportModal'
 
 export default function Comment(props: {
@@ -16,34 +16,55 @@ export default function Comment(props: {
   commentData: CommentDataType,
 }) {
   const { data: session } = useSession();
+
   const router = useRouter();
   const { episodeId } = router.query;
   const { author } = router.query;
+
   const nickNameData = props.nickNameData;
   const commentData = props.commentData;
   const [replyData, setReplyData] = useState<CommentDataType[]>([]);
+
   const [openReply, setOpenReply] = useState<boolean>(false);
+
+  const [likeState, setLikeState] = useState<boolean>(false);
+  const [disLikeState, setDisLikeState] = useState<boolean>(false);
+
+  const [showCommentModal, setShowCommentModal] = useState<boolean>();
+  const [reportValue, setReportValue] = useState<number>(0);
+
+  const [commentEmotionData, setCommentEmotionData] = useState<CommentEmotionDataType>({
+    id: 0,
+    commentId: 0,
+    emotion: false,
+    choice: false,
+  });
+
   const parentsJson: ParentsCommentType = {
     parentsId: commentData.parentsId,
     parentsNickname: commentData.parentsNickname,
     parentsCommentId: commentData.commentId,
   }
-  const [likeState, setLikeState] = useState<boolean>();
-  const [disLikeState, setDisLikeState] = useState<boolean>();
-
-  const [showCommentModal, setShowCommentModal] = useState<boolean>();
-  const [reportValue, setReportValue] = useState<number>(0);
 
   useEffect(() => {
-    axios.get(`https://blockpage.site/comment-service/v1/comments/reply/${commentData.commentId}`)
-      .then((res) => {
-        console.log(res);
-        setReplyData(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }, []);
+    if (session) {
+      axios.all([axios.get(`https://blockpage.site/comment-service/v1/comments/reply/${commentData.commentId}`), axios.get(`https://blockpage.site/member-service/v1/emotions?commentId=${commentData.commentId}`, {
+        headers: {
+          memberId: session?.email,
+        }
+      })]
+      )
+        .then(
+          axios.spread((res1, res2) => {
+            setReplyData(res1.data.data);
+            setCommentEmotionData(res2.data.data);
+          })
+        )
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [session]);
 
   const handleView = () => {
     setOpenReply(!openReply);
@@ -51,7 +72,6 @@ export default function Comment(props: {
 
   const handlePush = () => {
     // pin
-    console.log("handlePush onClick");
     axios.patch(`https://blockpage.site/comment-service/v1/comments/${commentData.commentId}`, {
       withCredentials: true
     })
@@ -64,7 +84,6 @@ export default function Comment(props: {
   }
 
   const handleDelete = () => {
-    console.log("handleDelete onClick");
     axios.delete(`https://blockpage.site/comment-service/v1/comments/${commentData.commentId}`)
       .then((res) => {
         console.log(res);
@@ -75,13 +94,27 @@ export default function Comment(props: {
   }
 
   const handleLike = () => {
-    console.log("handleLike onClick");
-    if (likeState) {
+    if (likeState === false) {
       axios.post(`https://blockpage.site/member-service/v1/emotions`, {
         episodeId: episodeId,
         commentId: commentData.commentId,
         emotion: true,
       }, {
+        headers: {
+          memberId: session?.email,
+        }
+      })
+        .then((res) => {
+          console.log(res);
+          setLikeState(!likeState);
+        })
+        .catch((err) => {
+          console.log(err);
+          alert(err.response.data);
+        })
+    }
+    else if (likeState === true) {
+      axios.post(`https://blockpage.site/member-service/v1/emotions${commentEmotionData?.commentId}`, {
         headers: {
           email: session?.email,
         }
@@ -92,60 +125,48 @@ export default function Comment(props: {
         })
         .catch((err) => {
           console.log(err);
+          alert(err.response.data);
         })
-    } else if (!likeState) {
-      // axios.post(`https://blockpage.site/member-service/v1/emotions${emotionId}`, {
-      //   headers: {
-      //     email: session?.email,
-      //   }
-      // })
-      //   .then((res) => {
-      //     console.log(res);
-      //     setLikeState(!likeState);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   })
     }
   }
 
   const handleDislike = () => {
-    console.log("handleDislike onClick");
-    if (disLikeState) {
+    if (disLikeState === false) {
       axios.post(`https://blockpage.site/member-service/v1/emotions`, {
         episodeId: episodeId,
         commentId: commentData.commentId,
         emotion: false,
       }, {
         headers: {
+          memberId: session?.email,
+        }
+      })
+        .then((res) => {
+          console.log(res);
+          setDisLikeState(!disLikeState);
+        })
+        .catch((err) => {
+          console.log(err);
+          alert(err.response.data);
+        })
+    } else if (disLikeState === true) {
+      axios.post(`https://blockpage.site/member-service/v1/emotions${commentEmotionData?.commentId}`, {
+        headers: {
           email: session?.email,
         }
       })
         .then((res) => {
           console.log(res);
-          setLikeState(!disLikeState);
+          setDisLikeState(!disLikeState);
         })
         .catch((err) => {
           console.log(err);
+          alert(err.response.data);
         })
-    } else if (!disLikeState) {
-      // axios.post(`https://blockpage.site/member-service/v1/emotions${emotionId}`, {
-      //   headers: {
-      //     email: session?.email,
-      //   }
-      // })
-      //   .then((res) => {
-      //     console.log(res);
-      //     setLikeState(!disLikeState);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   })
     }
   }
 
   const handleReport = () => {
-    console.log("handleDeclaration onClick");
     axios.post(`https://blockpage.site/comment-service/v1/reports`, {
       memberId: session?.email,
       commentId: commentData.commentId,
@@ -273,7 +294,7 @@ export default function Comment(props: {
                     onClick={handleLike}
                     priority
                   />
-                  <p>{commentData.likesCount}</p>
+                  <p className={commentEmotionData.choice && commentEmotionData.emotion ? `${style.likeCount}` : ""}>{commentData.likesCount}</p>
                 </div>
                 <div className={style.emotion}>
                   <Image
@@ -284,7 +305,7 @@ export default function Comment(props: {
                     onClick={handleDislike}
                     priority
                   />
-                  <p>{commentData.dislikesCount}</p>
+                  <p className={commentEmotionData.choice && !commentEmotionData.emotion ? `${style.disLikeCount}` : ""}>{commentData.dislikesCount}</p>
                 </div>
               </div>
             </div>

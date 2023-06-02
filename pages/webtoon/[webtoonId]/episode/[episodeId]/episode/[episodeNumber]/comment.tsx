@@ -12,7 +12,6 @@ function Comment(props: { commentData: CommentDataType[] }) {
   const { data: session } = useSession();
   const [nickNameData, setNickNameData] = useState<string>('');
   const [commentData, setCommentData] = useState<CommentDataType[]>([]);
-  console.log(nickNameData)
   useEffect(() => {
     setCommentData(props.commentData);
   }, []);

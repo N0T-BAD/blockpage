@@ -24,3 +24,10 @@ export interface ParentsCommentType {
   parentsNickname: string;
   parentsCommentId: number;
 }
+
+export interface CommentEmotionDataType {
+  id: number;
+  commentId: number;
+  emotion: boolean;
+  choice: boolean;
+}
