@@ -15,27 +15,22 @@ export default function MyBlock() {
   const [totalBlock, setTotalBlock] = useRecoilState<TotalBlock>(blockAtom)
 
   useEffect(() => {
-    const fetchTotalBlock = async () => {
-      try {
-        const res = await axios.get("https://blockpage.site/block-service/v1/blocks", {
-          headers: {
-            'Content-Type': 'application/json',
-            memberId: session?.email,
-            // role: role,
-          },
-        });
+    axios.get("https://blockpage.site/block-service/v1/blocks", {
+      headers: {
+        'Content-Type': 'application/json',
+        memberId: session?.email,
+        // role: role,
+      },
+    })
+      .then((res) => {
         const totalBlocks = res.data.data.totalBlocks;
+        console.log(totalBlocks)
         setTotalBlock({
           data: {
             totalBlocks,
           },
-        });
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    fetchTotalBlock();
+        })
+      })
   }, [session, setTotalBlock])
 
   return (

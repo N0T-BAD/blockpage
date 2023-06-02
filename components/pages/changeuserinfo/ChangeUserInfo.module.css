@@ -1,9 +1,9 @@
-.ChangeUserIntoWrap {
-  margin: 0 1rem;
+.userInfoWrap {
+  overflow-y: scroll;
 }
 
-.profileSkinWrap {
-  margin-bottom: 2rem;
+.ChangeUserIntoWrap {
+  margin: 0 1rem;
 }
 
 p.profileSkinchangetxt {
@@ -14,7 +14,7 @@ p.profileSkinchangetxt {
   width: 100%;
   height: 5rem;
   display: flex;
-  overflow-x: scroll;
+  
   margin: 1rem 0;
   background-color: var(--bp-gray);
 }
@@ -29,6 +29,11 @@ p.profileSkintxt {
   height: 100%;
   align-items: center;
   margin: 0 1rem;
+  overflow-x: scroll;
+}
+
+.ProfileSkinButtonBox::-webkit-scrollbar{
+  display: none;
 }
 
 .ProfileSkinButtonBox button {
@@ -41,44 +46,10 @@ p.profileSkintxt {
   background-color: var(--bp-gray);
 }
 
-.profileSkinItemPurple {
-  width: 1.5rem;
-  height: 1.5rem;
-  margin: 0.5rem;
-  background-color: var(--bp-secondary);
-  border-radius: 3rem;
-  border: none;
-}
-
-.profileSkinItemPink {
-  width: 1.5rem;
-  height: 1.5rem;
-  margin: 0.5rem;
-  background-color: var(--bp-red);
-  border-radius: 3rem;
-  border: none;
-}
-
-.profileSkinItemGreen {
-  width: 1.5rem;
-  height: 1.5rem;
-  margin: 0.5rem;
-  background-color: var(--bp-green);
-  border-radius: 3rem;
-  border: none;
-}
-
-.profileSkinItemblue {
-  width: 1.5rem;
-  height: 1.5rem;
-  margin: 0.5rem;
-  background-color: var(--bp-blue);
-  border-radius: 3rem;
-  border: none;
-}
-
 .certificationBox {
-  margin: 0 0 12rem 0;
+  margin: 0 0 1rem 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .certificationtxt {
@@ -87,7 +58,7 @@ p.profileSkintxt {
   color: var(--bp-font-gray);
 }
 
-button.certificationBtn {
+/* button.certificationBtn {
   background-color: var(--bp-blue);
   color: var(--bp-white);
   width: 9rem;
@@ -98,12 +69,13 @@ button.certificationBtn {
   font-size: 1rem;
   font-weight: 700;
   font-family: var(--bp-font);
-}
+  align-self: flex-end;
+} */
 
 .ChangeButtonBox {
   display: flex;
   justify-content: flex-end;
-  margin-top: 7rem;
+  margin: 3rem 0;
 }
 
 button.ChangeButton {
@@ -113,6 +85,150 @@ button.ChangeButton {
   border-radius: 3rem;
   height: 2.5rem;
   margin: 0;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-family: var(--bp-font);
+}
+
+section.ChangeUserInfoTopSection {
+  margin: 6rem 0 1rem 0;
+}
+
+section.ChangeUserInfoMiddleSection {
+  margin: 1rem 0 1rem 0;
+}
+
+section.ChangeUserInfoBottomSection {
+  margin : 0 1.5rem;
+}
+
+.usernicknameImgBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.usernicknameImg {
+  display: flex;
+  width: 80%;
+  flex-direction: column;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--bp-gray);
+  height: 100%;
+  margin-left: 2rem;
+}
+
+.userImage {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin:1rem 0;
+}
+
+.userImage img{
+  border-radius: 5rem;
+}
+
+img.userImage1 {
+  display: flex;
+}
+
+.usernicknameImg .usernickname {
+  padding-bottom: 1rem;
+  font-family: var(--bp-font);
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  width: 70%;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.usernicknameImg .usernickname2 {
+  font-family: var(--bp-font);
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  width: 60%;
+  padding: 0 1rem;
+}
+
+.usernicknameImg p.usernicknamechange {
+  margin: 0.5rem 0;
+  color: var(--bp-font-gray);
+  font-size: 0.8rem;
+}
+
+.uploadBtn p {
+  border: 2px solid var(--bp-blue);
+  border-radius: 5rem;
+  font-size: 0.8rem;
+  padding: 0 0.5rem;
+}
+
+.basicimg {
+  border: 2px solid var(--bp-blue);
+  border-radius: 5rem;
+  font-size: 0.7rem;
+  height: 1.2rem;
+  display: flex;
+}
+
+.uploadBtn input {
+  width: 0;
+}
+
+.userProfileImagePreview {
+  border-radius: 5rem;
+}
+
+.profileskin {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  
+}
+
+.profileskin img {
+  position: absolute;
+  top: 19%;
+}
+
+.changeuserinfobox {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.btn_input_box {
+  width: 100%;
+  display: flex;
+  padding: 1rem 1rem;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.infobox {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.changebtn{
+  width: 25%;
+  align-self: flex-end;
+  background-color: var(--bp-blue);
+  color: var(--bp-white);
+  border-radius: 3rem;
+  height: 2rem;
+  margin: 0.7rem 0;
   border: none;
   font-size: 0.9rem;
   font-weight: 700;

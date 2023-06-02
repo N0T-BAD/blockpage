@@ -1,41 +1,23 @@
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
-import { useSession } from 'next-auth/react';
+import React from 'react'
 
 import style from '@/components/pages/mypage/UserNickName.module.css'
-import { ChangeUserImageDataType, profileskinDataType } from '@/types/changeUserDataType';
+import { UserImgData } from '@/types/changeUserDataType';
 
-export default function UserProfileImg() {
+interface ChildProps {
+  userImg: UserImgData;
+  setUserImg: React.Dispatch<React.SetStateAction<UserImgData>>;
+}
 
-  const { data: session } = useSession();
-
-  const [userprofileImg, setUserProfileImg] = useState<ChangeUserImageDataType>(
-    {
-      profileimage: '',
-      profileskin: '',
-    }
-  );
-
-  const [basicimg, setBasicImg] = useState<profileskinDataType>();
-
-  // useEffect(() => {
-  //   axios.get('http://localhost:3000/api/v1/members?type=profileimage')
-  //     .then((res) => {
-  //       setUserProfileImg(res.data);
-  //     })
-  //   axios.get('http://localhost:3000/api/v1/members?type=profileskin')
-  //     .then((res) => {
-  //       setUserProfileImg(res.data);
-  //     })
-  // }, [])
+export default function UserProfileImg({ userImg, setUserImg }: ChildProps) {
 
   return (
     <div className={style.userImage}>
       {
-        session ?
+        userImg.data.profileImage ?
           <Image
-            src={userprofileImg.profileimage}
-            alt="userProfileImagePreview"
+            src={userImg.data.profileImage}
+            alt="userProfileImage"
             width={70}
             height={70}
           />
