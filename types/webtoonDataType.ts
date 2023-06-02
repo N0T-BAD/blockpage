@@ -23,6 +23,7 @@ export interface EpisodeViewListType {
   episodeThumbnail: string;
   uploadDate: string;
   totalScore: number;
+  authorWords: string;
 }
 
 export interface EpisodeViewDataType {

@@ -2,22 +2,20 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import style from '@/components/pages/episodeinfo/EpisodeInfoForm.module.css'
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { UploadFile, episodeInfoFormDataType } from '@/types/episodeInfoForm';
+import { ChangeepisodeInfoType, UploadFile, episodeInfoFormDataType } from '@/types/episodeInfoForm';
 import Image from 'next/image';
 
 export default function ChangeEpisodeInfoForm() {
 
   const router = useRouter();
 
-  const [episodeInfoData, setEpisodeInfoData] = useState<episodeInfoFormDataType>({
-    id: '',
-    title: '',
-    episodetitle: '',
-    episodedescription: '',
-    day: '',
-    authortalk: '',
+  const [episodeInfoData, setEpisodeInfoData] = useState<ChangeepisodeInfoType>({
+    webtoonId: 0,
+    episodeNumber: 0,
+    episodeTitle: '',
+    uploadDate: '',
+    authorWords: '',
     episodeThumbnail: '',
-    episodeImage: '',
   });
 
   const [episodeThumbnailImage, setEpisodeThumbnailImage] = useState<File>();
@@ -86,7 +84,7 @@ export default function ChangeEpisodeInfoForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (episodeInfoData.episodetitle === '' || episodeInfoData.episodedescription === '' || episodeInfoData.day === '' || episodeInfoData.authortalk === '') {
+    if (episodeInfoData.episodeTitle === '' || episodeInfoData.episodeNumber === 0 || episodeInfoData.uploadDate === '' || episodeInfoData.authorWords === '') {
       alert('에피소드 정보를 입력해주세요.')
     } else if (!episodeThumbnailImage) {
       alert('웹툰 썸네일 이미지를 입력해주세요.')
@@ -97,10 +95,10 @@ export default function ChangeEpisodeInfoForm() {
     } else {
       try {
         const formData = new FormData();
-        formData.append('episodetitle', episodeInfoData.episodetitle);
-        formData.append('episodedescription', episodeInfoData.episodedescription);
-        formData.append('day', episodeInfoData.day);
-        formData.append('authortalk', episodeInfoData.authortalk);
+        formData.append('episodetitle', episodeInfoData.episodeTitle);
+        formData.append('episodeNumber', String(episodeInfoData.episodeNumber));
+        formData.append('day', episodeInfoData.uploadDate);
+        formData.append('authortalk', episodeInfoData.authorWords);
 
         if (episodeThumbnailImage && episodeInfoData.episodeThumbnail !== episodeThumbnailImagePreview) {
           formData.append('episodeThumbnailImage', episodeThumbnailImage);
@@ -138,29 +136,25 @@ export default function ChangeEpisodeInfoForm() {
       {episodeInfoData &&
         <div className={style.WebtoonDeleteInfoWrap}>
           <form onSubmit={handleSubmit}>
-            <div className={style.webtoonInfoBox}>
-              <p>작품명 : </p>
-              <p className={style.title}>{episodeInfoData.title}</p>
-            </div>
-            <div className={style.webtoonInfoBox}>
+            {/* <div className={style.webtoonInfoBox}>
               <p>에피소드 회차 : </p>
-              <p className={style.title}>{episodeInfoData.id}화</p>
-            </div>
+              <p className={style.title}>{episodeInfoData.episodeNumber}화</p>
+            </div> */}
             <div className={style.episodeInfoBox}>
               <p>에피소드 명 : </p>
-              <input type="text" name="episodetitle" defaultValue={episodeInfoData.episodetitle} onChange={handleInput} />
+              <input type="text" name="episodetitle" defaultValue={episodeInfoData.episodeTitle} onChange={handleInput} />
             </div>
             <div className={style.episodeInfoBox}>
               <p>에피소드 내용 : </p>
-              <input type="text" name="episodedescription" defaultValue={episodeInfoData.episodedescription} onChange={handleInput} />
+              <input type="text" name="episodedescription" defaultValue={episodeInfoData.episodeNumber} onChange={handleInput} />
             </div>
             <div className={style.episodeInfoBox}>
               <p>업로드 일 : </p>
-              <input type="text" name="day" defaultValue={episodeInfoData.day} onChange={handleInput} />
+              <input type="text" name="day" defaultValue={episodeInfoData.uploadDate} onChange={handleInput} />
             </div>
             <div className={style.episodeInfoBox}>
               <p>작가의 말 : </p>
-              <input type="text" name="authortalk" defaultValue={episodeInfoData.authortalk} onChange={handleInput} />
+              <input type="text" name="authortalk" defaultValue={episodeInfoData.authorWords} onChange={handleInput} />
             </div>
             <div className={style.episodeInfoImgBox}>
               <div className={style.labelBox}>
