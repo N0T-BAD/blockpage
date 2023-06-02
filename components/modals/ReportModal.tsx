@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from 'react'
 
-import style from '@/components/modals/RatingModal.module.css'
-import Separator from '@/components/ui/Separator'
+import style from '@/components/modals/ReportModal.module.css'
 import CloseBtn from '../ui/CloseBtn';
+import Radio from '../ui/Radio';
+import { staticReportData } from '@/data/staticMenuData';
 
-export default function ReportModal(props: { handleShowReportModal: () => void, handleReport: () => void }) {
+export default function ReportModal(props: { handleShowReportModal: () => void, handleReport: () => void, setReportValue: React.Dispatch<React.SetStateAction<number>> }) {
 
-  const [value, setValue] = useState<number>();
-  const MAX_VALUE = 10;
+  const reportData = staticReportData;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = parseInt(e.target.value);
-    const regex = /^[0-9]+$/;
+    props.setReportValue(Number(e.target.value));
+  }
 
-    if (regex.test(e.target.value) && newValue > MAX_VALUE) {
-      setValue(MAX_VALUE);
-    } else {
-      setValue(newValue);
-    }
-  };
+  const handleConfirm = () => {
+    props.handleReport();
+    props.handleShowReportModal();
+  }
 
   useEffect(() => {
     document.body.style.cssText = `
@@ -42,29 +40,24 @@ export default function ReportModal(props: { handleShowReportModal: () => void, 
             width={20}
           />
         </div>
-        <div className={style.formBox}>
-          <form action="">
-            <input
-              type="text"
-              name='rating'
-              className={style.rating}
-              min="1"
-              max={MAX_VALUE}
-              maxLength={2}
-              value={value || ''}
-              placeholder='10'
-              onChange={handleChange}
-            />
-            <Separator
-              color='var(--bp-line-gray)'
-              gutter={0}
-            />
-            <p className={style.description}>최소 0점에서 10점까지</p>
-            <div className={style.confirmBox}>
-              <button type='button' className={style.confirm} onClick={props.handleReport}>확인</button>
-            </div>
-          </form>
-
+        <div className={style.radioBox}>
+          <div className={style.radioDiv}>
+            {
+              reportData &&
+              reportData.map((data) => (
+                <Radio
+                  key={data.id}
+                  value={data.id}
+                  text={data.name}
+                  defaultChecked={data.defaultChecked}
+                  handleChange={handleChange}
+                />
+              ))
+            }
+          </div>
+          <div className={style.confirmBox}>
+            <button type='button' className={style.confirm} onClick={handleConfirm}>확인</button>
+          </div>
         </div>
       </div>
     </div>

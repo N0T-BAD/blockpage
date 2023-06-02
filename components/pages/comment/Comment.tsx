@@ -32,6 +32,7 @@ export default function Comment(props: {
   const [disLikeState, setDisLikeState] = useState<boolean>();
 
   const [showCommentModal, setShowCommentModal] = useState<boolean>();
+  const [reportValue, setReportValue] = useState<number>(0);
 
   useEffect(() => {
     axios.get(`https://blockpage.site/comment-service/v1/comments/reply/${commentData.commentId}`)
@@ -150,7 +151,7 @@ export default function Comment(props: {
       commentId: commentData.commentId,
       memberNickname: nickNameData,
       content: commentData.content,
-      reportType: 0,
+      reportType: reportValue,
     }, {
       headers: {
         memberId: session?.email,
@@ -167,6 +168,7 @@ export default function Comment(props: {
 
   const handleShowReportModal = () => {
     setShowCommentModal(!showCommentModal);
+    setReportValue(0);
   }
 
   return (
@@ -176,6 +178,7 @@ export default function Comment(props: {
         <ReportModal
           handleShowReportModal={handleShowReportModal}
           handleReport={handleReport}
+          setReportValue={setReportValue}
         />
       }
       {
