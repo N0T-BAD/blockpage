@@ -5,13 +5,11 @@ export interface ChargeBlockData {
 }
 
 export interface ChargeBlockResponse {
-  data: {
-    orderId: string;
-    totalAmount: number;
-    itemName: string;
-    approvedAt: string;
-    blockQuantity: number;
-  };
+  orderId: string;
+  totalAmount: number;
+  itemName: string;
+  approvedAt: string;
+  blockQuantity: number;
 }
 
 export interface ChargeBlock {

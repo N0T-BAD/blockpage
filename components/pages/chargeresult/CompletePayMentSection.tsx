@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 
+
 export default function CompletePayMentSection() {
 
   const router = useRouter();
@@ -14,34 +15,32 @@ export default function CompletePayMentSection() {
 
   const [orderdata, setOrderData] = useState<ChargeBlockResponse>(
     {
-      data: {
-        orderId: '',
-        totalAmount: 0,
-        itemName: '',
-        approvedAt: '',
-        blockQuantity: 0,
-      },
+      orderId: '',
+      totalAmount: 0,
+      itemName: '',
+      approvedAt: '',
+      blockQuantity: 0,
     }
   );
 
-  console.log(orderdata)
 
+  console.log(orderdata)
   useEffect(() => {
-    const orderBlockdata = localStorage.getItem('orderdata');
-    console.log(orderBlockdata);
-    if (orderBlockdata) {
-      setOrderData(JSON.parse(orderBlockdata));
-      console.log(orderdata);
-    }
-  }, []);
+    const orderlist = localStorage.getItem('orderdata') as string;
+    setOrderData(JSON.parse(orderlist))
+  }, [])
 
   const HandleSeccess = () => {
     router.push('/blockcharge')
   }
 
+  if (!orderdata) {
+    return null;
+  }
+
   return (
     <section className={style.completepaymentsection}>
-      {orderdata.data &&
+      {orderdata &&
         <div className={style.blockcomplete}>
           <div className={style.orderbox}>
             <Image src={"/assets/images/icons/love.gif"} alt={"complete"} width={50} height={50} priority />
@@ -51,19 +50,19 @@ export default function CompletePayMentSection() {
             <p>입금 정보</p>
             <div className={style.orderinfo}>
               <p className={style.ordernumber}>주문 번호</p>
-              <p>{orderdata.data.orderId}</p>
+              <p>{orderdata.orderId}</p>
             </div>
             <div className={style.orderinfo}>
               <p className={style.ordernumber}>주문 시각</p>
-              <p>{orderdata.data.approvedAt}</p>
+              <p>{orderdata.approvedAt}</p>
             </div>
             <div className={style.orderinfo}>
               <p className={style.ordernumber}>상품명</p>
-              <p>{orderdata.data.itemName}</p>
+              <p>{orderdata.itemName}</p>
             </div>
             <div className={style.orderinfo}>
               <p className={style.ordernumber}>금액 </p>
-              <p>{orderdata.data.totalAmount}원</p>
+              <p>{orderdata.totalAmount}원</p>
             </div>
           </div>
           <div className={style.completebtn}>
