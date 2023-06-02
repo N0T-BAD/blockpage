@@ -1,4 +1,5 @@
 export interface listviewDataType {
+  id: number;
   webtoonId: number;
   webtoonTitle: string;
   creator: string;

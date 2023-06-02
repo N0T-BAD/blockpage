@@ -1,6 +1,7 @@
 export interface WebToonListDataType {
   data: {
     webtoonTitle: string;
+    webtoonThumnail: string;
     creator: string;
     illustrator: string;
     description: string;
@@ -14,6 +15,20 @@ export interface WebToonListDataType {
   meta: {
     sort: string;
   };
+}
+
+export interface WebToonDataType {
+  webtoonTitle: string;
+  webtoonThumnail: string;
+  creator: string;
+  illustrator: string;
+  description: string;
+  publicationDays: string;
+  genre: string;
+  webtoonMainImage: string;
+  views: number;
+  interestCount: number;
+  episodeViewList: EpisodeViewListType[];
 }
 
 export interface EpisodeViewListType {
