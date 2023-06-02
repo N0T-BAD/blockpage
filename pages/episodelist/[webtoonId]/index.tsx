@@ -63,7 +63,7 @@ const EpisodeListPage: NextPageWithLayout<EpisodeListProps> = ({ webtoonId }) =>
   return (
     <>
       <EpisodeTopSection />
-      <EpisodeMiddleSection episodeData={episodeData} webtoonId={webtoonId} />
+      <EpisodeMiddleSection episodeData={episodeData} />
     </>
   );
 };

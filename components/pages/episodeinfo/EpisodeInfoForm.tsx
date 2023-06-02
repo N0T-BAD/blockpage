@@ -202,8 +202,11 @@ import { EpisodeViewListType } from '@/types/webtoonDataType';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 
+interface EpisodeInfoBottomSectionProps {
+  webtoonId: number;
+}
 
-export default function EpisodeInfoForm() {
+export default function EpisodeInfoForm({ webtoonId }: EpisodeInfoBottomSectionProps) {
   const router = useRouter();
   const { data: session } = useSession();
 
