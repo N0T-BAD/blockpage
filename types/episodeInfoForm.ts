@@ -6,6 +6,15 @@ export interface episodeInfoFormDataType {
   authorWords: string;
 }
 
+export interface ChangeepisodeInfoType {
+  webtoonId: number;
+  episodeNumber: number;
+  episodeTitle: string;
+  uploadDate: string;
+  authorWords: string;
+  episodeThumbnail: string;
+}
+
 export interface changeEpisodeInfoFormDataType {
   id: string;
   title: string;
