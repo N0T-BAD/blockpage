@@ -7,7 +7,7 @@ import CommentInputSection from "@/components/pages/comment/CommentInputSection"
 import GetCommentSection from "@/components/pages/comment/GetCommentSection"
 import { CommentDataType } from "@/types/commentDataType"
 
-function Comment(props: { commentData: CommentDataType[] }) {
+function Comment(props: { commentData: CommentDataType[], count: number }) {
 
   const { data: session } = useSession();
   const [nickNameData, setNickNameData] = useState<string>('');
@@ -30,7 +30,7 @@ function Comment(props: { commentData: CommentDataType[] }) {
 
   return (
     <>
-      <CommentInputSection nickNameData={nickNameData} />
+      <CommentInputSection nickNameData={nickNameData} count={props.count} />
       <GetCommentSection commentData={commentData} nickNameData={nickNameData} />
     </>
   )
@@ -50,10 +50,10 @@ export async function getServerSideProps(context: any) {
   const { episodeId } = context.query;
 
   const res = await axios.get(`https://blockpage.site/comment-service/v1/comments/${episodeId}`)
-  const commentData = res.data.data;
-  console.log(res.data)
+  const commentData = res.data.data.commentViewList;
+  const count = res.data.data.count;
 
   return {
-    props: { commentData }
+    props: { commentData, count }
   }
 }
