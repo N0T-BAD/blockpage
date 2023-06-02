@@ -1,32 +1,90 @@
 import React, { ChangeEvent, useState } from 'react'
+import axios from 'axios';
+import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 
 import style from '@/components/pages/comment/CommentInput.module.css'
+import { ParentsCommentType } from '@/types/commentDataType';
 
-export default function CommentInput() {
-
+export default function CommentInput(props: {
+  nickNameData: string,
+  parents?: ParentsCommentType,
+}) {
+  const { data: session } = useSession();
+  const router = useRouter();
+  const { episodeId } = router.query;
+  const nickNameData = props.nickNameData;
+  const parents = props.parents;
   const [btnState, setBtnState] = useState(false);
   const [inputCount, setInputCount] = useState(0);
-  const maxLength = 300;
+  const [inputText, setInputText] = useState("");
+  const maxLength = 200;
 
   const handleBtn = () => {
     setBtnState(!btnState);
   }
 
-  const handleReg = () => {
+  const handleReg = async () => {
     setBtnState(!btnState);
     setInputCount(0);
+
     //댓글등록
+    console.log(typeof (Number(episodeId)));
+    console.log(inputText);
+    console.log(session?.email);
+    console.log(session?.nickname);
+    console.log(nickNameData);
+
+    if (inputText !== "") {
+      if (parents) {
+        axios.post(`https://blockpage.site/comment-service/v1/comments`, {
+          parentsId: parents.parentsId,
+          parentsNickname: parents.parentsNickname,
+          parentsCommentId: parents.parentsCommentId,
+          episodeId: episodeId,
+          content: inputText,
+          nickname: nickNameData,
+        }, {
+          headers: {
+            memberId: session?.email,
+          }
+        })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        axios.post(`https://blockpage.site/comment-service/v1/comments`, {
+          episodeId: episodeId,
+          content: inputText,
+          nickname: nickNameData,
+        }, {
+          headers: {
+            memberId: session?.email,
+          }
+        })
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    }
   }
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setInputCount(event.target.value.length);
+    setInputText(event.target.value);
   }
 
   return (
-    <div>
+    <div className={style.commentInput}>
       {
         btnState ?
-          <form action="">
+          <form>
             <div className={style.commentDiv}>
               <textarea
                 name="comment"
@@ -42,7 +100,7 @@ export default function CommentInput() {
                   <p>/</p>
                   <p>{maxLength}</p>
                 </div>
-                <button type='submit' className={style.commentBtn} onClick={handleReg}>등록</button>
+                <button type='button' className={style.commentBtn} onClick={handleReg}>등록</button>
               </div>
             </div>
           </form>

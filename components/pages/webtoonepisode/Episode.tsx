@@ -12,7 +12,7 @@ export default function Episode(props: {
   date?: string,
 }) {
 
-  const date = moment(props.date).format('YYYY-MM-DD');
+  const date = moment(props.date, 'YYYYMMDD').format('YYYY-MM-DD');
 
   return (
     <>

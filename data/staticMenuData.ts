@@ -227,3 +227,36 @@ export const staticMenuListData = [
     link: "/webtoonarchive/history",
   },
 ];
+
+export const staticReportData = [
+  {
+    id: 0,
+    name: "스팸/도배 신고",
+    defaultChecked: true,
+  },
+  {
+    id: 1,
+    name: "음란물 신고",
+    defaultChecked: false,
+  },
+  {
+    id: 2,
+    name: "욕설 신고",
+    defaultChecked: false,
+  },
+  {
+    id: 3,
+    name: "불법 정보 신고",
+    defaultChecked: false,
+  },
+  {
+    id: 4,
+    name: "개인정보 노출 신고",
+    defaultChecked: false,
+  },
+  {
+    id: 5,
+    name: "불쾌한 표현 신고",
+    defaultChecked: false,
+  },
+];

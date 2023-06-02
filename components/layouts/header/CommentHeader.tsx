@@ -7,8 +7,7 @@ import BackBtn from '@/components/ui/BackBtn'
 export default function CommentHeader() {
 
   const { query, back } = useRouter();
-  const webtoonName = query.webtoonName;
-  const episodeId = query.episodeId;
+  const episodeNumber = query.episodeNumber;
 
   return (
     <header className={style.headerSection}>
@@ -19,7 +18,7 @@ export default function CommentHeader() {
           />
         </div>
         <div className={style.centerHead}>
-          <p>{webtoonName} {episodeId}화</p>
+          <p>{episodeNumber}화</p>
         </div>
         <div className={style.rightHead}></div>
       </div>

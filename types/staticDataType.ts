@@ -9,3 +9,10 @@ export interface StaticMenuListDataType {
   name: string;
   link: string;
 }
+
+export interface StaticReportType {
+  id: number;
+  name: string;
+  defaultChecked?: boolean;
+  disabled?: boolean;
+}
