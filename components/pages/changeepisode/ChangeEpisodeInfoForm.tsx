@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import style from '@/components/pages/episodeinfo/EpisodeInfoForm.module.css'
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { UploadFile, episodeInfoFormDataType } from '@/types/episodeInfoForm';
+import { ChangeepisodeInfoType, UploadFile, episodeInfoFormDataType } from '@/types/episodeInfoForm';
 import Image from 'next/image';
 
 export default function ChangeEpisodeInfoForm() {

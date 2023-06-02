@@ -3,15 +3,14 @@ import style from '@/components/pages/episodelist/EpisodeMiddleSection.module.cs
 import EpisodelistBox from '@/components/pages/episodelist/EpisodelistBox';
 import { EpisodeViewListType, WebToonListDataType } from '@/types/webtoonDataType';
 import EpisodeListFooter from '@/components/layouts/episodelistfooter/EpisodeListFooter';
+import EpisodeInfoBottomSection from '../episodeinfo/EpisodeInfoBottomSection';
 
 interface EpisodeMiddleSectionProps {
     episodeData: WebToonListDataType;
-    webtoonId: number;
 }
 
-export default function EpisodeMiddleSection({ episodeData, webtoonId }: EpisodeMiddleSectionProps) {
+export default function EpisodeMiddleSection({ episodeData }: EpisodeMiddleSectionProps) {
 
-    console.log(webtoonId);
     console.log(episodeData);
     return (
         <>
