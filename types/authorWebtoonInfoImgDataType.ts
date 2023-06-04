@@ -16,3 +16,21 @@ export interface authorWebtoonInfoStateType {
     illustrator: string;
     author: string;
 }
+
+export interface ChangeWebtoon {
+    data: [{
+        webtoonId: number;
+        webtoonTitle: string;
+        webtoonDescription: string;
+        genreType: number;
+        publicationDays: number;
+        illustrator: string;
+        creator: string;
+    }]
+}
+
+export interface ChangeEpisode {
+    data: [{
+        webtoonId: number;
+    }]
+}

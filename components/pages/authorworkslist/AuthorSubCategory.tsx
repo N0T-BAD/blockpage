@@ -11,7 +11,6 @@ import { useRecoilState } from 'recoil';
 import { webtoonlist } from '@/state/webtoon/webtoonlist';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
-import { WebToonListDataType } from '@/types/webtoonDataType';
 
 
 export default function AuthorSubCategory({ active }: { active: string }) {
@@ -32,7 +31,6 @@ export default function AuthorSubCategory({ active }: { active: string }) {
       })
       .then((res) => {
         setWebtoonList(res.data)
-        console.log(res.data.data.genreType)
       })
       .catch((err) => {
         console.log(err)
@@ -41,6 +39,14 @@ export default function AuthorSubCategory({ active }: { active: string }) {
 
   const handleEpisodeClick = (webtoonId: number) => {
     router.push(`/episodelist/${webtoonId}`);
+  };
+
+  const handlechangewebtoonClick = (webtoonId: number) => {
+    router.push(`/authorworkslist/${webtoonId}/changewebtoon`);
+  };
+
+  const handleDeleteWebtoonClick = (webtoonId: number) => {
+    router.push(`/authorworkslist/${webtoonId}/webtoondelete`);
   };
 
   const getGenreTypeString = (genreType: number) => {
@@ -95,11 +101,12 @@ export default function AuthorSubCategory({ active }: { active: string }) {
                               <p className={style.title}>{webtoonsubcategory.webtoonTitle}</p>
                               <p className={style.author}>{webtoonsubcategory.creator}, {webtoonsubcategory.illustrator}</p>
                               <p className={style.author}>{getGenreTypeString(webtoonsubcategory.genreType)}</p>
+                              <p className={style.author}>{webtoonsubcategory.webtoonStatus}</p>
                             </div>
                           </div>
                           <div className={style.webtoonButton}>
-                            <button onClick={() => router.push('/changewebtoon')}>수정</button>
-                            <button onClick={() => router.push('/webtoondelete')}>삭제</button>
+                            <button onClick={() => handlechangewebtoonClick(webtoonsubcategory.webtoonId)}>수정</button>
+                            <button onClick={() => handleDeleteWebtoonClick(webtoonsubcategory.webtoonId)}>삭제</button>
                           </div>
                         </div>
                       </>

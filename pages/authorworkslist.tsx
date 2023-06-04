@@ -21,4 +21,3 @@ authorworkslist.getLayout = function getLayout(authorworkslist: React.ReactEleme
 }
 
 export default authorworkslist
-

@@ -26,6 +26,16 @@ export interface EpisodeViewListType {
   authorWords: string;
 }
 
+export interface AuthorEpisodeList {
+  data: [{
+    episodeNumber: number;
+    episodeTitle: string;
+    episodeThumbnail: string;
+    uploadDate: string;
+    totalScore: number;
+  }]
+}
+
 export interface EpisodeViewDataType {
   data: {
     images: ImagesType[];
@@ -68,7 +78,21 @@ export interface webtoonDeleteDataType {
 }
 
 export interface webtoonTitleDataType {
-  title: string;
+  webtoonTitle: string;
+}
+
+export interface webtoonDeleteData {
+  data: [{
+    webtoonTitle: string;
+    webtoonId: number;
+  }]
+}
+
+export interface EpisodeDeleteData {
+  data: [{
+    webtoonTitle: string;
+    webtoonId: number;
+  }]
 }
 
 export interface webtoonListGetDataType {
