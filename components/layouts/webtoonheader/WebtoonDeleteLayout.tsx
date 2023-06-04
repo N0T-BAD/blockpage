@@ -1,7 +1,7 @@
 import WebtoonDeleteHeader from "./WebtoonDeleteHeader";
 
 
-export default function WebtoonChargeLayout(props: { children: React.ReactNode }) {
+export default function WebtoonDeleteLayout(props: { children: React.ReactNode }) {
 
   return (
     <>

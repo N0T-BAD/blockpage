@@ -2,7 +2,7 @@ import { NextPageWithLayout } from "@/pages/_app"
 import WebtoonDeleteTopSection from "@/components/pages/webtoondelete/WebtoonDeleteTopSection"
 import WebtoonDeleteMiddleSection from "@/components/pages/webtoondelete/WebtoonDeleteMiddleSection"
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher"
-import WebtoonChargeLayout from "@/components/layouts/webtoonheader/WebtoonChargeLayout"
+import WebtoonDeleteLayout from "@/components/layouts/webtoonheader/WebtoonDeleteLayout"
 
 interface EpisodeListProps {
     webtoonId: number;
@@ -21,9 +21,9 @@ const WebToonDelete: NextPageWithLayout<EpisodeListProps> = ({ webtoonId }) => {
 
 WebToonDelete.getLayout = function getLayout(WebToonDelete: React.ReactElement) {
     return (
-        <WebtoonChargeLayout>
+        <WebtoonDeleteLayout>
             {WebToonDelete}
-        </WebtoonChargeLayout>
+        </WebtoonDeleteLayout>
     )
 }
 
