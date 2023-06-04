@@ -23,10 +23,6 @@ export default function TotalHeader() {
             setTitle('웹툰 등록')
         } else if (path === '/webtoondelete') {
             setTitle('웹툰 삭제')
-        } else if (path === '/changewebtoon') {
-            setTitle('웹툰 수정')
-        } else if (path === '/episodelist') {
-            setTitle('에피소드 조회')
         } else if (path === '/episodedelete') {
             setTitle('에피소드 삭제')
         } else if (path === '/changeuserinfo') {

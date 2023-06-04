@@ -6,10 +6,17 @@ import axios from 'axios';
 import { webtoonInfoState } from '@/state/webtoon/webtoonInfoState';
 import { useRecoilState } from 'recoil';
 import Image from 'next/image';
+import { authorNameDataType } from '@/types/authorNameDataType';
+import { authornickname } from '@/state/mypage/usernickname';
+import { useSession } from 'next-auth/react';
+import Swal from 'sweetalert2';
 
 export default function ChangeWebtoonForm() {
 
   const router = useRouter();
+  const { data: session } = useSession()
+  // const role = sessionStorage.getItem('role');
+  const { webtoonId } = router.query;
 
   const [webtoonInfoData, setWebtoonInfoData] = useState<authorWebtoonInfoDataType>({
     webtoonTitle: '',
@@ -25,12 +32,33 @@ export default function ChangeWebtoonForm() {
   const [WebtoonMainImage, setWebtoonMainImage] = useState<File>();
   const [WebtoonThumbnailImagePreview, setWebtoonThumbnailImagePreview] = useState<string>();
   const [WebtoonMainImagePreview, setWebtoonMainImagePreview] = useState<string>();
+  const [authorName, setAuthorName] = useRecoilState<authorNameDataType>(authornickname);
+
+
+  // useEffect(() => {
+  //   axios(`api/webtooninfo/${router.query.id}`)
+  //     .then(res => res.data)
+  //     .then(data => setChangeWebtoonData(data))
+  // }, [router.query.id, setChangeWebtoonData])
 
   useEffect(() => {
-    axios(`api/webtooninfo/${router.query.id}`)
-      .then(res => res.data)
-      .then(data => setChangeWebtoonData(data))
-  }, [router.query.id, setChangeWebtoonData])
+    axios.get('https://blockpage.site/member-service/v1/members?type=detail', {
+      headers: {
+        memberId: session?.email || '',
+        // role: role,
+      },
+    })
+      .then((res) => {
+        const creatorNickname = res.data.data.creatorNickname;
+        setAuthorName({
+          data: {
+            creatorNickname,
+          },
+        });
+        console.log(res.data)
+        console.log(authorName)
+      })
+  }, [])
 
   const handleInput = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -69,18 +97,43 @@ export default function ChangeWebtoonForm() {
     } else if (!WebtoonThumbnailImagePreview || !WebtoonMainImagePreview) {
       alert('웹툰 이미지를 입력해주세요.')
     } else {
-      axios.post('/api/authorwebtooninfo', {
-        title: webtoonInfoData.webtoonTitle,
-        description: webtoonInfoData.webtoonDescription,
-        genre: webtoonInfoData.genre,
-        day: webtoonInfoData.publicationDays,
-        illustrator: webtoonInfoData.illustrator,
-        mainImage: WebtoonThumbnailImage,
-        thumbnailImage: WebtoonMainImage,
-      })
+      const formData = new FormData();
+      if (WebtoonThumbnailImage) {
+        formData.append('webtoonThumbnail', WebtoonThumbnailImage);
+      }
+      if (WebtoonMainImage) {
+        formData.append('webtoonMainImage', WebtoonMainImage);
+      }
+      formData.append('webtoonTitle', webtoonInfoData.webtoonTitle);
+      formData.append('webtoonDescription', webtoonInfoData.webtoonDescription);
+      formData.append('genre', String(webtoonInfoData.genre));
+      formData.append('publicationDays', String(webtoonInfoData.publicationDays));
+      if (webtoonInfoData.illustrator === '') {
+        formData.append('illustrator', authorName.data.creatorNickname);
+      } else if (webtoonInfoData.illustrator !== undefined) {
+        formData.append('illustrator', webtoonInfoData.illustrator);
+      }
+      formData.append('creatorNickname', authorName.data.creatorNickname);
+      formData.append('webtoonId', String(webtoonId));
+
+      axios.post('https://blockpage.site/webtoon-service/v1/demands?target=webtoon&type=modify',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            memberId: session?.email,
+            // role: role,
+          },
+        },
+      )
         .then((res) => {
           console.log(res)
-          alert('웹툰 정보가 등록되었습니다.')
+          Swal.fire({
+            icon: 'success',
+            title: '웹툰 수정 요청이 완료되었습니다.',
+            showConfirmButton: false,
+            timer: 1500
+          })
           router.push('/authorworkslist')
         })
     }
@@ -142,10 +195,12 @@ export default function ChangeWebtoonForm() {
                 ))}
               </select>
             </div>
-            <div className={style.InfoBox}>
-              <p>작가 : </p>
-              <p className={style.author}>{changewebtoonData.author}</p>
-            </div>
+            {authorName.data &&
+              <div className={style.InfoBox}>
+                <p>작가 : </p>
+                <p className={style.author}>{authorName.data.creatorNickname}</p>
+              </div>
+            }
             <div className={style.InfoillustratorBox}>
               <p>일러스트레이터 : </p>
               <input type="text" name="illustrator" defaultValue={changewebtoonData.illustrator} placeholder='미입력시, 본인으로 등록됩니다.' onChange={handleInput} />

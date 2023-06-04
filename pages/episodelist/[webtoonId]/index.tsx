@@ -6,6 +6,7 @@ import { NextPageWithLayout } from '@/pages/_app';
 import EpisodeTopSection from '@/components/pages/episodelist/EpisodeTopSection';
 import EpisodeMiddleSection from '@/components/pages/episodelist/EpisodeMiddleSection';
 import EpisodeLayout from '@/components/layouts/episodeheader/EpisodeLayout';
+import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 
 interface EpisodeListProps {
   webtoonId: number;
@@ -78,8 +79,8 @@ EpisodeListPage.getLayout = function getLayout(page: React.ReactElement) {
 
 export default EpisodeListPage;
 
-export async function getServerSideProps({ query }: any) {
-  const webtoonId = parseInt(query.webtoonId);
+export async function getServerSideProps(context: Params) {
+  const webtoonId = parseInt(context.webtoonId);
 
   return {
     props: {

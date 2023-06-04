@@ -2,11 +2,8 @@ import { NextPageWithLayout } from "@/pages/_app"
 import EpisodeInfoTopSection from "@/components/pages/episodeinfo/EpisodeInfoTopSection"
 import EpisodeInfoBottomSection from "@/components/pages/episodeinfo/EpisodeInfoBottomSection"
 import EpisodeInfoLayout from "@/components/layouts/episodeheader/EpisodeInfoLayout";
-import { EpisodeViewListType } from "@/types/webtoonDataType";
-import axios from "axios";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
-import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+
 
 interface EpisodeListProps {
     webtoonId: number;

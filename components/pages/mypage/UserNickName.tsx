@@ -17,7 +17,7 @@ export default function UserNickName() {
   // const role = sessionStorage.getItem('role');
   const router = useRouter();
 
-  const RouterUrl = router.pathname === "/authorworkslist";
+  const RouterUrl = router.pathname === "/authorworkslist" || router.pathname === "/webtooninfo";
 
   const [userNickname, setUserNickname] = useRecoilState<ChangeUserDataType>(usernickname);
 

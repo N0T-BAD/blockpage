@@ -43,6 +43,10 @@ export default function AuthorSubCategory({ active }: { active: string }) {
     router.push(`/episodelist/${webtoonId}`);
   };
 
+  const handlechangewebtoonClick = (webtoonId: number) => {
+    router.push(`/authorworkslist/${webtoonId}/changewebtoon`);
+  };
+
   const getGenreTypeString = (genreType: number) => {
     if (genreType === 0) {
       return "판타지 드라마"
@@ -98,7 +102,7 @@ export default function AuthorSubCategory({ active }: { active: string }) {
                             </div>
                           </div>
                           <div className={style.webtoonButton}>
-                            <button onClick={() => router.push('/changewebtoon')}>수정</button>
+                            <button onClick={() => handlechangewebtoonClick(webtoonsubcategory.webtoonId)}>수정</button>
                             <button onClick={() => router.push('/webtoondelete')}>삭제</button>
                           </div>
                         </div>

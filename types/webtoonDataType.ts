@@ -68,7 +68,7 @@ export interface webtoonDeleteDataType {
 }
 
 export interface webtoonTitleDataType {
-  title: string;
+  webtoonTitle: string;
 }
 
 export interface webtoonListGetDataType {
