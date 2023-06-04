@@ -1,5 +1,4 @@
 export interface episodeInfoFormDataType {
-  webtoonId: number;
   episodeNumber: number;
   episodeTitle: string;
   uploadDate: string;

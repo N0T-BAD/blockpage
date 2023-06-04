@@ -18,7 +18,6 @@ export default function EpisodelistBox({ episodeData }: EpisodeMiddleSectionProp
 
   return (
     <>
-      {/* && Array.isArray(episodeData.data.episodeViewList) */}
       {episodeData.data && episodeData.data.episodeViewList ? (
         episodeData.data.episodeViewList.map((episodeData) => (
           <div className={style.webtoonBox} key={episodeData.episodeId}>
@@ -46,7 +45,7 @@ export default function EpisodelistBox({ episodeData }: EpisodeMiddleSectionProp
           </div>
         )))
         :
-        "작품이 없습니다."
+        <></>
       }
     </>
   );
