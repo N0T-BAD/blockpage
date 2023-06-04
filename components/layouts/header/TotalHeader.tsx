@@ -52,7 +52,7 @@ export default function TotalHeader() {
                         ""
                         :
                         <>
-                            {router.pathname === '/blockcharge' ?
+                            {router.pathname === '/blockcharge' || router.pathname === '/authorworkslist' || router.pathname === '/authorregister' ?
                                 <BackBtn
                                     onClick={() => router.push('/mypage')}
                                 />

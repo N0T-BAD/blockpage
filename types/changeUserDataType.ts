@@ -1,6 +1,7 @@
 export interface ChangeUserDataType {
-  id: number;
-  nickname: string;
+  data: {
+    nickname: string;
+  }
 }
 
 export interface ChangeUserImageDataType {
@@ -9,7 +10,31 @@ export interface ChangeUserImageDataType {
 }
 
 export interface profileskinDataType {
-  id: number;
-  color: string;
-  imgurl: string;
+  data: {
+    profileSkin: string;
+  }
+}
+
+export interface ChangeProfileSkin {
+  data: [{
+    memberHasProfileSkinId: number;
+    profileSkinDetail: {
+      profileSkinImage: string;
+    }
+  }]
+}
+
+export interface UserImgData {
+  data: {
+    profileImage: string;
+  }
+}
+
+export interface changeProfileSkin {
+  data: [{
+    memberHasProfileSkinId: number;
+    profileSkinDetail: {
+      profileSkinImage: string;
+    }
+  }]
 }

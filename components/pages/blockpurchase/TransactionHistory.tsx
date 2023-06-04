@@ -18,12 +18,14 @@ const TransectionHistory = () => {
         blockQuantity: 0,
         paymentTime: '',
         blockGainType: '',
+        validState: true,
       }],
     }
   )
   const [useBlock, setUseBlock] = useState<UseBlock>(
     {
       data: [{
+        totalAmount: 0,
         orderId: '',
         blockQuantity: 0,
         paymentTime: '',
@@ -36,6 +38,7 @@ const TransectionHistory = () => {
     {
       data: [{
         orderId: '',
+        validState: true,
       }]
     }
   )
@@ -103,8 +106,9 @@ const TransectionHistory = () => {
                 icon: 'success',
                 title: '환불이 완료되었습니다.',
                 showConfirmButton: false,
-                timer: 1500
+                timer: 3000
               })
+              window.location.reload();
             }
           })
       } else if (result.isDenied) {
@@ -140,10 +144,6 @@ const TransectionHistory = () => {
                   <div className={style.chargeBox} key={index}>
                     <div className={style.subhistorybox}>
                       <p>{chargeItem.paymentTime}</p>
-                      {/* <div className={style.chargeBlockBox}>
-                        <p>주문 번호</p>
-                        <p className={style.chargeBoxContent}>{chargeItem.orderId}</p>
-                      </div> */}
                       <div className={style.chargeBlockBox}>
                         <p>블럭 개수</p>
                         <p className={style.chargeBoxContent}>{chargeItem.blockQuantity} 개</p>
@@ -155,11 +155,14 @@ const TransectionHistory = () => {
                     </div>
                     {chargeItem.blockGainType === "블럭 충전" ? (
                       <>
-                        {refund.data[index].orderId !== '' ?
+                        {refund.data[index].validState === true ?
                           <div className={style.refundBox}>
                             <button onClick={() => handlerefund(index)}>환불하기</button>
                           </div>
-                          : ""
+                          :
+                          <div className={style.refund}>
+                            <button>환불완료</button>
+                          </div>
                         }
                       </>
                     )
@@ -178,6 +181,14 @@ const TransectionHistory = () => {
                         <p>사용 블럭</p>
                         <p className={style.chargeBoxContent}>{useItem.blockQuantity}개</p>
                       </div>
+                      {useItem.totalAmount === undefined ?
+                        ""
+                        :
+                        <div className={style.chargeBlockBox}>
+                          <p>가격</p>
+                          <p className={style.chargeBoxContent}>{useItem.totalAmount}원</p>
+                        </div>
+                      }
                       <div className={style.chargeBlockBox}>
                         <p>블럭 사용 내역</p>
                         <p className={style.chargeBoxContent}>{useItem.blockLossType}</p>
