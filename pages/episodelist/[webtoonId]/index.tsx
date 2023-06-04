@@ -13,58 +13,12 @@ interface EpisodeListProps {
 }
 
 const EpisodeListPage: NextPageWithLayout<EpisodeListProps> = ({ webtoonId }) => {
-  const { data: session } = useSession();
-  const [episodeData, setEpisodeData] = useState<WebToonListDataType>({
-    data: {
-      webtoonTitle: '',
-      creator: '',
-      illustrator: '',
-      description: '',
-      publicationDays: '',
-      genre: '',
-      webtoonMainImage: '',
-      views: 0,
-      interestCount: 0,
-      episodeViewList: [],
-    },
-    meta: {
-      sort: '',
-    },
-  });
-  console.log(episodeData)
-
-
-  useEffect(() => {
-
-    const fetchEpisodeData = async () => {
-      try {
-        const response = await axios.get(
-          `https://blockpage.site/webtoon-service/v1/episodes`,
-          {
-            headers: {
-              memberId: session?.email || '',
-            },
-            params: {
-              webtoonId: webtoonId,
-            },
-          }
-        );
-        const episodeData = response.data;
-
-        console.log(episodeData);
-        setEpisodeData(episodeData);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchEpisodeData();
-  }, [webtoonId, session]);
+  console.log(webtoonId)
 
   return (
     <>
       <EpisodeTopSection />
-      <EpisodeMiddleSection episodeData={episodeData} />
+      <EpisodeMiddleSection />
     </>
   );
 };

@@ -1,5 +1,21 @@
 export interface episodeInfoFormDataType {
+  data: [{
+    episodeTitle: string;
+    uploadDate: string;
+    participantCount: number;
+    episodeNumber: number;
+    totalScore: number;
+  }]
+}
+
+export interface episodeInfoData {
   episodeNumber: number;
+  episodeTitle: string;
+  uploadDate: string;
+  authorWords: string;
+}
+
+export interface episodeInfoType {
   episodeTitle: string;
   uploadDate: string;
   authorWords: string;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import style from '@/components/pages/changewebtoon/ChangeWebtoonForm.module.css'
-import { authorWebtoonInfoDataType, authorWebtoonInfoStateType } from '@/types/authorWebtoonInfoImgDataType';
+import { ChangeWebtoon, authorWebtoonInfoDataType, authorWebtoonInfoStateType } from '@/types/authorWebtoonInfoImgDataType';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { webtoonInfoState } from '@/state/webtoon/webtoonInfoState';
@@ -26,7 +26,21 @@ export default function ChangeWebtoonForm() {
     illustrator: '',
   });
 
-  const [changewebtoonData, setChangeWebtoonData] = useRecoilState<authorWebtoonInfoStateType>(webtoonInfoState);
+  const [webtoonData, setWebtoonData] = useState<ChangeWebtoon>(
+    {
+      data: [{
+        webtoonId: 0,
+        webtoonTitle: '',
+        webtoonDescription: '',
+        genreType: 0,
+        publicationDays: 0,
+        illustrator: '',
+        creator: '',
+      }]
+    }
+  )
+
+  // const [changewebtoonData, setChangeWebtoonData] = useRecoilState<authorWebtoonInfoStateType>(webtoonInfoState);
 
   const [WebtoonThumbnailImage, setWebtoonThumbnailImage] = useState<File>();
   const [WebtoonMainImage, setWebtoonMainImage] = useState<File>();
@@ -35,28 +49,21 @@ export default function ChangeWebtoonForm() {
   const [authorName, setAuthorName] = useRecoilState<authorNameDataType>(authornickname);
 
 
-  // useEffect(() => {
-  //   axios(`api/webtooninfo/${router.query.id}`)
-  //     .then(res => res.data)
-  //     .then(data => setChangeWebtoonData(data))
-  // }, [router.query.id, setChangeWebtoonData])
-
   useEffect(() => {
-    axios.get('https://blockpage.site/member-service/v1/members?type=detail', {
-      headers: {
-        memberId: session?.email || '',
-        // role: role,
-      },
-    })
+    axios.get("https://blockpage.site/webtoon-service/v1/webtoons/creator",
+      {
+        headers: {
+          memberId: session?.email || '',
+          // role: role,
+        },
+      })
       .then((res) => {
-        const creatorNickname = res.data.data.creatorNickname;
-        setAuthorName({
-          data: {
-            creatorNickname,
-          },
-        });
-        console.log(res.data)
-        console.log(authorName)
+        setWebtoonData(res.data)
+        console.log(res.data.data)
+        console.log(webtoonData)
+      })
+      .catch((err) => {
+        console.log(err)
       })
   }, [])
 
@@ -97,45 +104,49 @@ export default function ChangeWebtoonForm() {
     } else if (!WebtoonThumbnailImagePreview || !WebtoonMainImagePreview) {
       alert('웹툰 이미지를 입력해주세요.')
     } else {
-      const formData = new FormData();
-      if (WebtoonThumbnailImage) {
-        formData.append('webtoonThumbnail', WebtoonThumbnailImage);
-      }
-      if (WebtoonMainImage) {
-        formData.append('webtoonMainImage', WebtoonMainImage);
-      }
-      formData.append('webtoonTitle', webtoonInfoData.webtoonTitle);
-      formData.append('webtoonDescription', webtoonInfoData.webtoonDescription);
-      formData.append('genre', String(webtoonInfoData.genre));
-      formData.append('publicationDays', String(webtoonInfoData.publicationDays));
-      if (webtoonInfoData.illustrator === '') {
-        formData.append('illustrator', authorName.data.creatorNickname);
-      } else if (webtoonInfoData.illustrator !== undefined) {
-        formData.append('illustrator', webtoonInfoData.illustrator);
-      }
-      formData.append('creatorNickname', authorName.data.creatorNickname);
-      formData.append('webtoonId', String(webtoonId));
 
-      axios.post('https://blockpage.site/webtoon-service/v1/demands?target=webtoon&type=modify',
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            memberId: session?.email,
-            // role: role,
+      const selectedWebtoon = webtoonData.data.find((webtoon) => webtoon.webtoonId === Number(webtoonId));
+      if (selectedWebtoon) {
+        const formData = new FormData();
+        if (WebtoonThumbnailImage) {
+          formData.append('webtoonThumbnail', WebtoonThumbnailImage);
+        }
+        if (WebtoonMainImage) {
+          formData.append('webtoonMainImage', WebtoonMainImage);
+        }
+        formData.append('webtoonTitle', webtoonInfoData.webtoonTitle);
+        formData.append('webtoonDescription', webtoonInfoData.webtoonDescription);
+        formData.append('genre', String(webtoonInfoData.genre));
+        formData.append('publicationDays', String(webtoonInfoData.publicationDays));
+        if (webtoonInfoData.illustrator === '') {
+          formData.append('illustrator', authorName.data.creatorNickname);
+        } else if (webtoonInfoData.illustrator !== undefined) {
+          formData.append('illustrator', webtoonInfoData.illustrator);
+        }
+        formData.append('creatorNickname', authorName.data.creatorNickname);
+        formData.append('webtoonId', String(webtoonId));
+
+        axios.post('https://blockpage.site/webtoon-service/v1/demands?target=webtoon&type=modify',
+          formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              memberId: session?.email,
+              // role: role,
+            },
           },
-        },
-      )
-        .then((res) => {
-          console.log(res)
-          Swal.fire({
-            icon: 'success',
-            title: '웹툰 수정 요청이 완료되었습니다.',
-            showConfirmButton: false,
-            timer: 1500
+        )
+          .then((res) => {
+            console.log(res)
+            Swal.fire({
+              icon: 'success',
+              title: '웹툰 수정 요청이 완료되었습니다.',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            router.push('/authorworkslist')
           })
-          router.push('/authorworkslist')
-        })
+      }
     }
   };
 
@@ -163,83 +174,82 @@ export default function ChangeWebtoonForm() {
   return (
     <>
       <div className={style.WebtoonInfoWrap}>
-        {changewebtoonData &&
-          <form onSubmit={handleSubmit}>
-            <div className={style.InfoBox}>
-              <p>작품명 : </p>
-              <input type="text" name="title" defaultValue={changewebtoonData.title} onChange={handleInput} />
-            </div>
-            <div className={style.InfoBox}>
-              <p>줄거리 : </p>
-              <input type="text" name="description" defaultValue={changewebtoonData.description} onChange={handleInput} />
-            </div>
-            <div className={style.InfoBox}>
-              <p>장르 : </p>
-              <select name="genre" onChange={handleInput}>
-                <option value="">장르를 선택하세요</option>
-                {genreOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className={style.InfoBox}>
-              <p>요일 : </p>
-              <select name="publicationDays" onChange={handleInput}>
-                <option value="">요일을 선택하세요</option>
-                {dayOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-            {authorName.data &&
+        {webtoonData.data.map((webtoon) => (
+          webtoon.webtoonId === Number(webtoonId) && (
+            <form onSubmit={handleSubmit}>
+              <div className={style.InfoBox}>
+                <p>작품명 : </p>
+                <input type="text" name="webtoonTitle" defaultValue={webtoon.webtoonTitle} onChange={handleInput} />
+              </div>
+              <div className={style.InfoBox}>
+                <p>줄거리 : </p>
+                <input type="text" name="webtoonDescription" defaultValue={webtoon.webtoonDescription} onChange={handleInput} />
+              </div>
+              <div className={style.InfoBox}>
+                <p>장르 : </p>
+                <select name="genre" onChange={handleInput} defaultValue={webtoon.genreType}>
+                  <option value="">장르를 선택하세요</option>
+                  {genreOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className={style.InfoBox}>
+                <p>요일 : </p>
+                <select name="publicationDays" onChange={handleInput} defaultValue={webtoon.publicationDays}>
+                  <option value="">요일을 선택하세요</option>
+                  {dayOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
               <div className={style.InfoBox}>
                 <p>작가 : </p>
-                <p className={style.author}>{authorName.data.creatorNickname}</p>
+                <p className={style.author}>{webtoon.creator}</p>
               </div>
-            }
-            <div className={style.InfoillustratorBox}>
-              <p>일러스트레이터 : </p>
-              <input type="text" name="illustrator" defaultValue={changewebtoonData.illustrator} placeholder='미입력시, 본인으로 등록됩니다.' onChange={handleInput} />
-            </div>
-            <div className={style.InfoImgBox}>
-              <div className={style.labelBox}>
-                <p>메인 이미지</p>
-                <label>
-                  <div className={style.uploadbtn}>upload</div>
-                  <input type="file" name='file' id="file" accept="image/*" onChange={handleMainImage} defaultValue={changewebtoonData.mainImageData} />
-                </label>
+              <div className={style.InfoillustratorBox}>
+                <p>일러스트레이터 : </p>
+                <input type="text" name="illustrator" defaultValue={webtoon.illustrator} placeholder='미입력시, 본인으로 등록됩니다.' onChange={handleInput} />
               </div>
-              {WebtoonMainImagePreview && WebtoonMainImagePreview.length > 1 ?
-                <div className={style.ImageBox}>
-                  <Image src={WebtoonMainImagePreview} alt="WebtoonMainImagePreview" width={200} height={200} />
+              <div className={style.InfoImgBox}>
+                <div className={style.labelBox}>
+                  <p>메인 이미지</p>
+                  <label>
+                    <div className={style.uploadbtn}>upload</div>
+                    <input type="file" name='file' id="file" accept="image/*" onChange={handleMainImage} />
+                  </label>
                 </div>
-                : <></>
-              }
-            </div>
-            <div className={style.InfoImgBox}>
-              <div className={style.labelBox}>
-                <p>썸네일 이미지</p>
-                <label>
-                  <div className={style.uploadbtn}>upload</div>
-                  <input type="file" name='file' id="file" accept="image/*" onChange={handleThumbnailImage} defaultValue={changewebtoonData.thumbnailImageData} />
-                </label>
+                {WebtoonMainImagePreview && WebtoonMainImagePreview.length > 1 ?
+                  <div className={style.ImageBox}>
+                    <Image src={WebtoonMainImagePreview} alt="WebtoonMainImagePreview" width={200} height={200} />
+                  </div>
+                  : <></>
+                }
               </div>
-              {WebtoonThumbnailImagePreview && WebtoonThumbnailImagePreview.length > 1 ?
-                <div className={style.ImageBox}>
-                  <Image src={WebtoonThumbnailImagePreview} alt="WebtoonThumbnailImagePreview" width={200} height={200} />
+              <div className={style.InfoImgBox}>
+                <div className={style.labelBox}>
+                  <p>썸네일 이미지</p>
+                  <label>
+                    <div className={style.uploadbtn}>upload</div>
+                    <input type="file" name='file' id="file" accept="image/*" onChange={handleThumbnailImage} />
+                  </label>
                 </div>
-                : <></>
-              }
-            </div>
-            <div className={style.submit}>
-              <button type="submit">등록</button>
-            </div>
-          </form>
-        }
+                {WebtoonThumbnailImagePreview && WebtoonThumbnailImagePreview.length > 1 ?
+                  <div className={style.ImageBox}>
+                    <Image src={WebtoonThumbnailImagePreview} alt="WebtoonThumbnailImagePreview" width={200} height={200} />
+                  </div>
+                  : <></>
+                }
+              </div>
+              <div className={style.submit}>
+                <button type="submit">등록</button>
+              </div>
+            </form>
+          )))}
       </div>
     </>
   )

@@ -212,3 +212,15 @@ p.info{
   text-align: end;
   padding: 0.3rem 1.3rem 0.3rem 0;
 }
+
+p.episodeNumber{
+  width: 60%;
+  font-size: 1rem;
+  background-color: var(--bp-gray);
+  border-radius: 1rem;
+  border: none;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

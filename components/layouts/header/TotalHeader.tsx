@@ -21,16 +21,10 @@ export default function TotalHeader() {
             setTitle('작품 관리')
         } else if (path === '/webtooninfo') {
             setTitle('웹툰 등록')
-        } else if (path === '/webtoondelete') {
-            setTitle('웹툰 삭제')
         } else if (path === '/episodedelete') {
             setTitle('에피소드 삭제')
         } else if (path === '/changeuserinfo') {
             setTitle('회원정보 변경')
-        } else if (path === '/episodeinfo') {
-            setTitle('에피소드 등록')
-        } else if (path === '/changeepisode') {
-            setTitle('에피소드 수정')
         } else if (path === '/completepayment') {
             setTitle('결제 완료')
         } else if (path === '/game') {

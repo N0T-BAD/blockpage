@@ -1,5 +1,5 @@
 import { webtoonDeleteState } from '@/state/webtoon/webtoonDeleteState';
-import { webtoonDeleteDataType, webtoonTitleDataType } from '@/types/webtoonDataType';
+import { webtoonDeleteData, webtoonDeleteDataType, webtoonTitleDataType } from '@/types/webtoonDataType';
 import axios from 'axios';
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
@@ -18,18 +18,32 @@ export default function WebtoonDeleteInfo() {
     deletereason: '',
   });
 
-  const [webtoonTitle, setWebtoonTitle] = useRecoilState<webtoonTitleDataType>(webtoonDeleteState);
+  // const [webtoonTitle, setWebtoonTitle] = useRecoilState<webtoonTitleDataType>(webtoonDeleteState);
+  const [webtoonData, setWebtoonData] = useState<webtoonDeleteData>(
+    {
+      data: [{
+        webtoonId: 0,
+        webtoonTitle: '',
+      }]
+    }
+  )
 
   useEffect(() => {
-    console.log(webtoonDeleteInfoData)
-    console.log(webtoonTitle)
-  }, [webtoonDeleteInfoData, webtoonTitle])
-
-  useEffect(() => {
-    axios(`/api/authorwebtooninfo/${router.query.id}`)
-      .then(res => res.data)
-      .then(data => setWebtoonTitle(data))
-  }, [router.query.id, setWebtoonTitle])
+    axios.get("https://blockpage.site/webtoon-service/v1/webtoons/creator",
+      {
+        headers: {
+          memberId: session?.email || '',
+          // role: role,
+        },
+      })
+      .then((res) => {
+        setWebtoonData(res.data)
+        console.log(res.data.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -44,45 +58,49 @@ export default function WebtoonDeleteInfo() {
     if (webtoonDeleteInfoData.deletereason === '') {
       alert('웹툰 삭제 사유를 입력해주세요.')
     } else {
-      axios.post('/api', {
-        deletereason: webtoonDeleteInfoData.deletereason,
-        webtoonTitle: webtoonTitle.webtoonTitle,
-        webtoonId: webtoonId,
-      },
-        {
-          headers: {
-            memberId: session?.email,
-            // role: role,
-          },
+      const selectedWebtoon = webtoonData.data.find((webtoon) => webtoon.webtoonId === Number(webtoonId));
+      if (selectedWebtoon) {
+        axios.post('https://blockpage.site/webtoon-service/v1/demands?target=webtoon&type=remove', {
+          deletereason: webtoonDeleteInfoData.deletereason,
+          webtoonTitle: selectedWebtoon.webtoonTitle,
+          webtoonId: webtoonId,
         },
-      )
-        .then((res) => {
-          console.log(res)
-          alert('웹툰 삭제 요청이 완료되었습니다.')
-          router.push('/authorworkslist')
-        })
+          {
+            headers: {
+              memberId: session?.email,
+              // role: role,
+            },
+          },
+        )
+          .then((res) => {
+            console.log(res)
+            alert('웹툰 삭제 요청이 완료되었습니다.')
+            router.push('/authorworkslist')
+          })
+      }
     }
   };
 
   return (
     <>
-      {webtoonTitle &&
-        <div className={style.WebtoonDeleteInfoWrap}>
-          <form onSubmit={handleSubmit}>
-            <div className={style.DeleteInfoBox}>
-              <p>작품명 : </p>
-              <p className={style.title}>{webtoonTitle.webtoonTitle}</p>
-            </div>
-            <div className={style.DeleteInfoBox_2}>
-              <p>삭제 이유 : </p>
-              <input type="text" name="deletereason" onChange={handleInput} />
-            </div>
-            <div className={style.submit}>
-              <button type="submit">삭제</button>
-            </div>
-          </form>
-        </div>
-      }
+      {webtoonData.data.map((webtoon) => (
+        webtoon.webtoonId === Number(webtoonId) && (
+          <div className={style.WebtoonDeleteInfoWrap}>
+            <form onSubmit={handleSubmit}>
+              <div className={style.DeleteInfoBox}>
+                <p>작품명 : </p>
+                <p className={style.title}>{webtoon.webtoonTitle}</p>
+              </div>
+              <div className={style.DeleteInfoBox_2}>
+                <p>삭제 이유 : </p>
+                <input type="text" name="deletereason" onChange={handleInput} />
+              </div>
+              <div className={style.submit}>
+                <button type="submit">삭제</button>
+              </div>
+            </form>
+          </div>
+        )))}
     </>
   )
 }

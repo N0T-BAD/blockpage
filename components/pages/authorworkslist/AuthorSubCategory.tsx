@@ -11,7 +11,6 @@ import { useRecoilState } from 'recoil';
 import { webtoonlist } from '@/state/webtoon/webtoonlist';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
-import { WebToonListDataType } from '@/types/webtoonDataType';
 
 
 export default function AuthorSubCategory({ active }: { active: string }) {
@@ -32,7 +31,6 @@ export default function AuthorSubCategory({ active }: { active: string }) {
       })
       .then((res) => {
         setWebtoonList(res.data)
-        console.log(res.data.data.genreType)
       })
       .catch((err) => {
         console.log(err)
@@ -103,6 +101,7 @@ export default function AuthorSubCategory({ active }: { active: string }) {
                               <p className={style.title}>{webtoonsubcategory.webtoonTitle}</p>
                               <p className={style.author}>{webtoonsubcategory.creator}, {webtoonsubcategory.illustrator}</p>
                               <p className={style.author}>{getGenreTypeString(webtoonsubcategory.genreType)}</p>
+                              <p className={style.author}>{webtoonsubcategory.webtoonStatus}</p>
                             </div>
                           </div>
                           <div className={style.webtoonButton}>

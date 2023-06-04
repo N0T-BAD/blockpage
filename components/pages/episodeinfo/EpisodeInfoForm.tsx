@@ -3,7 +3,7 @@ import style from '@/components/pages/episodeinfo/EpisodeInfoForm.module.css';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { useRecoilState } from 'recoil';
-import { UploadedFile, episodeInfoFormDataType } from '@/types/episodeInfoForm';
+import { UploadedFile, episodeInfoData, episodeInfoFormDataType } from '@/types/episodeInfoForm';
 import { EpisodeViewListType } from '@/types/webtoonDataType';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
@@ -13,7 +13,7 @@ export default function EpisodeInfoForm() {
   const { data: session } = useSession();
   const { webtoonId } = router.query;
 
-  const [episodeInfoData, setEpisodeInfoData] = useState<episodeInfoFormDataType>({
+  const [episodeInfoData, setEpisodeInfoData] = useState<episodeInfoData>({
     episodeNumber: 0,
     episodeTitle: '',
     uploadDate: '',
