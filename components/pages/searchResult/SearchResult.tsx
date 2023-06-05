@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/router';
+import axios from 'axios';
 
 import { listviewDataType } from '@/types/listviewDataType';
 import { searchResultListContentData } from '@/data/dummy/listviewData';
 import WebtoonList from '@/components/ui/WebtoonList';
-import axios from 'axios';
-import { useRouter } from 'next/router';
 
 export default function SearchResult() {
 
