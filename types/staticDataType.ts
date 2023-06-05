@@ -16,3 +16,8 @@ export interface StaticReportType {
   defaultChecked?: boolean;
   disabled?: boolean;
 }
+
+export interface StaticDaysType {
+  id: number;
+  days: string;
+}

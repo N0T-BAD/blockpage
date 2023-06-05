@@ -1,0 +1,35 @@
+.previewSection {
+  width: 100%;
+  border-top: 1px solid var(--bp-line-gray);
+  border-bottom: 1px solid var(--bp-line-gray);
+  margin: 1rem 0;
+}
+
+.previewDiv {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+}
+
+.previewTxtDiv {
+  width: 70%;
+  display: flex;
+}
+
+.previewTxtDiv p:first-child {
+  color: var(--bp-secondary);
+}
+
+.imgBox {
+  width: 30%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.downArrow img {
+  transform: rotate(270deg);
+}
+
+.episodeSection {
+  padding: 0 1.5rem;
+}

@@ -1,12 +1,16 @@
 export interface listviewDataType {
+  id: number;
   webtoonId: number;
   webtoonTitle: string;
   creator: string;
   illustrator: string;
-  thumbnail: string;
-  genre: string;
+  webtoonThumbnail: string;
+  webtoonDescription?: string;
+  genre: number;
+  publicationDays?: number;
   views?: number;
-  likes?: number;
+  interestCount?: number;
+  webtoonStatus?: string;
   episodeId?: string;
   episodeTitle?: string;
   uploadDate?: string;
