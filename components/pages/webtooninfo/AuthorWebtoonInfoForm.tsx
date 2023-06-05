@@ -8,6 +8,7 @@ import { useRecoilState } from 'recoil';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { authornickname } from '@/state/mypage/usernickname';
+import Swal from 'sweetalert2';
 
 export default function AuthorWebtoonInfoForm() {
 
@@ -128,8 +129,12 @@ export default function AuthorWebtoonInfoForm() {
       )
         .then((res) => {
           console.log(res)
-          alert('웹툰 정보가 등록되었습니다.')
-
+          Swal.fire({
+            icon: 'success',
+            title: '웹툰이 등록 되었습니다.',
+            showConfirmButton: false,
+            timer: 1500
+          })
           router.push('/authorworkslist')
         })
     }
@@ -202,7 +207,7 @@ export default function AuthorWebtoonInfoForm() {
           </div>
           <div className={style.InfoImgBox}>
             <div className={style.labelBox}>
-              <p>메인 이미지</p>
+              <p className={style.mainImg}>메인 이미지</p>
               <label>
                 <div className={style.uploadbtn}>upload</div>
                 <input type="file" name='file' id="file" accept="image/*" onChange={handleMainImage} />

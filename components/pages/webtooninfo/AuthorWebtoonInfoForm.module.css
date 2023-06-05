@@ -1,4 +1,4 @@
-.WebtoonInfoWrap {
+/* .WebtoonInfoWrap {
   margin: 3rem 0;
 }
 
@@ -17,7 +17,7 @@
 
 .InfoBox input {
   width: 70%;
-  background-color: var(--bp-gray);
+  background-color: var(--bp-skyblue);
   border-radius: 1rem;
   border: none;
   padding-left: 1rem;
@@ -25,7 +25,7 @@
 
 .InfoBox p.author {
   width: 70%;
-  background-color: var(--bp-gray);
+  background-color: var(--bp-skyblue);
   border-radius: 1rem;
   border: none;
   padding-left: 1rem;
@@ -33,6 +33,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.InfoBox select{
+  width: 70%;
+  -webkit-appearance: none;
+  border: none;
+  text-align: center;
+  background-color: var(--bp-skyblue);
+  border-radius: 1rem;
 }
 
 .InfoillustratorBox {
@@ -50,7 +59,7 @@
 
 .InfoillustratorBox input {
   width: 60%;
-  background-color: var(--bp-gray);
+  background-color: var(--bp-skyblue);
   border-radius: 1rem;
   border: none;
   padding-left: 1rem;
@@ -94,12 +103,212 @@
   width: 100%;
   justify-content: space-around;
   align-items: center;
+  justify-content: flex-start;
+}
+
+.labelBox p{
+padding-left: 0.3rem;
+  width: 50%;
+}
+
+p.mainImg {
+  padding-left: 0.8rem;
+  width: 50%;
 }
 
 .labelBox label {
   display: flex;
   justify-content: center;
+  width: 35%;
+}
+
+.uploadbtn {
+  display: flex;
+  margin: 1rem 0;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--bp-blue);
+  width: 100%;
+  font-size: 0.9rem;
+  border-radius: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.uploadbtn:hover {
+  background-color: var(--bp-blue);
+  color: #fff;
+}
+
+.ImageBox {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  border: 5px solid var(--bp-gray);
+}
+
+.ImageBox img {
+  width: 80%;
+  margin: 1rem 0;
+}
+ */
+
+ .WebtoonInfoWrap {
+  margin: 3rem 0;
+}
+
+.InfoBox {
+  display: flex;
+  width: 100%;
+  height: 2rem;
+  margin: 2rem 0;
+}
+
+.InfoBox p {
   width: 30%;
+  /* text-align: center; */
+  align-self: center;
+}
+
+/* .InfoBox p::after{
+  display: inline-block;
+  content: "";
+  width: 15%;
+} */
+
+.InfoBox p::before{
+  display: inline-block;
+  content: "";
+  width: 30%;
+}
+
+p.sorttxt {
+  width: 25%;
+  /* text-align: center; */
+  align-self: center;
+}
+
+p.sorttxt::after{
+  display: inline-block;
+  content: "";
+  width: 5%;
+}
+
+p.sorttxt::before{
+  display: inline-block;
+  content: "";
+  width: 40%;
+}
+
+.InfoBox input {
+  width: 55%;
+  background-color: var(--bp-skyblue);
+  border-radius: 1rem;
+  border: none;
+  margin-left: 2.2rem;
+  text-align: center;
+}
+
+p.author {
+  width: 55%;
+  background-color: var(--bp-skyblue);
+  border-radius: 1rem;
+  border: none;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 2.2rem;
+  margin-left: 2.2rem;
+}
+
+.InfoBox select{
+  width: 55%;
+  -webkit-appearance: none;
+  border: none;
+  text-align: center;
+  background-color: var(--bp-skyblue);
+  border-radius: 1rem;
+  margin-left: 2.2rem;
+}
+
+.InfoillustratorBox {
+  display: flex;
+  width: 100%;
+  height: 2rem;
+  margin: 2rem 0;
+}
+
+.InfoillustratorBox p {
+  width: 35%;
+  text-align: center;
+  align-self: center;
+}
+
+.InfoillustratorBox input {
+  width: 55%;
+  background-color: var(--bp-skyblue);
+  border-radius: 1rem;
+  border: none;
+  text-align: center;
+  margin-left: 1rem;
+}
+
+.submit {
+  width: 100%;
+  height: 3rem;
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.submit button {
+  width: 50%;
+  height: 2rem;
+  border: none;
+  background-color: var(--bp-blue);
+  color: var(--bp-white);
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 0.4rem;
+}
+
+.InfoImgBox {
+  display: flex;
+  width: 100%;
+  height: fit-content;
+  margin: 1rem 0;
+  flex-direction: column;
+  align-items: center;
+}
+
+.InfoImgBox input {
+  width: 100%;
+  margin: 1rem 0;
+  display: none;
+}
+
+.labelBox {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.labelBox p{
+padding-left: 0.3rem;
+  width: 50%;
+}
+
+p.mainImg {
+  padding-left: 0.8rem;
+  width: 50%;
+}
+
+.labelBox label {
+  display: flex;
+  justify-content: center;
+  width: 35%;
 }
 
 .uploadbtn {

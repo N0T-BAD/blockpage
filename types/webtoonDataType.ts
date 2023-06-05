@@ -1,6 +1,7 @@
 export interface WebToonListDataType {
   data: {
     webtoonTitle: string;
+    webtoonThumnail: string;
     creator: string;
     illustrator: string;
     description: string;
@@ -16,14 +17,39 @@ export interface WebToonListDataType {
   };
 }
 
+export interface WebToonDataType {
+  webtoonTitle: string;
+  webtoonThumbnail: string;
+  creator: string;
+  illustrator: string;
+  description: string;
+  publicationDays: string;
+  genre: string;
+  webtoonMainImage: string;
+  views: number;
+  interestCount: number;
+  episodeViewList: EpisodeViewListType[];
+}
+
 export interface EpisodeViewListType {
   episodeId: number;
   episodeNumber: number;
   episodeTitle: string;
   episodeThumbnail: string;
   uploadDate: string;
-  totalScore: number;
+  rating: number;
   authorWords: string;
+}
+
+export interface AuthorEpisodeList {
+  data: [{
+    episodeNumber: number;
+    episodeTitle: string;
+    episodeThumbnail: string;
+    uploadDate: string;
+    totalScore: number;
+    webtoonStatus: string;
+  }]
 }
 
 export interface EpisodeViewDataType {
@@ -36,6 +62,8 @@ export interface EpisodeViewDataType {
     authorWords: string;
     nextEpisodeTitle: string;
     nextEpisodeThumbnail: string;
+    nextRating: number;
+    nextUploadDate: string;
   };
 }
 
@@ -68,7 +96,21 @@ export interface webtoonDeleteDataType {
 }
 
 export interface webtoonTitleDataType {
-  title: string;
+  webtoonTitle: string;
+}
+
+export interface webtoonDeleteData {
+  data: [{
+    webtoonTitle: string;
+    webtoonId: number;
+  }]
+}
+
+export interface EpisodeDeleteData {
+  data: [{
+    webtoonTitle: string;
+    webtoonId: number;
+  }]
 }
 
 export interface webtoonListGetDataType {

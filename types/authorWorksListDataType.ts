@@ -22,5 +22,6 @@ export interface authorwebtoonData {
     views: number;
     interestCount: number;
     genreType: number;
+    webtoonStatus: string;
   }]
 }

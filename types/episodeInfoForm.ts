@@ -1,6 +1,32 @@
 export interface episodeInfoFormDataType {
-  webtoonId: number;
+  data: [{
+    episodeTitle: string;
+    uploadDate: string;
+    participantCount: number;
+    episodeNumber: number;
+    totalScore: number;
+  }]
+}
+
+export interface ChangeEpisodeInfo {
+  data: [{
+    episodeTitle: string;
+    uploadDate: string;
+    participantCount: number;
+    episodeNumber: number;
+    totalScore: number;
+    authorWords: string;
+  }]
+}
+
+export interface episodeInfoData {
   episodeNumber: number;
+  episodeTitle: string;
+  uploadDate: string;
+  authorWords: string;
+}
+
+export interface episodeInfoType {
   episodeTitle: string;
   uploadDate: string;
   authorWords: string;

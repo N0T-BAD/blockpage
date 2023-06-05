@@ -4,9 +4,8 @@ import style from '@/components/modals/RatingModal.module.css'
 import Separator from '@/components/ui/Separator'
 import CloseBtn from '../ui/CloseBtn';
 
-export default function RatingModal(props: { handleShowRating: () => void, handleIsRating: () => void }) {
+export default function RatingModal(props: { handleShowRating: () => void, handleIsRating: () => void, setValue: React.Dispatch<React.SetStateAction<number>>, value: number }) {
 
-  const [value, setValue] = useState<number>();
   const MAX_VALUE = 10;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -14,9 +13,9 @@ export default function RatingModal(props: { handleShowRating: () => void, handl
     const regex = /^[0-9]+$/;
 
     if (regex.test(e.target.value) && newValue > MAX_VALUE) {
-      setValue(MAX_VALUE);
+      props.setValue(MAX_VALUE);
     } else {
-      setValue(newValue);
+      props.setValue(newValue);
     }
   };
 
@@ -50,8 +49,8 @@ export default function RatingModal(props: { handleShowRating: () => void, handl
               className={style.rating}
               min="1"
               max={MAX_VALUE}
+              value={props.value || ''}
               maxLength={2}
-              value={value || ''}
               placeholder='10'
               onChange={handleChange}
             />

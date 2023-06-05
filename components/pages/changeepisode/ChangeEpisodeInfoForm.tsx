@@ -2,19 +2,34 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import style from '@/components/pages/episodeinfo/EpisodeInfoForm.module.css'
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { ChangeepisodeInfoType, UploadFile, episodeInfoFormDataType } from '@/types/episodeInfoForm';
+import { ChangeEpisodeInfo, ChangeepisodeInfoType, UploadFile, episodeInfoFormDataType, episodeInfoType } from '@/types/episodeInfoForm';
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
+import { ChangeEpisode, ChangeWebtoon } from '@/types/authorWebtoonInfoImgDataType';
 
 export default function ChangeEpisodeInfoForm() {
 
   const router = useRouter();
+  const { webtoonId } = router.query;
+  const { episodeNumber } = router.query;
+  const { data: session } = useSession()
+  // const role = sessionStorage.getItem('role');
 
-  const [episodeInfoData, setEpisodeInfoData] = useState<episodeInfoFormDataType>({
-    webtoonId: 0,
-    episodeNumber: 0,
+  const [episodeInfo, setEpisodeInfo] = useState<episodeInfoType>({
     episodeTitle: '',
     uploadDate: '',
     authorWords: '',
+  });
+
+  const [episodeInfoData, setEpisodeInfoData] = useState<ChangeEpisodeInfo>({
+    data: [{
+      episodeTitle: '',
+      uploadDate: '',
+      episodeNumber: 0,
+      totalScore: 0,
+      participantCount: 0,
+      authorWords: '',
+    }]
   });
 
   const [episodeThumbnailImage, setEpisodeThumbnailImage] = useState<File>();
@@ -23,24 +38,48 @@ export default function ChangeEpisodeInfoForm() {
   const [episodeImagePreview, setEpisodeImagePreview] = useState<UploadFile[]>([]);
   const regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
 
+  // useEffect(() => {
+  //   axios(`/api/authorwebtooninfo/${router.query.id}`)
+  //     .then(res => res.data)
+  //     .then(data => {
+  //       setEpisodeInfoData(data);
+  //       setEpisodeThumbnailImagePreview(data.episodeThumbnail);
+  //       setEpisodeImagePreview(data.episodeImage.map((url: string, index: number) => ({
+  //         name: `Episode ${index + 1}`,
+  //         preview: url,
+  //         file: null,
+  //       })));
+  //     })
+  // }, [episodeInfoData, router.query.id])
+
   useEffect(() => {
-    axios(`/api/authorwebtooninfo/${router.query.id}`)
-      .then(res => res.data)
-      .then(data => {
-        setEpisodeInfoData(data);
-        setEpisodeThumbnailImagePreview(data.episodeThumbnail);
-        setEpisodeImagePreview(data.episodeImage.map((url: string, index: number) => ({
-          name: `Episode ${index + 1}`,
-          preview: url,
-          file: null,
-        })));
+    axios.get(`https://blockpage.site/webtoon-service/v1/episodes/creator?${webtoonId}`,
+      {
+        headers: {
+          memberId: session?.email || '',
+          // role: role,
+        },
+        params: {
+          webtoonId: webtoonId,
+          episodeNumber: episodeNumber,
+        },
       })
-  }, [episodeInfoData, router.query.id])
+      .then((res) => {
+        setEpisodeInfoData(res.data)
+        console.log(res.data)
+        console.log(episodeInfoData)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
+
+
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setEpisodeInfoData({
-      ...episodeInfoData,
+    setEpisodeInfo({
+      ...episodeInfo,
       [name]: value
     });
   };
@@ -83,9 +122,7 @@ export default function ChangeEpisodeInfoForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (episodeInfoData.episodeNumber === 0 || episodeInfoData.episodeTitle === '' || episodeInfoData.uploadDate === '' || episodeInfoData.authorWords === '') {
-      alert('에피소드 정보를 입력해주세요.')
-    } else if (!episodeThumbnailImage) {
+    if (!episodeThumbnailImage) {
       alert('웹툰 썸네일 이미지를 입력해주세요.')
     } else if (regex.test(episodeThumbnailImage.name)) {
       alert('해당 파일은 업로드할 수 없습니다.');
@@ -94,37 +131,49 @@ export default function ChangeEpisodeInfoForm() {
     } else {
       try {
         const formData = new FormData();
-        formData.append('webtoonId', String(episodeInfoData.webtoonId));
-        formData.append('episodeNumber', String(episodeInfoData.episodeNumber));
-        formData.append('episodeTitle', episodeInfoData.episodeTitle);
-        formData.append('uploadDate', episodeInfoData.uploadDate);
-        formData.append('authorWords', episodeInfoData.authorWords);
+        formData.append('webtoonId', String(webtoonId));
+        formData.append('episodeNumber', String(episodeNumber));
+
+        if (episodeInfo.episodeTitle === '') {
+          episodeInfoData.data.find((episode) => episode.episodeTitle === episodeInfo.episodeTitle)
+          formData.append('episodeTitle', episodeInfo.episodeTitle);
+        } else {
+          formData.append('episodeTitle', episodeInfo.episodeTitle);
+        }
+        if (episodeInfo.uploadDate === '') {
+          episodeInfoData.data.find((episode) => episode.uploadDate === episodeInfo.uploadDate)
+          formData.append('uploadDate', episodeInfo.uploadDate);
+        } else {
+          formData.append('uploadDate', episodeInfo.uploadDate);
+        }
+        if (episodeInfo.authorWords === '') {
+          episodeInfoData.data.find((episode) => episode.authorWords === episodeInfo.authorWords)
+          formData.append('authorWords', episodeInfo.authorWords);
+        } else {
+          formData.append('authorWords', episodeInfo.authorWords);
+        }
 
         if (episodeThumbnailImage) {
-          formData.append('episodeThumbnailImage', episodeThumbnailImage);
+          formData.append('episodeThumbnail', episodeThumbnailImage);
         }
-        // else {
-        //  formData.append('episodeThumbnailImage', episodeInfoData.episodeThumbnail);
-        //}
 
-        episodeImagePreview.forEach((preview) => {
-          if (preview.file) {
-            formData.append('episodeImage', preview.file);
-          } else {
-            formData.append('episodeImagePreview', preview.preview);
-          }
-        });
+        if (episodeImage) {
+          episodeImage.forEach((file) => {
+            formData.append('episodeImage', file);
+          })
+        };
 
-        const res = await axios.post(`/api/authorwebtooninfo/${router.query.id}`, formData, {
+        const res = await axios.post(`https://blockpage.site/webtoon-service/v1/demands?target=episode&type=modify`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
+            memberId: session?.email || '',
           },
         });
 
         console.log(res);
-        if (res.status === 200) {
-          alert('웹툰 정보가 등록되었습니다.');
-          router.push('/authorworkslist');
+        if (res.status === 201) {
+          alert('에피소드 수정 요청이 완료되었습니다.');
+          router.push(`/episodelist/${webtoonId}`);
         }
       } catch (error) {
         console.error(error);
@@ -134,74 +183,85 @@ export default function ChangeEpisodeInfoForm() {
 
   return (
     <>
-      {episodeInfoData &&
-        <div className={style.WebtoonDeleteInfoWrap}>
-          <form onSubmit={handleSubmit}>
-            <div className={style.webtoonInfoBox}>
-              <p>에피소드 회차 : </p>
-              <input type="text" name="episodeNumber" defaultValue={episodeInfoData.episodeNumber} onChange={handleInput} />
-            </div>
-            <div className={style.episodeInfoBox}>
-              <p>에피소드 명 : </p>
-              <input type="text" name="episodeTitle" defaultValue={episodeInfoData.episodeTitle} onChange={handleInput} />
-            </div>
-            <div className={style.episodeInfoBox}>
-              <p>업로드 일 : </p>
-              <input type="text" name="uploadDate" defaultValue={episodeInfoData.uploadDate} onChange={handleInput} />
-            </div>
-            <div className={style.episodeInfoBox}>
-              <p>작가의 말 : </p>
-              <input type="text" name="authorWords" defaultValue={episodeInfoData.authorWords} onChange={handleInput} />
-            </div>
-            <div className={style.episodeInfoImgBox}>
-              <div className={style.labelBox}>
-                <p>회차 썸네일 이미지</p>
-                <label>
-                  <div className={style.uploadbtn}>upload</div>
-                  <input type="file" name='file' id="file" accept="image/*" onChange={handleThumbnailImage} />
-                </label>
-              </div>
-              {episodeThumbnailImagePreview && episodeThumbnailImagePreview.length > 1 ?
-                <div className={style.ThumbnailBox}>
-                  <Image src={episodeThumbnailImagePreview} alt="episodeThumbnailImagePreview" width={200} height={200} />
+      {episodeInfoData.data &&
+        episodeInfoData.data.map((episode) => (
+          episode.episodeNumber === Number(episodeNumber) && (
+            <div className={style.WebtoonDeleteInfoWrap} key={episode.episodeNumber}>
+              <form onSubmit={handleSubmit}>
+                <div className={style.webtoonInfoBox}>
+                  <p>에피소드 회차 : </p>
+                  <p className={style.episodeNumber}>{episodeNumber} 화</p>
                 </div>
-                : <></>
-              }
-            </div>
-            <div className={style.episodeInfoImgBox}>
-              <div className={style.labelBox}>
-                <p>에피소드 이미지 </p>
-                <label>
-                  <div className={style.uploadbtn}>upload</div>
-                  <input type="file" id="file" name='file' accept="image/*" onChange={handleEpisodeImage} multiple />
-                </label>
-              </div>
-              <p className={style.episodeinfo}>이미지를 수정하시려면 모든 파일을 올려주세요.</p>
-              <div className={style.filelist}>
-                {episodeImagePreview.map((preview, index) => (
-                  <div className={style.filename} key={index}>
-                    <p>{preview.name}</p>
-                    <button type="button" onClick={() => handleRemoveEpisodeImage(index)}>삭제</button>
+                <div className={style.episodeInfoBox}>
+                  <p>에피소드 명 : </p>
+                  <input type="text" name="episodeTitle" defaultValue={episode.episodeTitle} onChange={handleInput} />
+                </div>
+                {/* <div className={style.episodeInfoBox}>
+                  <p>업로드 일 : </p>
+                  <input type="text" name="uploadDate" defaultValue={episode.uploadDate} onChange={handleInput} />
+                </div> */}
+                <div className={style.numberBox}>
+                  <div className={style.episodeInfoNumberBox}>
+                    <p>업로드 일 :</p>
+                    <input type="text" name="uploadDate" onChange={handleInput} defaultValue={episode.uploadDate} />
                   </div>
-                ))}
-              </div>
-              {episodeImagePreview.length > 0 ?
-                <div className={style.ImgPreview}>
-                  {episodeImagePreview.map((preview, index) => (
-                    <div className={style.episodeImg} key={index}>
-                      <Image src={preview.preview} alt={`에피소드 ${index + 1}`} width={200} height={200} />
-                    </div>
-                  ))}
+                  <p className={style.info}>숫자만 입력해주세요.</p>
                 </div>
-                : <></>
-              }
+                <div className={style.episodeInfoBox}>
+                  <p>작가의 말 : </p>
+                  <input type="text" name="authorWords" defaultValue={episode.authorWords} onChange={handleInput} />
+                </div>
+                <div className={style.episodeInfoImgBox}>
+                  <div className={style.labelBox}>
+                    <p>회차 썸네일 이미지</p>
+                    <label>
+                      <div className={style.uploadbtn}>upload</div>
+                      <input type="file" name='file' id="file" accept="image/*" onChange={handleThumbnailImage} />
+                    </label>
+                  </div>
+                  {episodeThumbnailImagePreview && episodeThumbnailImagePreview.length > 1 ?
+                    <div className={style.ThumbnailBox}>
+                      <Image src={episodeThumbnailImagePreview} alt="episodeThumbnailImagePreview" width={200} height={200} />
+                    </div>
+                    : <></>
+                  }
+                </div>
+                <div className={style.episodeInfoImgBox}>
+                  <div className={style.labelBox}>
+                    <p>에피소드 이미지 </p>
+                    <label>
+                      <div className={style.uploadbtn}>upload</div>
+                      <input type="file" id="file" name='file' accept="image/*" onChange={handleEpisodeImage} multiple />
+                    </label>
+                  </div>
+                  <p className={style.imgInfotxt}>이미지를 수정하시려면 모든 파일을 올려주세요.</p>
+                  <div className={style.filelist}>
+                    {episodeImagePreview.map((preview, index) => (
+                      <div className={style.filename} key={index}>
+                        <p>{preview.name}</p>
+                        <button type="button" onClick={() => handleRemoveEpisodeImage(index)}>삭제</button>
+                      </div>
+                    ))}
+                  </div>
+                  {episodeImagePreview.length > 0 ?
+                    <div className={style.ImgPreview}>
+                      {episodeImagePreview.map((preview, index) => (
+                        <div className={style.episodeImg} key={index}>
+                          <Image src={preview.preview} alt={`에피소드 ${index + 1}`} width={200} height={200} />
+                        </div>
+                      ))}
+                    </div>
+                    : <></>
+                  }
+                </div>
+                <div className={style.submit}>
+                  <button type="submit">등록</button>
+                </div>
+              </form>
             </div>
-            <div className={style.submit}>
-              <button type="submit">등록</button>
-            </div>
-          </form>
-        </div>
+          )))
       }
+
     </>
   )
 }

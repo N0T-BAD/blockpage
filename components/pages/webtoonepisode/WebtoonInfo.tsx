@@ -8,7 +8,6 @@ import { WebToonListDataType } from '@/types/webtoonDataType'
 
 export default function WebtoonInfo(props: { data: WebToonListDataType }) {
   const data = props.data.data;
-  console.log(props.data)
   return (
     <>
       {

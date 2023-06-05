@@ -6,10 +6,9 @@ import { UserImgData } from '@/types/changeUserDataType';
 
 interface ChildProps {
   userImg: UserImgData;
-  setUserImg: React.Dispatch<React.SetStateAction<UserImgData>>;
 }
 
-export default function UserProfileImg({ userImg, setUserImg }: ChildProps) {
+export default function UserProfileImg({ userImg }: ChildProps) {
 
   return (
     <div className={style.userImage}>
