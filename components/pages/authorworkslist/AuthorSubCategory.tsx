@@ -102,9 +102,9 @@ export default function AuthorSubCategory({ active }: { active: string }) {
                             <button onClick={() => router.push('/webtoondelete')}>삭제</button>
                           </div>
                         </div>
-                        <WebtoonListFooter />
                       </>
                     ))}
+                    <WebtoonListFooter />
                   </>
                   :
                   category.name === '정산 & 통계' ?

@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import style from '@/components/pages/episodeinfo/EpisodeInfoForm.module.css'
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { UploadFile, episodeInfoFormDataType } from '@/types/episodeInfoForm';
+import { ChangeepisodeInfoType, UploadFile, episodeInfoFormDataType } from '@/types/episodeInfoForm';
 import Image from 'next/image';
 
 export default function ChangeEpisodeInfoForm() {
@@ -10,14 +10,11 @@ export default function ChangeEpisodeInfoForm() {
   const router = useRouter();
 
   const [episodeInfoData, setEpisodeInfoData] = useState<episodeInfoFormDataType>({
-    id: '',
-    title: '',
-    episodetitle: '',
-    episodedescription: '',
-    day: '',
-    authortalk: '',
-    episodeThumbnail: '',
-    episodeImage: '',
+    webtoonId: 0,
+    episodeNumber: 0,
+    episodeTitle: '',
+    uploadDate: '',
+    authorWords: '',
   });
 
   const [episodeThumbnailImage, setEpisodeThumbnailImage] = useState<File>();
@@ -86,7 +83,7 @@ export default function ChangeEpisodeInfoForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (episodeInfoData.episodetitle === '' || episodeInfoData.episodedescription === '' || episodeInfoData.day === '' || episodeInfoData.authortalk === '') {
+    if (episodeInfoData.episodeNumber === 0 || episodeInfoData.episodeTitle === '' || episodeInfoData.uploadDate === '' || episodeInfoData.authorWords === '') {
       alert('에피소드 정보를 입력해주세요.')
     } else if (!episodeThumbnailImage) {
       alert('웹툰 썸네일 이미지를 입력해주세요.')
@@ -97,16 +94,18 @@ export default function ChangeEpisodeInfoForm() {
     } else {
       try {
         const formData = new FormData();
-        formData.append('episodetitle', episodeInfoData.episodetitle);
-        formData.append('episodedescription', episodeInfoData.episodedescription);
-        formData.append('day', episodeInfoData.day);
-        formData.append('authortalk', episodeInfoData.authortalk);
+        formData.append('webtoonId', String(episodeInfoData.webtoonId));
+        formData.append('episodeNumber', String(episodeInfoData.episodeNumber));
+        formData.append('episodeTitle', episodeInfoData.episodeTitle);
+        formData.append('uploadDate', episodeInfoData.uploadDate);
+        formData.append('authorWords', episodeInfoData.authorWords);
 
-        if (episodeThumbnailImage && episodeInfoData.episodeThumbnail !== episodeThumbnailImagePreview) {
+        if (episodeThumbnailImage) {
           formData.append('episodeThumbnailImage', episodeThumbnailImage);
-        } else {
-          formData.append('episodeThumbnailImage', episodeInfoData.episodeThumbnail);
         }
+        // else {
+        //  formData.append('episodeThumbnailImage', episodeInfoData.episodeThumbnail);
+        //}
 
         episodeImagePreview.forEach((preview) => {
           if (preview.file) {
@@ -139,35 +138,27 @@ export default function ChangeEpisodeInfoForm() {
         <div className={style.WebtoonDeleteInfoWrap}>
           <form onSubmit={handleSubmit}>
             <div className={style.webtoonInfoBox}>
-              <p>작품명 : </p>
-              <p className={style.title}>{episodeInfoData.title}</p>
-            </div>
-            <div className={style.webtoonInfoBox}>
               <p>에피소드 회차 : </p>
-              <p className={style.title}>{episodeInfoData.id}화</p>
+              <input type="text" name="episodeNumber" defaultValue={episodeInfoData.episodeNumber} onChange={handleInput} />
             </div>
             <div className={style.episodeInfoBox}>
               <p>에피소드 명 : </p>
-              <input type="text" name="episodetitle" defaultValue={episodeInfoData.episodetitle} onChange={handleInput} />
-            </div>
-            <div className={style.episodeInfoBox}>
-              <p>에피소드 내용 : </p>
-              <input type="text" name="episodedescription" defaultValue={episodeInfoData.episodedescription} onChange={handleInput} />
+              <input type="text" name="episodeTitle" defaultValue={episodeInfoData.episodeTitle} onChange={handleInput} />
             </div>
             <div className={style.episodeInfoBox}>
               <p>업로드 일 : </p>
-              <input type="text" name="day" defaultValue={episodeInfoData.day} onChange={handleInput} />
+              <input type="text" name="uploadDate" defaultValue={episodeInfoData.uploadDate} onChange={handleInput} />
             </div>
             <div className={style.episodeInfoBox}>
               <p>작가의 말 : </p>
-              <input type="text" name="authortalk" defaultValue={episodeInfoData.authortalk} onChange={handleInput} />
+              <input type="text" name="authorWords" defaultValue={episodeInfoData.authorWords} onChange={handleInput} />
             </div>
             <div className={style.episodeInfoImgBox}>
               <div className={style.labelBox}>
                 <p>회차 썸네일 이미지</p>
                 <label>
                   <div className={style.uploadbtn}>upload</div>
-                  <input type="file" name='file' id="file" accept="image/*" onChange={handleThumbnailImage} defaultValue={episodeInfoData.episodeThumbnail} />
+                  <input type="file" name='file' id="file" accept="image/*" onChange={handleThumbnailImage} />
                 </label>
               </div>
               {episodeThumbnailImagePreview && episodeThumbnailImagePreview.length > 1 ?
@@ -182,7 +173,7 @@ export default function ChangeEpisodeInfoForm() {
                 <p>에피소드 이미지 </p>
                 <label>
                   <div className={style.uploadbtn}>upload</div>
-                  <input type="file" id="file" name='file' defaultValue={episodeInfoData.episodeImage} accept="image/*" onChange={handleEpisodeImage} multiple />
+                  <input type="file" id="file" name='file' accept="image/*" onChange={handleEpisodeImage} multiple />
                 </label>
               </div>
               <p className={style.episodeinfo}>이미지를 수정하시려면 모든 파일을 올려주세요.</p>

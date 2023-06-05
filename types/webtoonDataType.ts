@@ -51,6 +51,8 @@ export interface EpisodeViewDataType {
     authorWords: string;
     nextEpisodeTitle: string;
     nextEpisodeThumbnail: string;
+    nextRating: number;
+    nextUploadDate: string;
   };
 }
 

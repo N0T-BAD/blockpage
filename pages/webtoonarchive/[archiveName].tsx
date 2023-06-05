@@ -17,14 +17,13 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
   // const data = await res.data.json();
 
   const dummyData = historyListContentData;
-
   if (archiveName === 'favorite') {
     const res = await axios.get(`https://blockpage.site/member-service/v1/interests`, {
       headers: {
         memberId: session?.email
       }
     })
-    const data = res.data;
+    const data = res.data.data;
     console.log(data);
     return {
       props: { data }
@@ -43,9 +42,11 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
 
 function WebtoonArchive(props: { data: listviewDataType[] }) {
   return (
-    <ArchiveDataSection
-      data={props.data}
-    />
+    <>
+      <ArchiveDataSection
+        data={props.data}
+      />
+    </>
   )
 }
 
