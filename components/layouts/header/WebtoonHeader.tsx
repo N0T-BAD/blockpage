@@ -21,7 +21,7 @@ export default function WebtoonHeader() {
   const [webtoonData, setWebtoonData] = useState<WebToonDataType>();
   const [like, setLike] = useState<boolean>(false);
   const [likeState, setLikeState] = useState<likeStateType>();
-  console.log(like);
+  console.log(webtoonData?.webtoonThumbnail)
   useEffect(() => {
     if (session) {
       axios.all([
@@ -53,7 +53,7 @@ export default function WebtoonHeader() {
         axios.post(`https://blockpage.site/member-service/v1/interests`, {
           webtoonId: webtoonId,
           webtoonTitle: webtoonData.webtoonTitle,
-          webtoonThumnail: webtoonData.webtoonThumnail,
+          webtoonThumbnail: webtoonData.webtoonThumbnail,
           genre: webtoonData.genre,
           illustrator: webtoonData.illustrator,
           creator: webtoonData.creator,

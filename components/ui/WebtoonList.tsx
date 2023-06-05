@@ -5,13 +5,16 @@ import style from '@/components/ui/WebtoonList.module.css'
 import { listviewDataType } from '@/types/listviewDataType'
 import Separator from './Separator'
 import ViewLike from './ViewLike'
+import { useRouter } from 'next/router'
 
 export default function WebtoonList(props: { data: listviewDataType }) {
+  const router = useRouter();
+  const webtoonId = props.data.webtoonId;
   return (
     <div>
-      <div className={style.webtoonBox}>
+      <div className={style.webtoonBox} onClick={() => router.push(`/webtoon/${webtoonId}`)}>
         <div className={style.ImgWrap} >
-          <Image src={props.data.thumbnail} alt={props.data.webtoonTitle} width={100} height={90} priority />
+          <Image src={props.data.webtoonThumbnail} alt={props.data.webtoonTitle} width={100} height={90} priority />
         </div>
         <div className={style.contentWrap} >
           {

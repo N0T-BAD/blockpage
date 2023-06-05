@@ -4,7 +4,7 @@ export interface listviewDataType {
   webtoonTitle: string;
   creator: string;
   illustrator: string;
-  thumbnail: string;
+  webtoonThumbnail: string;
   genre: string;
   views?: number;
   likes?: number;
