@@ -30,37 +30,66 @@ export default function AuthorNickName() {
       },
     }
   );
+  console.log(session?.email)
 
-
-  const fetchData = async () => {
-    try {
-      const res = await axios.get('https://blockpage.site/member-service/v1/members?type=detail', {
-        headers: {
-          memberId: session?.email || '',
-        },
-      });
-      const { creatorNickname, profileImage } = res.data.data;
-      setauthorNickName({
-        data: {
-          creatorNickname,
-        },
-      });
-      setUserImg({
-        data: {
-          profileImage,
-        },
-      });
-      console.log(res.data);
-      console.log(userImg)
-      console.log(authorNickName);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get('https://blockpage.site/member-service/v1/members?type=detail', {
+          headers: {
+            memberId: session?.email || '',
+            // role: role,
+          },
+        });
+        const { creatorNickname, profileImage } = res.data.data;
+        setauthorNickName({
+          data: {
+            creatorNickname,
+          },
+        });
+        setUserImg({
+          data: {
+            profileImage,
+          }
+        })
+        console.log(res.data)
+      }
+      catch (err) {
+        console.log(err);
+      }
+    };
     fetchData();
-  }, []);
+  }, [])
+  // const fetchData = async () => {
+  //   try {
+  //     const res = await axios.get('https://blockpage.site/member-service/v1/members?type=detail', {
+  //       headers: {
+  //         memberId: session?.email || '',
+  //       },
+  //     });
+  //     const { creatorNickname, profileImage } = res.data.data;
+  //     setauthorNickName({
+  //       data: {
+  //         creatorNickname,
+  //       },
+  //     });
+  //     setUserImg({
+  //       data: {
+  //         profileImage,
+  //       },
+  //     });
+  //     console.log(res.data);
+  //     console.log(userImg)
+  //     console.log(authorNickName);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   console.log(authorNickName);
   console.log(userprofile);

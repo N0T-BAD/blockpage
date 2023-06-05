@@ -170,11 +170,11 @@ export default function ChangeWebtoonForm() {
             console.log(res)
             Swal.fire({
               icon: 'success',
-              title: '웹툰 수정 요청이 완료되었습니다.',
+              title: '에피소드 수정 요청이 완료되었습니다.',
               showConfirmButton: false,
               timer: 1500
             })
-            router.push('/authorworkslist')
+            router.push(`/authorworkslist/${webtoonId}`);
           })
       }
     }
@@ -218,7 +218,7 @@ export default function ChangeWebtoonForm() {
                 <input type="text" name="webtoonDescription" defaultValue={webtoon.webtoonDescription} onChange={handleInput} />
               </div>
               <div className={style.InfoBox}>
-                <p>장  르 : </p>
+                <p className={style.sorttxt}>장 르 : </p>
                 <select name="genre" onChange={handleInput} defaultValue={webtoon.genreType}>
                   <option value="">장르를 선택하세요</option>
                   {genreOptions.map((option) => (
@@ -229,7 +229,7 @@ export default function ChangeWebtoonForm() {
                 </select>
               </div>
               <div className={style.InfoBox}>
-                <p>요  일 : </p>
+                <p className={style.sorttxt}>요 일 : </p>
                 <select name="publicationDays" onChange={handleInput} defaultValue={webtoon.publicationDays}>
                   <option value="">요일을 선택하세요</option>
                   {dayOptions.map((option) => (
@@ -241,7 +241,7 @@ export default function ChangeWebtoonForm() {
               </div>
               {authorName.data && (
                 <div className={style.InfoBox}>
-                  <p>작 가 : </p>
+                  <p className={style.sorttxt}>작 가 : </p>
                   <p className={style.author}>{authorName.data.toString()}</p>
                 </div>
               )}

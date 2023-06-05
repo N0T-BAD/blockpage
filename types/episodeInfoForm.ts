@@ -8,6 +8,17 @@ export interface episodeInfoFormDataType {
   }]
 }
 
+export interface ChangeEpisodeInfo {
+  data: [{
+    episodeTitle: string;
+    uploadDate: string;
+    participantCount: number;
+    episodeNumber: number;
+    totalScore: number;
+    authorWords: string;
+  }]
+}
+
 export interface episodeInfoData {
   episodeNumber: number;
   episodeTitle: string;

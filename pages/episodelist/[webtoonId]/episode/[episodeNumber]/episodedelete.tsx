@@ -26,3 +26,4 @@ EpisodeDelete.getLayout = function getLayout(EpisodeDelete: React.ReactElement) 
 
 export default EpisodeDelete
 
+EpisodeDelete.auth = true

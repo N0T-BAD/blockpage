@@ -2,7 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import style from '@/components/pages/episodeinfo/EpisodeInfoForm.module.css'
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { ChangeepisodeInfoType, UploadFile, episodeInfoFormDataType, episodeInfoType } from '@/types/episodeInfoForm';
+import { ChangeEpisodeInfo, ChangeepisodeInfoType, UploadFile, episodeInfoFormDataType, episodeInfoType } from '@/types/episodeInfoForm';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { ChangeEpisode, ChangeWebtoon } from '@/types/authorWebtoonInfoImgDataType';
@@ -21,13 +21,14 @@ export default function ChangeEpisodeInfoForm() {
     authorWords: '',
   });
 
-  const [episodeInfoData, setEpisodeInfoData] = useState<episodeInfoFormDataType>({
+  const [episodeInfoData, setEpisodeInfoData] = useState<ChangeEpisodeInfo>({
     data: [{
       episodeTitle: '',
       uploadDate: '',
       episodeNumber: 0,
       totalScore: 0,
       participantCount: 0,
+      authorWords: '',
     }]
   });
 
@@ -121,9 +122,7 @@ export default function ChangeEpisodeInfoForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (episodeNumber === '' || episodeInfo.episodeTitle === '' || episodeInfo.uploadDate === '' || episodeInfo.authorWords === '') {
-      alert('에피소드 정보를 입력해주세요.')
-    } else if (!episodeThumbnailImage) {
+    if (!episodeThumbnailImage) {
       alert('웹툰 썸네일 이미지를 입력해주세요.')
     } else if (regex.test(episodeThumbnailImage.name)) {
       alert('해당 파일은 업로드할 수 없습니다.');
@@ -134,26 +133,44 @@ export default function ChangeEpisodeInfoForm() {
         const formData = new FormData();
         formData.append('webtoonId', String(webtoonId));
         formData.append('episodeNumber', String(episodeNumber));
-        formData.append('episodeTitle', episodeInfo.episodeTitle);
-        formData.append('uploadDate', episodeInfo.uploadDate);
-        formData.append('authorWords', episodeInfo.authorWords);
+
+        if (episodeInfo.episodeTitle === '') {
+          episodeInfoData.data.find((episode) => episode.episodeTitle === episodeInfo.episodeTitle)
+          formData.append('episodeTitle', episodeInfo.episodeTitle);
+        } else {
+          formData.append('episodeTitle', episodeInfo.episodeTitle);
+        }
+        if (episodeInfo.uploadDate === '') {
+          episodeInfoData.data.find((episode) => episode.uploadDate === episodeInfo.uploadDate)
+          formData.append('uploadDate', episodeInfo.uploadDate);
+        } else {
+          formData.append('uploadDate', episodeInfo.uploadDate);
+        }
+        if (episodeInfo.authorWords === '') {
+          episodeInfoData.data.find((episode) => episode.authorWords === episodeInfo.authorWords)
+          formData.append('authorWords', episodeInfo.authorWords);
+        } else {
+          formData.append('authorWords', episodeInfo.authorWords);
+        }
 
         if (episodeThumbnailImage) {
           formData.append('episodeThumbnailImage', episodeThumbnailImage);
         }
-        // else {
-        //  formData.append('episodeThumbnailImage', episodeInfoData.episodeThumbnail);
-        //}
 
-        episodeImagePreview.forEach((preview) => {
-          if (preview.file) {
-            formData.append('episodeImage', preview.file);
-          } else {
-            formData.append('episodeImagePreview', preview.preview);
-          }
-        });
+        // episodeImagePreview.forEach((preview) => {
+        //   if (preview.file) {
+        //     formData.append('episodeImage', preview.file);
+        //   } else {
+        //     formData.append('episodeImagePreview', preview.preview);
+        //   }
+        // });
+        if (episodeImage) {
+          episodeImage.forEach((file) => {
+            formData.append('episodeImage', file);
+          })
+        };
 
-        const res = await axios.post(`/api/authorwebtooninfo/${router.query.id}`, formData, {
+        const res = await axios.post(`https://blockpage.site/webtoon-service/v1/demands?target=episode&type=modify}`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -185,14 +202,21 @@ export default function ChangeEpisodeInfoForm() {
                   <p>에피소드 명 : </p>
                   <input type="text" name="episodeTitle" defaultValue={episode.episodeTitle} onChange={handleInput} />
                 </div>
-                <div className={style.episodeInfoBox}>
+                {/* <div className={style.episodeInfoBox}>
                   <p>업로드 일 : </p>
                   <input type="text" name="uploadDate" defaultValue={episode.uploadDate} onChange={handleInput} />
+                </div> */}
+                <div className={style.numberBox}>
+                  <div className={style.episodeInfoNumberBox}>
+                    <p>업로드 일 :</p>
+                    <input type="text" name="uploadDate" onChange={handleInput} defaultValue={episode.uploadDate} />
+                  </div>
+                  <p className={style.info}>숫자만 입력해주세요.</p>
                 </div>
-                {/* <div className={style.episodeInfoBox}>
-                <p>작가의 말 : </p>
-                <input type="text" name="authorWords" defaultValue={webtoon.authorWords} onChange={handleInput} />
-              </div> */}
+                <div className={style.episodeInfoBox}>
+                  <p>작가의 말 : </p>
+                  <input type="text" name="authorWords" defaultValue={episode.authorWords} onChange={handleInput} />
+                </div>
                 <div className={style.episodeInfoImgBox}>
                   <div className={style.labelBox}>
                     <p>회차 썸네일 이미지</p>
@@ -216,7 +240,7 @@ export default function ChangeEpisodeInfoForm() {
                       <input type="file" id="file" name='file' accept="image/*" onChange={handleEpisodeImage} multiple />
                     </label>
                   </div>
-                  <p className={style.episodeinfo}>이미지를 수정하시려면 모든 파일을 올려주세요.</p>
+                  <p className={style.imgInfotxt}>이미지를 수정하시려면 모든 파일을 올려주세요.</p>
                   <div className={style.filelist}>
                     {episodeImagePreview.map((preview, index) => (
                       <div className={style.filename} key={index}>

@@ -145,89 +145,100 @@ export default function EpisodeInfoForm() {
         }
       } catch (error) {
         console.error(error);
+        console.log(session?.email)
       }
     }
   };
 
   return (
     <>
-      {episodeInfo.data &&
+      {/* {episodeInfo.data &&
         episodeInfo.data.map((episode) => (
-          episode.episodeNumber && (
-            <div className={style.WebtoonDeleteInfoWrap}>
-              <form onSubmit={handleSubmit}>
-                <div className={style.webtoonInfoBox}>
+          episode.episodeNumber && ( */}
+      <div className={style.WebtoonDeleteInfoWrap}>
+        <form onSubmit={handleSubmit}>
+          {/* <div className={style.webtoonInfoBox}>
                   <p>에피소드 회차 : </p>
                   <p className={style.episodeNumber}>{episode.episodeNumber} 화</p>
+                </div> */}
+          <div className={style.numberBox}>
+            <div className={style.episodeInfoNumberBox}>
+              <p>에피소드 회차 :</p>
+              <div className={style.episodeInputBox}>
+                <input type="text" name="episodeNumber" onChange={handleInput} />
+                <p>화</p>
+              </div>
+            </div>
+            <p className={style.info}>숫자만 입력해주세요.</p>
+          </div>
+          <div className={style.episodeInfoBox}>
+            <p>에피소드 명 :</p>
+            <input type="text" name="episodeTitle" onChange={handleInput} />
+          </div>
+          <div className={style.numberBox}>
+            <div className={style.episodeInfoNumberBox}>
+              <p>업로드 일 :</p>
+              <input type="text" name="uploadDate" onChange={handleInput} />
+            </div>
+            <p className={style.info}>숫자만 입력해주세요.</p>
+          </div>
+          <div className={style.episodeInfoBox}>
+            <p>작가의 말 :</p>
+            <input type="text" name="authorWords" onChange={handleInput} />
+          </div>
+          <div className={style.episodeInfoImgBox}>
+            <div className={style.labelBox}>
+              <p>에피소드 썸네일 이미지</p>
+              <label>
+                <div className={style.uploadbtn}>upload</div>
+                <input type="file" name="file" id="file" accept="image/*" onChange={handleThumbnailImage} />
+              </label>
+            </div>
+            {episodeThumbnailImagePreview && episodeThumbnailImagePreview.length > 1 ? (
+              <div className={style.ThumbnailBox}>
+                <Image src={episodeThumbnailImagePreview} alt="episodeThumbnailImagePreview" width={200} height={200} />
+              </div>
+            ) : (
+              <></>
+            )}
+          </div>
+          <div className={style.episodeInfoImgBox}>
+            <div className={style.labelBox}>
+              <p>에피소드 이미지 </p>
+              <label>
+                <div className={style.uploadbtn}>upload</div>
+                <input type="file" id="file" name="file" accept="image/*" onChange={handleEpisodeImage} multiple />
+              </label>
+            </div>
+            <div className={style.filelist}>
+              {episodeImagePreview.map((preview, index) => (
+                <div className={style.filename} key={index}>
+                  <p>{preview.name}</p>
+                  <button type="button" onClick={() => handleRemoveEpisodeImage(index)}>
+                    삭제
+                  </button>
                 </div>
-                <div className={style.episodeInfoBox}>
-                  <p>에피소드 명 :</p>
-                  <input type="text" name="episodeTitle" onChange={handleInput} />
-                </div>
-                <div className={style.numberBox}>
-                  <div className={style.episodeInfoNumberBox}>
-                    <p>업로드 일 :</p>
-                    <input type="text" name="uploadDate" onChange={handleInput} />
+              ))}
+            </div>
+            {episodeImagePreview.length > 0 ? (
+              <div className={style.ImgPreview}>
+                {episodeImagePreview.map((preview, index) => (
+                  <div className={style.episodeImg} key={index}>
+                    <Image src={preview.preview} alt={`에피소드 ${index + 1}`} width={200} height={200} />
                   </div>
-                  <p className={style.info}>숫자만 입력해주세요.</p>
-                </div>
-                <div className={style.episodeInfoBox}>
-                  <p>작가의 말 :</p>
-                  <input type="text" name="authorWords" onChange={handleInput} />
-                </div>
-                <div className={style.episodeInfoImgBox}>
-                  <div className={style.labelBox}>
-                    <p>에피소드 썸네일 이미지</p>
-                    <label>
-                      <div className={style.uploadbtn}>upload</div>
-                      <input type="file" name="file" id="file" accept="image/*" onChange={handleThumbnailImage} />
-                    </label>
-                  </div>
-                  {episodeThumbnailImagePreview && episodeThumbnailImagePreview.length > 1 ? (
-                    <div className={style.ThumbnailBox}>
-                      <Image src={episodeThumbnailImagePreview} alt="episodeThumbnailImagePreview" width={200} height={200} />
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                </div>
-                <div className={style.episodeInfoImgBox}>
-                  <div className={style.labelBox}>
-                    <p>에피소드 이미지 </p>
-                    <label>
-                      <div className={style.uploadbtn}>upload</div>
-                      <input type="file" id="file" name="file" accept="image/*" onChange={handleEpisodeImage} multiple />
-                    </label>
-                  </div>
-                  <div className={style.filelist}>
-                    {episodeImagePreview.map((preview, index) => (
-                      <div className={style.filename} key={index}>
-                        <p>{preview.name}</p>
-                        <button type="button" onClick={() => handleRemoveEpisodeImage(index)}>
-                          삭제
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                  {episodeImagePreview.length > 0 ? (
-                    <div className={style.ImgPreview}>
-                      {episodeImagePreview.map((preview, index) => (
-                        <div className={style.episodeImg} key={index}>
-                          <Image src={preview.preview} alt={`에피소드 ${index + 1}`} width={200} height={200} />
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <></>
-                  )}
-                </div>
-                <div className={style.submit}>
-                  <button type="submit">등록</button>
-                </div>
-              </form >
-            </div >
-          )
-        ))}
+                ))}
+              </div>
+            ) : (
+              <></>
+            )}
+          </div>
+          <div className={style.submit}>
+            <button type="submit">등록</button>
+          </div>
+        </form >
+      </div >
+      {/* )
+        ))} */}
     </>
   );
 }
