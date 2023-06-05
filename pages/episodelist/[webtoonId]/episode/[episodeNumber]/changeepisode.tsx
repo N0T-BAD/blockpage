@@ -45,3 +45,5 @@ export async function getServerSideProps(context: Params) {
     },
   };
 }
+
+ChangeEpisode.auth = true

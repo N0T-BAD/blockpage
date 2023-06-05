@@ -3,7 +3,7 @@ import AuthorWorksListTopSection from "@/components/pages/authorworkslist/Author
 import AuthorWorksListMiddleSection from "@/components/pages/authorworkslist/AuthorWorksListMiddleSection"
 import TotalLayout from "@/components/layouts/TotalLayout"
 
-const authorworkslist: NextPageWithLayout = () => {
+const Authorworkslist: NextPageWithLayout = () => {
   return (
     <>
       <AuthorWorksListTopSection />
@@ -12,7 +12,7 @@ const authorworkslist: NextPageWithLayout = () => {
   )
 }
 
-authorworkslist.getLayout = function getLayout(authorworkslist: React.ReactElement) {
+Authorworkslist.getLayout = function getLayout(authorworkslist: React.ReactElement) {
   return (
     <TotalLayout>
       {authorworkslist}
@@ -20,4 +20,6 @@ authorworkslist.getLayout = function getLayout(authorworkslist: React.ReactEleme
   )
 }
 
-export default authorworkslist
+export default Authorworkslist
+
+Authorworkslist.auth = true

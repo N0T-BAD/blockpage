@@ -46,8 +46,12 @@ export default function ChangeWebtoonForm() {
   const [WebtoonMainImage, setWebtoonMainImage] = useState<File>();
   const [WebtoonThumbnailImagePreview, setWebtoonThumbnailImagePreview] = useState<string>();
   const [WebtoonMainImagePreview, setWebtoonMainImagePreview] = useState<string>();
-  const [authorName, setAuthorName] = useRecoilState<authorNameDataType>(authornickname);
-
+  // const [authorName, setAuthorName] = useRecoilState<authorNameDataType>(authornickname);
+  const [authorName, setAuthorName] = useState<authorNameDataType>({
+    data: {
+      creatorNickname: '',
+    },
+  });
 
   useEffect(() => {
     axios.get("https://blockpage.site/webtoon-service/v1/webtoons/creator",
@@ -61,6 +65,13 @@ export default function ChangeWebtoonForm() {
         setWebtoonData(res.data)
         console.log(res.data.data)
         console.log(webtoonData)
+        const selectedWebtoon = res.data.data.find((webtoon: any) => webtoon.webtoonId === Number(webtoonId));
+        if (selectedWebtoon) {
+          setAuthorName({
+            data: selectedWebtoon.creator,
+          });
+        }
+        console.log(authorName)
       })
       .catch((err) => {
         console.log(err)
@@ -73,6 +84,7 @@ export default function ChangeWebtoonForm() {
       ...webtoonInfoData,
       [name]: Number(value) || value,
     });
+    console.log(webtoonInfoData)
   };
 
   const handleMainImage = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -99,12 +111,9 @@ export default function ChangeWebtoonForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (webtoonInfoData.webtoonTitle === '' || webtoonInfoData.webtoonDescription === '' || !webtoonInfoData.genre || !webtoonInfoData.publicationDays) {
-      alert('웹툰 정보를 입력해주세요.')
-    } else if (!WebtoonThumbnailImagePreview || !WebtoonMainImagePreview) {
+    if (!WebtoonThumbnailImagePreview || !WebtoonMainImagePreview) {
       alert('웹툰 이미지를 입력해주세요.')
     } else {
-
       const selectedWebtoon = webtoonData.data.find((webtoon) => webtoon.webtoonId === Number(webtoonId));
       if (selectedWebtoon) {
         const formData = new FormData();
@@ -114,16 +123,37 @@ export default function ChangeWebtoonForm() {
         if (WebtoonMainImage) {
           formData.append('webtoonMainImage', WebtoonMainImage);
         }
-        formData.append('webtoonTitle', webtoonInfoData.webtoonTitle);
-        formData.append('webtoonDescription', webtoonInfoData.webtoonDescription);
-        formData.append('genre', String(webtoonInfoData.genre));
-        formData.append('publicationDays', String(webtoonInfoData.publicationDays));
+
+        if (webtoonInfoData.webtoonTitle === '') {
+          webtoonData.data.find((webtoon) => webtoon.webtoonTitle === webtoonInfoData.webtoonTitle)
+          formData.append('webtoonTitle', webtoonInfoData.webtoonTitle);
+        } else {
+          formData.append('webtoonTitle', webtoonInfoData.webtoonTitle);
+        }
+        if (webtoonInfoData.webtoonDescription === '') {
+          webtoonData.data.find((webtoon) => webtoon.webtoonDescription === webtoonInfoData.webtoonDescription)
+          formData.append('webtoonDescription', webtoonInfoData.webtoonDescription);
+        } else {
+          formData.append('webtoonDescription', webtoonInfoData.webtoonDescription);
+        }
+        if (webtoonInfoData.genre === 0) {
+          webtoonData.data.find((webtoon) => webtoon.genreType === webtoonInfoData.genre)
+          formData.append('genre', String(webtoonInfoData.genre));
+        } else {
+          formData.append('genre', String(webtoonInfoData.genre));
+        }
+        if (webtoonInfoData.publicationDays === 0) {
+          webtoonData.data.find((webtoon) => webtoon.publicationDays === webtoonInfoData.publicationDays)
+          formData.append('publicationDays', String(webtoonInfoData.publicationDays));
+        } else {
+          formData.append('publicationDays', String(webtoonInfoData.publicationDays));
+        }
         if (webtoonInfoData.illustrator === '') {
-          formData.append('illustrator', authorName.data.creatorNickname);
+          formData.append('illustrator', authorName.data.toString());
         } else if (webtoonInfoData.illustrator !== undefined) {
           formData.append('illustrator', webtoonInfoData.illustrator);
         }
-        formData.append('creatorNickname', authorName.data.creatorNickname);
+        formData.append('creatorNickname', authorName.data.toString());
         formData.append('webtoonId', String(webtoonId));
 
         axios.post('https://blockpage.site/webtoon-service/v1/demands?target=webtoon&type=modify',
@@ -140,11 +170,11 @@ export default function ChangeWebtoonForm() {
             console.log(res)
             Swal.fire({
               icon: 'success',
-              title: '웹툰 수정 요청이 완료되었습니다.',
+              title: '에피소드 수정 요청이 완료되었습니다.',
               showConfirmButton: false,
               timer: 1500
             })
-            router.push('/authorworkslist')
+            router.push(`/authorworkslist/${webtoonId}`);
           })
       }
     }
@@ -171,11 +201,13 @@ export default function ChangeWebtoonForm() {
     { label: '일', value: 6 },
   ];
 
+  console.log(authorName.data)
+
   return (
     <>
-      <div className={style.WebtoonInfoWrap}>
-        {webtoonData.data.map((webtoon) => (
-          webtoon.webtoonId === Number(webtoonId) && (
+      {webtoonData.data.map((webtoon) => (
+        webtoon.webtoonId === Number(webtoonId) && (
+          <div className={style.WebtoonInfoWrap} key={webtoon.webtoonId}>
             <form onSubmit={handleSubmit}>
               <div className={style.InfoBox}>
                 <p>작품명 : </p>
@@ -186,7 +218,7 @@ export default function ChangeWebtoonForm() {
                 <input type="text" name="webtoonDescription" defaultValue={webtoon.webtoonDescription} onChange={handleInput} />
               </div>
               <div className={style.InfoBox}>
-                <p>장르 : </p>
+                <p className={style.sorttxt}>장 르 : </p>
                 <select name="genre" onChange={handleInput} defaultValue={webtoon.genreType}>
                   <option value="">장르를 선택하세요</option>
                   {genreOptions.map((option) => (
@@ -197,7 +229,7 @@ export default function ChangeWebtoonForm() {
                 </select>
               </div>
               <div className={style.InfoBox}>
-                <p>요일 : </p>
+                <p className={style.sorttxt}>요 일 : </p>
                 <select name="publicationDays" onChange={handleInput} defaultValue={webtoon.publicationDays}>
                   <option value="">요일을 선택하세요</option>
                   {dayOptions.map((option) => (
@@ -207,17 +239,19 @@ export default function ChangeWebtoonForm() {
                   ))}
                 </select>
               </div>
-              <div className={style.InfoBox}>
-                <p>작가 : </p>
-                <p className={style.author}>{webtoon.creator}</p>
-              </div>
+              {authorName.data && (
+                <div className={style.InfoBox}>
+                  <p className={style.sorttxt}>작 가 : </p>
+                  <p className={style.author}>{authorName.data.toString()}</p>
+                </div>
+              )}
               <div className={style.InfoillustratorBox}>
                 <p>일러스트레이터 : </p>
                 <input type="text" name="illustrator" defaultValue={webtoon.illustrator} placeholder='미입력시, 본인으로 등록됩니다.' onChange={handleInput} />
               </div>
               <div className={style.InfoImgBox}>
                 <div className={style.labelBox}>
-                  <p>메인 이미지</p>
+                  <p className={style.mainImg}>메인 이미지</p>
                   <label>
                     <div className={style.uploadbtn}>upload</div>
                     <input type="file" name='file' id="file" accept="image/*" onChange={handleMainImage} />
@@ -249,8 +283,8 @@ export default function ChangeWebtoonForm() {
                 <button type="submit">등록</button>
               </div>
             </form>
-          )))}
-      </div>
+          </div>
+        )))}
     </>
   )
 }

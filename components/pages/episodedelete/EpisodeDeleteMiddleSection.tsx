@@ -27,7 +27,7 @@ export default function EpisodeDeleteMiddleSection() {
             {episodeData && (
                 <>
                     <section className={style.EpisodeDeleteMiddleSection}>
-                        <EpisodeDeleteInfo episodeData={episodeData} />
+                        <EpisodeDeleteInfo />
                     </section>
                 </>
             )

@@ -113,3 +113,37 @@ img.userImage1 {
   justify-content: center;
   width: 100%;
 }
+
+.reader {
+  margin-bottom: 0.8rem;
+  padding: 0.2rem 0;
+  background-color: var(--bp-red);
+  border-radius: 3rem;
+  width: 3rem;
+}
+
+.reader p {
+  color: var(--bp-white);
+  font-family: var(--bp-font);
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0;
+}
+
+.author {
+  margin: 0.5rem 1rem;
+  padding: 0.2rem 0;
+  background-color: var(--bp-secondary);
+  border-radius: 3rem;
+  width: 3rem;
+}
+
+.author p {
+  color: var(--bp-white);
+  font-family: var(--bp-font);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0;
+}

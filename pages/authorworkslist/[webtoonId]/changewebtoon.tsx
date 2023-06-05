@@ -40,3 +40,5 @@ export async function getServerSideProps(context: Params) {
         },
     };
 }
+
+ChangeWebtoon.auth = true

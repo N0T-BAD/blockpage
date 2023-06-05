@@ -55,7 +55,7 @@ export default function EpisodeDeleteInfo() {
   return (
     <>
       <div className={style.WebtoonDeleteInfoWrap}>
-        <form onSubmit={handleSubmit}>
+        {/* <form onSubmit={handleSubmit}>
           <div className={style.DeleteInfoBox}>
             <p>작품명 : </p>
             <p className={style.title}>{props.episodeData.title}</p>
@@ -71,7 +71,7 @@ export default function EpisodeDeleteInfo() {
           <div className={style.submit}>
             <button type="submit">삭제</button>
           </div>
-        </form>
+        </form> */}
       </div>
     </>
   )

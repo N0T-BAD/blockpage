@@ -40,3 +40,5 @@ export async function getServerSideProps(context: Params) {
         },
     };
 }
+
+WebToonDelete.auth = true

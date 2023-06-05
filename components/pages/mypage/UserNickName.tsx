@@ -17,36 +17,23 @@ export default function UserNickName() {
   // const role = sessionStorage.getItem('role');
   const router = useRouter();
 
-  const RouterUrl = router.pathname === "/authorworkslist" || router.pathname === "/webtooninfo";
-
   const [userNickname, setUserNickname] = useRecoilState<ChangeUserDataType>(usernickname);
-
-  const [authorNickName, setauthorNickName] = useRecoilState<authorNickname>(authornickname);
 
   const [userImg, setUserImg] = useRecoilState<UserImgData>(userprofile);
 
-  console.log(authorNickName.data.creatorNickname)
-  console.log(userImg.data.profileImage)
-
   useEffect(() => {
-    axios.get('https://blockpage.site/member-service/v1/members?type=detail', {
-      headers: {
-        memberId: session?.email || '',
-        // role: role,
-      },
-    })
-      .then((res) => {
-        const nickname = res.data.data.nickname;
-        const creatorNickname = res.data.data.creatorNickname;
-        const profileImage = res.data.data.profileImage;
+    const fetchData = async () => {
+      try {
+        const res = await axios.get('https://blockpage.site/member-service/v1/members?type=detail', {
+          headers: {
+            memberId: session?.email || '',
+            // role: role,
+          },
+        });
+        const { nickname, profileImage } = res.data.data;
         setUserNickname({
           data: {
             nickname,
-          },
-        });
-        setauthorNickName({
-          data: {
-            creatorNickname,
           },
         });
         setUserImg({
@@ -56,8 +43,12 @@ export default function UserNickName() {
         })
         console.log(res.data)
         console.log(userNickname)
-        console.log(authorNickName)
-      })
+      }
+      catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
   }, [])
 
   return (
@@ -65,18 +56,8 @@ export default function UserNickName() {
       <div className={style.usernicknameImgBox}>
         <div className={style.usernicknameImg}>
           <UserProfileImg userImg={userImg} />
-          {RouterUrl ?
-            <>
-              {
-                authorNickName.data.creatorNickname &&
-                <p className={style.usernickname}>{authorNickName.data.creatorNickname}</p>
-              }
-            </>
-            : <>
-              {userNickname.data.nickname &&
-                <p className={style.usernickname}>{userNickname.data.nickname}</p>
-              }
-            </>
+          {userNickname.data.nickname &&
+            <p className={style.usernickname}>{userNickname.data.nickname}</p>
           }
           <UserIcon />
         </div>
