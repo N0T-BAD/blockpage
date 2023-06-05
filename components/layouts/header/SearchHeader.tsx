@@ -17,7 +17,6 @@ export default function SearchHeader() {
             <Image src={'/assets/images/logo/logo.svg'} alt="logo" width={200} height={77} priority />
           </div>
         </div>
-        <SearchBarSection />
       </header>
     </>
   )
