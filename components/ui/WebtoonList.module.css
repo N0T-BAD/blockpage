@@ -89,6 +89,7 @@
 }
 
 .genre {
+  display: flex;
   width: fit-content;
   padding: 0.2rem 0.4rem;
   font-size: 0.5rem;
@@ -97,4 +98,9 @@
   color: var(--bp-white);
   border-radius: 1.5rem;
   margin-bottom: 0.3rem;
+}
+
+.genre p:last-child::before {
+  content: '/';
+  padding: 0 0.3rem;
 }

@@ -57,6 +57,8 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
   }
 
   useEffect(() => {
+    console.log(session?.email)
+    console.log(episodeId)
     axios.get(`https://blockpage.site/member-service/v1/ratings/${episodeId}`, {
       headers: {
         memberId: session?.email
@@ -68,7 +70,6 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
       })
       .catch((err) => {
         console.log(err);
-        console.log(err.response.data);
       })
   }, [])
 
@@ -89,13 +90,17 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
         }
       >
         <div className={style.top}>
-          <div className={style.ratingBtn} onClick={isRating ? undefined : handleShowRating}>
+          <div className={style.ratingBtn} onClick={value !== 0 ? undefined : handleShowRating}>
             <p>★</p>
-            <p>{data.rating}</p>
             {
-              isRating ?
+              value !== 0 ?
+                <p>{value}</p>
+                : ""
+            }
+            {
+              value !== 0 ?
                 <p>참여완료</p>
-                : <p>별점주기</p>
+                : <p>평점주기</p>
             }
           </div>
           <div className={style.close}>
@@ -126,7 +131,7 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
                 subject={data.nextEpisodeTitle}
                 thumbnail={data.nextEpisodeThumbnail}
                 rating={data.rating}
-                uploadData={data.nextUploadDate}
+                uploadDate={data.nextUploadDate}
               />
             </div>
             :

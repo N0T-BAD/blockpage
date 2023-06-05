@@ -18,7 +18,7 @@ export default function EpisodeSection(props: { episodeViewList: EpisodeViewList
 
   return (
     <>
-      <section className={style.previewSection}>
+      {/* <section className={style.previewSection}>
         <div className={style.previewDiv}>
           <div className={style.previewTxtDiv}>
             <p>2개</p>
@@ -54,23 +54,23 @@ export default function EpisodeSection(props: { episodeViewList: EpisodeViewList
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {
         //미리보기 섹션
-        isPreviewSection &&
-        <section className={style.episodeSection} key={data[0].episodeNumber} onClick={() => router.push(`/webtoon/${webtoonId}/episode/${data[0].episodeId}/episode/${data[0].episodeNumber}`)}>
-          <Episode
-            id={data[0].episodeNumber}
-            subject={data[0].episodeTitle}
-            thumbnail={data[0].episodeThumbnail}
-            rating={data[0].rating}
-            uploadDate={data[0].uploadDate}
-          />
-          <Separator
-            color='var(--bp-line-gray)'
-            gutter={1}
-          />
-        </section >
+        // isPreviewSection &&
+        // <section className={style.episodeSection} key={data[0].episodeNumber} onClick={() => router.push(`/webtoon/${webtoonId}/episode/${data[0].episodeId}/episode/${data[0].episodeNumber}`)}>
+        //   <Episode
+        //     id={data[0].episodeNumber}
+        //     subject={data[0].episodeTitle}
+        //     thumbnail={data[0].episodeThumbnail}
+        //     rating={data[0].rating}
+        //     uploadDate={data[0].uploadDate}
+        //   />
+        //   <Separator
+        //     color='var(--bp-line-gray)'
+        //     gutter={1}
+        //   />
+        // </section >
       }
       <section className={style.episodeSection}>
         {
