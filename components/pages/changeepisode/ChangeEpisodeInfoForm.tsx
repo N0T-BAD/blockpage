@@ -154,32 +154,26 @@ export default function ChangeEpisodeInfoForm() {
         }
 
         if (episodeThumbnailImage) {
-          formData.append('episodeThumbnailImage', episodeThumbnailImage);
+          formData.append('episodeThumbnail', episodeThumbnailImage);
         }
 
-        // episodeImagePreview.forEach((preview) => {
-        //   if (preview.file) {
-        //     formData.append('episodeImage', preview.file);
-        //   } else {
-        //     formData.append('episodeImagePreview', preview.preview);
-        //   }
-        // });
         if (episodeImage) {
           episodeImage.forEach((file) => {
             formData.append('episodeImage', file);
           })
         };
 
-        const res = await axios.post(`https://blockpage.site/webtoon-service/v1/demands?target=episode&type=modify}`, formData, {
+        const res = await axios.post(`https://blockpage.site/webtoon-service/v1/demands?target=episode&type=modify`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
+            memberId: session?.email || '',
           },
         });
 
         console.log(res);
-        if (res.status === 200) {
-          alert('웹툰 정보가 등록되었습니다.');
-          router.push('/authorworkslist');
+        if (res.status === 201) {
+          alert('에피소드 수정 요청이 완료되었습니다.');
+          router.push(`/episodelist/${webtoonId}`);
         }
       } catch (error) {
         console.error(error);
@@ -192,7 +186,7 @@ export default function ChangeEpisodeInfoForm() {
       {episodeInfoData.data &&
         episodeInfoData.data.map((episode) => (
           episode.episodeNumber === Number(episodeNumber) && (
-            <div className={style.WebtoonDeleteInfoWrap}>
+            <div className={style.WebtoonDeleteInfoWrap} key={episode.episodeNumber}>
               <form onSubmit={handleSubmit}>
                 <div className={style.webtoonInfoBox}>
                   <p>에피소드 회차 : </p>

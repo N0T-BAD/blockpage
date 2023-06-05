@@ -18,6 +18,7 @@ export default function EpisodelistBox() {
       episodeThumbnail: '',
       uploadDate: '',
       totalScore: 0,
+      webtoonStatus: '',
     }]
   });
 
@@ -51,6 +52,7 @@ export default function EpisodelistBox() {
         console.log(episodeData);
         setWebtoonData(episodeInfoData);
         console.log(webtoonData)
+        console.log(episodeData.data)
       } catch (error) {
         console.error(error);
       }
@@ -86,8 +88,6 @@ export default function EpisodelistBox() {
     router.push(`/episodelist/${webtoonId}/episode/${episodeNumber}/changeepisode`);
   };
 
-  console.log(webtoonData)
-
   return (
     <>
       {episodeData.data && webtoonData.data ? (
@@ -102,22 +102,23 @@ export default function EpisodelistBox() {
                 <div className={style.option}>
                   <div className={style.views}>
                     <Image src={'/assets/images/icons/star.svg'} alt={'평점'} width={10} height={10} />
-                    <p className={style.viewstxt}>{episodeData.uploadDate}</p>
+                    <p className={style.viewstxt}>{episodeData.totalScore}</p>
                   </div>
                   <div className={style.likes}>
-                    <p className={style.likestxt}>{episodeData.totalScore}</p>
+                    <p className={style.likestxt}>{episodeData.uploadDate}</p>
                   </div>
                 </div>
+                <p className={style.author}>{episodeData.webtoonStatus}</p>
               </div>
             </div>
             <div className={style.webtoonButton}>
-              {/* {episodeData.webtoonStatus === "배포중" ?
-                <> */}
-              <button onClick={() => handleChangeClick(episodeData.episodeNumber)}>수정</button>
-              <button onClick={() => handleDeleteClick(episodeData.episodeNumber)}>삭제</button>
-              {/* </>
+              {episodeData.webtoonStatus === "배포중" ?
+                <>
+                  <button onClick={() => handleChangeClick(episodeData.episodeNumber)}>수정</button>
+                  <button onClick={() => handleDeleteClick(episodeData.episodeNumber)}>삭제</button>
+                </>
                 : ""
-              } */}
+              }
             </div>
           </div>
         )))

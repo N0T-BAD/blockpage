@@ -205,9 +205,9 @@ export default function ChangeWebtoonForm() {
 
   return (
     <>
-      <div className={style.WebtoonInfoWrap}>
-        {webtoonData.data.map((webtoon) => (
-          webtoon.webtoonId === Number(webtoonId) && (
+      {webtoonData.data.map((webtoon) => (
+        webtoon.webtoonId === Number(webtoonId) && (
+          <div className={style.WebtoonInfoWrap} key={webtoon.webtoonId}>
             <form onSubmit={handleSubmit}>
               <div className={style.InfoBox}>
                 <p>작품명 : </p>
@@ -283,8 +283,8 @@ export default function ChangeWebtoonForm() {
                 <button type="submit">등록</button>
               </div>
             </form>
-          )))}
-      </div>
+          </div>
+        )))}
     </>
   )
 }
