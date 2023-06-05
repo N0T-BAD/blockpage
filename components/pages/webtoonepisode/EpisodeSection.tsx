@@ -21,8 +21,8 @@ export default function EpisodeSection(props: { episodeViewList: EpisodeViewList
               id={item.episodeNumber}
               subject={item.episodeTitle}
               thumbnail={item.episodeThumbnail}
-              rating={item.totalScore}
-              date={item.uploadDate}
+              rating={item.rating}
+              uploadDate={item.uploadDate}
             />
             <Separator
               color='var(--bp-line-gray)'

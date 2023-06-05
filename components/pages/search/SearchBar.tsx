@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router';
 
@@ -10,9 +10,16 @@ export default function SearchBar() {
 
     const router = useRouter();
 
+    const [value, setValue] = useState<string>();
+
     const handleSearch = () => {
         router.push('/searchresult');
     }
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log(e.target.value)
+        // setValue(e.target.value)
+    };
 
     return (
         <div className={style.SearchBar}>
@@ -22,7 +29,11 @@ export default function SearchBar() {
                 />
             </div>
             <div className={style.searchbarbg}>
-                <input className={style.searchinput} placeholder='검색어를 입력해주세요.'></input>
+                <input
+                    className={style.searchinput}
+                    placeholder='검색어를 입력해주세요.'
+                    onChange={handleChange}
+                />
                 <Image src={"/assets/images/icons/search.svg"} alt={"search"} width={20} height={20} onClick={handleSearch} priority />
             </div>
         </div>

@@ -21,7 +21,6 @@ export default function WebtoonHeader() {
   const [webtoonData, setWebtoonData] = useState<WebToonDataType>();
   const [like, setLike] = useState<boolean>(false);
   const [likeState, setLikeState] = useState<likeStateType>();
-  console.log(webtoonData?.webtoonThumbnail)
   useEffect(() => {
     if (session) {
       axios.all([

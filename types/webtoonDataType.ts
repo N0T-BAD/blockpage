@@ -37,7 +37,7 @@ export interface EpisodeViewListType {
   episodeTitle: string;
   episodeThumbnail: string;
   uploadDate: string;
-  totalScore: number;
+  rating: number;
   authorWords: string;
 }
 

@@ -8,7 +8,7 @@ export default function Episode(props: {
   subject: string,
   thumbnail: string,
   rating?: number,
-  uploadData?: string,
+  uploadDate?: string,
 }) {
 
   return (
@@ -28,7 +28,7 @@ export default function Episode(props: {
             <p className={style.subject}>{props.subject}</p>
             <div className={style.episodeOption}>
               <p className={style.rating}>평점 {props.rating}</p>
-              <p className={style.date}>{props.uploadData}</p>
+              <p className={style.date}>{props.uploadDate}</p>
             </div>
           </div>
         </div>
