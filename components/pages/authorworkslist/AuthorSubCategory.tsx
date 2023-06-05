@@ -13,7 +13,7 @@ import axios from 'axios';
 import { useSession } from 'next-auth/react';
 
 
-export default function AuthorSubCategory({ active }: { active: string }) {
+export default function AuthorSubCategory({ active, defaultActive }: { active: string, defaultActive: string }) {
   const { data: session } = useSession()
 
   const [webtoonList, setWebtoonList] = useRecoilState<authorwebtoonData>(webtoonlist);
@@ -75,7 +75,7 @@ export default function AuthorSubCategory({ active }: { active: string }) {
     <>
       {
         authorWorksListCategoryData.map((category) => (
-          <div className={category.name === active ? `${style.Clickactive}` : `${style.NoClickactive}`} key={category.id}>
+          <div className={category.name === (active || defaultActive) ? `${style.Clickactive}` : `${style.NoClickactive}`} key={category.id}>
             <>
               {
                 category.name === '웹툰 조회' ?

@@ -17,7 +17,7 @@
 
 .InfoBox input {
   width: 70%;
-  background-color: var(--bp-gray);
+  background-color: var(--bp-skyblue);
   border-radius: 1rem;
   border: none;
   padding-left: 1rem;
@@ -25,7 +25,7 @@
 
 .InfoBox p.author {
   width: 70%;
-  background-color: var(--bp-gray);
+  background-color: var(--bp-skyblue);
   border-radius: 1rem;
   border: none;
   padding-left: 1rem;
@@ -40,6 +40,8 @@
   -webkit-appearance: none;
   border: none;
   text-align: center;
+  background-color: var(--bp-skyblue);
+  border-radius: 1rem;
 }
 
 .InfoillustratorBox {
@@ -57,7 +59,7 @@
 
 .InfoillustratorBox input {
   width: 60%;
-  background-color: var(--bp-gray);
+  background-color: var(--bp-skyblue);
   border-radius: 1rem;
   border: none;
   padding-left: 1rem;
@@ -101,12 +103,23 @@
   width: 100%;
   justify-content: space-around;
   align-items: center;
+  justify-content: flex-start;
+}
+
+.labelBox p{
+padding-left: 0.3rem;
+  width: 50%;
+}
+
+p.mainImg {
+  padding-left: 0.8rem;
+  width: 50%;
 }
 
 .labelBox label {
   display: flex;
   justify-content: center;
-  width: 30%;
+  width: 35%;
 }
 
 .uploadbtn {

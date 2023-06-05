@@ -207,7 +207,7 @@ export default function AuthorWebtoonInfoForm() {
           </div>
           <div className={style.InfoImgBox}>
             <div className={style.labelBox}>
-              <p>메인 이미지</p>
+              <p className={style.mainImg}>메인 이미지</p>
               <label>
                 <div className={style.uploadbtn}>upload</div>
                 <input type="file" name='file' id="file" accept="image/*" onChange={handleMainImage} />

@@ -30,6 +30,10 @@ export interface UserImgData {
   }
 }
 
+export interface AuthorImgData {
+  profileImage: string;
+}
+
 export interface changeProfileSkin {
   data: [{
     memberHasProfileSkinId: number;
