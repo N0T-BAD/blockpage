@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import BackBtn from '@/components/ui/BackBtn'
 import style from '@/components/layouts/header/TotalHeader.module.css'
 
-export default function TotalHeader() {
+export default function EpisodeChangeHeader() {
 
     const router = useRouter();
 
@@ -19,7 +19,7 @@ export default function TotalHeader() {
                     />
                 </div>
                 <div className={style.centerHead}>
-                    <p>에피소드 조회</p>
+                    <p>에피소드 수정</p>
                 </div>
                 <div className={style.rightHead}></div>
             </div>

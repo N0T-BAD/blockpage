@@ -35,6 +35,13 @@
   justify-content: center;
 }
 
+.InfoBox select{
+  width: 70%;
+  -webkit-appearance: none;
+  border: none;
+  text-align: center;
+}
+
 .InfoillustratorBox {
   display: flex;
   width: 100%;
