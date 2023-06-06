@@ -3,7 +3,7 @@ import { GetServerSideProps } from "next"
 import ArchiveLayout from "@/components/layouts/ArchiveLayout"
 import ArchiveDataSection from "@/components/pages/webtoonarchive/ArchiveDataSection"
 
-import { favoriteListContentData, historyListContentData, purchaseListContentData } from "@/data/dummy/listviewData"
+import { historyListContentData, purchaseListContentData } from "@/data/dummy/listviewData"
 import { listviewDataType } from "@/types/listviewDataType"
 import axios from "axios"
 import { getServerSession } from "next-auth"

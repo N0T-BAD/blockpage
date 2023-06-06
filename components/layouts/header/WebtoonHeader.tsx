@@ -26,7 +26,7 @@ export default function WebtoonHeader() {
       axios.all([
         axios.get(`https://blockpage.site/webtoon-service/v1/episodes?webtoonId=${webtoonId}&sort=DESC`),
         axios.get(`https://blockpage.site/member-service/view/v1/interest`, {
-          headers: { memberId: session?.email },
+          headers: { memberId: session.email },
           params: { webtoonId: webtoonId },
         },)
       ])

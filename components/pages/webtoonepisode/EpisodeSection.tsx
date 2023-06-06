@@ -13,7 +13,7 @@ import PreviewSection from './PreviewSection';
 export default function EpisodeSection(props: { data: WebToonListDataType, episodeViewList: EpisodeViewListType[] }) {
 
   const { data: session } = useSession();
-  console.log(session?.email)
+  console.log(session?.email);
 
   const router = useRouter();
   const { webtoonId } = router.query;
@@ -46,28 +46,40 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
       }
     })
       .then((res) => {
-        console.log(res)
+        console.log(res);
       })
       .catch((err) => {
-        console.log(err)
-      })
+        console.log(err);
+      });
 
-    router.push(`/webtoon/${webtoonId}/episode/${episodeId}/episode/${episodeNumber}`)
-  }
+    router.push(`/webtoon/${webtoonId}/episode/${episodeId}/episode/${episodeNumber}`);
+  };
 
   useEffect(() => {
     if (session) {
-      axios.get(`https://blockpage.site/block-service/v1/blocks`, {
-        headers: { memberId: session.email }
-      })
-        .then((res) => {
-          console.log(res)
-        })
+      axios.all([
+        axios.get(`https://blockpage.site/block-service/v1/blocks`, {
+          headers: { memberId: session.email }
+        }),
+        axios.get(`https://blockpage.site/purchase-service/v1/purchases?type=episodeBMFree&webtoonId=${webtoonId}`, {
+          headers: { memberId: session.email }
+        }),
+        axios.get(`https://blockpage.site/purchase-service/v1/purchases?type=episodeBMFree&webtoonId=${webtoonId}`, {
+          headers: { memberId: session.email }
+        }),
+      ])
+        .then(
+          axios.spread((res1, res2, res3) => {
+            console.log(res1);
+            console.log(res2);
+            console.log(res3);
+          })
+        )
         .catch((err) => {
-          console.log(err)
-        })
-    }
-  }, [session?.email])
+          console.log(err);
+        });
+    };
+  }, [session?.email]);
 
   return (
     <>
