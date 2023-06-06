@@ -129,7 +129,7 @@ export interface webtoonListGetDataType {
       illustrator: string;
       views: number;
       interestCount: number;
-      genreType: number;
+      genre: number;
     }
   ];
 }
