@@ -57,8 +57,6 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
   }
 
   useEffect(() => {
-    console.log(session?.email)
-    console.log(episodeId)
     axios.get(`https://blockpage.site/member-service/v1/ratings/${episodeId}`, {
       headers: {
         memberId: session?.email

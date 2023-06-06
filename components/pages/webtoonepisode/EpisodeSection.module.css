@@ -8,12 +8,13 @@
 .previewDiv {
   display: flex;
   justify-content: space-between;
-  padding: 0 1.5rem;
+  padding: 1rem 1.5rem;
 }
 
 .previewTxtDiv {
   width: 70%;
   display: flex;
+  align-items: center;
 }
 
 .previewTxtDiv p:first-child {
@@ -26,8 +27,28 @@
   justify-content: space-between;
 }
 
+.imgDiv {
+  width: 100%;
+  padding: 0 1rem;
+  display: flex;
+}
+
+.imgBox .imgDiv img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+
+.downArrow {
+  display: flex;
+}
+
 .downArrow img {
   transform: rotate(270deg);
+}
+
+.upArrow img {
+  transform: rotate(90deg);
 }
 
 .episodeSection {
