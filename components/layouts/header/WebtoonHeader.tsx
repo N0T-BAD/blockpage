@@ -41,7 +41,7 @@ export default function WebtoonHeader() {
           console.log(err);
         })
     }
-  }, [session, like])
+  }, [session?.email, like])
 
   const handleLike = () => {
     if (webtoonData && likeState) {

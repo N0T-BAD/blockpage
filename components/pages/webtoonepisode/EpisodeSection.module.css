@@ -41,6 +41,7 @@
 
 .downArrow {
   display: flex;
+  align-items: center;
 }
 
 .downArrow img {
