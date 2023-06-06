@@ -64,7 +64,7 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
         axios.get(`https://blockpage.site/purchase-service/v1/purchases?type=episodeBMFree&webtoonId=${webtoonId}`, {
           headers: { memberId: session.email }
         }),
-        axios.get(`https://blockpage.site/purchase-service/v1/purchases?type=episodeBMFree&webtoonId=${webtoonId}`, {
+        axios.get(`https://blockpage.site/purchase-service/v1/purchases?type=episodeBMPaid&webtoonId=${webtoonId}`, {
           headers: { memberId: session.email }
         }),
       ])

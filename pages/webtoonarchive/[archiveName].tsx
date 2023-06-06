@@ -11,27 +11,44 @@ import { authOptions } from "../api/auth/[...nextauth]"
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const { archiveName } = context.query;
+  const { webtoonId } = context.query;
   const session = await getServerSession(context.req, context.res, authOptions);
   // server에서 데이터 불러와서 서버사이드에서 렌더링하기 위해 데이터 받아오기
   // const res = fetch(`http://localhost:3000/api/webtoonArchive/${archiveName}`);
   // const data = await res.data.json();
 
   const dummyData = historyListContentData;
-  if (archiveName === 'favorite') {
-    const res = await axios.get(`https://blockpage.site/member-service/v1/interests`, {
-      headers: {
-        memberId: session?.email
+  if (session) {
+    if (archiveName === 'favorite') {
+      const res = await axios.get(`https://blockpage.site/member-service/v1/interests`, {
+        headers: {
+          memberId: session?.email
+        }
+      })
+      const data = res.data.data;
+      return {
+        props: { data }
       }
-    })
-    const data = res.data.data;
-    console.log(data);
-    return {
-      props: { data }
-    }
-  } else if (archiveName === 'purchase') {
-    const data = purchaseListContentData;
-    return {
-      props: { data }
+    } else if (archiveName === 'purchase') {
+      const res = await axios.get(`https://blockpage.site/purchase-service/v1/purchases?type=episodeBMFree&webtoonId=${webtoonId}`, {
+        headers: {
+          memberId: session?.email
+        }
+      })
+      const data = res.data.data;
+      return {
+        props: { data }
+      }
+    } else if (archiveName === 'history') {
+      const res = await axios.get(`https://blockpage.site/purchase-service/v1/purchases?type=episodeBMPaid&webtoonId=${webtoonId}`, {
+        headers: {
+          memberId: session?.email
+        }
+      })
+      const data = res.data.data;
+      return {
+        props: { data }
+      }
     }
   }
   const data = dummyData;
