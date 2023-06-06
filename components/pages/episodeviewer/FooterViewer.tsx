@@ -8,9 +8,12 @@ import CloseBtn from '@/components/ui/CloseBtn';
 import Episode from '../webtoonepisode/Episode';
 import { EpisodeViewDataType } from '@/types/webtoonDataType';
 import RatingModal from '@/components/modals/RatingModal';
+import axios from 'axios';
+import { useSession } from 'next-auth/react';
 
 export default function FooterViewer(props: { episodeData: EpisodeViewDataType, isViewer: boolean, setIsViewer: React.Dispatch<React.SetStateAction<boolean>> }) {
 
+  const { data: session } = useSession();
   const router = useRouter();
   const data = props.episodeData.data;
   const { webtoonId } = router.query;
@@ -20,6 +23,8 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
   const [showModal, setShowModal] = useState(false);
   const [isRating, setIsRating] = useState(false);
 
+  const [value, setValue] = useState<number>(0);
+
   const nextId = Number(episodeId) + 1;
   const nextNumber = Number(episodeNumber) + 1;
 
@@ -28,9 +33,45 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
   }
 
   const handleIsRating = () => {
+    if (session) {
+      axios.post(`https://blockpage.site/member-service/v1/ratings`, {
+        episodeId: episodeId,
+        webtoonId: webtoonId,
+        ratings: value,
+      }, {
+        headers: {
+          memberId: session?.email,
+        }
+      })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+          alert(err.response.data);
+        })
+    }
+
     setIsRating(!isRating);
     setShowModal(!showModal);
   }
+
+  useEffect(() => {
+    console.log(session?.email)
+    console.log(episodeId)
+    axios.get(`https://blockpage.site/member-service/v1/ratings/${episodeId}`, {
+      headers: {
+        memberId: session?.email
+      }
+    })
+      .then((res) => {
+        console.log(res);
+        setValue(res.data.data.ratings)
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }, [])
 
   return (
     <>
@@ -39,6 +80,8 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
         <RatingModal
           handleShowRating={handleShowRating}
           handleIsRating={handleIsRating}
+          setValue={setValue}
+          value={value}
         />
       }
       <footer
@@ -47,13 +90,17 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
         }
       >
         <div className={style.top}>
-          <div className={style.ratingBtn} onClick={isRating ? undefined : handleShowRating}>
+          <div className={style.ratingBtn} onClick={value !== 0 ? undefined : handleShowRating}>
             <p>★</p>
-            <p>{data.rating}</p>
             {
-              isRating ?
+              value !== 0 ?
+                <p>{value}</p>
+                : ""
+            }
+            {
+              value !== 0 ?
                 <p>참여완료</p>
-                : <p>별점주기</p>
+                : <p>평점주기</p>
             }
           </div>
           <div className={style.close}>
@@ -83,6 +130,8 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
               <Episode
                 subject={data.nextEpisodeTitle}
                 thumbnail={data.nextEpisodeThumbnail}
+                rating={data.rating}
+                uploadDate={data.nextUploadDate}
               />
             </div>
             :

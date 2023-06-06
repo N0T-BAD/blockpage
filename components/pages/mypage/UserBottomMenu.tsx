@@ -46,8 +46,10 @@ export default function UserBottomMenu() {
             icon: 'success',
             title: '출석 완료!',
             text: res.data.message,
-            confirmButtonText: '확인',
+            showConfirmButton: false,
+            timer: 5000
           })
+          window.location.reload();
         }
       })
       .catch((err) => {

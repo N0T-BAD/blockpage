@@ -2,8 +2,9 @@ import React from 'react'
 import Image from 'next/image'
 
 import style from '@/components/ui/WebtoonList.module.css'
+import { listviewDataType } from '@/types/listviewDataType'
 
-export default function ViewLike(props: { data: any }) {
+export default function ViewLike(props: { data: listviewDataType }) {
   return (
     <div className={style.option} >
       <div className={style.views} >
@@ -22,7 +23,7 @@ export default function ViewLike(props: { data: any }) {
           height={12}
           priority
         />
-        <p className={style.likestxt} >{props.data.likes}</p>
+        <p className={style.likestxt} >{props.data.interestCount}</p>
       </div>
     </div>
   )

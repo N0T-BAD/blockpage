@@ -68,7 +68,7 @@ export default function MenuModal(props: { handleModal: () => void }) {
       </div>
       <section className={style.userSection}>
         <div className={style.user} onClick={session ? undefined : () => router.push("/login")}>
-          <UserProfileImg userImg={userImg} setUserImg={setUserImg} />
+          <UserProfileImg userImg={userImg} />
           {
             session ?
               <div className={style.userSectionTxt}>

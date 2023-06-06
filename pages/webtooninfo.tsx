@@ -22,3 +22,4 @@ webtooninfo.getLayout = function getLayout(webtooninfo: React.ReactElement) {
 
 export default webtooninfo
 
+webtooninfo.auth = true

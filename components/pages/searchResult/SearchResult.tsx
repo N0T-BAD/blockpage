@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { listviewDataType } from '@/types/listviewDataType';
-import { searchResultListContentData } from '@/data/dummy/listviewData';
 import WebtoonList from '@/components/ui/WebtoonList';
 
-export default function SearchResult() {
+export default function SearchResult(props: { searchData: listviewDataType[] }) {
 
-  const [listviewData] = useState<listviewDataType[]>(searchResultListContentData);
+  const listviewData = props.searchData;
 
   return (
     <>

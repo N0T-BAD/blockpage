@@ -41,3 +41,5 @@ export async function getServerSideProps(context: Params) {
         },
     };
 }
+
+EpisodeInfo.auth = true
