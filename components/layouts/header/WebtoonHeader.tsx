@@ -32,9 +32,7 @@ export default function WebtoonHeader() {
       ])
         .then(
           axios.spread((res1, res2) => {
-            console.log(res1.data)
             setWebtoonData(res1.data.data);
-            console.log(res2.data)
             setLikeState(res2.data.data);
             setLike(res2.data.data.choice);
           })
@@ -48,7 +46,6 @@ export default function WebtoonHeader() {
   const handleLike = () => {
     if (webtoonData && likeState) {
       if (like === false) {
-        console.log('하트 생성');
         axios.post(`https://blockpage.site/member-service/v1/interests`, {
           webtoonId: webtoonId,
           webtoonTitle: webtoonData.webtoonTitle,
@@ -69,10 +66,8 @@ export default function WebtoonHeader() {
             console.log(err);
           })
       } else if (like === true) {
-        console.log('하트 취소');
         axios.delete(`https://blockpage.site/member-service/v1/interests/${likeState.id}`)
           .then((res) => {
-            console.log('하트 취소 성공')
             setLike(false);
           })
           .catch((err) => {

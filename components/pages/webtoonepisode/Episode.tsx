@@ -45,7 +45,7 @@ export default function Episode(props: {
           {
             props.price &&
               props.price > 0 ?
-              <p className={style.priceBlock}>블럭 4개</p> :
+              <p className={style.priceBlock}>블럭 {props.price}개</p> :
               <>
                 <p className={style.rating}>평점 {props.rating}</p>
                 <p className={style.date}>{props.uploadDate}</p>

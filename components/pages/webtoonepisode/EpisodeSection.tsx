@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
 import Episode from './Episode';
 import { useSession } from 'next-auth/react';
@@ -36,6 +36,10 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
       persistType: "permanent",
       webtoonTitle: webtoonData.webtoonTitle,
       episodeNumber: episodeNumber,
+      webtoonThumbnail: webtoonData.webtoonThumnail,
+      creator: webtoonData.creator,
+      illustrator: webtoonData.illustrator,
+      genre: webtoonData.genre,
     }, {
       headers: {
         memberId: session?.email,
@@ -51,11 +55,24 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
     router.push(`/webtoon/${webtoonId}/episode/${episodeId}/episode/${episodeNumber}`)
   }
 
+  useEffect(() => {
+    if (session) {
+      axios.get(`https://blockpage.site/block-service/v1/blocks`, {
+        headers: { memberId: session.email }
+      })
+        .then((res) => {
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+  }, [session?.email])
+
   return (
     <>
       <PreviewSection isPreviewSection={isPreviewSection} handleView={handleView} priceData={priceData} />
       {
-        //미리보기 섹션
         <section className={style.episodeSection}>
           {
             isPreviewSection &&
