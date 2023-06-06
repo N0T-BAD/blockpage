@@ -13,7 +13,7 @@ import axios from 'axios';
 import { useSession } from 'next-auth/react';
 
 
-export default function AuthorSubCategory({ active }: { active: string }) {
+export default function AuthorSubCategory({ active, defaultActive }: { active: string, defaultActive: string }) {
   const { data: session } = useSession()
 
   const [webtoonList, setWebtoonList] = useRecoilState<authorwebtoonData>(webtoonlist);
@@ -45,9 +45,30 @@ export default function AuthorSubCategory({ active }: { active: string }) {
     router.push(`/authorworkslist/${webtoonId}/changewebtoon`);
   };
 
-  const handleDeleteWebtoonClick = (webtoonId: number) => {
-    router.push(`/authorworkslist/${webtoonId}/webtoondelete`);
+  console.log(webtoonList.data)
+
+  const handleDeleteWebtoonClick = (webtoonTitle: string) => {
+
+    const formData = new FormData();
+    formData.append('webtoonTitle', webtoonTitle);
+    axios.post(`https://blockpage.site/webtoon-service/v1/demands?target=webtoon&type=remove`,
+      formData,
+      {
+        headers: {
+          memberId: session?.email || '',
+          // role: role,
+        },
+      })
+      .then((res) => {
+        console.log(res)
+        alert("삭제되었습니다.")
+        window.location.reload()
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   };
+  console.log(session?.email)
 
   const getGenreTypeString = (genreType: number) => {
     if (genreType === 0) {
@@ -75,7 +96,7 @@ export default function AuthorSubCategory({ active }: { active: string }) {
     <>
       {
         authorWorksListCategoryData.map((category) => (
-          <div className={category.name === active ? `${style.Clickactive}` : `${style.NoClickactive}`} key={category.id}>
+          <div className={category.name === (active || defaultActive) ? `${style.Clickactive}` : `${style.NoClickactive}`} key={category.id}>
             <>
               {
                 category.name === '웹툰 조회' ?
@@ -105,9 +126,15 @@ export default function AuthorSubCategory({ active }: { active: string }) {
                             </div>
                           </div>
                           <div className={style.webtoonButton}>
-                            <button onClick={() => handlechangewebtoonClick(webtoonsubcategory.webtoonId)}>수정</button>
-                            <button onClick={() => handleDeleteWebtoonClick(webtoonsubcategory.webtoonId)}>삭제</button>
+                            {webtoonsubcategory.webtoonStatus === "배포중" ?
+                              <>
+                                <button onClick={() => handlechangewebtoonClick(webtoonsubcategory.webtoonId)}>수정</button>
+                                <button onClick={() => handleDeleteWebtoonClick(webtoonsubcategory.webtoonTitle)}>삭제</button>
+                              </>
+                              : ""
+                            }
                           </div>
+
                         </div>
                       </>
                     ))}

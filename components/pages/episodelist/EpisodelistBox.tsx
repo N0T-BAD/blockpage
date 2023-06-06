@@ -18,6 +18,7 @@ export default function EpisodelistBox() {
       episodeThumbnail: '',
       uploadDate: '',
       totalScore: 0,
+      webtoonStatus: '',
     }]
   });
 
@@ -50,6 +51,8 @@ export default function EpisodelistBox() {
         setEpisodeData(episodeInfoData);
         console.log(episodeData);
         setWebtoonData(episodeInfoData);
+        console.log(webtoonData)
+        console.log(episodeData.data)
       } catch (error) {
         console.error(error);
       }
@@ -59,14 +62,31 @@ export default function EpisodelistBox() {
   }, [webtoonId, session]);
 
   const handleDeleteClick = (episodeNumber: number) => {
-    router.push(`/episodelist/${webtoonId}/episode/${episodeNumber}/episodedelete`);
+
+    const formData = new FormData();
+    formData.append('webtoonId', String(webtoonId));
+    formData.append('episodeNumber', String(episodeNumber));
+    axios.post(`https://blockpage.site/webtoon-service/v1/demands?target=episode&type=remove`,
+      formData,
+      {
+        headers: {
+          memberId: session?.email || '',
+          // role: role,
+        },
+      })
+      .then((res) => {
+        console.log(res)
+        alert("삭제되었습니다.")
+        window.location.reload()
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   };
 
   const handleChangeClick = (episodeNumber: number) => {
     router.push(`/episodelist/${webtoonId}/episode/${episodeNumber}/changeepisode`);
   };
-
-  console.log(webtoonData)
 
   return (
     <>
@@ -82,17 +102,23 @@ export default function EpisodelistBox() {
                 <div className={style.option}>
                   <div className={style.views}>
                     <Image src={'/assets/images/icons/star.svg'} alt={'평점'} width={10} height={10} />
-                    <p className={style.viewstxt}>{episodeData.uploadDate}</p>
+                    <p className={style.viewstxt}>{episodeData.totalScore}</p>
                   </div>
                   <div className={style.likes}>
-                    <p className={style.likestxt}>{episodeData.totalScore}</p>
+                    <p className={style.likestxt}>{episodeData.uploadDate}</p>
                   </div>
                 </div>
+                <p className={style.author}>{episodeData.webtoonStatus}</p>
               </div>
             </div>
             <div className={style.webtoonButton}>
-              <button onClick={() => handleChangeClick(episodeData.episodeNumber)}>수정</button>
-              <button onClick={() => handleDeleteClick(episodeData.episodeNumber)}>삭제</button>
+              {episodeData.webtoonStatus === "배포중" ?
+                <>
+                  <button onClick={() => handleChangeClick(episodeData.episodeNumber)}>수정</button>
+                  <button onClick={() => handleDeleteClick(episodeData.episodeNumber)}>삭제</button>
+                </>
+                : ""
+              }
             </div>
           </div>
         )))

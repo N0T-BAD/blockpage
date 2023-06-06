@@ -83,9 +83,9 @@ export default function WebtoonDeleteInfo() {
 
   return (
     <>
-      {webtoonData.data.map((webtoon) => (
+      {/* {webtoonData.data.map((webtoon) => (
         webtoon.webtoonId === Number(webtoonId) && (
-          <div className={style.WebtoonDeleteInfoWrap}>
+          <div className={style.WebtoonDeleteInfoWrap} key>
             <form onSubmit={handleSubmit}>
               <div className={style.DeleteInfoBox}>
                 <p>작품명 : </p>
@@ -100,7 +100,7 @@ export default function WebtoonDeleteInfo() {
               </div>
             </form>
           </div>
-        )))}
+        )))} */}
     </>
   )
 }
