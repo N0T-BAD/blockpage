@@ -12,7 +12,6 @@ export default function WebtoonEpisodeSection(props: { data: WebToonListDataType
   return (
     <section className={style.webtoonEpisodeSection}>
       <WebtoonSummary summary={data.description} />
-      {/* <WebtoonState state={data.state} /> */}
       <EpisodeSection data={props.data} episodeViewList={data.episodeViewList} />
     </section>
   )

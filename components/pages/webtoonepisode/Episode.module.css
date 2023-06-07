@@ -1,15 +1,17 @@
 .episode {
   display: flex;
+  padding: 0.3rem 0;
 }
 
 .imgWrap {
   position: relative;
   width: 30%;
-  margin-right: 1rem;
 }
 
 .episodeImg {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .episodeImg img {
@@ -28,10 +30,11 @@
 }
 
 .episodeContents {
-  width: 70%;
+  width: 45%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-left: 1rem;
 }
 
 .subject {
@@ -58,4 +61,18 @@
 .episodeOption {
   display: flex;
   align-items: baseline;
+}
+
+.leftTimer {
+  width: 25%;
+  display: flex;
+  align-items: center;
+}
+
+.leftTimer p {
+  width: 100%;
+  text-align: right;
+  font-size: 0.8rem;
+  color: var(--bp-font-gray);
+  word-break: keep-all;
 }
