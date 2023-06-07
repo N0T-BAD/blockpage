@@ -16,6 +16,7 @@ export interface ChangeEpisodeInfo {
     episodeNumber: number;
     totalScore: number;
     authorWords: string;
+    webtoonStatus: string;
   }]
 }
 

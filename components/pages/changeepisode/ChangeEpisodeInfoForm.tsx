@@ -29,6 +29,7 @@ export default function ChangeEpisodeInfoForm() {
       totalScore: 0,
       participantCount: 0,
       authorWords: '',
+      webtoonStatus: '',
     }]
   });
 
@@ -51,6 +52,8 @@ export default function ChangeEpisodeInfoForm() {
   //       })));
   //     })
   // }, [episodeInfoData, router.query.id])
+
+  console.log(episodeInfoData)
 
   useEffect(() => {
     axios.get(`https://blockpage.site/webtoon-service/v1/episodes/creator?${webtoonId}`,
@@ -130,50 +133,50 @@ export default function ChangeEpisodeInfoForm() {
       alert('해당 파일은 업로드할 수 없습니다.');
     } else {
       try {
-        const formData = new FormData();
-        formData.append('webtoonId', String(webtoonId));
-        formData.append('episodeNumber', String(episodeNumber));
+        const selectedEpisode = episodeInfoData.data.find((episode) => episode.episodeNumber === Number(episodeNumber));
+        if (selectedEpisode) {
+          const formData = new FormData();
+          formData.append('webtoonId', String(webtoonId));
+          formData.append('episodeNumber', String(episodeNumber));
 
-        if (episodeInfo.episodeTitle === '') {
-          episodeInfoData.data.find((episode) => episode.episodeTitle === episodeInfo.episodeTitle)
-          formData.append('episodeTitle', episodeInfo.episodeTitle);
-        } else {
-          formData.append('episodeTitle', episodeInfo.episodeTitle);
-        }
-        if (episodeInfo.uploadDate === '') {
-          episodeInfoData.data.find((episode) => episode.uploadDate === episodeInfo.uploadDate)
-          formData.append('uploadDate', episodeInfo.uploadDate);
-        } else {
-          formData.append('uploadDate', episodeInfo.uploadDate);
-        }
-        if (episodeInfo.authorWords === '') {
-          episodeInfoData.data.find((episode) => episode.authorWords === episodeInfo.authorWords)
-          formData.append('authorWords', episodeInfo.authorWords);
-        } else {
-          formData.append('authorWords', episodeInfo.authorWords);
-        }
+          if (episodeInfo.episodeTitle === '') {
+            formData.append('episodeTitle', selectedEpisode.episodeTitle);
+          } else {
+            formData.append('episodeTitle', episodeInfo.episodeTitle);
+          }
+          if (episodeInfo.uploadDate === '') {
+            formData.append('uploadDate', selectedEpisode.uploadDate);
+          } else {
+            formData.append('uploadDate', episodeInfo.uploadDate);
+          }
+          if (episodeInfo.authorWords === '') {
+            formData.append('authorWords', selectedEpisode.authorWords);
+          } else {
+            formData.append('authorWords', episodeInfo.authorWords);
+          }
 
-        if (episodeThumbnailImage) {
-          formData.append('episodeThumbnail', episodeThumbnailImage);
-        }
+          if (episodeThumbnailImage) {
+            formData.append('episodeThumbnail', episodeThumbnailImage);
+          }
 
-        if (episodeImage) {
-          episodeImage.forEach((file) => {
-            formData.append('episodeImage', file);
-          })
-        };
+          if (episodeImage) {
+            episodeImage.forEach((file) => {
+              formData.append('episodeImage', file);
+            })
+          };
 
-        const res = await axios.post(`https://blockpage.site/webtoon-service/v1/demands?target=episode&type=modify`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            memberId: session?.email || '',
-          },
-        });
+          const res = await axios.post(`https://blockpage.site/webtoon-service/v1/demands?target=episode&type=modify`, formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              memberId: session?.email || '',
+            },
+          });
 
-        console.log(res);
-        if (res.status === 201) {
-          alert('에피소드 수정 요청이 완료되었습니다.');
-          router.push(`/episodelist/${webtoonId}`);
+          console.log(res);
+          if (res.status === 201) {
+            alert('에피소드 수정 요청이 완료되었습니다.');
+            router.back();
+          }
         }
       } catch (error) {
         console.error(error);
@@ -185,7 +188,7 @@ export default function ChangeEpisodeInfoForm() {
     <>
       {episodeInfoData.data &&
         episodeInfoData.data.map((episode) => (
-          episode.episodeNumber === Number(episodeNumber) && (
+          episode.episodeNumber === Number(episodeNumber) && episode.webtoonStatus === "배포중" && (
             <div className={style.WebtoonDeleteInfoWrap} key={episode.episodeNumber}>
               <form onSubmit={handleSubmit}>
                 <div className={style.webtoonInfoBox}>
@@ -196,14 +199,10 @@ export default function ChangeEpisodeInfoForm() {
                   <p>에피소드 명 : </p>
                   <input type="text" name="episodeTitle" defaultValue={episode.episodeTitle} onChange={handleInput} />
                 </div>
-                {/* <div className={style.episodeInfoBox}>
-                  <p>업로드 일 : </p>
-                  <input type="text" name="uploadDate" defaultValue={episode.uploadDate} onChange={handleInput} />
-                </div> */}
                 <div className={style.numberBox}>
                   <div className={style.episodeInfoNumberBox}>
                     <p>업로드 일 :</p>
-                    <input type="text" name="uploadDate" onChange={handleInput} defaultValue={episode.uploadDate} />
+                    <input type="text" name="uploadDate" onChange={handleInput} defaultValue={episode.uploadDate} placeholder='20230408' />
                   </div>
                   <p className={style.info}>숫자만 입력해주세요.</p>
                 </div>

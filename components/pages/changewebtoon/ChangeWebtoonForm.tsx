@@ -32,10 +32,11 @@ export default function ChangeWebtoonForm() {
         webtoonId: 0,
         webtoonTitle: '',
         webtoonDescription: '',
-        genreType: 0,
+        genre: 0,
         publicationDays: 0,
         illustrator: '',
         creator: '',
+        webtoonStatus: '',
       }]
     }
   )
@@ -62,10 +63,14 @@ export default function ChangeWebtoonForm() {
         },
       })
       .then((res) => {
-        setWebtoonData(res.data)
+        const selectedWebtoon = res.data.data.find((webtoon: any) => webtoon.webtoonId === Number(webtoonId));
+        if (selectedWebtoon) {
+          setWebtoonData({
+            data: [selectedWebtoon],
+          })
+        }
         console.log(res.data.data)
         console.log(webtoonData)
-        const selectedWebtoon = res.data.data.find((webtoon: any) => webtoon.webtoonId === Number(webtoonId));
         if (selectedWebtoon) {
           setAuthorName({
             data: selectedWebtoon.creator,
@@ -77,6 +82,8 @@ export default function ChangeWebtoonForm() {
         console.log(err)
       })
   }, [])
+
+  console.log(webtoonData)
 
   const handleInput = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -125,37 +132,39 @@ export default function ChangeWebtoonForm() {
         }
 
         if (webtoonInfoData.webtoonTitle === '') {
-          webtoonData.data.find((webtoon) => webtoon.webtoonTitle === webtoonInfoData.webtoonTitle)
-          formData.append('webtoonTitle', webtoonInfoData.webtoonTitle);
+          // if (webtoonData.data.find((webtoon) => webtoon.webtoonTitle !== webtoonInfoData.webtoonTitle)) {
+          formData.append('webtoonTitle', selectedWebtoon.webtoonTitle);
+          // }
         } else {
           formData.append('webtoonTitle', webtoonInfoData.webtoonTitle);
         }
         if (webtoonInfoData.webtoonDescription === '') {
-          webtoonData.data.find((webtoon) => webtoon.webtoonDescription === webtoonInfoData.webtoonDescription)
-          formData.append('webtoonDescription', webtoonInfoData.webtoonDescription);
+          // if (webtoonData.data.find((webtoon) => webtoon.webtoonDescription !== webtoonInfoData.webtoonDescription)) {
+          formData.append('webtoonDescription', selectedWebtoon.webtoonDescription);
+          // }
         } else {
           formData.append('webtoonDescription', webtoonInfoData.webtoonDescription);
         }
         if (webtoonInfoData.genre === 0) {
-          webtoonData.data.find((webtoon) => webtoon.genreType === webtoonInfoData.genre)
-          formData.append('genre', String(webtoonInfoData.genre));
+          // if (webtoonData.data.find((webtoon) => webtoon.genre !== webtoonInfoData.genre)) {
+          formData.append('genre', String(selectedWebtoon.genre));
+          // }
         } else {
           formData.append('genre', String(webtoonInfoData.genre));
         }
         if (webtoonInfoData.publicationDays === 0) {
-          webtoonData.data.find((webtoon) => webtoon.publicationDays === webtoonInfoData.publicationDays)
-          formData.append('publicationDays', String(webtoonInfoData.publicationDays));
+          // webtoonData.data.find((webtoon) => webtoon.publicationDays === webtoonInfoData.publicationDays)
+          formData.append('publicationDays', String(selectedWebtoon.publicationDays));
         } else {
           formData.append('publicationDays', String(webtoonInfoData.publicationDays));
         }
         if (webtoonInfoData.illustrator === '') {
-          formData.append('illustrator', authorName.data.toString());
+          formData.append('illustrator', selectedWebtoon.illustrator);
         } else if (webtoonInfoData.illustrator !== undefined) {
           formData.append('illustrator', webtoonInfoData.illustrator);
         }
         formData.append('creatorNickname', authorName.data.toString());
         formData.append('webtoonId', String(webtoonId));
-
         axios.post('https://blockpage.site/webtoon-service/v1/demands?target=webtoon&type=modify',
           formData,
           {
@@ -170,11 +179,13 @@ export default function ChangeWebtoonForm() {
             console.log(res)
             Swal.fire({
               icon: 'success',
-              title: '에피소드 수정 요청이 완료되었습니다.',
+              title: '웹툰 수정 요청이 완료되었습니다.',
               showConfirmButton: false,
               timer: 1500
             })
-            router.push(`/authorworkslist/${webtoonId}`);
+              .then(() => {
+                router.back();
+              })
           })
       }
     }
@@ -201,12 +212,10 @@ export default function ChangeWebtoonForm() {
     { label: '일', value: 6 },
   ];
 
-  console.log(authorName.data)
-
   return (
     <>
       {webtoonData.data.map((webtoon) => (
-        webtoon.webtoonId === Number(webtoonId) && (
+        webtoon.webtoonId === Number(webtoonId) && webtoon.webtoonStatus === "배포중" && (
           <div className={style.WebtoonInfoWrap} key={webtoon.webtoonId}>
             <form onSubmit={handleSubmit}>
               <div className={style.InfoBox}>
@@ -219,7 +228,7 @@ export default function ChangeWebtoonForm() {
               </div>
               <div className={style.InfoBox}>
                 <p className={style.sorttxt}>장 르 : </p>
-                <select name="genre" onChange={handleInput} defaultValue={webtoon.genreType}>
+                <select name="genre" onChange={handleInput} defaultValue={webtoon.genre}>
                   <option value="">장르를 선택하세요</option>
                   {genreOptions.map((option) => (
                     <option key={option.value} value={option.value}>

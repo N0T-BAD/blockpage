@@ -22,10 +22,11 @@ export interface ChangeWebtoon {
         webtoonId: number;
         webtoonTitle: string;
         webtoonDescription: string;
-        genreType: number;
+        genre: number;
         publicationDays: number;
         illustrator: string;
         creator: string;
+        webtoonStatus: string;
     }]
 }
 
