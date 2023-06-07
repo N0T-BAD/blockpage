@@ -33,6 +33,7 @@
 
 .contentBox .webtoonThumbnail {
   border: 0.01rem solid var(--bp-line-gray);
+  min-height: 11rem;
 }
 
 .contentWrap {
