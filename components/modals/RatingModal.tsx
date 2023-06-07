@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import style from '@/components/modals/RatingModal.module.css'
 import Separator from '@/components/ui/Separator'

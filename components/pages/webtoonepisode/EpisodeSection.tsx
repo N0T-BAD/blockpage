@@ -9,6 +9,7 @@ import Episode from './Episode';
 import PreviewSection from './PreviewSection';
 import Separator from '@/components/ui/Separator';
 import { EpisodeViewListType, WebToonListDataType } from '@/types/webtoonDataType';
+import PurchaseModal from '@/components/modals/PurchaseModal';
 
 export default function EpisodeSection(props: { data: WebToonListDataType, episodeViewList: EpisodeViewListType[] }) {
 
@@ -26,8 +27,20 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
 
   const [myBlock, setMyBlock] = useState<number>(0);
 
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [episodeIdModal, setEpisodeIdModal] = useState<number>(0);
+  const [episodeNumberModal, setEpisodeIdNumberModal] = useState<number>(0);
+  const [episodePriceModal, setEpisodePriceModal] = useState<number>(0);
+
   const handleView = () => {
     setIsPreviewSection(!isPreviewSection);
+  }
+
+  const handleShowModal = (episodeId: number, episodeNumber: number, episodePrice: number) => {
+    setEpisodeIdModal(episodeId)
+    setEpisodeIdNumberModal(episodeNumber)
+    setEpisodePriceModal(episodePrice)
+    setShowModal(true);
   }
 
   const handleEpisode = (paramEpisodeBM: string, paramPersistType: string, episodeId: number, episodeNumber: number, episodePrice: number, isRead: boolean) => {
@@ -79,19 +92,19 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
 
             if (freeData) {
               freePriceData.map((item) => (
-                freeData.map((data: EpisodeViewListType) => (
-                  item.episodeId === data.episodeId ?
-                    item.isRead = true : ""
-                ))
+                freeData.map((item2: EpisodeViewListType) => {
+                  item.episodeId === item2.episodeId ? item.isRead = true : "";
+                  item.episodeId === item2.episodeId ? item.leftTimer = item2.leftTimer : "";
+                })
               ))
             }
 
             if (paidData) {
               priceData.map((item) => (
-                paidData.map((data: EpisodeViewListType) => (
-                  item.episodeId === data.episodeId ?
-                    item.isRead = true : ""
-                ))
+                paidData.map((item2: EpisodeViewListType) => {
+                  item.episodeId === item2.episodeId ? item.isRead = true : "";
+                  item.episodeId === item2.episodeId ? item.leftTimer = item2.leftTimer : "";
+                })
               ))
             }
           })
@@ -104,6 +117,17 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
 
   return (
     <>
+      {
+        showModal &&
+        <PurchaseModal
+          myBlock={myBlock}
+          episodeId={episodeIdModal}
+          episodeNumber={episodeNumberModal}
+          episodePrice={episodePriceModal}
+          setShowModal={setShowModal}
+          handleEpisode={handleEpisode}
+        />
+      }
       <PreviewSection isPreviewSection={isPreviewSection} handleView={handleView} priceData={priceData} />
       {
         isPreviewSection &&
@@ -119,7 +143,7 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
               item.isRead === true ?
                 () => handleEpisode('episodeBMPaid', 'rental', item.episodeId, item.episodeNumber, item.episodePrice, false) :
                 myBlock > 4 ?
-                  () => handleEpisode('episodeBMPaid', 'rental', item.episodeId, item.episodeNumber, item.episodePrice, true) :
+                  () => handleShowModal(item.episodeId, item.episodeNumber, item.episodePrice) :
                   () => console.log('블럭 충전 페이지로 이동')
             }
           >
@@ -130,6 +154,7 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
                   thumbnail={item.episodeThumbnail}
                   price={item.episodePrice}
                   rating={item.rating}
+                  leftTimer={item.leftTimer}
                   uploadDate={item.uploadDate}
                 />
                 <Separator

@@ -29,23 +29,19 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
       return {
         props: { data }
       }
-    } else if (archiveName === 'purchase') {
-      const res = await axios.get(`https://blockpage.site/purchase-service/v1/purchases?type=episodeBMFree&webtoonId=${webtoonId}`, {
-        headers: {
-          memberId: session?.email
-        }
-      })
+    }
+    // else if (archiveName === 'purchase') {
+    //   const res = await axios.get(`https://blockpage.site/purchase-service/v1/purchases?type=episodeBMPaid`)
+    //   const data = res.data.data;
+    //   console.log(data)
+    //   return {
+    //     props: { data }
+    //   }
+    // }
+    else if (archiveName === 'history') {
+      const res = await axios.get(`https://blockpage.site/purchase-service/v1/purchases?type=episodeBMFree`)
       const data = res.data.data;
-      return {
-        props: { data }
-      }
-    } else if (archiveName === 'history') {
-      const res = await axios.get(`https://blockpage.site/purchase-service/v1/purchases?type=episodeBMPaid&webtoonId=${webtoonId}`, {
-        headers: {
-          memberId: session?.email
-        }
-      })
-      const data = res.data.data;
+      console.log(data)
       return {
         props: { data }
       }
