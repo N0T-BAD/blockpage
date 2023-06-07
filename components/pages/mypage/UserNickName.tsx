@@ -39,7 +39,7 @@ export default function UserNickName() {
           }
         })
         console.log(res.data)
-        console.log(userNickname)
+        console.log(userImg)
       }
       catch (err) {
         console.log(err);

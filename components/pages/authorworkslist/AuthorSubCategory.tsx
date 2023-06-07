@@ -17,7 +17,19 @@ import { WebtoonStatusData } from '@/types/authorWebtoonInfoImgDataType';
 export default function AuthorSubCategory({ active, defaultActive }: { active: string, defaultActive: string }) {
   const { data: session } = useSession()
 
-  const [webtoonList, setWebtoonList] = useRecoilState<authorwebtoonData>(webtoonlist);
+  const [webtoonList, setWebtoonList] = useState<authorwebtoonData>({
+    data: [{
+      webtoonId: 0,
+      webtoonTitle: '',
+      webtoonThumbnail: '',
+      creator: '',
+      illustrator: '',
+      views: 0,
+      interestCount: 0,
+      genreType: 0,
+      webtoonStatus: '',
+    }]
+  });
 
   console.log(webtoonList)
 
