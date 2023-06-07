@@ -6,6 +6,12 @@ export interface authorWebtoonInfoDataType {
     illustrator?: string;
 }
 
+export interface WebtoonStatusData {
+    data: {
+        webtoonStatus: string;
+    }
+}
+
 export interface authorWebtoonInfoStateType {
     mainImageData: string;
     thumbnailImageData: string;
@@ -22,10 +28,11 @@ export interface ChangeWebtoon {
         webtoonId: number;
         webtoonTitle: string;
         webtoonDescription: string;
-        genreType: number;
+        genre: number;
         publicationDays: number;
         illustrator: string;
         creator: string;
+        webtoonStatus: string;
     }]
 }
 

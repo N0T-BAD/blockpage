@@ -112,12 +112,23 @@ export default function EpisodelistBox() {
               </div>
             </div>
             <div className={style.webtoonButton}>
-              {episodeData.webtoonStatus === "배포중" ?
+              {/* {episodeData.webtoonStatus === "배포중" ?
                 <>
                   <button onClick={() => handleChangeClick(episodeData.episodeNumber)}>수정</button>
                   <button onClick={() => handleDeleteClick(episodeData.episodeNumber)}>삭제</button>
                 </>
                 : ""
+              } */}
+              {episodeData.webtoonStatus === "수정 요청" ?
+                ""
+                :
+                <button onClick={() => handleChangeClick(episodeData.episodeNumber)}>수정</button>
+              }
+              {
+                episodeData.webtoonStatus === "삭제 요청" ?
+                  ""
+                  :
+                  <button onClick={() => handleDeleteClick(episodeData.episodeNumber)}>삭제</button>
               }
             </div>
           </div>

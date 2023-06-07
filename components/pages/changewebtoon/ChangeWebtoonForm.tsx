@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import style from '@/components/pages/changewebtoon/ChangeWebtoonForm.module.css'
-import { ChangeWebtoon, authorWebtoonInfoDataType, authorWebtoonInfoStateType } from '@/types/authorWebtoonInfoImgDataType';
+import { ChangeWebtoon, WebtoonStatusData, authorWebtoonInfoDataType, authorWebtoonInfoStateType } from '@/types/authorWebtoonInfoImgDataType';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { webtoonInfoState } from '@/state/webtoon/webtoonInfoState';
@@ -32,10 +32,11 @@ export default function ChangeWebtoonForm() {
         webtoonId: 0,
         webtoonTitle: '',
         webtoonDescription: '',
-        genreType: 0,
+        genre: 0,
         publicationDays: 0,
         illustrator: '',
         creator: '',
+        webtoonStatus: '',
       }]
     }
   )
@@ -137,7 +138,7 @@ export default function ChangeWebtoonForm() {
           formData.append('webtoonDescription', webtoonInfoData.webtoonDescription);
         }
         if (webtoonInfoData.genre === 0) {
-          webtoonData.data.find((webtoon) => webtoon.genreType === webtoonInfoData.genre)
+          webtoonData.data.find((webtoon) => webtoon.genre === webtoonInfoData.genre)
           formData.append('genre', String(webtoonInfoData.genre));
         } else {
           formData.append('genre', String(webtoonInfoData.genre));
@@ -170,11 +171,11 @@ export default function ChangeWebtoonForm() {
             console.log(res)
             Swal.fire({
               icon: 'success',
-              title: '에피소드 수정 요청이 완료되었습니다.',
+              title: '웹툰 수정 요청이 완료되었습니다.',
               showConfirmButton: false,
               timer: 1500
             })
-            router.push(`/authorworkslist/${webtoonId}`);
+            router.back();
           })
       }
     }
@@ -219,7 +220,7 @@ export default function ChangeWebtoonForm() {
               </div>
               <div className={style.InfoBox}>
                 <p className={style.sorttxt}>장 르 : </p>
-                <select name="genre" onChange={handleInput} defaultValue={webtoon.genreType}>
+                <select name="genre" onChange={handleInput} defaultValue={webtoon.genre}>
                   <option value="">장르를 선택하세요</option>
                   {genreOptions.map((option) => (
                     <option key={option.value} value={option.value}>
