@@ -40,6 +40,7 @@ export interface EpisodeViewListType {
   uploadDate: string;
   rating: number;
   authorWords: string;
+  isRead?: boolean;
 }
 
 export interface AuthorEpisodeList {

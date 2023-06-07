@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
-import Episode from './Episode';
 import { useSession } from 'next-auth/react';
 import axios from 'axios';
 
 import style from '@/components/pages/webtoonepisode/EpisodeSection.module.css'
 
-import { EpisodeViewListType, WebToonListDataType } from '@/types/webtoonDataType';
-import Separator from '@/components/ui/Separator';
+import Episode from './Episode';
 import PreviewSection from './PreviewSection';
+import Separator from '@/components/ui/Separator';
+import { EpisodeViewListType, WebToonListDataType } from '@/types/webtoonDataType';
 
 export default function EpisodeSection(props: { data: WebToonListDataType, episodeViewList: EpisodeViewListType[] }) {
 
   const { data: session } = useSession();
-  console.log(session?.email);
 
   const router = useRouter();
   const { webtoonId } = router.query;
@@ -25,32 +24,36 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
 
   const [isPreviewSection, setIsPreviewSection] = useState<boolean>(false);
 
+  const [myBlock, setMyBlock] = useState<number>(0);
+
   const handleView = () => {
     setIsPreviewSection(!isPreviewSection);
   }
 
-  const handleEpisode = (episodeId: number, episodeNumber: number, episodePrice: number) => {
-    axios.post(`https://blockpage.site/purchase-service/v1/purchases?type=episodeBMFree&webtoonId=${webtoonId}`, {
-      blockQuantity: episodePrice,
-      episodeId: episodeId,
-      persistType: "permanent",
-      webtoonTitle: webtoonData.webtoonTitle,
-      episodeNumber: episodeNumber,
-      webtoonThumbnail: webtoonData.webtoonThumnail,
-      creator: webtoonData.creator,
-      illustrator: webtoonData.illustrator,
-      genre: webtoonData.genre,
-    }, {
-      headers: {
-        memberId: session?.email,
-      }
-    })
-      .then((res) => {
-        console.log(res);
+  const handleEpisode = (paramEpisodeBM: string, paramPersistType: string, episodeId: number, episodeNumber: number, episodePrice: number, isRead: boolean) => {
+    if (isRead) {
+      axios.post(`https://blockpage.site/purchase-service/v1/purchases?type=${paramEpisodeBM}&webtoonId=${webtoonId}`, {
+        blockQuantity: episodePrice,
+        episodeId: episodeId,
+        persistType: paramPersistType,
+        webtoonTitle: webtoonData.webtoonTitle,
+        episodeNumber: episodeNumber,
+        webtoonThumbnail: webtoonData.webtoonThumnail,
+        creator: webtoonData.creator,
+        illustrator: webtoonData.illustrator,
+        genre: webtoonData.genre,
+      }, {
+        headers: {
+          memberId: session?.email,
+        }
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
 
     router.push(`/webtoon/${webtoonId}/episode/${episodeId}/episode/${episodeNumber}`);
   };
@@ -69,10 +72,28 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
         }),
       ])
         .then(
-          axios.spread((res1, res2, res3) => {
-            console.log(res1);
-            console.log(res2);
-            console.log(res3);
+          axios.spread((getBlock, free, paid) => {
+            setMyBlock(getBlock.data.data.totalBlocks);
+            const freeData = free.data.data;
+            const paidData = paid.data.data;
+
+            if (freeData) {
+              freePriceData.map((item) => (
+                freeData.map((data: EpisodeViewListType) => (
+                  item.episodeId === data.episodeId ?
+                    item.isRead = true : ""
+                ))
+              ))
+            }
+
+            if (paidData) {
+              priceData.map((item) => (
+                paidData.map((data: EpisodeViewListType) => (
+                  item.episodeId === data.episodeId ?
+                    item.isRead = true : ""
+                ))
+              ))
+            }
           })
         )
         .catch((err) => {
@@ -85,14 +106,26 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
     <>
       <PreviewSection isPreviewSection={isPreviewSection} handleView={handleView} priceData={priceData} />
       {
-        <section className={style.episodeSection}>
-          {
-            isPreviewSection &&
-            priceData &&
-            priceData.map((item) => (
-              <section key={item.episodeNumber} onClick={() => router.push(`/webtoon/${webtoonId}/episode/${item.episodeId}/episode/${item.episodeNumber}`)}>
+        isPreviewSection &&
+        priceData &&
+        priceData.map((item) => (
+          <section
+            className={
+              item.isRead === true ?
+                `${style.episodeWrapSection} ${style.bgGray}` : `${style.episodeWrapSection}`
+            }
+            key={item.episodeId}
+            onClick={
+              item.isRead === true ?
+                () => handleEpisode('episodeBMPaid', 'rental', item.episodeId, item.episodeNumber, item.episodePrice, false) :
+                myBlock > 4 ?
+                  () => handleEpisode('episodeBMPaid', 'rental', item.episodeId, item.episodeNumber, item.episodePrice, true) :
+                  () => console.log('블럭 충전 페이지로 이동')
+            }
+          >
+            {
+              <>
                 <Episode
-                  id={item.episodeNumber}
                   subject={item.episodeTitle}
                   thumbnail={item.episodeThumbnail}
                   price={item.episodePrice}
@@ -101,34 +134,43 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
                 />
                 <Separator
                   color='var(--bp-line-gray)'
-                  gutter={1}
+                  gutter={0}
                 />
-              </section>
-            ))
-          }
-        </section>
+              </>
+            }
+          </section>
+        ))
       }
-      <section className={style.episodeSection}>
-        {
-          freePriceData &&
-          freePriceData.map((item) => (
-            <section key={item.episodeNumber} onClick={() => handleEpisode(item.episodeId, item.episodeNumber, item.episodePrice)}>
-              <Episode
-                id={item.episodeNumber}
-                subject={item.episodeTitle}
-                thumbnail={item.episodeThumbnail}
-                price={item.episodePrice}
-                rating={item.rating}
-                uploadDate={item.uploadDate}
-              />
-              <Separator
-                color='var(--bp-line-gray)'
-                gutter={1}
-              />
-            </section>
-          ))
-        }
-      </section>
+      {
+        freePriceData &&
+        freePriceData.map((item) => (
+          <section
+            className={
+              item.isRead === true ?
+                `${style.episodeWrapSection} ${style.bgGray}` :
+                `${style.episodeWrapSection}`
+            }
+            key={item.episodeId}
+            onClick={
+              item.isRead === true ?
+                () => handleEpisode('episodeBMFree', 'permanent', item.episodeId, item.episodeNumber, item.episodePrice, false) :
+                () => handleEpisode('episodeBMFree', 'permanent', item.episodeId, item.episodeNumber, item.episodePrice, true)
+            }
+          >
+            <Episode
+              subject={item.episodeTitle}
+              thumbnail={item.episodeThumbnail}
+              price={item.episodePrice}
+              rating={item.rating}
+              uploadDate={item.uploadDate}
+            />
+            <Separator
+              color='var(--bp-line-gray)'
+              gutter={0}
+            />
+          </section>
+        ))
+      }
     </>
   )
 }

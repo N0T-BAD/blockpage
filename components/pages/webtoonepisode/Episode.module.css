@@ -1,5 +1,6 @@
 .episode {
   display: flex;
+  padding: 0.3rem 0;
 }
 
 .imgWrap {
@@ -10,6 +11,8 @@
 
 .episodeImg {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .episodeImg img {
