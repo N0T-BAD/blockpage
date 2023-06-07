@@ -52,7 +52,7 @@
 .ratingBtn {
   color: var(--bp-white);
   display: flex;
-  align-items: center;
+  align-items: baseline;
   background-color: var(--bp-secondary);
   border-radius: 1rem;
   padding: 0 1rem;
