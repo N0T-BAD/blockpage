@@ -1,97 +1,201 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router';
-import Episode from './Episode';
-import Image from 'next/image';
+import { useSession } from 'next-auth/react';
+import axios from 'axios';
 
 import style from '@/components/pages/webtoonepisode/EpisodeSection.module.css'
 
-import { EpisodeViewListType } from '@/types/webtoonDataType';
+import Episode from './Episode';
+import PreviewSection from './PreviewSection';
 import Separator from '@/components/ui/Separator';
+import { EpisodeViewListType, WebToonListDataType } from '@/types/webtoonDataType';
+import PurchaseModal from '@/components/modals/PurchaseModal';
 
-export default function EpisodeSection(props: { episodeViewList: EpisodeViewListType[] }) {
+export default function EpisodeSection(props: { data: WebToonListDataType, episodeViewList: EpisodeViewListType[] }) {
+
+  const { data: session } = useSession();
 
   const router = useRouter();
   const { webtoonId } = router.query;
+  const webtoonData = props.data.data;
   const data = props.episodeViewList;
 
-  const [isPreviewSection, setIsPreviewSection] = useState<boolean>(true);
+  const priceData = data.filter(item => item.episodePrice > 0)
+  const freePriceData = data.filter(item => item.episodePrice === 0)
+
+  const [isPreviewSection, setIsPreviewSection] = useState<boolean>(false);
+
+  const [myBlock, setMyBlock] = useState<number>(0);
+
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [episodeIdModal, setEpisodeIdModal] = useState<number>(0);
+  const [episodeNumberModal, setEpisodeIdNumberModal] = useState<number>(0);
+  const [episodePriceModal, setEpisodePriceModal] = useState<number>(0);
+
+  const handleView = () => {
+    setIsPreviewSection(!isPreviewSection);
+  }
+
+  const handleShowModal = (episodeId: number, episodeNumber: number, episodePrice: number) => {
+    setEpisodeIdModal(episodeId)
+    setEpisodeIdNumberModal(episodeNumber)
+    setEpisodePriceModal(episodePrice)
+    setShowModal(true);
+  }
+
+  const handleEpisode = (paramEpisodeBM: string, paramPersistType: string, episodeId: number, episodeNumber: number, episodePrice: number, isRead: boolean) => {
+    if (isRead) {
+      axios.post(`https://blockpage.site/purchase-service/v1/purchases?type=${paramEpisodeBM}&webtoonId=${webtoonId}`, {
+        blockQuantity: episodePrice,
+        episodeId: episodeId,
+        persistType: paramPersistType,
+        webtoonTitle: webtoonData.webtoonTitle,
+        episodeNumber: episodeNumber,
+        webtoonThumbnail: webtoonData.webtoonThumnail,
+        creator: webtoonData.creator,
+        illustrator: webtoonData.illustrator,
+        genre: webtoonData.genre,
+      }, {
+        headers: {
+          memberId: session?.email,
+        }
+      })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+
+    router.push(`/webtoon/${webtoonId}/episode/${episodeId}/episode/${episodeNumber}`);
+  };
+
+  useEffect(() => {
+    if (session) {
+      axios.all([
+        axios.get(`https://blockpage.site/block-service/v1/blocks`, {
+          headers: { memberId: session.email }
+        }),
+        axios.get(`https://blockpage.site/purchase-service/v1/purchases?type=episodeBMFree&webtoonId=${webtoonId}`, {
+          headers: { memberId: session.email }
+        }),
+        axios.get(`https://blockpage.site/purchase-service/v1/purchases?type=episodeBMPaid&webtoonId=${webtoonId}`, {
+          headers: { memberId: session.email }
+        }),
+      ])
+        .then(
+          axios.spread((getBlock, free, paid) => {
+            setMyBlock(getBlock.data.data.totalBlocks);
+            const freeData = free.data.data;
+            const paidData = paid.data.data;
+
+            if (freeData) {
+              freePriceData.map((item) => (
+                freeData.map((item2: EpisodeViewListType) => {
+                  item.episodeId === item2.episodeId ? item.isRead = true : "";
+                  item.episodeId === item2.episodeId ? item.leftTimer = item2.leftTimer : "";
+                })
+              ))
+            }
+
+            if (paidData) {
+              priceData.map((item) => (
+                paidData.map((item2: EpisodeViewListType) => {
+                  item.episodeId === item2.episodeId ? item.isRead = true : "";
+                  item.episodeId === item2.episodeId ? item.leftTimer = item2.leftTimer : "";
+                })
+              ))
+            }
+          })
+        )
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+  }, [session?.email]);
 
   return (
     <>
-      {/* <section className={style.previewSection}>
-        <div className={style.previewDiv}>
-          <div className={style.previewTxtDiv}>
-            <p>2개</p>
-            <p>의 미리보기가 있습니다</p>
-          </div>
-          <div className={style.imgBox}>
-            <div>
-              <div>
-                <Image
-                  src={data[0].episodeThumbnail}
-                  alt='에피소드 썸네일'
-                  width={30}
-                  height={20}
-                  priority
-                />
-                <Image
-                  src={data[0].episodeThumbnail}
-                  alt='에피소드 썸네일'
-                  width={30}
-                  height={20}
-                  priority
-                />
-              </div>
-            </div>
-            <div className={style.downArrow}>
-              <Image
-                src={'/assets/images/icons/back.svg'}
-                alt='에피소드 썸네일'
-                width={20}
-                height={20}
-                priority
-              />
-            </div>
-          </div>
-        </div>
-      </section> */}
       {
-        //미리보기 섹션
-        // isPreviewSection &&
-        // <section className={style.episodeSection} key={data[0].episodeNumber} onClick={() => router.push(`/webtoon/${webtoonId}/episode/${data[0].episodeId}/episode/${data[0].episodeNumber}`)}>
-        //   <Episode
-        //     id={data[0].episodeNumber}
-        //     subject={data[0].episodeTitle}
-        //     thumbnail={data[0].episodeThumbnail}
-        //     rating={data[0].rating}
-        //     uploadDate={data[0].uploadDate}
-        //   />
-        //   <Separator
-        //     color='var(--bp-line-gray)'
-        //     gutter={1}
-        //   />
-        // </section >
+        showModal &&
+        <PurchaseModal
+          myBlock={myBlock}
+          episodeId={episodeIdModal}
+          episodeNumber={episodeNumberModal}
+          episodePrice={episodePriceModal}
+          setShowModal={setShowModal}
+          handleEpisode={handleEpisode}
+        />
       }
-      <section className={style.episodeSection}>
-        {
-          data &&
-          data.map((item) => (
-            <section key={item.episodeNumber} onClick={() => router.push(`/webtoon/${webtoonId}/episode/${item.episodeId}/episode/${item.episodeNumber}`)}>
-              <Episode
-                id={item.episodeNumber}
-                subject={item.episodeTitle}
-                thumbnail={item.episodeThumbnail}
-                rating={item.rating}
-                uploadDate={item.uploadDate}
-              />
-              <Separator
-                color='var(--bp-line-gray)'
-                gutter={1}
-              />
-            </section>
-          ))
-        }
-      </section>
+      <PreviewSection isPreviewSection={isPreviewSection} handleView={handleView} priceData={priceData} />
+      {
+        isPreviewSection &&
+        priceData &&
+        priceData.map((item) => (
+          <section
+            className={
+              item.isRead === true ?
+                `${style.episodeWrapSection} ${style.bgGray}` : `${style.episodeWrapSection}`
+            }
+            key={item.episodeId}
+            onClick={
+              item.isRead === true ?
+                () => handleEpisode('episodeBMPaid', 'rental', item.episodeId, item.episodeNumber, item.episodePrice, false) :
+                myBlock > 4 ?
+                  () => handleShowModal(item.episodeId, item.episodeNumber, item.episodePrice) :
+                  () => console.log('블럭 충전 페이지로 이동')
+            }
+          >
+            {
+              <>
+                <Episode
+                  subject={item.episodeTitle}
+                  thumbnail={item.episodeThumbnail}
+                  price={item.episodePrice}
+                  rating={item.rating}
+                  leftTimer={item.leftTimer}
+                  uploadDate={item.uploadDate}
+                />
+                <Separator
+                  color='var(--bp-line-gray)'
+                  gutter={0}
+                />
+              </>
+            }
+          </section>
+        ))
+      }
+      {
+        freePriceData &&
+        freePriceData.map((item) => (
+          <section
+            className={
+              item.isRead === true ?
+                `${style.episodeWrapSection} ${style.bgGray}` :
+                `${style.episodeWrapSection}`
+            }
+            key={item.episodeId}
+            onClick={
+              item.isRead === true ?
+                () => handleEpisode('episodeBMFree', 'permanent', item.episodeId, item.episodeNumber, item.episodePrice, false) :
+                () => handleEpisode('episodeBMFree', 'permanent', item.episodeId, item.episodeNumber, item.episodePrice, true)
+            }
+          >
+            <Episode
+              subject={item.episodeTitle}
+              thumbnail={item.episodeThumbnail}
+              price={item.episodePrice}
+              rating={item.rating}
+              uploadDate={item.uploadDate}
+            />
+            <Separator
+              color='var(--bp-line-gray)'
+              gutter={0}
+            />
+          </section>
+        ))
+      }
     </>
   )
 }

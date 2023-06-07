@@ -64,7 +64,7 @@ export default function Comment(props: {
           console.log(err);
         });
     }
-  }, [session]);
+  }, [session?.email]);
 
   const handleView = () => {
     setOpenReply(!openReply);

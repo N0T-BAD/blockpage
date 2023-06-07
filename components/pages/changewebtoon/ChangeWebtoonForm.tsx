@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import style from '@/components/pages/changewebtoon/ChangeWebtoonForm.module.css'
-import { ChangeWebtoon, authorWebtoonInfoDataType, authorWebtoonInfoStateType } from '@/types/authorWebtoonInfoImgDataType';
+import { ChangeWebtoon, WebtoonStatusData, authorWebtoonInfoDataType, authorWebtoonInfoStateType } from '@/types/authorWebtoonInfoImgDataType';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { webtoonInfoState } from '@/state/webtoon/webtoonInfoState';
@@ -146,9 +146,7 @@ export default function ChangeWebtoonForm() {
           formData.append('webtoonDescription', webtoonInfoData.webtoonDescription);
         }
         if (webtoonInfoData.genre === 0) {
-          // if (webtoonData.data.find((webtoon) => webtoon.genre !== webtoonInfoData.genre)) {
           formData.append('genre', String(selectedWebtoon.genre));
-          // }
         } else {
           formData.append('genre', String(webtoonInfoData.genre));
         }

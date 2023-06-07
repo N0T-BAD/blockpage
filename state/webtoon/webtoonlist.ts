@@ -12,7 +12,7 @@ const webtoonlist = atom<authorwebtoonData>({
             illustrator: '',
             views: 0,
             interestCount: 0,
-            genreType: 0,
+            genre: 0,
             webtoonStatus: '',
         }]
     },

@@ -10,7 +10,6 @@ import { listviewDataType } from '@/types/listviewDataType'
 export default function WebtoonList(props: { data: listviewDataType }) {
   const router = useRouter();
   const webtoonId = props.data.webtoonId;
-
   return (
     <div>
       <div className={style.webtoonBox} onClick={() => router.push(`/webtoon/${webtoonId}`)}>
@@ -18,13 +17,19 @@ export default function WebtoonList(props: { data: listviewDataType }) {
           <Image src={props.data.webtoonThumbnail} alt={props.data.webtoonTitle} width={100} height={90} priority />
         </div>
         <div className={style.contentWrap} >
-          <ViewLike
-            data={props.data}
-          />
+          {
+            props.data.views || props.data.views === 0 ?
+              <ViewLike
+                data={props.data}
+              /> : ""
+          }
           <p className={style.title} >{props.data.webtoonTitle}</p>
           <p className={style.creator} >{props.data.creator} / {props.data.illustrator}</p>
           <div className={style.genre}>
-            <p>{props.data.publicationDays}</p>
+            {
+              props.data.publicationDays &&
+              <p>{props.data.publicationDays}</p>
+            }
             <p>{props.data.genre}</p>
           </div>
           {
@@ -34,10 +39,6 @@ export default function WebtoonList(props: { data: listviewDataType }) {
           {
             props.data.uploadDate &&
             <p className={style.infoTxt}>{props.data.uploadDate}</p>
-          }
-          {
-            props.data.endDate &&
-            <p className={style.infoTxt}>유효기간 {props.data.endDate}</p>
           }
         </div>
       </div>

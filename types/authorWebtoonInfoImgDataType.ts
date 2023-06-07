@@ -6,6 +6,12 @@ export interface authorWebtoonInfoDataType {
     illustrator?: string;
 }
 
+export interface WebtoonStatusData {
+    data: {
+        webtoonStatus: string;
+    }
+}
+
 export interface authorWebtoonInfoStateType {
     mainImageData: string;
     thumbnailImageData: string;
