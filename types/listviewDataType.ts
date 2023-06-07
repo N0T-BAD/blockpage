@@ -13,6 +13,7 @@ export interface listviewDataType {
   webtoonStatus?: string;
   episodeId?: string;
   episodeTitle?: string;
+  episodeNumber?: number;
   uploadDate?: string;
   endDate?: string;
 }
