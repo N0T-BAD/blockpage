@@ -7,6 +7,7 @@ import { UploadedFile, episodeInfoData, episodeInfoFormDataType } from '@/types/
 import { EpisodeViewListType } from '@/types/webtoonDataType';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
+import Swal from 'sweetalert2';
 
 export default function EpisodeInfoForm() {
   const router = useRouter();
@@ -139,7 +140,12 @@ export default function EpisodeInfoForm() {
         );
 
         if (response) {
-          alert('에피소드 정보가 등록되었습니다.');
+          Swal.fire({
+            title: '등록 성공!',
+            text: '에피소드 등록이 완료되었습니다.',
+            icon: 'success',
+            confirmButtonText: '확인',
+          })
           router.back();
           console.log(response)
         }

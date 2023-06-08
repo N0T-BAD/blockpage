@@ -12,6 +12,7 @@ import { webtoonlist } from '@/state/webtoon/webtoonlist';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { WebtoonStatusData } from '@/types/authorWebtoonInfoImgDataType';
+import Swal from 'sweetalert2';
 
 
 export default function AuthorSubCategory({ active, defaultActive }: { active: string, defaultActive: string }) {
@@ -83,7 +84,12 @@ export default function AuthorSubCategory({ active, defaultActive }: { active: s
       })
       .then((res) => {
         console.log(res)
-        alert("삭제되었습니다.")
+        Swal.fire({
+          icon: 'success',
+          title: '삭제되었습니다.',
+          showConfirmButton: false,
+          timer: 1500
+        })
         window.location.reload()
       })
       .catch((err) => {

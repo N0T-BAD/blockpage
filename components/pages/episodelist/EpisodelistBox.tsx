@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { AuthorEpisodeList, EpisodeDeleteData, EpisodeViewListType, WebToonListDataType, webtoonDeleteData } from '@/types/webtoonDataType';
 import { useSession } from 'next-auth/react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default function EpisodelistBox() {
 
@@ -76,7 +77,12 @@ export default function EpisodelistBox() {
       })
       .then((res) => {
         console.log(res)
-        alert("삭제되었습니다.")
+        Swal.fire({
+          icon: 'success',
+          title: '삭제되었습니다.',
+          showConfirmButton: false,
+          timer: 1500
+        })
         window.location.reload()
       })
       .catch((err) => {
