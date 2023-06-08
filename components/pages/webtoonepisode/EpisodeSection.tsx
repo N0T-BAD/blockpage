@@ -51,7 +51,7 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
         persistType: paramPersistType,
         webtoonTitle: webtoonData.webtoonTitle,
         episodeNumber: episodeNumber,
-        webtoonThumbnail: webtoonData.webtoonThumnail,
+        webtoonThumbnail: webtoonData.webtoonThumbnail,
         creator: webtoonData.creator,
         illustrator: webtoonData.illustrator,
         genre: webtoonData.genre,
@@ -142,7 +142,7 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
             onClick={
               item.isRead === true ?
                 () => handleEpisode('episodeBMPaid', 'rental', item.episodeId, item.episodeNumber, item.episodePrice, false) :
-                myBlock > 4 ?
+                myBlock >= 4 ?
                   () => handleShowModal(item.episodeId, item.episodeNumber, item.episodePrice) :
                   () => console.log('블럭 충전 페이지로 이동')
             }

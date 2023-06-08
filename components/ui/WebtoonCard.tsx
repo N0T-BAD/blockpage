@@ -23,14 +23,16 @@ export default function WebtoonCard(props: { rank: number, data: any }) {
           : ""
       }
       <div className={style.contentBox}>
-        <Image
-          className={style.webtoonThumbnail}
-          src={data.webtoonThumbnail}
-          alt={data.webtoonTitle}
-          width={110}
-          height={110}
-          priority
-        />
+        <div>
+          <Image
+            className={style.webtoonThumbnail}
+            src={data.webtoonThumbnail}
+            alt={data.webtoonTitle}
+            width={110}
+            height={110}
+            priority
+          />
+        </div>
         <div className={style.contentWrap}>
           <div className={style.option}>
             <div className={style.views}>
