@@ -1,9 +1,11 @@
 .scrollWrap {
   position: fixed;
-  width: auto;
+  width: 100%;
   bottom: 2rem;
   z-index: 400;
   opacity: 0;
+  display: flex;
+  justify-content: center;
 }
 
 .scrollWrap.active {
@@ -15,20 +17,17 @@
   animation: slideDown 0.5s ease-in-out;
 }
 
-
 .scrollBtn {
   width: 4rem;
   height: 4rem;
+  background-color: #00d293;
+  border-radius: 50%;
+  box-shadow: 0 5px 0.5rem #04674a50;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 50%;
-  background-color: #00d293;
-  margin: 0 auto;
-  filter: contrast(120%) brightness(1.4);
-  box-shadow: 0 5px 0.5rem #04674a50;
   opacity: 0.9;
-
+  filter: contrast(120%) brightness(1.4);
 }
 
 .scrollBtn img {
