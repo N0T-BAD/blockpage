@@ -20,3 +20,4 @@ ChangeUserInfoPage.getLayout = function getLayout(ChangeUserInfo: React.ReactEle
 
 export default ChangeUserInfoPage
 
+ChangeUserInfoPage.auth = true

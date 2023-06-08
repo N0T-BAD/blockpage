@@ -34,11 +34,50 @@
   align-self: center;
 }
 
+.webtoonButton button {
+  width: 100%;
+  align-self: flex-end;
+  background-color: var(--bp-blue);
+  color: var(--bp-white);
+  border-radius: 3rem;
+  height: 2rem;
+  margin: 0.7rem 0;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-family: var(--bp-font);
+}
+/* 
+.changebtn{
+  width: 25%;
+  align-self: flex-end;
+  background-color: var(--bp-blue);
+  color: var(--bp-white);
+  border-radius: 3rem;
+  height: 2rem;
+  margin: 0.7rem 0;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-family: var(--bp-font);
+} */
+
 .contentWrap .option {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   margin: 0.3rem 0;
+}
+
+p.genreoption {
+  margin: 0.4rem 0;
+  width: fit-content;
+  padding: 0.2rem 1rem;
+  font-size: 0.55rem;
+  font-weight: 400;
+  background: var(--bp-secondary-glow);
+  color: var(--bp-white);
+  border-radius: 1rem;
 }
 
 .contentWrap p.title {
@@ -136,9 +175,17 @@
   padding-bottom: 1rem;
 }
 
-.webtoonButton button {
+.sorrybox {
   width: 100%;
-  margin: 0.5rem 0;
-  border: none;
-  height: 1.5rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6rem 0;
+}
+
+.sorrybox p{
+ margin: 1rem 0;
+ font-size: 1.5rem;
+ font-weight: 600;
 }
