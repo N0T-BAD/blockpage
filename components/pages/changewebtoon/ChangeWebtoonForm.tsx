@@ -172,7 +172,8 @@ export default function ChangeWebtoonForm() {
             console.log(res)
             Swal.fire({
               icon: 'success',
-              title: '웹툰 수정 요청이 완료되었습니다.',
+              title: '요청 성공!',
+              text: '웹툰 수정 요청이 완료되었습니다.',
               showConfirmButton: false,
               timer: 1500
             })

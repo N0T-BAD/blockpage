@@ -6,6 +6,7 @@ import { ChangeEpisodeInfo, ChangeepisodeInfoType, UploadFile, episodeInfoFormDa
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { ChangeEpisode, ChangeWebtoon } from '@/types/authorWebtoonInfoImgDataType';
+import Swal from 'sweetalert2';
 
 export default function ChangeEpisodeInfoForm() {
 
@@ -174,7 +175,12 @@ export default function ChangeEpisodeInfoForm() {
 
           console.log(res);
           if (res.status === 201) {
-            alert('에피소드 수정 요청이 완료되었습니다.');
+            Swal.fire({
+              title: '요청 성공!',
+              text: '에피소드 수정 요청이 완료되었습니다.',
+              icon: 'success',
+              confirmButtonText: '확인',
+            });
             router.back();
           }
         }

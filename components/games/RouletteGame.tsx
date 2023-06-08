@@ -1,159 +1,101 @@
-import React, { useState } from 'react'
-import style from './RouletteGame.module.css'
-import Image from 'next/image'
-import axios from 'axios';
-import { useSession } from 'next-auth/react';
+import { useRef, useState } from "react";
+import style from "@/components/games/RouletteGame.module.css";
 
-export default function RouletteGame() {
-  const { data: session } = useSession();
-  const roulette = "roulette";
-  const [rouletteData, setRouletteData] = useState<boolean>(false);
+const RouletteGame = () => {
+  const rolLength = 6;
+  const [setNum, setSetNum] = useState<number | null>(null);
+  const btnRef = useRef<HTMLButtonElement>(null);
 
-  const prizeData = [
-    {
-      id: 1,
-      brandName: "꽝",
-      // prizeName: "상품1",
-      prizeImgUrl: "/assets/images/boom/boom.png",
-    },
-    {
-      id: 2,
-      brandName: "브랜드2",
-      // prizeName: "상품2",
-      prizeImgUrl: "/assets/images/icons/loading.gif",
-    },
-    {
-      id: 3,
-      brandName: "꽝",
-      // prizeName: "상품3",
-      prizeImgUrl: "/assets/images/boom/boom.png",
-    },
-    {
-      id: 4,
-      brandName: "브랜드4",
-      // prizeName: "상품4",
-      prizeImgUrl: "/assets/images/icons/loading.gif",
-    },
-    {
-      id: 5,
-      brandName: "꽝",
-      // prizeName: "상품1",
-      prizeImgUrl: "/assets/images/boom/boom.png",
-    },
-    {
-      id: 6,
-      brandName: "꽝",
-      // prizeName: "상품2",
-      prizeImgUrl: "/assets/images/boom/boom.png",
-    },
-    {
-      id: 7,
-      brandName: "브랜드7",
-      // prizeName: "상품3",
-      prizeImgUrl: "/assets/images/icons/loading.gif",
-    },
-    {
-      id: 8,
-      brandName: "꽝",
-      // prizeName: "상품4",
-      prizeImgUrl: "/assets/images/boom/boom.png",
-    },
-  ];
-
-  const [prize, setPrize] = useState<number>(Math.floor(Math.random() * prizeData.length) + 1);
-  const [prizeNumber, setPrizeNumber] = useState<number>(1);
-  const [getPrize, setGetPrize] = useState<boolean>(false);
-
-  const handleClick = () => {
-    setGetPrize(false);
-    setPrizeNumber(prize);
-    setTimeout(() => {
-      setGetPrize(true);
-      setPrize(Math.floor(Math.random() * prizeData.length) + 1);
-    }, 4000);
-    if (prizeNumber === prizeData.length) {
-      setRouletteData(false)
-    }
-    else {
-      setRouletteData(true)
-    }
-    // axios.put(`https://blockpage.site/game-service/v1/games`, {
-    //   type: roulette,
-    //   compensation: rouletteData,
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     memberId: session?.email || "",
-    //   }
-    // })
-    console.log(rouletteData)
+  // 랜덤숫자부여
+  const rRandom = () => {
+    const min = Math.ceil(0);
+    const max = Math.floor(rolLength - 1);
+    return Math.floor(Math.random() * (max - min)) + min;
   };
 
-  return (
-    <div className={style.wrap}>
-      <div className={style.contents}>
-        <div className={style.rouletteOuter}>
-          <div className={`${style.roulette} ${style[`on${prizeNumber}`]}`}>
-            {/* 값 영역 */}
-            <div>
-              {prizeData.map((item) => {    // data map
-                return (
-                  <div
-                    style={{ transform: `rotate(${((item.id - 1) * 45) % 360}deg)` }}  // 아이템 배치 각도
-                    className={style.item}
-                    key={item.id}
-                  >
-                    <div>
-                      <div>
-                        <p className={style.brandName}>{item.brandName}</p>
-                        {/* <p className={style.prizeName}>{item.brandName}</p> */}
-                      </div>
-                      <div className={style.prizeImg}>
-                        <Image
-                          className={style.prizeImgUrl}
-                          src={item.prizeImgUrl}
-                          alt={item.prizeImgUrl}
-                          width={20}
-                          height={20}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-            {/* 선 영역 */}
-            <div>
-              {[...Array(8)].map((n, index) => {
-                return (
-                  <div
-                    className={style.line}
-                    style={{
-                      transform: `rotate(${(index + 1) * 45 - 22.5}deg)`,  // 선의 각도
-                    }}
-                    key={index}
-                  />
-                );
-              })}
-            </div>
-          </div>
-          {/* <FiIcon className={style.roulettePin} />   // 상단에 있는 룰렛 핀 아이콘 */}
-          <div className={style.rouletteOuterBtn}>
-            <button
-              className={style.rouletteBtn}
-              onClick={handleClick}
-            >
-              <p>도전</p>
-            </button>
-          </div>
-        </div>
-      </div>
-      {
-        getPrize && (
-          <p style={{ textAlign: 'center', marginTop: '1rem' }}>
-            당첨 결과: {rouletteData === false ? '꽝' : '당첨'}
-          </p>
-        )
+  const rRotate = () => {
+    const panel = document.querySelector(`.${style.rouletterwacu}`) as HTMLElement;
+    const btn = document.querySelector(`.${style.rouletterbtn}`) as HTMLButtonElement;
+    const deg: number[] = [];
+    // 룰렛 각도 설정(rolLength = 6)
+    for (let i = 1, len = rolLength; i <= len; i++) {
+      deg.push((360 / len) * i);
+    }
+
+    // 랜덤 생성된 숫자를 히든 인풋에 넣기
+    let num = 0; // let으로 변경
+    // const hiddenInput = document.createElement("input");
+    // hiddenInput.className = "hidden-input";
+    // document.body.append(hiddenInput);
+    setSetNum(rRandom());
+
+    // 애니설정
+    const ani = setInterval(() => {
+      num++;
+      if (panel && panel.style) {
+        panel.style.transform = "rotate(" + 360 * num + "deg)";
       }
-    </div >
-  )
-}
+
+      // btn.disabled와 btn.style.pointerEvents 설정을 다음과 같이 변경
+      if (btn) {
+        btn.disabled = true;
+        btn.style.pointerEvents = "none";
+      }
+
+      // 총 50에 다달했을 때, 즉 마지막 바퀴를 돌고나서
+      if (num === 50) {
+        clearInterval(ani);
+        if (panel && panel.style) {
+          panel.style.transform = `rotate(${deg[setNum!]}deg)`;
+        }
+      }
+    }, 50);
+  };
+
+  // 정해진 alert띄우기, custom modal등
+  const rLayerPopup = (num: number) => {
+    if (num === 1) {
+      alert("당첨!! 스타벅스 아메리카노");
+    } else if (num === 3) {
+      alert("당첨!! 햄버거 세트 교환권");
+    } else if (num === 5) {
+      alert("당첨!! CU 3,000원 상품권");
+    } else {
+      alert("꽝! 다음기회에");
+    }
+  };
+
+  // reset
+  const rReset = () => {
+    setTimeout(() => {
+      const btn = btnRef.current;
+      if (btn) {
+        btn.disabled = false;
+        btn.style.pointerEvents = "auto";
+      }
+      rLayerPopup(setNum!);
+      // const hiddenInput = document.querySelector(".hidden-input") as HTMLElement;
+      // hiddenInput.remove();
+    }, 5500);
+  };
+
+
+  return (
+    <div id="app" className={style.boxWrap}>
+      <div className={style.rouletter}>
+        <div className={style.rouletterbg}>
+          <div className={style.rouletterwacu}></div>
+        </div>
+        <div className={style.rouletterarrow}></div>
+        <button className={style.rouletterbtn} ref={btnRef} onClick={() => {
+          rRotate();
+          rReset();
+        }}>
+          start
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default RouletteGame;
