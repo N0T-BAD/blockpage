@@ -5,6 +5,7 @@ import { BlockPurchase, RefundBlock, UseBlock } from '@/types/chargeBlockData';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import Swal from 'sweetalert2';
+import Image from 'next/image';
 
 const TransectionHistory = () => {
 
@@ -160,41 +161,48 @@ const TransectionHistory = () => {
           {
             category.name === '충전 내역' ?
               <>
-                {chargeBlock.data.map((chargeItem, index) => (
-                  <div className={style.chargeBox} key={index}>
-                    <div className={style.subhistorybox}>
-                      <p>{chargeItem.paymentTime}</p>
-                      <div className={style.chargeBlockBox}>
-                        <p>블럭 개수</p>
-                        <p className={style.chargeBoxContent}>{chargeItem.blockQuantity} 개</p>
+                {chargeBlock.data.length ?
+                  (chargeBlock.data.map((chargeItem, index) => (
+                    <div className={style.chargeBox} key={index}>
+                      <div className={style.subhistorybox}>
+                        <p>{chargeItem.paymentTime}</p>
+                        <div className={style.chargeBlockBox}>
+                          <p>블럭 개수</p>
+                          <p className={style.chargeBoxContent}>{chargeItem.blockQuantity} 개</p>
+                        </div>
+                        <div className={style.chargeBlockBox}>
+                          <p>충전 타입</p>
+                          <p className={style.chargeBoxContent}>{chargeItem.blockGainType}</p>
+                        </div>
                       </div>
-                      <div className={style.chargeBlockBox}>
-                        <p>충전 타입</p>
-                        <p className={style.chargeBoxContent}>{chargeItem.blockGainType}</p>
-                      </div>
+                      {chargeItem.blockGainType === "블럭 충전" ? (
+                        <>
+                          {refund.data[index].validState === true ?
+                            <div className={style.refundBox}>
+                              <button onClick={() => handlerefund(index)}>환불하기</button>
+                            </div>
+                            :
+                            <div className={style.refund}>
+                              <button>환불완료</button>
+                            </div>
+                          }
+                        </>
+                      )
+                        : ""
+                      }
                     </div>
-                    {chargeItem.blockGainType === "블럭 충전" ? (
-                      <>
-                        {refund.data[index].validState === true ?
-                          <div className={style.refundBox}>
-                            <button onClick={() => handlerefund(index)}>환불하기</button>
-                          </div>
-                          :
-                          <div className={style.refund}>
-                            <button>환불완료</button>
-                          </div>
-                        }
-                      </>
-                    )
-                      : ""
-                    }
-                  </div>
-                ))}
+                  ))
+                  ) : (
+                    <div className={style.sorrybox}>
+                      <Image src={'/assets/images/icons/Sorry.gif'} alt={'Sorry'} width={100} height={100} />
+                      <p>충전 내역이 없습니다.</p>
+                    </div>
+                  )}
               </>
               :
               category.name === '사용 내역' ?
                 <>
-                  {useBlock.data.map((useItem, index) => (
+                  {useBlock.data.length ? (useBlock.data.map((useItem, index) => (
                     <div className={style.UseBox} key={index}>
                       <p>{useItem.paymentTime}</p>
                       <div className={style.chargeBlockBox}>
@@ -223,7 +231,12 @@ const TransectionHistory = () => {
                       )
                       }
                     </div>
-                  ))}
+                  ))) :
+                    <div className={style.sorrybox}>
+                      <Image src={'/assets/images/icons/Sorry.gif'} alt={'Sorry'} width={100} height={100} />
+                      <p>사용 내역이 없습니다.</p>
+                    </div>
+                  }
                 </>
                 : ""
           }
