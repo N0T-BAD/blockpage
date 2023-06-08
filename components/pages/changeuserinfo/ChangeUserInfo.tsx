@@ -41,49 +41,48 @@ export default function ChangeUserInfo() {
   });
 
   useEffect(() => {
-    if (session) {
-      axios.get('https://blockpage.site/member-service/v1/members?type=detail', {
-        headers: {
-          memberId: session?.email || '',
-          // role: role,
-        },
-      })
-        .then((res) => {
-          const profileImage = res.data.data.profileImage;
-          const nickname = res.data.data.nickname;
-          const profileSkin = res.data.data.profileSkin;
-          setUserImg({
-            data: {
-              profileImage,
-            }
-          });
-          setUserNickname({
-            data: {
-              nickname,
-            },
-          });
-          setUserProfileSkin({
-            data: {
-              profileSkin,
-            }
-          });
-          console.log(res.data)
+    const fetchData = async () => {
+      console.log(session?.email)
+      try {
+        const res = await axios.get('https://blockpage.site/member-service/v1/members?type=detail', {
+          headers: {
+            memberId: session?.email || '',
+            // role: role,
+          },
+        });
+        const { profileImage, nickname, profileSkin } = res.data.data;
+        setUserImg({
+          data: {
+            profileImage,
+          }
+        });
+        setUserNickname({
+          data: {
+            nickname,
+          },
+        });
+        setUserProfileSkin({
+          data: {
+            profileSkin,
+          }
+        });
+        console.log(res.data)
+
+        const res2 = await axios.get("https://blockpage.site/purchase-service/v1/purchases?type=profileSkin", {
+          headers: {
+            memberId: session?.email || '',
+            // role: role,
+          },
         })
-
-      axios.get("https://blockpage.site/purchase-service/v1/purchases?type=profileSkin", {
-        headers: {
-          memberId: session?.email || '',
-          // role: role,
-        },
-      })
-        .then((res) => {
-          setChangeProfileSkin(res.data);
-          console.log(res.data.data)
-        }
-        )
+        setChangeProfileSkin(res2.data);
+        console.log(res2.data.data)
+      } catch (e) {
+        console.log(e);
+      }
     }
+    fetchData();
 
-  }, [session])
+  }, [])
 
   const handleProfileSkinColor = (memberHasProfileSkinId: number, profileSkinImage: string) => {
     setChangeProfileSkinbox({

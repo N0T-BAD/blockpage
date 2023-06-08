@@ -13,7 +13,7 @@
 .BestRankingCard {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   width: 100%;
 }
 
@@ -112,14 +112,20 @@
 
 .imgbox {
   width: 100%;
-  margin-bottom: 1rem;
+  /* padding: 1rem 1rem; */
+  margin-Top: 1rem;
+  padding-top: 1rem;
   animation: banner 0.5s ease-in-out;
   position: relative;
   z-index: 11;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .imgbox img {
   animation: banner 0.5s ease-in-out;
+  width: 70%;
+  height: 70%;
 }
 
 .bestimg_1 {
@@ -153,7 +159,7 @@
 .bgtxt {
   position: absolute;
   top: 20px;
-  right: 5px;
+  right: 0px;
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
@@ -167,4 +173,43 @@
   justify-content: center;
   align-items: center;
   animation: banner 0.5s ease-in-out;
+}
+
+
+
+.categoryRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin : 2rem 0;
+}
+
+.categoryRow .item {
+  width: content-fit;
+  padding: 0.5rem 0.7rem;
+  background-color: var(--bp-primary);
+  border-radius: 3rem;
+  color: var(--bp-white);
+  font-size: 1.1rem;
+  margin: 0.2rem 0.2rem;
+}
+
+.categoryRow .activeitem{
+  width: content-fit;
+  padding: 0.5rem 0.7rem;
+  background-color: var(--bp-white);
+  border-radius: 3rem;
+  color: var(--bp-primary);
+  font-size: 1.1rem;
+  margin: 0.2rem 0.2rem;
+}
+
+.Clickactive {
+  margin: 1rem 0.5rem;
+  display: block;
+}
+
+.NoClickactive {
+  margin: 1rem 0.5rem;
+  display: none;
 }

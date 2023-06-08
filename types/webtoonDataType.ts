@@ -52,6 +52,7 @@ export interface AuthorEpisodeList {
       episodeThumbnail: string;
       uploadDate: string;
       totalScore: number;
+      webtoonStatus: string;
     }
   ];
 }
