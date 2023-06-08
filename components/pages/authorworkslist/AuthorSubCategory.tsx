@@ -131,6 +131,9 @@ export default function AuthorSubCategory({ active, defaultActive }: { active: s
                               <Image src={webtoonsubcategory.webtoonThumbnail} alt={webtoonsubcategory.webtoonTitle} width={140} height={120} />
                             </div>
                             <div className={style.contentWrap}>
+                              <p className={style.genreoption}>{getGenreTypeString(webtoonsubcategory.genre)}</p>
+                              <p className={style.title}>{webtoonsubcategory.webtoonTitle}</p>
+                              <p className={style.author}>{webtoonsubcategory.creator}, {webtoonsubcategory.illustrator}</p>
                               <div className={style.option}>
                                 <div className={style.views}>
                                   <Image src={'/assets/images/icons/views.svg'} alt={'조회 수'} width={15} height={15} />
@@ -141,9 +144,6 @@ export default function AuthorSubCategory({ active, defaultActive }: { active: s
                                   <p className={style.likestxt}>{webtoonsubcategory.interestCount}</p>
                                 </div>
                               </div>
-                              <p className={style.title}>{webtoonsubcategory.webtoonTitle}</p>
-                              <p className={style.author}>{webtoonsubcategory.creator}, {webtoonsubcategory.illustrator}</p>
-                              <p className={style.author}>{getGenreTypeString(webtoonsubcategory.genre)}</p>
                               <p className={style.author}>{webtoonsubcategory.webtoonStatus}</p>
                             </div>
                           </div>
