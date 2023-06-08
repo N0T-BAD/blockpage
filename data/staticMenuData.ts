@@ -218,13 +218,18 @@ export const staticMenuListData = [
   },
   {
     id: 4,
+    name: "웹툰 보관함",
+    link: "/webtoonarchive/history",
+  },
+  {
+    id: 5,
     name: "게임",
     link: "/game",
   },
   {
-    id: 5,
-    name: "보관함",
-    link: "/webtoonarchive/history",
+    id: 6,
+    name: "스토어",
+    link: "/store",
   },
 ];
 

@@ -18,7 +18,7 @@ export default function PurchaseModal(props: { myBlock: number, episodeId: numbe
 
   useEffect(() => {
     document.body.style.cssText = `
-      position: fixed; 
+      position: fixed;
       top: -${window.scrollY}px;
       overflow-y: scroll;
       width: 100%;`;
@@ -41,9 +41,10 @@ export default function PurchaseModal(props: { myBlock: number, episodeId: numbe
         <div className={style.formBox}>
           <p className={style.myBlock}>내 블럭 : {props.myBlock}개</p>
           <p className={style.useBlock}>블럭 {props.episodePrice}개를 사용하여</p>
-          <p className={style.useBlock}><span>{props.episodeNumber}화</span>를 구매합니다.</p>
+          <p className={style.useBlock}><span>{props.episodeNumber}화</span>를 구매하시겠습니까?</p>
           <div className={style.confirmBox}>
-            <button type='button' className={style.confirm} onClick={handleViewEpisode}>확인</button>
+            <button type='button' className={style.confirmBtn} onClick={handleViewEpisode}>확인</button>
+            <button type='button' className={style.cancle} onClick={() => props.setShowModal(false)}>취소</button>
           </div>
         </div>
       </div>
