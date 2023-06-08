@@ -42,13 +42,12 @@ export default function ProfileStore(props: { data: userDataType }) {
         headers: { memberId: session.email }
       })
         .then((res) => {
-          console.log(res);
           Swal.fire({
             icon: 'success',
             title: selectedSkinName,
             text: '구매가 완료되었습니다.',
             showConfirmButton: false,
-            timer: 3000
+            timer: 2000
           }).then(result => {
             setConfirm(!confirm);
             setShowModal(false);

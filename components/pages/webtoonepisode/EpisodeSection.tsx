@@ -62,14 +62,16 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
         }
       })
         .then((res) => {
-          Swal.fire({
-            icon: 'success',
-            title: episodeNumber + '화',
-            text: '구매가 완료되었습니다.',
-            showConfirmButton: false,
-            timer: 2000
-          }).then(result => {
-          })
+          if (episodePrice !== 0) {
+            Swal.fire({
+              icon: 'success',
+              title: episodeNumber + '화',
+              text: '구매가 완료되었습니다.',
+              showConfirmButton: false,
+              timer: 2000
+            }).then(result => {
+            })
+          }
         })
         .catch((err) => {
           console.log(err);
