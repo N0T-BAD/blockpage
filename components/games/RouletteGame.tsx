@@ -1,57 +1,62 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './RouletteGame.module.css'
 import Image from 'next/image'
+import axios from 'axios';
+import { useSession } from 'next-auth/react';
 
 export default function RouletteGame() {
+  const { data: session } = useSession();
+  const roulette = "roulette";
+  const [rouletteData, setRouletteData] = useState<boolean>(false);
 
   const prizeData = [
     {
       id: 1,
-      brandName: "브랜드1",
-      prizeName: "상품1",
-      prizeImgUrl: "/assets/images/icons/loading.gif",
+      brandName: "꽝",
+      // prizeName: "상품1",
+      prizeImgUrl: "/assets/images/boom/boom.png",
     },
     {
       id: 2,
       brandName: "브랜드2",
-      prizeName: "상품2",
+      // prizeName: "상품2",
       prizeImgUrl: "/assets/images/icons/loading.gif",
     },
     {
       id: 3,
-      brandName: "브랜드3",
-      prizeName: "상품3",
-      prizeImgUrl: "/assets/images/icons/loading.gif",
+      brandName: "꽝",
+      // prizeName: "상품3",
+      prizeImgUrl: "/assets/images/boom/boom.png",
     },
     {
       id: 4,
       brandName: "브랜드4",
-      prizeName: "상품4",
+      // prizeName: "상품4",
       prizeImgUrl: "/assets/images/icons/loading.gif",
     },
     {
       id: 5,
-      brandName: "브랜드5",
-      prizeName: "상품1",
-      prizeImgUrl: "/assets/images/icons/loading.gif",
+      brandName: "꽝",
+      // prizeName: "상품1",
+      prizeImgUrl: "/assets/images/boom/boom.png",
     },
     {
       id: 6,
-      brandName: "브랜드6",
-      prizeName: "상품2",
-      prizeImgUrl: "/assets/images/icons/loading.gif",
+      brandName: "당첨",
+      // prizeName: "상품2",
+      prizeImgUrl: "/assets/images/boom/boom.png",
     },
     {
       id: 7,
       brandName: "브랜드7",
-      prizeName: "상품3",
+      // prizeName: "상품3",
       prizeImgUrl: "/assets/images/icons/loading.gif",
     },
     {
       id: 8,
-      brandName: "브랜드8",
-      prizeName: "상품4",
-      prizeImgUrl: "/assets/images/icons/loading.gif",
+      brandName: "당첨",
+      // prizeName: "상품4",
+      prizeImgUrl: "/assets/images/boom/boom.png",
     },
   ];
 
@@ -60,16 +65,32 @@ export default function RouletteGame() {
   const [prizeNumber, setPrizeNumber] = useState<number>(0);
   const [getPrize, setGetPrize] = useState<boolean>(false);
 
-  const handleClick = () => {
-    setSpinning(true);
+  const handleClick: () => void = () => {
     setGetPrize(false);
     setPrizeNumber(prize);
     setTimeout(() => {
-      setSpinning(false);
       setGetPrize(true);
       setPrize(Math.floor(Math.random() * prizeData.length) + 1);
     }, 4000);
+    if (prize === 1 || prize === 3 || prize === 5) {
+      setRouletteData(false)
+    } else {
+      setRouletteData(true)
+    }
+    axios.put(`https://blockpage.site/game-service/v1/games`, {
+      type: "roulette",
+      compensation: rouletteData,
+      headers: {
+        "Content-Type": "application/json",
+        memberId: session?.email || "",
+      }
+    })
+    console.log(rouletteData)
   };
+
+  useEffect(() => {
+    setRouletteData(false);
+  }, []);
 
   return (
     <div className={style.wrap}>

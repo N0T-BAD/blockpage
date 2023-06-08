@@ -14,8 +14,9 @@ export default function EpisodeViewer(props: { episodeData: EpisodeViewDataType 
             <Image
               src={item.imageUrl}
               alt={`episode image ${index}`}
-              width={390}
+              width={400}
               height={500}
+              // fill
               priority
             />
           </div>

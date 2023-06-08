@@ -1,0 +1,124 @@
+.userImgSection {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  background-color: white;
+  margin-top: 5.5rem;
+  padding: 0 1.5rem;
+  border-bottom: 0.02rem solid var(--bp-line-gray);
+}
+
+.sectionProfileTxt {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sectionProfileTxt p {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+p.myBlock {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--bp-font-gray);
+}
+
+.userProfileDiv {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 1rem;
+}
+
+.userProfileImgDiv {
+  position: relative;
+}
+
+.selectedUserSkin {
+  position: absolute;
+  top: 2.6rem;
+}
+
+.userProfileImgDiv img {
+  border-radius: 50%;
+}
+
+.profileSkinSection {
+  margin-top: 15rem;
+  padding: 0 1.5rem;
+}
+
+.sectionTxt {
+  padding: 1rem 0 0;
+}
+
+.sectionTxt p {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.skinImgList {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0.5rem;
+}
+
+.skinImg {
+  display: flex;
+  align-items: center;
+}
+
+.skinImgDiv {
+  display: flex;
+  padding: 1rem 0;
+  cursor: pointer;
+}
+
+.skinImgDiv p {
+  width: 100%;
+  text-align: left;
+  padding: 0.2rem 0;
+}
+
+.skinTxtDiv {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 1rem;
+}
+
+.skinTxtDiv p {
+  font-size: 0.8rem;
+}
+
+p.skinName {
+  color: var(--bp-secondary);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+p.skinDescription {
+  text-align: justify;
+}
+
+.blockPrice {
+  color: var(--bp-secondary);
+}
+
+.confirmBox {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.confirm {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--bp-white);
+  background-color: var(--bp-blue);
+  border: none;
+  border-radius: 2rem;
+  padding: 1rem 3rem;
+}

@@ -3,11 +3,13 @@ import style from '@/components/pages/mypage/UserNickName.module.css'
 import UserIcon from '@/components/pages/mypage/UserIcon'
 import UserProfileImg from '@/components/ui/UserProfileImg'
 import axios from 'axios'
-import { ChangeUserDataType, UserImgData } from '@/types/changeUserDataType'
+import { ChangeUserDataType, UserImgData, profileskinDataType } from '@/types/changeUserDataType'
 import { useSession } from 'next-auth/react'
 import { authornickname, usernickname } from '@/state/mypage/usernickname'
 import { useRecoilState } from 'recoil'
 import { userprofile } from '@/state/mypage/userprofile'
+import { profileskin } from '@/state/mypage/profileskin'
+import Image from 'next/image'
 
 export default function UserNickName() {
 
@@ -15,7 +17,7 @@ export default function UserNickName() {
   // const role = sessionStorage.getItem('role');
 
   const [userNickname, setUserNickname] = useRecoilState<ChangeUserDataType>(usernickname);
-
+  const [userprofileSkin, setUserProfileSkin] = useRecoilState<profileskinDataType>(profileskin)
   const [userImg, setUserImg] = useRecoilState<UserImgData>(userprofile);
 
   useEffect(() => {
@@ -27,7 +29,7 @@ export default function UserNickName() {
             // role: role,
           },
         });
-        const { nickname, profileImage } = res.data.data;
+        const { nickname, profileImage, profileSkin } = res.data.data;
         setUserNickname({
           data: {
             nickname,
@@ -38,6 +40,11 @@ export default function UserNickName() {
             profileImage,
           }
         })
+        setUserProfileSkin({
+          data: {
+            profileSkin,
+          }
+        });
         console.log(res.data)
         console.log(userImg)
       }
@@ -52,7 +59,26 @@ export default function UserNickName() {
     <>
       <div className={style.usernicknameImgBox}>
         <div className={style.usernicknameImg}>
-          <UserProfileImg userImg={userImg} />
+          <div className={style.profileskin}>
+            {
+              userImg.data.profileImage ?
+                <Image
+                  src={userImg.data.profileImage}
+                  alt="userProfileImage"
+                  width={70}
+                  height={70}
+                />
+                : <Image
+                  src={"/assets/images/mypage/userImg.png"}
+                  alt="userProfileImagePreview"
+                  width={70}
+                  height={70}
+                />
+            }
+            {userprofileSkin.data.profileSkin &&
+              <Image className={style.profileskinbox} src={userprofileSkin.data.profileSkin} alt={userprofileSkin.data.profileSkin} width={70} height={70} />
+            }
+          </div>
           {userNickname.data.nickname &&
             <p className={style.usernickname}>{userNickname.data.nickname}</p>
           }

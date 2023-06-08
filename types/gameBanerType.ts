@@ -5,4 +5,5 @@ export interface GameBannerType {
   imgUrl: string;
   color: string;
   path: string;
+  name: string;
 }

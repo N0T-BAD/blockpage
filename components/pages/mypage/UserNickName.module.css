@@ -26,6 +26,20 @@
   border-radius: 5rem;
 }
 
+.profileskin {
+  width: 40%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 1rem;
+}
+
+.profileskin img {
+  position: absolute;
+  border-radius: 5rem;
+}
+
 img.userImage1 {
   display: flex;
 }
@@ -76,19 +90,6 @@ img.userImage1 {
 
 .userProfileImagePreview {
   border-radius: 5rem;
-}
-
-.profileskin {
-  width: 40%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-}
-
-.profileskin img {
-  position: absolute;
-  top: 15%;
 }
 
 .changeuserinfobox {

@@ -22,7 +22,7 @@
   min-width: 270;
   border-radius: 50%;
   background-color: #EAF2FA;
-  box-shadow: `0px 12px 20px rgba(0 0 0 0.25)`;
+  box-shadow: 0px 12px 20px rgba(0 0 0 0.25);
   aspect-ratio: 1/1;
 }
 .roulette {
@@ -89,7 +89,7 @@
 .prizeImg {
   width: 45;
   height: 45;
-  margin: `5px auto`;
+  margin: 5px auto;
 }
 .prizeImgUrl {
   width: 100%;
@@ -228,29 +228,24 @@
 }
 
 
-@media {
+@media screen and (max-width: 400px) {
   .rouletteOuter {
-    aspect-ratio: 1/1;
-  }
-}
-@media (max-width:400px) {
-  .rouletteOuter {
-    width: 300;
+    width: 300px;
   }
   .prizeName {
-    padding-bottom: 3;
+    padding-bottom: 3px;
   }
   .prizeImg {
-    width: 40;
-    height: 40;
+    width: 40px;
+    height: 40px;
   }
   .rouletteOuterBtn {
-    width: 80;
-    height: 80;
+    width: 80px;
+    height: 80px;
   }
   .rouletteBtn {
-    width: 66;
-    height: 66;
+    width: 66px;
+    height: 66px;
     font-size: 15px;
   }
 }

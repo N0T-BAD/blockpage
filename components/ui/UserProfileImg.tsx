@@ -2,7 +2,7 @@ import Image from 'next/image'
 import React from 'react'
 
 import style from '@/components/pages/mypage/UserNickName.module.css'
-import { UserImgData } from '@/types/changeUserDataType';
+import { UserImgData, profileskinDataType } from '@/types/changeUserDataType';
 
 interface ChildProps {
   userImg: UserImgData;
