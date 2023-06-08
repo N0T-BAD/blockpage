@@ -34,6 +34,19 @@ export const staticTopNavData = [
   },
 ];
 
+export const staticStoreNavData = [
+  {
+    id: 1,
+    name: "프로필 스킨",
+    link: "profileSkin",
+  },
+  {
+    id: 2,
+    name: "NFT",
+    link: "nft",
+  },
+];
+
 export const staticWeekNavData = [
   {
     id: 0,
@@ -260,7 +273,7 @@ export const staticMenuListData = [
   {
     id: 6,
     name: "스토어",
-    link: "/store",
+    link: "/store/profileSkin",
   },
 ];
 
