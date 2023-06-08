@@ -1,19 +1,25 @@
 import RouletteGame from '@/components/games/RouletteGame'
 import Layout from '@/components/layouts/layout'
 import React from 'react'
+import { NextPageWithLayout } from '../_app'
 
-export default function roulette() {
+const Roulette: NextPageWithLayout = () => {
+
   return (
-    <main>
+    <>
       <RouletteGame />
-    </main>
+    </>
   )
 }
 
-roulette.getLayout = function getLayout(page: React.ReactElement) {
+Roulette.getLayout = function getLayout(page: React.ReactElement) {
   return (
     <Layout>
       {page}
     </Layout>
   )
 }
+
+export default Roulette;
+
+Roulette.auth = true

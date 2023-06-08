@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './RouletteGame.module.css'
 import Image from 'next/image'
 import axios from 'axios';
@@ -42,7 +42,7 @@ export default function RouletteGame() {
     },
     {
       id: 6,
-      brandName: "꽝",
+      brandName: "당첨",
       // prizeName: "상품2",
       prizeImgUrl: "/assets/images/boom/boom.png",
     },
@@ -54,7 +54,7 @@ export default function RouletteGame() {
     },
     {
       id: 8,
-      brandName: "꽝",
+      brandName: "당첨",
       // prizeName: "상품4",
       prizeImgUrl: "/assets/images/boom/boom.png",
     },
@@ -64,29 +64,32 @@ export default function RouletteGame() {
   const [prizeNumber, setPrizeNumber] = useState<number>(1);
   const [getPrize, setGetPrize] = useState<boolean>(false);
 
-  const handleClick = () => {
+  const handleClick: () => void = () => {
     setGetPrize(false);
     setPrizeNumber(prize);
     setTimeout(() => {
       setGetPrize(true);
       setPrize(Math.floor(Math.random() * prizeData.length) + 1);
     }, 4000);
-    if (prizeNumber === prizeData.length) {
+    if (prize === 1 || prize === 3 || prize === 5) {
       setRouletteData(false)
-    }
-    else {
+    } else {
       setRouletteData(true)
     }
-    // axios.put(`https://blockpage.site/game-service/v1/games`, {
-    //   type: roulette,
-    //   compensation: rouletteData,
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     memberId: session?.email || "",
-    //   }
-    // })
+    axios.put(`https://blockpage.site/game-service/v1/games`, {
+      type: "roulette",
+      compensation: rouletteData,
+      headers: {
+        "Content-Type": "application/json",
+        memberId: session?.email || "",
+      }
+    })
     console.log(rouletteData)
   };
+
+  useEffect(() => {
+    setRouletteData(false);
+  }, []);
 
   return (
     <div className={style.wrap}>
@@ -150,7 +153,7 @@ export default function RouletteGame() {
       {
         getPrize && (
           <p style={{ textAlign: 'center', marginTop: '1rem' }}>
-            당첨 결과: {rouletteData === false ? '꽝' : '당첨'}
+            당첨 결과: {prizeNumber === 1 || prizeNumber === 3 || prizeNumber === 5 ? '꽝' : '당첨'}
           </p>
         )
       }
