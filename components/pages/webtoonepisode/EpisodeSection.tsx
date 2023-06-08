@@ -10,6 +10,7 @@ import PreviewSection from './PreviewSection';
 import Separator from '@/components/ui/Separator';
 import { EpisodeViewListType, WebToonListDataType } from '@/types/webtoonDataType';
 import PurchaseModal from '@/components/modals/PurchaseModal';
+import Swal from 'sweetalert2';
 
 export default function EpisodeSection(props: { data: WebToonListDataType, episodeViewList: EpisodeViewListType[] }) {
 
@@ -51,7 +52,7 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
         persistType: paramPersistType,
         webtoonTitle: webtoonData.webtoonTitle,
         episodeNumber: episodeNumber,
-        webtoonThumbnail: webtoonData.webtoonThumnail,
+        webtoonThumbnail: webtoonData.webtoonThumbnail,
         creator: webtoonData.creator,
         illustrator: webtoonData.illustrator,
         genre: webtoonData.genre,
@@ -61,7 +62,16 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
         }
       })
         .then((res) => {
-          console.log(res);
+          if (episodePrice !== 0) {
+            Swal.fire({
+              icon: 'success',
+              title: episodeNumber + '화',
+              text: '구매가 완료되었습니다.',
+              showConfirmButton: false,
+              timer: 2000
+            }).then(result => {
+            })
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -142,7 +152,7 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
             onClick={
               item.isRead === true ?
                 () => handleEpisode('episodeBMPaid', 'rental', item.episodeId, item.episodeNumber, item.episodePrice, false) :
-                myBlock > 4 ?
+                myBlock >= 4 ?
                   () => handleShowModal(item.episodeId, item.episodeNumber, item.episodePrice) :
                   () => console.log('블럭 충전 페이지로 이동')
             }

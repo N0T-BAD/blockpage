@@ -11,25 +11,46 @@
 }
 
 .previewTxtDiv {
-  width: 70%;
+  width: 60%;
   display: flex;
   align-items: center;
+  font-size: 0.9rem;
 }
 
 .previewTxtDiv p:first-child {
   color: var(--bp-secondary);
+  font-size: 1rem;
 }
 
 .imgBox {
-  width: 30%;
+  width: 40%;
   display: flex;
   justify-content: space-between;
 }
 
 .imgDiv {
   width: 100%;
-  padding: 0 1rem;
   display: flex;
+}
+
+.imgDiv img:nth-child(n+2) {
+  position: relative;
+  right: 10px;
+}
+
+.imgDiv img:nth-child(n+3) {
+  position: relative;
+  right: 20px;
+}
+
+.imgDiv img:nth-child(n+4) {
+  position: relative;
+  right: 30px;
+}
+
+.imgDiv img:nth-child(n+5) {
+  position: relative;
+  right: 40px;
 }
 
 .imgBox .imgDiv img {
@@ -40,6 +61,7 @@
 
 .downArrow {
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 

@@ -21,7 +21,7 @@
   border: 0.2rem solid var(--bp-line-gray);
   border-radius: 1rem;
   background-color: var(--bp-white);
-  padding: 2rem 4rem;
+  padding: 2rem 2rem;
 }
 
 .closeBtn {
@@ -68,6 +68,7 @@
 
 .useBlock {
   text-align: center;
+  padding: 0.1rem 0;
 }
 
 .useBlock span {
@@ -79,7 +80,7 @@
 .confirmBox {
   display: flex;
   justify-content: center;
-  padding-top: 1rem;
+  padding-top: 1.5rem;
 }
 
 .confirm {
@@ -87,7 +88,37 @@
   font-weight: 700;
   color: var(--bp-white);
   background-color: var(--bp-blue);
-  border: none;
+  border: 0.1rem solid var(--bp-blue);
   border-radius: 2rem;
   padding: 1rem 3rem;
+}
+
+.skinPurchaseModalBox {
+  width: 100%;
+  border: 0.2rem solid var(--bp-line-gray);
+  border-radius: 1rem;
+  background-color: var(--bp-white);
+  padding: 2rem 2rem;
+}
+
+.confirmBtn {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--bp-white);
+  background-color: var(--bp-blue);
+  border: 0.1rem solid var(--bp-blue);
+  border-radius: 2rem;
+  padding: 1rem 2rem;
+  margin: 0 0.2rem;
+}
+
+.confirmBox .cancle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--bp-blue);
+  background-color: var(--bp-white);
+  border: 0.1rem solid var(--bp-blue);
+  border-radius: 2rem;
+  padding: 1rem 2rem;
+  margin: 0 0.2rem;
 }

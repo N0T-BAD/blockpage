@@ -30,16 +30,20 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
         props: { data }
       }
     }
-    // else if (archiveName === 'purchase') {
-    //   const res = await axios.get(`https://blockpage.site/purchase-service/v1/purchases?type=episodeBMPaid`)
-    //   const data = res.data.data;
-    //   console.log(data)
-    //   return {
-    //     props: { data }
-    //   }
-    // }
+    else if (archiveName === 'purchase') {
+      const res = await axios.get(`https://blockpage.site/purchase-service/v1/purchases?type=episodeBMPaid`, {
+        headers: { memberId: session.email }
+      })
+      const data = res.data.data;
+      console.log(data)
+      return {
+        props: { data }
+      }
+    }
     else if (archiveName === 'history') {
-      const res = await axios.get(`https://blockpage.site/purchase-service/v1/purchases?type=episodeBMFree`)
+      const res = await axios.get(`https://blockpage.site/purchase-service/v1/purchases?type=episodeBMFree`, {
+        headers: { memberId: session.email }
+      })
       const data = res.data.data;
       console.log(data)
       return {

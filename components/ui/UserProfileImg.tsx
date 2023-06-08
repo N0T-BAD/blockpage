@@ -6,10 +6,9 @@ import { UserImgData, profileskinDataType } from '@/types/changeUserDataType';
 
 interface ChildProps {
   userImg: UserImgData;
-  userprofileSkin: profileskinDataType;
 }
 
-export default function UserProfileImg({ userImg, userprofileSkin }: ChildProps) {
+export default function UserProfileImg({ userImg }: ChildProps) {
 
   return (
     <div className={style.userImage}>
@@ -27,9 +26,6 @@ export default function UserProfileImg({ userImg, userprofileSkin }: ChildProps)
             width={70}
             height={70}
           />
-      }
-      {userprofileSkin.data.profileSkin &&
-        <Image className={style.profileskinbox} src={userprofileSkin.data.profileSkin} alt={userprofileSkin.data.profileSkin} width={70} height={70} />
       }
     </div>
   )
