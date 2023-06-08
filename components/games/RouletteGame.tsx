@@ -1,81 +1,97 @@
 import React, { useState } from 'react'
 import style from './RouletteGame.module.css'
 import Image from 'next/image'
+import axios from 'axios';
+import { useSession } from 'next-auth/react';
 
 export default function RouletteGame() {
+  const { data: session } = useSession();
+  const roulette = "roulette";
+  const [rouletteData, setRouletteData] = useState<boolean>(false);
 
   const prizeData = [
     {
       id: 1,
       brandName: "꽝",
-      prizeName: "상품1",
+      // prizeName: "상품1",
       prizeImgUrl: "/assets/images/boom/boom.png",
     },
     {
       id: 2,
       brandName: "브랜드2",
-      prizeName: "상품2",
+      // prizeName: "상품2",
       prizeImgUrl: "/assets/images/icons/loading.gif",
     },
     {
       id: 3,
       brandName: "꽝",
-      prizeName: "상품3",
+      // prizeName: "상품3",
       prizeImgUrl: "/assets/images/boom/boom.png",
     },
     {
       id: 4,
       brandName: "브랜드4",
-      prizeName: "상품4",
+      // prizeName: "상품4",
       prizeImgUrl: "/assets/images/icons/loading.gif",
     },
     {
       id: 5,
       brandName: "꽝",
-      prizeName: "상품1",
+      // prizeName: "상품1",
       prizeImgUrl: "/assets/images/boom/boom.png",
     },
     {
       id: 6,
       brandName: "꽝",
-      prizeName: "상품2",
+      // prizeName: "상품2",
       prizeImgUrl: "/assets/images/boom/boom.png",
     },
     {
       id: 7,
       brandName: "브랜드7",
-      prizeName: "상품3",
+      // prizeName: "상품3",
       prizeImgUrl: "/assets/images/icons/loading.gif",
     },
     {
       id: 8,
       brandName: "꽝",
-      prizeName: "상품4",
+      // prizeName: "상품4",
       prizeImgUrl: "/assets/images/boom/boom.png",
     },
   ];
 
-  const [spinning, setSpinning] = useState<boolean>(false);
   const [prize, setPrize] = useState<number>(Math.floor(Math.random() * prizeData.length) + 1);
-  const [prizeNumber, setPrizeNumber] = useState<number>(0);
+  const [prizeNumber, setPrizeNumber] = useState<number>(1);
   const [getPrize, setGetPrize] = useState<boolean>(false);
 
   const handleClick = () => {
-    // setSpinning(true);
     setGetPrize(false);
     setPrizeNumber(prize);
     setTimeout(() => {
-      // setSpinning(false);
       setGetPrize(true);
       setPrize(Math.floor(Math.random() * prizeData.length) + 1);
     }, 4000);
+    if (prizeNumber === prizeData.length) {
+      setRouletteData(false)
+    }
+    else {
+      setRouletteData(true)
+    }
+    // axios.put(`https://blockpage.site/game-service/v1/games`, {
+    //   type: roulette,
+    //   compensation: rouletteData,
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     memberId: session?.email || "",
+    //   }
+    // })
+    console.log(rouletteData)
   };
 
   return (
     <div className={style.wrap}>
       <div className={style.contents}>
         <div className={style.rouletteOuter}>
-          {/* <div className={spinning ? `${style.roulette} ${style[`on${prize}`]}` : style.roulette}> */}
           <div className={`${style.roulette} ${style[`on${prizeNumber}`]}`}>
             {/* 값 영역 */}
             <div>
@@ -89,15 +105,15 @@ export default function RouletteGame() {
                     <div>
                       <div>
                         <p className={style.brandName}>{item.brandName}</p>
-                        <p className={style.prizeName}>{item.brandName}</p>
+                        {/* <p className={style.prizeName}>{item.brandName}</p> */}
                       </div>
                       <div className={style.prizeImg}>
                         <Image
                           className={style.prizeImgUrl}
                           src={item.prizeImgUrl}
                           alt={item.prizeImgUrl}
-                          width={50}
-                          height={50}
+                          width={20}
+                          height={20}
                         />
                       </div>
                     </div>
@@ -134,7 +150,7 @@ export default function RouletteGame() {
       {
         getPrize && (
           <p style={{ textAlign: 'center', marginTop: '1rem' }}>
-            당첨 결과: {prizeNumber === 0 ? '꽝' : prizeNumber}
+            당첨 결과: {rouletteData === false ? '꽝' : '당첨'}
           </p>
         )
       }
