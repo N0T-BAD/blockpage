@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import style from '@/components/pages/main/game/GameBanner.module.css'
 import { gameEventData } from '@/data/dummy/mainGameEventData'
 import { GameBannerType } from '@/types/gameBanerType'
+import { useRouter } from 'next/router'
 
 export default function GameBanner(props: { data: GameBannerType[] }) {
 
@@ -26,14 +27,24 @@ export default function GameBanner(props: { data: GameBannerType[] }) {
 }
 
 const GameBannerItem = (props: { data: GameBannerType, isActive: boolean }) => {
+  const router = useRouter();
+
+  const handleGame = (name: string) => {
+    router.push(`/game/${name}`)
+  }
+
   return (
-    <div className={props.isActive ? `${style.gameBox} ${style[props.data.color]} ` : `${style.gameBox} ${style[props.data.color]}`}>
-      <div className={style.gameText}>
-        <p>{props.data.eventTitle}</p>
-        <p>{props.data.text}</p>
+    <>
+
+      <div className={props.isActive ? `${style.gameBox} ${style[props.data.color]} ` : `${style.gameBox} ${style[props.data.color]}`} onClick={() => handleGame(props.data.name)}>
+        <div className={style.gameText}>
+          <p>{props.data.eventTitle}</p>
+          <p>{props.data.text}</p>
+        </div>
+        <Image src={props.data.imgUrl} alt={props.data.eventTitle} width={190} height={170} priority />
       </div>
-      <Image src={props.data.imgUrl} alt={props.data.eventTitle} width={190} height={170} priority />
-    </div>
+
+    </>
   )
 }
 

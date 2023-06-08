@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import style from '@/components/pages/changewebtoon/ChangeWebtoonForm.module.css'
-import { ChangeWebtoon, WebtoonStatusData, authorWebtoonInfoDataType, authorWebtoonInfoStateType } from '@/types/authorWebtoonInfoImgDataType';
+import { ChangeWebtoon, authorWebtoonInfoDataType, authorWebtoonInfoStateType } from '@/types/authorWebtoonInfoImgDataType';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { webtoonInfoState } from '@/state/webtoon/webtoonInfoState';
@@ -132,16 +132,12 @@ export default function ChangeWebtoonForm() {
         }
 
         if (webtoonInfoData.webtoonTitle === '') {
-          // if (webtoonData.data.find((webtoon) => webtoon.webtoonTitle !== webtoonInfoData.webtoonTitle)) {
           formData.append('webtoonTitle', selectedWebtoon.webtoonTitle);
-          // }
         } else {
           formData.append('webtoonTitle', webtoonInfoData.webtoonTitle);
         }
         if (webtoonInfoData.webtoonDescription === '') {
-          // if (webtoonData.data.find((webtoon) => webtoon.webtoonDescription !== webtoonInfoData.webtoonDescription)) {
           formData.append('webtoonDescription', selectedWebtoon.webtoonDescription);
-          // }
         } else {
           formData.append('webtoonDescription', webtoonInfoData.webtoonDescription);
         }
@@ -151,7 +147,6 @@ export default function ChangeWebtoonForm() {
           formData.append('genre', String(webtoonInfoData.genre));
         }
         if (webtoonInfoData.publicationDays === 0) {
-          // webtoonData.data.find((webtoon) => webtoon.publicationDays === webtoonInfoData.publicationDays)
           formData.append('publicationDays', String(selectedWebtoon.publicationDays));
         } else {
           formData.append('publicationDays', String(webtoonInfoData.publicationDays));
