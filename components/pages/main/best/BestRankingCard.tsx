@@ -109,6 +109,12 @@ export default function BestRankingCard() {
             Weeksdata.data.map((data, index) => (
               <div className={style.BestRankingCard} key={data.webtoonId} onClick={() => handler(data.webtoonId)}>
                 <div className={style.contentWrap}>
+                  <p className={style.option2}>{getGenreTypeString(data.genre)}</p>
+                  <p className={style.title}>{data.webtoonTitle}</p>
+                  {data.illustrator ?
+                    <p className={style.author}>{data.creator} / {data.illustrator}</p>
+                    : <p className={style.author}>{data.creator}</p>
+                  }
                   <div className={style.option}>
                     <div className={style.views}>
                       <Image src={'/assets/images/icons/views.svg'} alt={'조회 수'} width={15} height={15} priority />
@@ -119,19 +125,22 @@ export default function BestRankingCard() {
                       <p className={style.likestxt}>{data.interestCount}</p>
                     </div>
                   </div>
-                  <p className={style.title}>{data.webtoonTitle}</p>
-                  {data.illustrator ?
-                    <p className={style.author}>{data.creator} / {data.illustrator}</p>
-                    : <p className={style.author}>{data.creator}</p>
-                  }
-                  <p className={style.option2}>{getGenreTypeString(data.genre)}</p>
                 </div>
-                <div className={style.bestimg_1}>
-                  <div className={style.imgbox}>
-                    <Image src={data.webtoonThumbnail} alt={"베스트 이미지"} width={190} height={170} priority />
+                {data.cutoutImage === null ?
+                  <div className={style.bestimg_1}>
+                    <div className={style.imgbox}>
+                      <Image src={data.webtoonThumbnail} alt={"베스트 이미지"} width={190} height={150} priority />
+                    </div>
+                    <div className={style.bgtxt}>{index + 1}</div>
                   </div>
-                  <div className={style.bgtxt}>{index + 1}</div>
-                </div>
+                  :
+                  <div className={style.bestimg_1}>
+                    <div className={style.imgbox}>
+                      <Image src={data.cutoutImage} alt={"베스트 이미지"} width={190} height={170} priority />
+                    </div>
+                    <div className={style.bgtxt}>{index + 1}</div>
+                  </div>
+                }
               </div>
             ))
           }

@@ -10,6 +10,7 @@ import { usernickname } from '@/state/mypage/usernickname';
 import { profileskin } from '@/state/mypage/profileskin';
 import { useRouter } from 'next/router';
 import UserIcon from '../mypage/UserIcon';
+import Swal from 'sweetalert2';
 
 
 export default function ChangeUserInfo() {
@@ -21,6 +22,8 @@ export default function ChangeUserInfo() {
   const router = useRouter();
   const [userProfileImage, setUserProfileImage] = useState<File>();
   const [userProfileImagePreview, setUserProfileImagePreview] = useState<string>();
+  const [skin, setSkin] = useState(false);
+  const [check, setCheck] = useState<number | null>(null);
 
   const [changeProfileSkin, setChangeProfileSkin] = useState<changeProfileSkin>({
     data: [{
@@ -85,6 +88,8 @@ export default function ChangeUserInfo() {
   }, [])
 
   const handleProfileSkinColor = (memberHasProfileSkinId: number, profileSkinImage: string) => {
+    setSkin(true)
+    setCheck(memberHasProfileSkinId);
     setChangeProfileSkinbox({
       data: [
         {
@@ -146,6 +151,12 @@ export default function ChangeUserInfo() {
         })
         .then((res) => {
           console.log(res.data)
+          Swal.fire({
+            icon: 'success',
+            title: '변경되었습니다.',
+            showConfirmButton: false,
+            timer: 1500
+          })
         })
 
       // axios.put('https://blockpage.site/member-service/v1/members?type=member', {
@@ -183,44 +194,43 @@ export default function ChangeUserInfo() {
                       </>
                     }
 
-                    {changeProfileSkinbox.data ? (
-                      changeProfileSkinbox.data.map((item) => (
-                        <Image
-                          key={item.memberHasProfileSkinId}
-                          className={style.profileskinbox}
-                          src={item.profileSkinDetail.profileSkinImage}
-                          alt={item.profileSkinDetail.profileSkinImage}
-                          width={70}
-                          height={70}
-                        />
-                      ))
+                    {skin === false ? (
+                      userprofileSkin.data.profileSkin &&
+                      <Image className={style.profileskinbox} src={userprofileSkin.data.profileSkin} alt={userprofileSkin.data.profileSkin} width={70} height={70} />
                     ) : (
                       <>
                         {
-                          userprofileSkin.data.profileSkin &&
-                          <Image className={style.profileskinbox} src={userprofileSkin.data.profileSkin} alt={userprofileSkin.data.profileSkin} width={70} height={70} />
+                          changeProfileSkinbox.data && changeProfileSkinbox.data.map((item) => (
+                            <Image
+                              key={item.memberHasProfileSkinId}
+                              className={style.profileskinbox}
+                              src={item.profileSkinDetail.profileSkinImage}
+                              alt={item.profileSkinDetail.profileSkinImage}
+                              width={70}
+                              height={70}
+                            />
+                          ))
                         }
                       </>
                     )}
-
                     <UserIcon />
                   </div>
 
                   <div className={style.infobox}>
                     <div className={style.btn_input_box}>
-                      <label className={style.uploadBtn}>
-                        <input type="file" accept="image/*" onChange={handleuserProfileImage} />
-                        <p>upload</p>
-                      </label>
-                      <p className={style.basicimg} onClick={handleBasicImageChange}>기본 이미지 변경</p>
-                    </div>
-                    <div className={style.btn_input_box}>
-                      <p>닉네임</p>
+                      <p className={style.nicknametext}>닉네임</p>
                       {userNickname.data.nickname && userNickname.data.nickname.length > 0 ?
                         <input className={style.usernickname2} type='text' defaultValue={userNickname.data.nickname} onChange={handleChange} />
                         :
                         <input className={style.usernickname2} type='text' onChange={handleChange} />
                       }
+                    </div>
+                    <div className={style.btn_input_box2}>
+                      <label className={style.uploadBtn}>
+                        <input type="file" accept="image/*" onChange={handleuserProfileImage} />
+                        <p>upload</p>
+                      </label>
+                      <p className={style.basicimg} onClick={handleBasicImageChange}>기본 이미지</p>
                     </div>
                   </div>
                 </>
@@ -238,19 +248,37 @@ export default function ChangeUserInfo() {
             <p className={style.profileSkintxt}>프로필 스킨</p>
             <div className={style.profileSkinWrap}>
               <div className={style.profileSkinBox}>
-                <div className={style.ProfileSkinButtonBox}>
+                <div className={check === null ? style.ProfileSkinButtonBox : style.ProfileSkinButtonBox2}>
                   {changeProfileSkin.data.map((skinData) => (
-                    <button
-                      key={skinData.memberHasProfileSkinId}
-                      onClick={() => handleProfileSkinColor(skinData.memberHasProfileSkinId, skinData.profileSkinDetail.profileSkinImage)}
-                    >
-                      <Image
-                        src={skinData.profileSkinDetail.profileSkinImage}
-                        alt={skinData.profileSkinDetail.profileSkinImage}
-                        width={50}
-                        height={50}
-                      />
-                    </button>
+                    <>
+                      <button
+                        key={skinData.memberHasProfileSkinId}
+                        onClick={() => handleProfileSkinColor(skinData.memberHasProfileSkinId, skinData.profileSkinDetail.profileSkinImage)}
+                      >
+                        {
+                          changeProfileSkinbox.data && changeProfileSkinbox.data.map((item) => (item.memberHasProfileSkinId === skinData.memberHasProfileSkinId ?
+                            <>
+                              <Image src={"/assets/images/icons/check.png"} alt={"check"} width={15} height={15} className={style.check} />
+                              <Image
+                                src={skinData.profileSkinDetail.profileSkinImage}
+                                alt={skinData.profileSkinDetail.profileSkinImage}
+                                width={50}
+                                height={50}
+                                className={style.skinImg}
+                              />
+                            </>
+                            :
+                            <Image
+                              key={skinData.memberHasProfileSkinId}
+                              src={skinData.profileSkinDetail.profileSkinImage}
+                              alt={skinData.profileSkinDetail.profileSkinImage}
+                              width={50}
+                              height={50}
+                              className={style.skinImg}
+                            />
+                          ))}
+                      </button>
+                    </>
                   ))}
                 </div>
               </div>

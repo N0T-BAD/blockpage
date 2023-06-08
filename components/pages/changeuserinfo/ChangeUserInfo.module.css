@@ -38,12 +38,38 @@ p.profileSkintxt {
 
 .ProfileSkinButtonBox button {
   display: flex;
+  flex-direction: column;
   border: none;
   margin: 0 1rem;
   width: 100%;
   height: 100%;
   align-items: center;
   background-color: var(--bp-aliceblue);
+  justify-content: center;
+}
+
+.ProfileSkinButtonBox2 {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  margin: 0 1rem;
+  overflow-x: scroll;
+}
+
+.ProfileSkinButtonBox2::-webkit-scrollbar{
+  display: none;
+}
+
+.ProfileSkinButtonBox2 button {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  margin: 0 1rem;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  background-color: var(--bp-aliceblue);
+  justify-content: center;
 }
 
 .certificationBox {
@@ -151,8 +177,8 @@ img.userImage1 {
   font-size: 1rem;
   font-weight: 700;
   border: none;
-  width: 60%;
-  padding: 0 1rem;
+  width: 50%;
+  text-align: center;
 }
 
 .usernicknameImg p.usernicknamechange {
@@ -190,7 +216,6 @@ img.userImage1 {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  
 }
 
 .profileskin img {
@@ -200,17 +225,30 @@ img.userImage1 {
 
 .changeuserinfobox {
   width: 100%;
-  height: 80%;
+  height: 130px;
   display: flex;
   align-items: flex-end;
 }
 
 .btn_input_box {
-  width: 100%;
+  width: 80%;
   display: flex;
-  padding: 1rem 1rem;
+  margin: 0.3rem 1rem;
   align-items: flex-end;
-  justify-content: space-between;
+  justify-content: center;
+}
+
+.btn_input_box2 {
+  width: 80%;
+  display: flex;
+  margin: 0.3rem 1rem;
+  align-items: flex-end;
+  justify-content: space-around;
+}
+
+p.nicknametext{
+  width: 45%;
+  text-align: center;
 }
 
 .infobox {
@@ -219,6 +257,7 @@ img.userImage1 {
   flex-direction: column;
   justify-content: center;
   width: 100%;
+  align-items: center;
 }
 
 .changebtn{
@@ -233,4 +272,8 @@ img.userImage1 {
   font-size: 0.9rem;
   font-weight: 700;
   font-family: var(--bp-font);
+}
+
+img.check{
+  align-items: center;
 }

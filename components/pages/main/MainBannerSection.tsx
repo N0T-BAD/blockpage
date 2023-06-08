@@ -80,9 +80,14 @@ export default function MainBannerSection() {
         <Slider {...sliderSettings}>
           {mainBannerData.data.map((data) => (
             <div className={style.bannerWrap} key={data.webtoonId} onClick={() => handler(data.webtoonId)}>
-              {/* <div className={style.bannerImg}>
-                <Image src={data.cutoutImage} alt={data.webtoonTitle} width={200} height={200} priority />
-              </div> */}
+              {data.cutoutImage === null ?
+                <div className={style.bannerImg}>
+                </div>
+                :
+                <div className={style.bannerImg}>
+                  <Image src={data.cutoutImage} alt={data.webtoonTitle} width={200} height={200} priority />
+                </div>
+              }
               <div className={style.line}></div>
               <p>{data.webtoonTitle}</p>
               <p className={style.option}>{data.genre}</p>
