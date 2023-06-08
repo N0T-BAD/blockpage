@@ -29,9 +29,10 @@ export default function TotalHeader() {
             setTitle('결제 완료')
         } else if (path === '/game') {
             setTitle('게임')
+        } else if (path === '/store') {
+            setTitle('스토어')
         }
     }, [router.pathname])
-
 
     return (
 
