@@ -129,47 +129,56 @@ export default function AuthorSubCategory({ active, defaultActive }: { active: s
               {
                 category.name === '웹툰 조회' ?
                   <>
-                    {webtoonList.data.map((webtoonsubcategory) => (
+                    {webtoonList.data.length ? (
                       <>
-                        <div className={style.webtoonBox} key={webtoonsubcategory.webtoonId}>
-                          <div className={style.webtoonInfoWrap} onClick={() => handleEpisodeClick(webtoonsubcategory.webtoonId)}>
-                            <div className={style.ImgWrap}>
-                              <Image src={webtoonsubcategory.webtoonThumbnail} alt={webtoonsubcategory.webtoonTitle} width={140} height={120} />
-                            </div>
-                            <div className={style.contentWrap}>
-                              <p className={style.genreoption}>{getGenreTypeString(webtoonsubcategory.genre)}</p>
-                              <p className={style.title}>{webtoonsubcategory.webtoonTitle}</p>
-                              <p className={style.author}>{webtoonsubcategory.creator}, {webtoonsubcategory.illustrator}</p>
-                              <div className={style.option}>
-                                <div className={style.views}>
-                                  <Image src={'/assets/images/icons/views.svg'} alt={'조회 수'} width={15} height={15} />
-                                  <p className={style.viewstxt}>{webtoonsubcategory.views}</p>
+                        {webtoonList.data.map((webtoonsubcategory) => (
+                          <>
+                            <div className={style.webtoonBox} key={webtoonsubcategory.webtoonId}>
+                              <div className={style.webtoonInfoWrap} onClick={() => handleEpisodeClick(webtoonsubcategory.webtoonId)}>
+                                <div className={style.ImgWrap}>
+                                  <Image src={webtoonsubcategory.webtoonThumbnail} alt={webtoonsubcategory.webtoonTitle} width={140} height={120} />
                                 </div>
-                                <div className={style.likes}>
-                                  <Image src={'/assets/images/icons/likes.svg'} alt={'좋아요 수'} width={12} height={12} />
-                                  <p className={style.likestxt}>{webtoonsubcategory.interestCount}</p>
+                                <div className={style.contentWrap}>
+                                  <p className={style.genreoption}>{getGenreTypeString(webtoonsubcategory.genre)}</p>
+                                  <p className={style.title}>{webtoonsubcategory.webtoonTitle}</p>
+                                  <p className={style.author}>{webtoonsubcategory.creator}, {webtoonsubcategory.illustrator}</p>
+                                  <div className={style.option}>
+                                    <div className={style.views}>
+                                      <Image src={'/assets/images/icons/views.svg'} alt={'조회 수'} width={15} height={15} />
+                                      <p className={style.viewstxt}>{webtoonsubcategory.views}</p>
+                                    </div>
+                                    <div className={style.likes}>
+                                      <Image src={'/assets/images/icons/likes.svg'} alt={'좋아요 수'} width={12} height={12} />
+                                      <p className={style.likestxt}>{webtoonsubcategory.interestCount}</p>
+                                    </div>
+                                  </div>
+                                  <p className={style.author}>{webtoonsubcategory.webtoonStatus}</p>
                                 </div>
                               </div>
-                              <p className={style.author}>{webtoonsubcategory.webtoonStatus}</p>
+                              <div className={style.webtoonButton}>
+                                {webtoonsubcategory.webtoonStatus === "수정 요청" ?
+                                  ""
+                                  :
+                                  <button onClick={() => handlechangewebtoonClick(webtoonsubcategory.webtoonId)}>수정</button>
+                                }
+                                {
+                                  webtoonsubcategory.webtoonStatus === "삭제 요청" ?
+                                    ""
+                                    :
+                                    <button onClick={() => handleDeleteWebtoonClick(webtoonsubcategory.webtoonTitle, webtoonsubcategory.webtoonStatus)}>삭제</button>
+                                }
+                              </div>
                             </div>
-                          </div>
-                          <div className={style.webtoonButton}>
-                            {webtoonsubcategory.webtoonStatus === "수정 요청" ?
-                              ""
-                              :
-                              <button onClick={() => handlechangewebtoonClick(webtoonsubcategory.webtoonId)}>수정</button>
-                            }
-                            {
-                              webtoonsubcategory.webtoonStatus === "삭제 요청" ?
-                                ""
-                                :
-                                <button onClick={() => handleDeleteWebtoonClick(webtoonsubcategory.webtoonTitle, webtoonsubcategory.webtoonStatus)}>삭제</button>
-                            }
-                          </div>
-                        </div>
+                          </>
+                        ))}
+                        <WebtoonListFooter />
                       </>
-                    ))}
-                    <WebtoonListFooter />
+                    ) : (
+                      <div className={style.sorrybox}>
+                        <Image src={'/assets/images/icons/Sorry.gif'} alt={'Sorry'} width={100} height={100} />
+                        <p>작품이 없습니다.</p>
+                      </div>
+                    )}
                   </>
                   :
                   category.name === '정산 & 통계' ?

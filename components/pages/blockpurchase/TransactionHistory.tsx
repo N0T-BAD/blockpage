@@ -11,6 +11,7 @@ const TransectionHistory = () => {
   const { data: session } = useSession()
   // const role = sessionStorage.getItem('role');
   const [active, setActive] = useState('');
+  const [defaultActive] = useState("충전 내역");
   const [chargeBlock, setChargeBlock] = useState<BlockPurchase>(
     {
       data: [{
@@ -43,6 +44,24 @@ const TransectionHistory = () => {
       }]
     }
   )
+
+  useEffect(() => {
+    axios.get("https://blockpage.site/block-service/v1/payments?type=gain", {
+      headers: {
+        'Content-Type': 'application/json',
+        memberId: session?.email,
+        // role: role,
+      },
+    })
+      .then((res) => {
+        setChargeBlock(res.data)
+        console.log(chargeBlock)
+        setRefund(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
 
   const handleCategoryClick = (name: string) => {
     setActive(name);
@@ -126,7 +145,7 @@ const TransectionHistory = () => {
             {TransactionHistoryData.map((category) => (
               <li
                 key={category.id}
-                className={category.name === active ? `${style.active}` : ""}
+                className={category.name === (active || defaultActive) ? `${style.active}` : ""}
                 onClick={() => handleCategoryClick(category.name)}
               >
                 {category.name}
@@ -137,7 +156,7 @@ const TransectionHistory = () => {
       </div>
 
       {TransactionHistoryData.map((category) => (
-        <div className={category.name === active ? `${style.Clickactive}` : `${style.NoClickactive}`} key={category.id}>
+        <div className={category.name === (active || defaultActive) ? `${style.Clickactive}` : `${style.NoClickactive}`} key={category.id}>
           {
             category.name === '충전 내역' ?
               <>

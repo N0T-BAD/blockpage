@@ -96,7 +96,7 @@ export default function EpisodelistBox() {
 
   return (
     <>
-      {episodeData.data && webtoonData.data ? (
+      {episodeData.data && webtoonData.data && episodeData.data.length ? (
         webtoonData.data && episodeData.data.map((episodeData) => (
           <div className={style.webtoonBox} key={episodeData.episodeNumber}>
             <div className={style.webtoonInfoWrap}>
@@ -140,7 +140,12 @@ export default function EpisodelistBox() {
           </div>
         )))
         :
-        <></>
+        (
+          <div className={style.sorrybox}>
+            <Image src={'/assets/images/icons/Sorry.gif'} alt={'Sorry'} width={100} height={100} />
+            <p>작품이 없습니다.</p>
+          </div>
+        )
       }
     </>
   );
