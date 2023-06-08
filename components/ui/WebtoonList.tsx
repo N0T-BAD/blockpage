@@ -40,6 +40,10 @@ export default function WebtoonList(props: { data: listviewDataType }) {
             props.data.uploadDate &&
             <p className={style.infoTxt}>{props.data.uploadDate}</p>
           }
+          {
+            props.data.episodeNumber &&
+            <p className={style.infoTxt}>{props.data.episodeNumber}화</p>
+          }
         </div>
       </div>
       <Separator color='var(--bp-line-gray)' gutter={0.5} />

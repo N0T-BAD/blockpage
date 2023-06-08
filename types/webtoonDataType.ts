@@ -1,7 +1,7 @@
 export interface WebToonListDataType {
   data: {
     webtoonTitle: string;
-    webtoonThumnail: string;
+    webtoonThumbnail: string;
     creator: string;
     illustrator: string;
     description: string;
