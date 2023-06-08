@@ -4,8 +4,6 @@ import UserIcon from '@/components/pages/mypage/UserIcon'
 import UserProfileImg from '@/components/ui/UserProfileImg'
 import axios from 'axios'
 import { ChangeUserDataType, UserImgData } from '@/types/changeUserDataType'
-import { authorNickname } from '@/types/authorNameDataType'
-import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
 import { authornickname, usernickname } from '@/state/mypage/usernickname'
 import { useRecoilState } from 'recoil'
@@ -15,7 +13,6 @@ export default function UserNickName() {
 
   const { data: session } = useSession()
   // const role = sessionStorage.getItem('role');
-  const router = useRouter();
 
   const [userNickname, setUserNickname] = useRecoilState<ChangeUserDataType>(usernickname);
 
@@ -42,7 +39,7 @@ export default function UserNickName() {
           }
         })
         console.log(res.data)
-        console.log(userNickname)
+        console.log(userImg)
       }
       catch (err) {
         console.log(err);

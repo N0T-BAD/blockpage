@@ -178,7 +178,7 @@ export default function EpisodeInfoForm() {
           <div className={style.numberBox}>
             <div className={style.episodeInfoNumberBox}>
               <p>업로드 일 :</p>
-              <input type="text" name="uploadDate" onChange={handleInput} />
+              <input type="text" name="uploadDate" onChange={handleInput} placeholder='20230408' />
             </div>
             <p className={style.info}>숫자만 입력해주세요.</p>
           </div>

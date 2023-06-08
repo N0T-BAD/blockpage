@@ -1,14 +1,17 @@
-/* .episodeSection {} */
-
 .episode {
   display: flex;
+  padding: 0.3rem 0;
+}
+
+.imgWrap {
+  position: relative;
+  width: 30%;
 }
 
 .episodeImg {
-  width: 40%;
-  height: 80px;
-  overflow: hidden;
-  margin-right: 1rem;  
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .episodeImg img {
@@ -16,16 +19,32 @@
   height: auto;
 }
 
+.brightness {
+  filter: brightness(0.5);
+}
+
+.imgLock {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+}
+
 .episodeContents {
-  width: 60%;
+  width: 48%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-left: 1rem;
 }
 
 .subject {
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1rem;
+}
+
+.priceBlock {
+  font-size: 0.9rem;
+  color: var(--bp-secondary);
 }
 
 .rating {
@@ -42,4 +61,18 @@
 .episodeOption {
   display: flex;
   align-items: baseline;
+}
+
+.leftTimer {
+  width: 22%;
+  display: flex;
+  align-items: center;
+}
+
+.leftTimer p {
+  width: 100%;
+  text-align: right;
+  font-size: 0.8rem;
+  color: var(--bp-font-gray);
+  word-break: keep-all;
 }
