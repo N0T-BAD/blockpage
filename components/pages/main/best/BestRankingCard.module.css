@@ -10,11 +10,18 @@
   }
 }
 
+p.daysTitle {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
 .BestRankingCard {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   width: 100%;
+  margin : 0.7rem 0;
 }
 
 .contentWrap {
@@ -181,7 +188,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin : 2rem 0;
+  margin : 1rem 0;
 }
 
 .categoryRow .item {

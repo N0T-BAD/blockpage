@@ -1,7 +1,7 @@
 .BestTotalButtonBox {
   display: flex;
   justify-content: center;
-  margin: 1rem;
+  margin: 3rem 1rem 1rem 1rem;
 }
 
 .BestTotalButton {

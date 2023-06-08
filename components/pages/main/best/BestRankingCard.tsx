@@ -94,7 +94,7 @@ export default function BestRankingCard() {
 
   return (
     <>
-      <p>요일별 웹툰</p>
+      <p className={style.daysTitle}>요일별 웹툰</p>
       <div className={style.categoryRow}>
         {categoryMenuData.map((data) => (
           <div className={data.id === (active || defaultActive) ? `${style.activeitem}` : `${style.item}`} key={data.id} onClick={() => handleMainCategory(data.id)}>
