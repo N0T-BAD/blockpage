@@ -8,12 +8,13 @@ section.mainBannerSection {
 }
 
   .bannerImg {
-    width: 80%;
+    width: 180px;
+    height: 200px;
     margin-bottom: 1rem;
   }
   .bannerImg img {
     width: 100%;
-    height: auto;
+    height: 100%;
   }
   
   .bannerWrap h2 {

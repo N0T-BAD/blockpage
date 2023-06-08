@@ -8,7 +8,7 @@ export default function Episode(props: {
   subject: string,
   thumbnail: string,
   leftTimer?: string,
-  price: number,
+  price?: number,
   rating?: number,
   uploadDate?: string,
 }) {

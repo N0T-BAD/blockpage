@@ -6,6 +6,7 @@ export const gameEventData = [
     imgUrl: "/assets/dummy/03.png",
     color: "blue",
     path: "/game/1",
+    name: "lotto"
   },
   {
     id: 2,
@@ -14,5 +15,6 @@ export const gameEventData = [
     imgUrl: "/assets/dummy/02.png",
     color: "red",
     path: "/game/2",
+    name: "roulette"
   }
 ]

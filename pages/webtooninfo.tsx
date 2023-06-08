@@ -3,7 +3,7 @@ import { NextPageWithLayout } from "@/pages/_app"
 import AuthorWebtooninfoBottomSection from "@/components/pages/webtooninfo/AuthorWebtooninfoBottomSection"
 import TotalLayout from "@/components/layouts/TotalLayout"
 
-const webtooninfo: NextPageWithLayout = () => {
+const Webtooninfo: NextPageWithLayout = () => {
     return (
         <>
             <AuthorWebtooninfoTopSection />
@@ -12,14 +12,14 @@ const webtooninfo: NextPageWithLayout = () => {
     )
 }
 
-webtooninfo.getLayout = function getLayout(webtooninfo: React.ReactElement) {
+Webtooninfo.getLayout = function getLayout(page: React.ReactElement) {
     return (
         <TotalLayout>
-            {webtooninfo}
+            {page}
         </TotalLayout>
     )
 }
 
-export default webtooninfo
+export default Webtooninfo
 
-webtooninfo.auth = true
+Webtooninfo.auth = true
