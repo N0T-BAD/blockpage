@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react';
+import axios from 'axios';
 
 import style from '@/components/pages/episodeviewer/FooterViewer.module.css'
+
 import BackBtn from '@/components/ui/BackBtn';
 import CloseBtn from '@/components/ui/CloseBtn';
 import Episode from '../webtoonepisode/Episode';
 import { EpisodeViewDataType } from '@/types/webtoonDataType';
 import RatingModal from '@/components/modals/RatingModal';
-import axios from 'axios';
-import { useSession } from 'next-auth/react';
+import DataFetchingLoader from '@/components/widgets/DataFetchingLoader';
+import LoginGuide from '@/components/modals/LoginGuide';
 
 export default function FooterViewer(props: { episodeData: EpisodeViewDataType, isViewer: boolean, setIsViewer: React.Dispatch<React.SetStateAction<boolean>> }) {
 
@@ -29,7 +32,11 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
   const nextNumber = Number(episodeNumber) + 1;
 
   const handleShowRating = () => {
-    setShowModal(!showModal);
+    if (session) {
+      setShowModal(!showModal);
+    } else {
+      router.push('/login');
+    }
   }
 
   const handleIsRating = () => {
@@ -48,7 +55,6 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
         })
         .catch((err) => {
           console.log(err);
-          alert(err.response.data);
         })
     }
 
