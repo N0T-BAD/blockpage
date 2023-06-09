@@ -11,8 +11,6 @@ import CloseBtn from '@/components/ui/CloseBtn';
 import Episode from '../webtoonepisode/Episode';
 import { EpisodeViewDataType } from '@/types/webtoonDataType';
 import RatingModal from '@/components/modals/RatingModal';
-import DataFetchingLoader from '@/components/widgets/DataFetchingLoader';
-import LoginGuide from '@/components/modals/LoginGuide';
 
 export default function FooterViewer(props: { episodeData: EpisodeViewDataType, isViewer: boolean, setIsViewer: React.Dispatch<React.SetStateAction<boolean>> }) {
 
@@ -63,18 +61,20 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
   }
 
   useEffect(() => {
-    axios.get(`https://blockpage.site/member-service/v1/ratings/${episodeId}`, {
-      headers: {
-        memberId: session?.email
-      }
-    })
-      .then((res) => {
-        console.log(res);
-        setValue(res.data.data.ratings)
+    if (session) {
+      axios.get(`https://blockpage.site/member-service/v1/ratings/${episodeId}`, {
+        headers: {
+          memberId: session?.email
+        }
       })
-      .catch((err) => {
-        console.log(err);
-      })
+        .then((res) => {
+          console.log(res);
+          setValue(res.data.data.ratings)
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
   }, [])
 
   return (
@@ -136,6 +136,7 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
                 thumbnail={data.nextEpisodeThumbnail}
                 rating={data.rating}
                 uploadDate={data.nextUploadDate}
+                price={data.nextEpisodeBlockPrice}
               />
             </div>
             :
@@ -177,7 +178,7 @@ const NavFooter = (props: { author: string }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIsViewer(false);
-    }, 3000);
+    }, 2000);
     return () => clearInterval(interval);
   }, []);
 
