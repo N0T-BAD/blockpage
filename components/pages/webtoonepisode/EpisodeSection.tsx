@@ -70,7 +70,6 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
                 text: '구매가 완료되었습니다.',
                 showConfirmButton: false,
                 timer: 2000
-              }).then(result => {
               })
             }
           })
@@ -155,11 +154,11 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
               item.isRead === true ?
                 () => handleEpisode('episodeBMPaid', 'rental', item.episodeId, item.episodeNumber, item.episodePrice, false) :
                 !session?.email ?
-                  () => console.log('로그인페이지로 이동')
+                  () => router.push('/login')
                   :
                   myBlock >= 4 ?
                     () => handleShowModal(item.episodeId, item.episodeNumber, item.episodePrice) :
-                    () => console.log('블럭 충전 페이지로 이동')
+                    () => router.push('/blockcharge')
             }
           >
             {

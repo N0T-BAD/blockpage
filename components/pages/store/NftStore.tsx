@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Image from 'next/image'
 import { useSession } from 'next-auth/react';
 import axios from 'axios';
 
@@ -71,22 +70,23 @@ export default function NftStore(props: { data: userDataType }) {
   }
 
   useEffect(() => {
-    if (session) {
-      axios.all([
-        axios.get(`https://blockpage.site/purchase-service/v1/products?type=nft`),
-        axios.get(`https://blockpage.site/block-service/v1/blocks`, {
-          headers: { memberId: session.email }
-        }),
-      ])
-        .then(
-          axios.spread((res1, res2) => {
-            console.log(res1);
-            setNftData(res1.data.data);
+    axios.get(`https://blockpage.site/purchase-service/v1/products?type=nft`)
+      .then((res) => {
+        console.log(res);
+        setNftData(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-            console.log(res2);
-            setMyBlock(res2.data.data.totalBlocks)
-          })
-        )
+    if (session) {
+      axios.get(`https://blockpage.site/block-service/v1/blocks`, {
+        headers: { memberId: session.email }
+      })
+        .then((res) => {
+          console.log(res);
+          setMyBlock(res.data.data.totalBlocks)
+        })
         .catch((err) => {
           console.log(err);
         });

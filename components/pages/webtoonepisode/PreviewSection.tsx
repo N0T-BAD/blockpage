@@ -7,7 +7,7 @@ import { EpisodeViewListType } from '@/types/webtoonDataType';
 export default function PreviewSection(props: { isPreviewSection: boolean, handleView: () => void, priceData: EpisodeViewListType[] }) {
   return (
     <section className={style.previewSection}>
-      <div className={style.previewDiv} onClick={props.handleView}>
+      <div className={props.isPreviewSection ? `${style.previewDiv}` : `${style.previewDivTrue}`} onClick={props.handleView}>
         <div className={style.previewTxtDiv}>
           {
             !props.isPreviewSection ?
