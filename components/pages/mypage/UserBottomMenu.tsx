@@ -47,9 +47,11 @@ export default function UserBottomMenu() {
             title: '출석 완료!',
             text: res.data.message,
             showConfirmButton: false,
-            timer: 5000
+            timer: 2000
           })
-          window.location.reload();
+            .then(() => {
+              window.location.reload();
+            })
         }
       })
       .catch((err) => {
