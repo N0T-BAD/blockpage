@@ -70,7 +70,6 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
                 text: '구매가 완료되었습니다.',
                 showConfirmButton: false,
                 timer: 2000
-              }).then(result => {
               })
             }
           })

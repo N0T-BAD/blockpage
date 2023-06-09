@@ -11,6 +11,7 @@ import CloseBtn from '@/components/ui/CloseBtn';
 import Episode from '../webtoonepisode/Episode';
 import { EpisodeViewDataType } from '@/types/webtoonDataType';
 import RatingModal from '@/components/modals/RatingModal';
+import Swal from 'sweetalert2';
 
 export default function FooterViewer(props: { episodeData: EpisodeViewDataType, isViewer: boolean, setIsViewer: React.Dispatch<React.SetStateAction<boolean>> }) {
 
@@ -33,12 +34,26 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
     if (session) {
       setShowModal(!showModal);
     } else {
-      router.push('/login');
+      Swal.fire({
+        icon: 'warning',
+        text: '로그인이 필요한 서비스입니다.',
+        showConfirmButton: false,
+        timer: 2000
+      }).then(result => {
+        router.push('/login');
+      })
     }
   }
 
   const handleIsRating = () => {
-    if (session) {
+    if (value === 0) {
+      Swal.fire({
+        icon: 'warning',
+        text: '1~10을 입력해주세요',
+        showConfirmButton: false,
+        timer: 2000
+      })
+    } else if (session) {
       axios.post(`https://blockpage.site/member-service/v1/ratings`, {
         episodeId: episodeId,
         webtoonId: webtoonId,
@@ -50,14 +65,13 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
       })
         .then((res) => {
           console.log(res);
+          setIsRating(!isRating);
+          setShowModal(!showModal);
         })
         .catch((err) => {
           console.log(err);
         })
     }
-
-    setIsRating(!isRating);
-    setShowModal(!showModal);
   }
 
   useEffect(() => {
@@ -128,7 +142,10 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
           data.nextEpisodeThumbnail !== "" ?
             <div
               className={style.nextEpisode}
-              onClick={() => router.push(`/webtoon/${webtoonId}/episode/${nextId}/episode/${nextNumber}`)}
+              onClick={
+
+                () => router.push(`/webtoon/${webtoonId}/episode/${nextId}/episode/${nextNumber}`)
+              }
             >
               <p className={style.nextTxt}>다음화</p>
               <Episode
@@ -194,7 +211,17 @@ const NavFooter = (props: { author: string }) => {
           pathname: `/webtoon/${webtoonId}/episode/${episodeId}/episode/${episodeNumber}/comment`,
           query: { author: props.author },
         }
-      ) : () => router.push('/login')
+      ) : () => {
+        Swal.fire({
+          icon: 'warning',
+          text: '로그인이 필요한 서비스입니다.',
+          showConfirmButton: false,
+          timer: 2000
+        }).then(result => {
+          router.push('/login');
+        })
+      }
+
       }>
         <Image
           src={'/assets/images/icons/comment.svg'}

@@ -8,6 +8,7 @@ import style from '@/components/layouts/header/WebtoonHeader.module.css'
 import BackBtn from '@/components/ui/BackBtn'
 import LikeButton from '@/components/ui/LikeButton'
 import { WebToonDataType } from '@/types/webtoonDataType';
+import Swal from 'sweetalert2';
 
 interface likeStateType {
   id: number;
@@ -75,6 +76,15 @@ export default function WebtoonHeader() {
             console.log(err);
           })
       }
+    } else {
+      Swal.fire({
+        icon: 'warning',
+        text: '로그인이 필요한 서비스입니다.',
+        showConfirmButton: false,
+        timer: 2000
+      }).then(result => {
+        router.push('/login');
+      })
     }
   }
 

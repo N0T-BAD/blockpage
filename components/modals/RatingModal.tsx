@@ -58,7 +58,7 @@ export default function RatingModal(props: { handleShowRating: () => void, handl
               color='var(--bp-line-gray)'
               gutter={0}
             />
-            <p className={style.description}>최소 0점에서 10점까지</p>
+            <p className={style.description}>1점에서 10점까지</p>
             <div className={style.confirmBox}>
               <button type='button' className={style.confirm} onClick={props.handleIsRating}>확인</button>
             </div>
