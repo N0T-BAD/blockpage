@@ -45,37 +45,39 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
   }
 
   const handleEpisode = (paramEpisodeBM: string, paramPersistType: string, episodeId: number, episodeNumber: number, episodePrice: number, isRead: boolean) => {
-    if (isRead) {
-      axios.post(`https://blockpage.site/purchase-service/v1/purchases?type=${paramEpisodeBM}&webtoonId=${webtoonId}`, {
-        blockQuantity: episodePrice,
-        episodeId: episodeId,
-        persistType: paramPersistType,
-        webtoonTitle: webtoonData.webtoonTitle,
-        episodeNumber: episodeNumber,
-        webtoonThumbnail: webtoonData.webtoonThumbnail,
-        creator: webtoonData.creator,
-        illustrator: webtoonData.illustrator,
-        genre: webtoonData.genre,
-      }, {
-        headers: {
-          memberId: session?.email,
-        }
-      })
-        .then((res) => {
-          if (episodePrice !== 0) {
-            Swal.fire({
-              icon: 'success',
-              title: episodeNumber + '화',
-              text: '구매가 완료되었습니다.',
-              showConfirmButton: false,
-              timer: 2000
-            }).then(result => {
-            })
+    if (session?.email) {
+      if (isRead) {
+        axios.post(`https://blockpage.site/purchase-service/v1/purchases?type=${paramEpisodeBM}&webtoonId=${webtoonId}`, {
+          blockQuantity: episodePrice,
+          episodeId: episodeId,
+          persistType: paramPersistType,
+          webtoonTitle: webtoonData.webtoonTitle,
+          episodeNumber: episodeNumber,
+          webtoonThumbnail: webtoonData.webtoonThumbnail,
+          creator: webtoonData.creator,
+          illustrator: webtoonData.illustrator,
+          genre: webtoonData.genre,
+        }, {
+          headers: {
+            memberId: session?.email,
           }
         })
-        .catch((err) => {
-          console.log(err);
-        });
+          .then((res) => {
+            if (episodePrice !== 0) {
+              Swal.fire({
+                icon: 'success',
+                title: episodeNumber + '화',
+                text: '구매가 완료되었습니다.',
+                showConfirmButton: false,
+                timer: 2000
+              }).then(result => {
+              })
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     }
 
     router.push(`/webtoon/${webtoonId}/episode/${episodeId}/episode/${episodeNumber}`);
@@ -152,9 +154,12 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
             onClick={
               item.isRead === true ?
                 () => handleEpisode('episodeBMPaid', 'rental', item.episodeId, item.episodeNumber, item.episodePrice, false) :
-                myBlock >= 4 ?
-                  () => handleShowModal(item.episodeId, item.episodeNumber, item.episodePrice) :
-                  () => console.log('블럭 충전 페이지로 이동')
+                !session?.email ?
+                  () => console.log('로그인페이지로 이동')
+                  :
+                  myBlock >= 4 ?
+                    () => handleShowModal(item.episodeId, item.episodeNumber, item.episodePrice) :
+                    () => console.log('블럭 충전 페이지로 이동')
             }
           >
             {

@@ -28,7 +28,7 @@ export default function WebtoonHeader() {
         axios.get(`https://blockpage.site/member-service/view/v1/interest`, {
           headers: { memberId: session.email },
           params: { webtoonId: webtoonId },
-        },)
+        })
       ])
         .then(
           axios.spread((res1, res2) => {
