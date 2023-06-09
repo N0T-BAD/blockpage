@@ -174,6 +174,15 @@ export default function ChangeUserInfo() {
     }
   }
 
+  const handleAdult = () => {
+    Swal.fire({
+      icon: 'error',
+      title: '준비중인 서비스입니다.',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+
   return (
     <div className={style.userInfoWrap}>
       <section className={style.ChangeUserInfoTopSection}>
@@ -293,7 +302,7 @@ export default function ChangeUserInfo() {
             <p className={style.profileSkintxt}>성인 인증</p>
             <div className={style.certificationBox}>
               <p className={style.certificationtxt}>성인 인증을 하시면 다양한 작품을 감상할 수 있습니다.</p>
-              <button className={style.changebtn}>인증</button>
+              <button className={style.changebtn} onClick={handleAdult}>인증</button>
             </div>
           </div>
         </div>

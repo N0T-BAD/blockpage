@@ -3,7 +3,7 @@ import TransactionHistorySection from "@/components/pages/blockpurchase/Transact
 import BlockChargeLayout from "@/components/layouts/BlockChargeLayout"
 import BlockPurchaseTopSection from "@/components/pages/blockpurchase/BlockPurchaseTopSection"
 
-const blockpurchase: NextPageWithLayout = () => {
+const Blockpurchase: NextPageWithLayout = () => {
   return (
     <>
       <BlockPurchaseTopSection />
@@ -12,7 +12,7 @@ const blockpurchase: NextPageWithLayout = () => {
   )
 }
 
-blockpurchase.getLayout = function getLayout(blockpurchase: React.ReactElement) {
+Blockpurchase.getLayout = function getLayout(blockpurchase: React.ReactElement) {
   return (
     <BlockChargeLayout>
       {blockpurchase}
@@ -20,5 +20,6 @@ blockpurchase.getLayout = function getLayout(blockpurchase: React.ReactElement) 
   )
 }
 
-export default blockpurchase
+export default Blockpurchase
 
+Blockpurchase.auth = true
