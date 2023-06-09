@@ -1,23 +1,17 @@
 import { GetServerSideProps } from "next"
+import { getServerSession } from "next-auth"
+import { authOptions } from "../api/auth/[...nextauth]"
+import axios from "axios"
 
 import ArchiveLayout from "@/components/layouts/ArchiveLayout"
 import ArchiveDataSection from "@/components/pages/webtoonarchive/ArchiveDataSection"
-
-import { historyListContentData, purchaseListContentData } from "@/data/dummy/listviewData"
 import { listviewDataType } from "@/types/listviewDataType"
-import axios from "axios"
-import { getServerSession } from "next-auth"
-import { authOptions } from "../api/auth/[...nextauth]"
+import DataFetchingLoader from "@/components/widgets/DataFetchingLoader"
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
   const { archiveName } = context.query;
-  const { webtoonId } = context.query;
   const session = await getServerSession(context.req, context.res, authOptions);
-  // server에서 데이터 불러와서 서버사이드에서 렌더링하기 위해 데이터 받아오기
-  // const res = fetch(`http://localhost:3000/api/webtoonArchive/${archiveName}`);
-  // const data = await res.data.json();
 
-  const dummyData = historyListContentData;
   if (session) {
     if (archiveName === 'favorite') {
       const res = await axios.get(`https://blockpage.site/member-service/v1/interests`, {
@@ -51,7 +45,7 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
       }
     }
   }
-  const data = dummyData;
+  const data = "";
   return {
     props: { data }
   }
@@ -76,3 +70,8 @@ WebtoonArchive.getLayout = function getLayout(history: React.ReactElement) {
 }
 
 export default WebtoonArchive
+
+WebtoonArchive.auth = {
+  loading: <DataFetchingLoader text="load" />,
+  unauthorized: '/login',
+}
