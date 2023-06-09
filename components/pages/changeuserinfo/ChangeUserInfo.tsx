@@ -102,6 +102,27 @@ export default function ChangeUserInfo() {
     });
   };
 
+  const handleProfileSkinSubmit = () => {
+    console.log(check)
+    axios.put('https://blockpage.site/purchase-service/v1/purchases?type=profileSkin', {
+      memberProfileSkinId: check,
+    }, {
+      headers: {
+        memberId: session?.email || '',
+        // role: role,
+      },
+    })
+      .then((res) => {
+        console.log(res.data)
+        Swal.fire({
+          icon: 'success',
+          title: '변경되었습니다.',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      })
+  }
+
   const handleuserProfileImage = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const reader = new FileReader();
@@ -185,8 +206,8 @@ export default function ChangeUserInfo() {
 
   return (
     <div className={style.userInfoWrap}>
-      <section className={style.ChangeUserInfoTopSection}>
-        <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
+        <section className={style.ChangeUserInfoTopSection}>
           <div className={style.usernicknameImgBox}>
             <div className={style.usernicknameImg}>
               <p className={style.profileSkintxt}>회원 정보</p>
@@ -226,30 +247,37 @@ export default function ChangeUserInfo() {
                   </div>
 
                   <div className={style.infobox}>
-                    <div className={style.btn_input_box}>
-                      <p className={style.nicknametext}>닉네임</p>
-                      {userNickname.data.nickname && userNickname.data.nickname.length > 0 ?
-                        <input className={style.usernickname2} type='text' defaultValue={userNickname.data.nickname} onChange={handleChange} />
-                        :
-                        <input className={style.usernickname2} type='text' onChange={handleChange} />
-                      }
-                    </div>
                     <div className={style.btn_input_box2}>
                       <label className={style.uploadBtn}>
                         <input type="file" accept="image/*" onChange={handleuserProfileImage} />
-                        <p>upload</p>
+                        <p>프로필 변경</p>
                       </label>
-                      <p className={style.basicimg} onClick={handleBasicImageChange}>기본 이미지</p>
+                      <p className={style.basicimg} onClick={handleBasicImageChange}>기본 프로필</p>
                     </div>
                   </div>
                 </>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className={style.ChangeUserInfoMiddleSection}>
+          <div className={style.usernicknameImgBox}>
+            <div className={style.usernicknameImg}>
+              <p className={style.profileSkintxt}>닉네임 변경</p>
+              <div className={style.btn_input_box}>
+                <p className={style.nicknametext}>닉네임</p>
+                {userNickname.data.nickname && userNickname.data.nickname.length > 0 ?
+                  <input className={style.usernickname2} type='text' defaultValue={userNickname.data.nickname} onChange={handleChange} />
+                  :
+                  <input className={style.usernickname2} type='text' onChange={handleChange} />
+                }
+              </div>
               <button type="submit" className={style.changebtn}>변경</button>
             </div>
           </div>
-        </form>
-      </section>
-
+        </section>
+      </form>
 
       <section className={style.ChangeUserInfoMiddleSection}>
         <div className={style.usernicknameImgBox}>
@@ -292,7 +320,7 @@ export default function ChangeUserInfo() {
                 </div>
               </div>
             </div>
-            <button type="submit" className={style.changebtn}>변경</button>
+            <button type="button" className={style.changebtn} onClick={handleProfileSkinSubmit}>변경</button>
           </div>
         </div>
       </section>
