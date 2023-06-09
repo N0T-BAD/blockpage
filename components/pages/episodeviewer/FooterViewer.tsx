@@ -152,6 +152,8 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
 }
 
 const NavFooter = (props: { author: string }) => {
+  const { data: session } = useSession();
+
   const router = useRouter();
   const { webtoonId } = router.query;
   const { episodeId } = router.query;
@@ -186,12 +188,13 @@ const NavFooter = (props: { author: string }) => {
           onClick={() => router.back()}
         />
       </div>
-      <div className={style.btn} onClick={() => router.push(
+      <div className={style.btn} onClick={session ? () => router.push(
         {
           pathname: `/webtoon/${webtoonId}/episode/${episodeId}/episode/${episodeNumber}/comment`,
           query: { author: props.author },
         }
-      )}>
+      ) : () => router.push('/login')
+      }>
         <Image
           src={'/assets/images/icons/comment.svg'}
           alt="commentBtnIcon"
