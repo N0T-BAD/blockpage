@@ -178,7 +178,7 @@ p.daysTitle {
   font-weight: 700;
   font-size: 1rem;
   background-color: var(--bp-primary);
-  z-index: 1;
+  z-index: 100;
   color: var(--bp-white);
   display: flex;
   justify-content: center;
