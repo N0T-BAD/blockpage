@@ -1,28 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
 import axios from 'axios';
 
-import style from '@/components/pages/store/ProfileStore.module.css'
-import { skinDataType, userDataType } from '@/types/storeDataType';
+import style from '@/components/pages/store/NftStore.module.css'
+import { nftDataType, skinDataType, userDataType } from '@/types/storeDataType';
 import ProfileSkin from './ProfileSkin';
 import SkinPurchaseModal from '@/components/modals/SkinPurchaseModal';
 import Swal from 'sweetalert2';
+import NftData from './NftData';
 
-export default function ProfileStore(props: { data: userDataType }) {
+export default function NftStore(props: { data: userDataType }) {
 
   const { data: session } = useSession();
 
-  const router = useRouter();
-
   const [confirm, setConfirm] = useState<boolean>(false);
+
   const [myBlock, setMyBlock] = useState<number>(0);
   const [selectedSkinId, setSelectedSkinId] = useState<number>(0);
   const [selectedSkinName, setSeletedSkinName] = useState<string>('');
   const [selectedSkinImage, setSelectedSkinImage] = useState<string>('');
   const [blockQuantity, setBlockQuantity] = useState<number>(0);
-  const [skinData, setSkinData] = useState<skinDataType[]>([]);
+  const [nftData, setNftData] = useState<nftDataType[]>([]);
   const userData = props.data;
 
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -72,27 +71,26 @@ export default function ProfileStore(props: { data: userDataType }) {
   }
 
   useEffect(() => {
-    axios.get(`https://blockpage.site/purchase-service/v1/products?type=profileSkin`)
-      .then((res) => {
-        console.log(res);
-        setSkinData(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
     if (session) {
-      axios.get(`https://blockpage.site/block-service/v1/blocks`, {
-        headers: { memberId: session.email }
-      })
-        .then((res) => {
-          console.log(res);
-          setMyBlock(res.data.data.totalBlocks)
-        })
+      axios.all([
+        axios.get(`https://blockpage.site/purchase-service/v1/products?type=nft`),
+        axios.get(`https://blockpage.site/block-service/v1/blocks`, {
+          headers: { memberId: session.email }
+        }),
+      ])
+        .then(
+          axios.spread((res1, res2) => {
+            console.log(res1);
+            setNftData(res1.data.data);
+
+            console.log(res2);
+            setMyBlock(res2.data.data.totalBlocks)
+          })
+        )
         .catch((err) => {
           console.log(err);
         });
-    };
+    }
   }, [session?.email, confirm])
 
   return (
@@ -107,69 +105,30 @@ export default function ProfileStore(props: { data: userDataType }) {
           handlePurchase={handlePurchase}
         />
       }
-      <section className={style.userImgSection}>
-        <div className={style.sectionProfileTxt}>
-          <p>내 프로필</p>
-          <p className={style.myBlock}>보유 블럭 {myBlock}</p>
-        </div>
-        <div className={style.userProfileDiv}>
-          <div className={style.userProfileImgDiv}>
-            {
-              //
-              session?.email ?
-                <Image
-                  src={userData.profileImage}
-                  alt='유저 프로필 이미지'
-                  width={80}
-                  height={80}
-                  priority
-                />
-                :
-                <Image
-                  src={'/assets/images/mypage/userImg.png'}
-                  alt='게스트 프로필 이미지'
-                  width={80}
-                  height={80}
-                  priority
-                />
-            }
-          </div>
-          <div className={style.selectedUserSkin}>
-            {
-              selectedSkinImage !== '' &&
-              <Image
-                src={selectedSkinImage}
-                alt='스킨 이미지'
-                width={80}
-                height={80}
-                priority
-              />
-            }
-          </div>
-        </div>
-      </section>
-      <section className={style.profileSkinSection}>
+      <section className={style.nftSection}>
         <div className={style.sectionTxt}>
-          <p>스킨 목록</p>
+          <p>NFT 목록</p>
         </div>
         <div className={style.skinImgList}>
           {
-            skinData &&
-            skinData.map((data) => (
-              <ProfileSkin
-                key={data.profileSkinId}
-                skinId={data.profileSkinId}
-                skinName={data.profileSkinName}
-                skinDescription={data.profileSkinDescription}
-                skinImage={data.profileSkinImage}
-                blockPrice={data.profileSkinBlockPrice}
+            nftData &&
+            nftData.map((data) => (
+              <NftData
+                key={data.nftId}
+                nftCreatorId={data.nftCreatorId}
+                nftMemberId={data.nftMemberId}
+                nftName={data.nftName}
+                nftDescription={data.nftDescription}
+                nftImage={data.nftImage}
+                nftBlockPrice={data.nftBlockPrice}
+                nftType={data.nftType}
                 handleSelectSkin={handleSelectSkin}
               />
             ))
           }
         </div>
         <div className={style.confirmBox}>
-          <button type='button' className={style.confirm} onClick={session ? () => router.push('/login') : () => setShowModal(true)}>구매</button>
+          <button type='button' className={style.confirm} onClick={() => setShowModal(true)}>구매</button>
         </div>
       </section>
     </>
