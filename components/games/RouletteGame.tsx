@@ -55,11 +55,11 @@ const RouletteGame = () => {
   // 정해진 alert띄우기, custom modal등
   const rLayerPopup = (num: number) => {
     if (num === 1) {
-      alert("당첨!! 스타벅스 아메리카노");
+      alert("당첨!! 블럭 2개 획득!!");
     } else if (num === 3) {
-      alert("당첨!! 햄버거 세트 교환권");
+      alert("당첨!! 블럭 2개 획득!!");
     } else if (num === 5) {
-      alert("당첨!! CU 3,000원 상품권");
+      alert("당첨!! 블럭 2개 획득!!");
     } else {
       alert("꽝! 다음기회에");
     }
@@ -82,6 +82,7 @@ const RouletteGame = () => {
 
   return (
     <div id="app" className={style.boxWrap}>
+      <p className={style.gameTitle}>룰렛 게임</p>
       <div className={style.rouletter}>
         <div className={style.rouletterbg}>
           <div className={style.rouletterwacu}></div>
