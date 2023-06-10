@@ -13,3 +13,14 @@ export interface userDataType {
   role: string;
   creatorNickname: string;
 }
+
+export interface nftDataType {
+  nftId: number;
+  nftCreatorId: string;
+  nftMemberId: string;
+  nftName: string;
+  nftDescription: string;
+  nftImage: string;
+  nftBlockPrice: number;
+  nftType: string;
+}

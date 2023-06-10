@@ -129,7 +129,9 @@ const TransectionHistory = () => {
                 showConfirmButton: false,
                 timer: 3000
               })
-              window.location.reload();
+                .then(() => {
+                  window.location.reload();
+                })
             }
           })
       } else if (result.isDenied) {
@@ -165,7 +167,7 @@ const TransectionHistory = () => {
                   (chargeBlock.data.map((chargeItem, index) => (
                     <div className={style.chargeBox} key={index}>
                       <div className={style.subhistorybox}>
-                        <p>{chargeItem.paymentTime}</p>
+                        <p className={style.chargedays}>{chargeItem.paymentTime}</p>
                         <div className={style.chargeBlockBox}>
                           <p>블럭 개수</p>
                           <p className={style.chargeBoxContent}>{chargeItem.blockQuantity} 개</p>
@@ -204,7 +206,7 @@ const TransectionHistory = () => {
                 <>
                   {useBlock.data.length ? (useBlock.data.map((useItem, index) => (
                     <div className={style.UseBox} key={index}>
-                      <p>{useItem.paymentTime}</p>
+                      <p className={style.chargedays}>{useItem.paymentTime}</p>
                       <div className={style.chargeBlockBox}>
                         <p>사용 블럭</p>
                         <p className={style.chargeBoxContent}>{useItem.blockQuantity}개</p>

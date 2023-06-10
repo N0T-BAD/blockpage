@@ -25,6 +25,7 @@
 
 .chargeBlockBox {
   display: flex;
+  margin: 0.2rem 0;
 }
 
 .chargeBlockBox p {
@@ -46,15 +47,13 @@
 }
 
 .subhistorybox {
-  padding-bottom: 1rem;
   width: 80%;
 }
 
 .UseBox {
-  padding-bottom: 1rem;
   width: 100%;
   border-bottom: 0.1rem solid var(--bp-gray);
-  margin: 1rem 0;
+  padding: 0.8rem 0;
 }
 
 .chargeBox {
@@ -63,7 +62,7 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: 0.1rem solid var(--bp-gray);
-  margin: 1rem 0;
+  padding: 0.8rem 0;
 }
 
 .refundBox{
@@ -105,4 +104,9 @@
  margin: 1rem 0;
  font-size: 1.5rem;
  font-weight: 600;
+}
+
+.chargedays {
+  font-size: 1rem;
+  font-weight: 600;
 }

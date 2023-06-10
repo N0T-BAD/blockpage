@@ -90,7 +90,9 @@ export default function AuthorSubCategory({ active, defaultActive }: { active: s
           showConfirmButton: false,
           timer: 1500
         })
-        window.location.reload()
+          .then(() => {
+            window.location.reload();
+          })
       })
       .catch((err) => {
         console.log(err)
