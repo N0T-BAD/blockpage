@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import style from '@/components/games/LottoGame.module.css'
 import Image from 'next/image'
 import axios from 'axios';
@@ -15,6 +15,8 @@ function LottoGame() {
       lottoDayCount: 0,
     }
   });
+  const btnRef = useRef<HTMLButtonElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const { data: session } = useSession();
   const [image, setImage] = useState<boolean>(false);
 
@@ -37,8 +39,25 @@ function LottoGame() {
     , [])
 
   const checkResult = async () => {
-    setImage(true)
-    setResult(false);
+    if (Number(userNumber) > 5 || Number(userNumber) === 0) {
+      Swal.fire({
+        icon: "error",
+        title: "1~5 사이의 숫자를 입력해주세요.",
+        showConfirmButton: false,
+        timer: 1500,
+      })
+      return;
+    }
+    const btn = btnRef.current;
+    const on = inputRef.current;
+    if (btn && on) {
+      on.disabled = true;
+      on.style.pointerEvents = "none";
+      btn.disabled = true;
+      btn.style.pointerEvents = "none";
+      setImage(true)
+      setResult(false);
+    }
 
     setTimeout(async () => {
       setImage(false)
@@ -93,26 +112,47 @@ function LottoGame() {
   }
 
   return (
-    <section className={style.gameSection}>
-      {image === false ? (
-        <div className={style.lottoImg}>
-          <Image src={"/assets/images/lotto/gashaponImg.png"} alt={"lotto"} width={110} height={190} />
+    <>
+      <section className={style.gameSection}>
+        {image === false ? (
+          <div className={style.lottoImg}>
+            <Image src={"/assets/images/lotto/gashaponImg.png"} alt={"lotto"} width={110} height={190} />
+          </div>
+        ) : (
+          <div className={style.lottoImg2}>
+            <Image src={"/assets/images/lotto/gashapon.gif"} alt={"lotto"} width={110} height={190} />
+          </div>)
+        }
+        <div className={style.lottoContent}>
+          <p className={style.contentTitle}>뽑기 돌리고 블럭 받아 가자~~!!</p>
+          <div className={style.inputBox}>
+            {games.data.lottoDayCount > 0 ?
+              <>
+                <input
+                  type="number"
+                  value={userNumber}
+                  onChange={(e) => setUserNumber(e.target.value)}
+                  ref={inputRef}
+                  placeholder='숫자 1~5 입력'
+                />
+                <button onClick={checkResult} ref={btnRef}>눌러봐!!</button>
+              </>
+              :
+              <>
+                <input
+                  type="number"
+                  value={userNumber}
+                  onChange={(e) => setUserNumber(e.target.value)}
+                  disabled
+                />
+                <button disabled>눌러봐!!</button>
+              </>
+            }
+          </div>
+          <p className={style.gamecount}>로또 횟수 : {games.data.lottoDayCount}</p>
         </div>
-      ) : (
-        <div className={style.lottoImg2}>
-          <Image src={"/assets/images/lotto/gashapon.gif"} alt={"lotto"} width={110} height={190} />
-        </div>)
-      }
-      <h1>숫자 1부터 5까지 입력해주세요.</h1>
-      {/* <p>Random Number: {randomNumber}</p> */}
-      <input
-        type="number"
-        value={userNumber}
-        onChange={(e) => setUserNumber(e.target.value)}
-      />
-      <button onClick={checkResult}>Check</button>
-      <p className={style.gameTitle}>로또 횟수 : {games.data.lottoDayCount}</p>
-    </section>
+      </section>
+    </>
   );
 }
 
