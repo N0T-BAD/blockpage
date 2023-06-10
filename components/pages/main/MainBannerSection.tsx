@@ -89,7 +89,7 @@ export default function MainBannerSection() {
                 </div>
               }
               <div className={style.line}></div>
-              <p>{data.webtoonTitle}</p>
+              <p className={style.webtoonTitle}>{data.webtoonTitle}</p>
               <p className={style.option}>{data.genre}</p>
             </div>
           ))}

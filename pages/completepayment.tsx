@@ -26,3 +26,4 @@ Completepayment.getLayout = function getLayout(page: React.ReactElement) {
 
 export default Completepayment
 
+Completepayment.auth = true;

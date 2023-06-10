@@ -2,7 +2,7 @@ import { NextPageWithLayout } from "@/pages/_app"
 import AuthorRegisterSection from "@/components/pages/authorregister/AuthorRegisterSection"
 import TotalLayout from "@/components/layouts/TotalLayout"
 
-const authorregister: NextPageWithLayout = () => {
+const Authorregister: NextPageWithLayout = () => {
   return (
     <>
       <AuthorRegisterSection />
@@ -10,7 +10,7 @@ const authorregister: NextPageWithLayout = () => {
   )
 }
 
-authorregister.getLayout = function getLayout(authorregister: React.ReactElement) {
+Authorregister.getLayout = function getLayout(authorregister: React.ReactElement) {
   return (
     <TotalLayout>
       {authorregister}
@@ -18,5 +18,6 @@ authorregister.getLayout = function getLayout(authorregister: React.ReactElement
   )
 }
 
-export default authorregister
+export default Authorregister
 
+Authorregister.auth = true

@@ -2,6 +2,7 @@
 
 :root {
   --bp-primary: #a6c9ff;
+  --bp-primary-2: #eef4fd;
   --bp-secondary: #9a2aed;
   --bp-black: #171f24;
   --bp-white: #ffffff;
@@ -10,8 +11,11 @@
   --bp-red: #ff54d9;
   --bp-secondary-gray: #e3dfdf;
   --bp-blue-gray: #e3e8f0;
-  --bp-green: #00ffb2;
   --bp-gray-2:#d5d5d5;
+
+  --bp-green: #B0FFB8;
+  --bp-green-2: #D9FFDD;
+  --bp-green-shadow: #E0FFE3;
 
   --bp-font-gray: #778087;
 
@@ -52,4 +56,11 @@ a {
 }
 .slide-pane {
   border-radius: 0 0.5rem 0.5rem 0 !important;
+}
+
+@font-face {
+  font-family: 'omyu_pretty';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/omyu_pretty.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
 }
