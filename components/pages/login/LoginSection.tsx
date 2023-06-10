@@ -113,7 +113,6 @@ export default function LoginSection() {
   return (
     <section className={style.loginSection}>
       <div className={style.logo}>
-
         <Image src={"/assets/images/logo/logoimg.png"} alt={"로고"} width={200} height={77} />
       </div>
       <div className={style.kakaoLogin} onClick={() => signIn("kakao")}>
@@ -121,7 +120,6 @@ export default function LoginSection() {
       </div>
       <p>계정과 비밀번호 입력없이</p>
       <p>카카오로 로그인 해 보세요.</p>
-
     </section>
   )
 }
