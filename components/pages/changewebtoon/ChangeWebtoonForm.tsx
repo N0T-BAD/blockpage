@@ -63,6 +63,7 @@ export default function ChangeWebtoonForm() {
         },
       })
       .then((res) => {
+        console.log(res)
         const selectedWebtoon = res.data.data.find((webtoon: any) => webtoon.webtoonId === Number(webtoonId));
         if (selectedWebtoon) {
           setWebtoonData({

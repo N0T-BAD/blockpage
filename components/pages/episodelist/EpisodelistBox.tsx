@@ -83,7 +83,9 @@ export default function EpisodelistBox() {
           showConfirmButton: false,
           timer: 1500
         })
-        window.location.reload()
+          .then(() => {
+            window.location.reload()
+          })
       })
       .catch((err) => {
         console.log(err)

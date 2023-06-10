@@ -19,4 +19,3 @@ Game.getLayout = function getLayout(game: React.ReactElement) {
 }
 
 export default Game
-

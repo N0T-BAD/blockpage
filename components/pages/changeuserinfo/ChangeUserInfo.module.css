@@ -177,10 +177,11 @@ img.userImage1 {
   font-size: 1rem;
   font-weight: 700;
   border: none;
-  width: 50%;
+  width: 70%;
   border-radius: 1.5rem;
   background-color: var(--bp-skyblue);
   text-align: center;
+  height: 100%;
 }
 
 .usernicknameImg p.usernicknamechange {
@@ -239,11 +240,12 @@ img.userImage1 {
 }
 
 .btn_input_box {
-  width: 80%;
+  width: 100%;
   display: flex;
-  margin: 1.5rem 1rem;
+  margin: 1.5rem 0;
   align-items: flex-end;
   justify-content: center;
+  height: 2rem;
 }
 
 .btn_input_box2 {
@@ -258,8 +260,12 @@ img.userImage1 {
 }
 
 p.nicknametext{
-  width: 45%;
+  width: 30%;
   text-align: center;
+  align-items: center;
+  height: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .infobox {

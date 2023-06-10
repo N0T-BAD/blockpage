@@ -179,19 +179,6 @@ export default function ChangeUserInfo() {
             timer: 1500
           })
         })
-
-      // axios.put('https://blockpage.site/member-service/v1/members?type=member', {
-      //   headers: {
-      //     memberId: session?.email || '',
-      //     // role: role,
-      //   },
-      //   data: {
-      //     profileSkin: changeProfileSkinbox.data[0].memberHasProfileSkinId,
-      //   },
-      // })
-      //   .then((res) => {
-      //     console.log(res.data)
-      //   })
     }
   }
 
