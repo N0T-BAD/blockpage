@@ -51,6 +51,7 @@ export default function CommentInput(props: {
         })
           .then((res) => {
             console.log(res);
+            router.reload();
           })
           .catch((err) => {
             console.log(err);
@@ -67,6 +68,7 @@ export default function CommentInput(props: {
         })
           .then((res) => {
             console.log(res);
+            router.reload();
           })
           .catch((err) => {
             console.log(err);

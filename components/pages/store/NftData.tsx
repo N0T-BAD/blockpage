@@ -18,13 +18,13 @@ export default function NftData(props: {
     <>
       <div className={style.skinImgDiv} onClick={() => console.log('onClick')}>
         <div className={style.skinImg}>
-          {/* <Image
+          <Image
             src={props.nftImage}
             alt={props.nftName}
             width={80}
             height={80}
             priority
-          /> */}
+          />
         </div>
         <div className={style.skinTxtDiv}>
           <p className={style.skinName}>{props.nftName}</p>
