@@ -12,7 +12,7 @@ function EpisodeId(props: { data: EpisodeViewDataType }) {
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll); //clean up
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 

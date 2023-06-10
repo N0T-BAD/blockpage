@@ -77,6 +77,7 @@ export default function Comment(props: {
     })
       .then((res) => {
         console.log(res);
+        router.reload();
       })
       .catch((err) => {
         console.log(err);
@@ -87,6 +88,7 @@ export default function Comment(props: {
     axios.delete(`https://blockpage.site/comment-service/v1/comments/${commentData.commentId}`)
       .then((res) => {
         console.log(res);
+        router.reload();
       })
       .catch((err) => {
         console.log(err);
@@ -107,10 +109,10 @@ export default function Comment(props: {
         .then((res) => {
           console.log(res);
           setLikeState(!likeState);
+          router.reload();
         })
         .catch((err) => {
           console.log(err);
-          alert(err.response.data);
         })
     }
     else if (likeState === true) {
@@ -122,10 +124,10 @@ export default function Comment(props: {
         .then((res) => {
           console.log(res);
           setLikeState(!likeState);
+          router.reload();
         })
         .catch((err) => {
           console.log(err);
-          alert(err.response.data);
         })
     }
   }
@@ -144,10 +146,10 @@ export default function Comment(props: {
         .then((res) => {
           console.log(res);
           setDisLikeState(!disLikeState);
+          router.reload();
         })
         .catch((err) => {
           console.log(err);
-          alert(err.response.data);
         })
     } else if (disLikeState === true) {
       axios.post(`https://blockpage.site/member-service/v1/emotions${commentEmotionData?.commentId}`, {
@@ -158,10 +160,10 @@ export default function Comment(props: {
         .then((res) => {
           console.log(res);
           setDisLikeState(!disLikeState);
+          router.reload();
         })
         .catch((err) => {
           console.log(err);
-          alert(err.response.data);
         })
     }
   }
@@ -181,6 +183,7 @@ export default function Comment(props: {
       .then((res) => {
         console.log(res);
         setShowCommentModal(!showCommentModal);
+        router.reload();
       })
       .catch((err) => {
         console.log(err);

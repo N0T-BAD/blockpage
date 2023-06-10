@@ -1,8 +1,9 @@
 import React from 'react'
-import style from '@/components/widgets/DataFetchingLoader.module.css'
 import Image from 'next/image'
 
-export default function DataFetchingLoader(props:{text:string}) {
+import style from '@/components/widgets/DataFetchingLoader.module.css'
+
+export default function DataFetchingLoader(props: { text: string }) {
   return (
     <div className={style.loaderContainer}>
       <div className={style.loader}>

@@ -1,51 +1,11 @@
-.userImgSection {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  z-index: 100;
-  background-color: white;
-  margin-top: 7rem;
-  padding: 0 1.5rem;
-  border-bottom: 0.02rem solid var(--bp-line-gray);
-}
-
-.sectionProfileTxt {
-  display: flex;
-  justify-content: space-between;
-}
-
-.sectionProfileTxt p {
-  font-size: 1.1rem;
-  font-weight: 700;
-}
-
 p.myBlock {
   font-size: 1rem;
   font-weight: 400;
   color: var(--bp-font-gray);
 }
 
-.userProfileDiv {
-  display: flex;
-  justify-content: center;
-  padding: 1rem 1rem;
-}
-
-.userProfileImgDiv {
-  position: relative;
-}
-
-.selectedUserSkin {
-  position: absolute;
-  top: 2.6rem;
-}
-
-.userProfileImgDiv img {
-  border-radius: 50%;
-}
-
-.profileSkinSection {
-  margin-top: 17rem;
+.nftSection {
+  margin-top: 8rem;
   padding: 0 1.5rem;
 }
 
