@@ -19,3 +19,5 @@ Lotto.getLayout = function getLayout(game: React.ReactElement) {
 }
 
 export default Lotto
+
+Lotto.auth = true

@@ -109,14 +109,20 @@ const RouletteGame = () => {
             title: "당첨!! 블럭 2개 획득!!",
             showConfirmButton: false,
             timer: 1500,
-          });
+          })
+            .then(() => {
+              window.location.reload();
+            });
         } else {
           Swal.fire({
             icon: "error",
             title: "꽝! 다음기회에",
             showConfirmButton: false,
             timer: 1500,
-          });
+          })
+            .then(() => {
+              window.location.reload();
+            });
         }
       })
       .catch((error) => {
