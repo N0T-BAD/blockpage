@@ -24,3 +24,20 @@ export interface nftDataType {
   nftBlockPrice: number;
   nftType: string;
 }
+
+export interface nftListData {
+  data: [
+    {
+      memberId: string;
+      expiredDate: string,
+      memberHasNftId: number;
+      nftDetail: {
+        id: number;
+        nftName: string;
+        nftDescription: string;
+        nftImage: string;
+        nftType: string;
+      }
+    }
+  ]
+}

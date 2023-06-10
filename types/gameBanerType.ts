@@ -12,3 +12,9 @@ export interface GameData {
     rouletteDayCount: number;
   }
 }
+
+export interface GameLottoData {
+  data: {
+    lottoDayCount: number;
+  }
+}

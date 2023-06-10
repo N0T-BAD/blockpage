@@ -122,7 +122,7 @@ const TransectionHistory = () => {
         })
           .then((res) => {
             console.log(res)
-            if (res.status === 200) {
+            if (res.status === 204) {
               Swal.fire({
                 icon: 'success',
                 title: '환불이 완료되었습니다.',
