@@ -29,7 +29,6 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
         headers: { memberId: session.email }
       })
       const data = res.data.data;
-      console.log(data)
       return {
         props: { data }
       }
@@ -39,7 +38,6 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
         headers: { memberId: session.email }
       })
       const data = res.data.data;
-      console.log(data)
       return {
         props: { data }
       }
