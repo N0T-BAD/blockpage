@@ -143,7 +143,6 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
             <div
               className={style.nextEpisode}
               onClick={
-
                 () => router.push(`/webtoon/${webtoonId}/episode/${nextId}/episode/${nextNumber}`)
               }
             >
