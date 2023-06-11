@@ -10,9 +10,6 @@ interface Props {
 
 export default function Pagination({ total, limit, page, setPage }: Props) {
 
-  const numPages = Math.ceil(total / limit);
-  console.log(numPages);
-
   return (
     <nav className={style.pagination}>
       <button className={style.btn} onClick={() => setPage(1)} disabled={page === 1}>
