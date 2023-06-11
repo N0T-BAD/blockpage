@@ -50,23 +50,28 @@ export default function Comment(props: {
 
   useEffect(() => {
     if (session) {
-      axios.all([axios.get(`https://blockpage.site/comment-service/v1/comments/reply/${commentData.commentId}`), axios.get(`https://blockpage.site/member-service/v1/emotions?commentId=${commentData.commentId}`, {
-        headers: {
-          memberId: session?.email,
-        }
-      })]
+      axios.all([
+        axios.get(`https://blockpage.site/comment-service/v1/comments/reply/${commentData.commentId}`),
+        axios.get(`https://blockpage.site/member-service/v1/emotions?commentId=${commentData.commentId}`, {
+          headers: {
+            memberId: session?.email,
+          }
+        })]
       )
         .then(
           axios.spread((res1, res2) => {
             setReplyData(res1.data.data);
             setCommentEmotionData(res2.data.data);
+
+            console.log(res1.data.data);
+            console.log(res2.data.data);
           })
         )
         .catch((err) => {
           console.log(err);
         });
     }
-  }, [session?.email]);
+  }, [session?.email, likeState]);
 
   const handleView = () => {
     setOpenReply(!openReply);
@@ -111,7 +116,6 @@ export default function Comment(props: {
         .then((res) => {
           console.log(res);
           setLikeState(!likeState);
-          router.reload();
         })
         .catch((err) => {
           console.log(err);
@@ -126,7 +130,6 @@ export default function Comment(props: {
         .then((res) => {
           console.log(res);
           setLikeState(!likeState);
-          router.reload();
         })
         .catch((err) => {
           console.log(err);
