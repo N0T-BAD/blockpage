@@ -53,9 +53,11 @@ export default function Episode(props: {
       </div>
       {
         props.leftTimer &&
-        <div className={style.leftTimer}>
-          <p>{props.leftTimer}</p>
-        </div>
+          props.leftTimer[0] !== '-' ?
+          <div className={style.leftTimer}>
+            <p>{props.leftTimer}</p>
+          </div>
+          : ''
       }
     </div>
   )
