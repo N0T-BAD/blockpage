@@ -10,6 +10,7 @@ import CommentUserInfo from './CommentUserInfo'
 import { CommentDataType, CommentEmotionDataType, ParentsCommentType } from '@/types/commentDataType'
 import CommentInput from './CommentInput'
 import ReportModal from '@/components/modals/ReportModal'
+import CommentDeleteModal from '@/components/modals/CommentDeleteModal'
 
 export default function Comment(props: {
   nickNameData: string,
@@ -32,6 +33,7 @@ export default function Comment(props: {
 
   const [showCommentModal, setShowCommentModal] = useState<boolean>();
   const [reportValue, setReportValue] = useState<number>(0);
+  const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
 
   const [commentEmotionData, setCommentEmotionData] = useState<CommentEmotionDataType>({
     id: 0,
@@ -206,6 +208,13 @@ export default function Comment(props: {
         />
       }
       {
+        showDeleteModal &&
+        <CommentDeleteModal
+          setShowDeleteModal={setShowDeleteModal}
+          handleDelete={handleDelete}
+        />
+      }
+      {
         <>
           <div className={style.commentSection}>
             {
@@ -245,7 +254,7 @@ export default function Comment(props: {
                 }
                 {
                   session?.email === commentData.childId ?
-                    <div onClick={handleDelete}>
+                    <div onClick={() => setShowDeleteModal(true)}>
                       <Image
                         src={"/assets/images/icons/trash.svg"}
                         alt='쓰레기통'
@@ -256,7 +265,7 @@ export default function Comment(props: {
                     </div> :
                     !commentData.childId &&
                       session?.email === commentData.parentsId ?
-                      <div onClick={handleDelete}>
+                      <div onClick={() => setShowDeleteModal(true)}>
                         <Image
                           src={"/assets/images/icons/trash.svg"}
                           alt='쓰레기통'
