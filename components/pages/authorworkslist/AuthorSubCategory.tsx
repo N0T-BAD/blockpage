@@ -40,7 +40,6 @@ export default function AuthorSubCategory({ active, defaultActive }: { active: s
     }
   });
 
-
   useEffect(() => {
     axios.get("https://blockpage.site/webtoon-service/v1/webtoons/creator",
       {
