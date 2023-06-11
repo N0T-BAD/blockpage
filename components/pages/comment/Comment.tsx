@@ -279,15 +279,19 @@ export default function Comment(props: {
                     <p onClick={handleView}>답글 달기</p>
               }
               <div className={style.bottomIcon}>
-                <div onClick={handleShowReportModal}>
-                  <Image
-                    src={"/assets/images/icons/siren.svg"}
-                    alt='신고'
-                    width={14}
-                    height={14}
-                    priority
-                  />
-                </div>
+                {
+                  session?.email === commentData.parentsId ?
+                    <div onClick={handleShowReportModal}>
+                      <Image
+                        src={"/assets/images/icons/siren.svg"}
+                        alt='신고'
+                        width={14}
+                        height={14}
+                        priority
+                      />
+                    </div>
+                    : ""
+                }
                 <div className={style.emotion}>
                   <Image
                     src={"/assets/images/icons/thumbsup.svg"}
