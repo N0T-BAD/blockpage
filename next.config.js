@@ -16,6 +16,7 @@ const nextConfig = withPWA({
   images: {
     domains: [
       "storage.googleapis.com",
+      'k.kakaocdn.net',
     ],
   },
   webpack: config => {
@@ -25,9 +26,6 @@ const nextConfig = withPWA({
       use: ["@svgr/webpack"]
     });
     return config;
-  },
-  images: {
-    domains: ['k.kakaocdn.net', 'storage.googleapis.com'],
   },
 });
 

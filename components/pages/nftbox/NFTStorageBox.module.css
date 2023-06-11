@@ -31,7 +31,6 @@ section.nftsection::-webkit-scrollbar{
   background-color: var(--bp-primary);
   border-top-left-radius: 2rem;
   border-bottom-left-radius: 2rem;
-  border-left: 1px;
 }
 
 .nftline2{
@@ -40,7 +39,6 @@ section.nftsection::-webkit-scrollbar{
   background-color: var(--bp-green);
   border-top-left-radius: 2rem;
   border-bottom-left-radius: 2rem;
-  border-left: 1px;
 }
 
 .nftContentBox{
