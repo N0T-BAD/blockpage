@@ -34,7 +34,7 @@
 
 .rightHeadBox {
   width: 60%;
-  background-color: var(--bp-primary);
+  background-color: var(--bp-blue);
   border-radius: 0.6rem;
   height: 100%;
   display: flex;

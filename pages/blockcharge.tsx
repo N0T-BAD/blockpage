@@ -3,7 +3,7 @@ import BlcokChargeTopSection from "@/components/pages/blockcharge/BlcokChargeTop
 import BlockChargeMiddleSection from "@/components/pages/blockcharge/BlockChargeMiddleSection"
 import TotalLayout from "@/components/layouts/TotalLayout"
 
-const blockcharge: NextPageWithLayout = () => {
+const Blockcharge: NextPageWithLayout = () => {
   return (
     <>
       <BlcokChargeTopSection />
@@ -12,7 +12,7 @@ const blockcharge: NextPageWithLayout = () => {
   )
 }
 
-blockcharge.getLayout = function getLayout(blockcharge: React.ReactElement) {
+Blockcharge.getLayout = function getLayout(blockcharge: React.ReactElement) {
   return (
     <TotalLayout>
       {blockcharge}
@@ -20,5 +20,6 @@ blockcharge.getLayout = function getLayout(blockcharge: React.ReactElement) {
   )
 }
 
-export default blockcharge
+export default Blockcharge
 
+Blockcharge.auth = true

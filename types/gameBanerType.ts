@@ -4,6 +4,17 @@ export interface GameBannerType {
   text: string;
   imgUrl: string;
   color: string;
-  path: string;
   name: string;
+}
+
+export interface GameData {
+  data: {
+    rouletteDayCount: number;
+  }
+}
+
+export interface GameLottoData {
+  data: {
+    lottoDayCount: number;
+  }
 }

@@ -40,7 +40,6 @@ export default function AuthorSubCategory({ active, defaultActive }: { active: s
     }
   });
 
-
   useEffect(() => {
     axios.get("https://blockpage.site/webtoon-service/v1/webtoons/creator",
       {
@@ -90,7 +89,9 @@ export default function AuthorSubCategory({ active, defaultActive }: { active: s
           showConfirmButton: false,
           timer: 1500
         })
-        window.location.reload()
+          .then(() => {
+            window.location.reload();
+          })
       })
       .catch((err) => {
         console.log(err)
@@ -141,7 +142,7 @@ export default function AuthorSubCategory({ active, defaultActive }: { active: s
                                 <div className={style.contentWrap}>
                                   <p className={style.genreoption}>{getGenreTypeString(webtoonsubcategory.genre)}</p>
                                   <p className={style.title}>{webtoonsubcategory.webtoonTitle}</p>
-                                  <p className={style.author}>{webtoonsubcategory.creator}, {webtoonsubcategory.illustrator}</p>
+                                  <p className={style.author}>{webtoonsubcategory.creator} / {webtoonsubcategory.illustrator}</p>
                                   <div className={style.option}>
                                     <div className={style.views}>
                                       <Image src={'/assets/images/icons/views.svg'} alt={'조회 수'} width={15} height={15} />
