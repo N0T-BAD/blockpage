@@ -1,0 +1,17 @@
+.searchResultTxt {
+  padding: 1rem 1.5rem;
+}
+
+.searchResultTxt p {
+  font-size: 0.9rem;
+  color: var(--bp-font-gray);
+}
+
+.noneResult {
+  padding: 1rem 1.5rem;
+}
+
+.noneResult p {
+  font-size: 0.9rem;
+  color: var(--bp-font-gray);
+}
