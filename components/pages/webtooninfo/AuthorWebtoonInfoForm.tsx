@@ -50,16 +50,6 @@ export default function AuthorWebtoonInfoForm() {
       })
   }, [])
 
-  // useEffect(() => {
-  //     console.log(webtoonInfoData)
-  // }, [webtoonInfoData])
-
-  // useEffect(() => {
-  //     axios(`api/v1/webtoons`)
-  //         .then(res => res.data)
-  //         .then(data => setAuthorName(data))
-  // }, [setAuthorName])
-
   const handleInput = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     const { name, value } = e.target;
     setWebtoonInfoData({
@@ -134,8 +124,9 @@ export default function AuthorWebtoonInfoForm() {
             title: '웹툰이 등록 되었습니다.',
             showConfirmButton: false,
             timer: 1500
+          }).then(() => {
+            router.push('/authorworkslist')
           })
-          router.push('/authorworkslist')
         })
     }
   };

@@ -31,6 +31,12 @@ export default function TotalHeader() {
             setTitle('게임')
         } else if (path === '/store') {
             setTitle('스토어')
+        } else if (path === '/game/roulette') {
+            setTitle('룰렛 게임')
+        } else if (path === '/game/lotto') {
+            setTitle('로또 게임')
+        } else if (path === '/nftbox') {
+            setTitle('NET 보관함')
         }
     }, [router.pathname])
 
