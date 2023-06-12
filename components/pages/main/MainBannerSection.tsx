@@ -62,7 +62,6 @@ export default function MainBannerSection() {
       },
     })
       .then((res) => {
-        console.log(res)
         setMainBannerData(res.data)
       })
       .catch((err) => {

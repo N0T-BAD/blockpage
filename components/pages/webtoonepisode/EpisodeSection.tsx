@@ -35,6 +35,27 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
   const [episodeNumberModal, setEpisodeIdNumberModal] = useState<number>(0);
   const [episodePriceModal, setEpisodePriceModal] = useState<number>(0);
 
+  const [freeData, setFreeData] = useState<EpisodeViewListType[]>([]);
+  const [paidData, setPaidData] = useState<EpisodeViewListType[]>([]);
+
+  if (freeData) {
+    freePriceData.map((item) => (
+      freeData.map((item2: EpisodeViewListType) => {
+        item.episodeId === item2.episodeId ? item.isRead = true : "";
+        item.episodeId === item2.episodeId ? item.leftTimer = item2.leftTimer : "";
+      })
+    ))
+  }
+
+  if (paidData) {
+    priceData.map((item) => (
+      paidData.map((item2: EpisodeViewListType) => {
+        item.episodeId === item2.episodeId ? item.isRead = true : "";
+        item.episodeId === item2.episodeId ? item.leftTimer = item2.leftTimer : "";
+      })
+    ))
+  }
+
   const handleView = () => {
     setIsPreviewSection(!isPreviewSection);
   }
@@ -99,27 +120,12 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
       ])
         .then(
           axios.spread((getBlock, free, paid) => {
+            console.log(getBlock)
             setMyBlock(getBlock.data.data.totalBlocks);
-            const freeData = free.data.data;
-            const paidData = paid.data.data;
-
-            if (freeData) {
-              freePriceData.map((item) => (
-                freeData.map((item2: EpisodeViewListType) => {
-                  item.episodeId === item2.episodeId ? item.isRead = true : "";
-                  item.episodeId === item2.episodeId ? item.leftTimer = item2.leftTimer : "";
-                })
-              ))
-            }
-
-            if (paidData) {
-              priceData.map((item) => (
-                paidData.map((item2: EpisodeViewListType) => {
-                  item.episodeId === item2.episodeId ? item.isRead = true : "";
-                  item.episodeId === item2.episodeId ? item.leftTimer = item2.leftTimer : "";
-                })
-              ))
-            }
+            // const freeData = free.data.data;
+            setFreeData(free.data.data);
+            // const paidData = paid.data.data;
+            setPaidData(paid.data.data);
           })
         )
         .catch((err) => {

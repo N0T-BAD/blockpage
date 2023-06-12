@@ -29,8 +29,6 @@ export default function MenuModal(props: { handleModal: () => void }) {
           setUserProfileImg(res.data.data.profileImage);
           setUserNickname(res.data.data.nickname);
           setUserProfileSkin(res.data.data.profileSkin);
-          console.log(res.data.data.profileSkin);
-          console.log(res.data.data)
         })
     }
     document.body.style.cssText = `
@@ -43,7 +41,7 @@ export default function MenuModal(props: { handleModal: () => void }) {
       document.body.style.cssText = '';
       window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
     };
-  }, []);
+  }, [session?.email]);
 
   return (
     <section className={style.menuSection}>
