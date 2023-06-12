@@ -1,16 +1,18 @@
-import React, { useState } from 'react'
+import React, { Dispatch, useState } from 'react'
 import style from '@/components/pages/authorregister/AuthorRegister.module.css'
 import { AuthorSignupDataType } from '@/types/authorSignupDataType'
 import { authorNicknameDataType } from '@/types/authorNameDataType'
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
+import Swal from 'sweetalert2';
 
 interface ChildProps {
   inputData: authorNicknameDataType;
-  setInputData: React.Dispatch<React.SetStateAction<authorNicknameDataType>>;
+  setInputData: Dispatch<React.SetStateAction<authorNicknameDataType>>;
+  setsignupbtn: Dispatch<boolean>;
 }
 
-export default function AuthorRegister({ inputData, setInputData }: ChildProps) {
+export default function AuthorRegister({ inputData, setInputData, setsignupbtn }: ChildProps) {
 
   const { data: session } = useSession()
   // const role = sessionStorage.getItem('role');
@@ -39,7 +41,26 @@ export default function AuthorRegister({ inputData, setInputData }: ChildProps) 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (inputData.creatorNickname === "") {
-      alert('작가명을 입력해주세요.')
+      Swal.fire({
+        icon: 'error',
+        title: '작가명을 입력해주세요.',
+        showConfirmButton: true,
+      })
+      // alert('작가명을 입력해주세요.')
+    } else if (inputData.creatorNickname.length < 2 || inputData.creatorNickname.length > 10) {
+      Swal.fire({
+        icon: 'error',
+        title: '작가명은 2자 이상 10자 이하로 입력해주세요.',
+        showConfirmButton: true,
+      })
+      // alert('작가명은 2자 이상 10자 이하로 입력해주세요.')
+    } else if (!regex.test(inputData.creatorNickname)) {
+      Swal.fire({
+        icon: 'error',
+        title: '작가명은 한글, 영문, 숫자만 입력 가능합니다.',
+        showConfirmButton: true,
+      })
+      // alert('작가명은 한글, 영문, 숫자만 입력 가능합니다.')
     } else {
       axios.get('https://blockpage.site/member-service/v1/members?type=nickname',
         {
@@ -54,11 +75,23 @@ export default function AuthorRegister({ inputData, setInputData }: ChildProps) 
         })
         .then((res) => {
           console.log(res)
-          alert("사용 가능한 작가명입니다.")
+          Swal.fire({
+            icon: 'success',
+            title: '사용 가능한 작가명입니다.',
+            showConfirmButton: true,
+          }).then(() => {
+            setsignupbtn(true)
+          })
+          // alert("사용 가능한 작가명입니다.")
         })
         .catch((err) => {
           if (err.response.status === 409) {
-            alert("이미 사용 중인 작가명입니다.")
+            Swal.fire({
+              icon: 'error',
+              title: '이미 사용 중인 작가명입니다.',
+              showConfirmButton: true,
+            })
+            // alert("이미 사용 중인 작가명입니다.")
           }
         })
     }

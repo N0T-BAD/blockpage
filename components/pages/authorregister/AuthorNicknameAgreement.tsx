@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { Dispatch } from 'react'
 import style from '@/components/pages/authorregister/AuthorNicknameAgreement.module.css'
 import { useRouter } from 'next/router';
 import { authorNicknameDataType } from '@/types/authorNameDataType';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
+import Swal from 'sweetalert2';
 
 interface ChildProps {
   inputData: authorNicknameDataType;
   setInputData: React.Dispatch<React.SetStateAction<authorNicknameDataType>>;
+  signupbtn: boolean;
 }
 
-export default function AuthorNicknameAgreement({ inputData, setInputData }: ChildProps) {
+export default function AuthorNicknameAgreement({ inputData, setInputData, signupbtn }: ChildProps) {
 
   const router = useRouter();
   console.log(inputData.creatorNickname)
@@ -43,48 +45,29 @@ export default function AuthorNicknameAgreement({ inputData, setInputData }: Chi
       const data = await res.json()
       console.log(data)
       if (data) {
-        alert("작가 등록이 완료되었습니다.")
-        router.push('/authorworkslist')
+        Swal.fire({
+          icon: 'success',
+          title: '작가 등록이 완료되었습니다.',
+          showConfirmButton: true,
+        })
+          .then(() => {
+            router.push('/authorworkslist')
+          })
       } else {
-        alert('작가 등록에 실패하였습니다.');
+        Swal.fire({
+          icon: 'success',
+          title: '작가 등록에 실패하였습니다.',
+          showConfirmButton: true,
+        })
       }
     } catch (err) {
       console.log(err)
-      alert('작가 등록에 실패하였습니다.');
+      Swal.fire({
+        icon: 'success',
+        title: '작가 등록에 실패하였습니다.',
+        showConfirmButton: true,
+      })
     }
-
-    // try {
-    //   const formData = new FormData();
-    //   formData.append("creatorNickname", inputData.creatorNickname);
-
-    //   console.log(inputData.creatorNickname)
-    //   console.log(session)
-
-    //   //put - formdata 못 넣음. 데이터를 넣을때 사용.
-
-    //   console.log(formData.get('creatorNickname'))
-
-    //   const res = await fetch('https://blockpage.site/member-service/v1/members/test?type=author', {
-    //     method: 'POST',
-    //     body: formData,
-    //     headers: {
-    //       memberId: session?.email || '',
-    //       // role: role,
-    //     },
-    //   })
-
-    //   const data = await res.json()
-    //   console.log(data)
-    //   if (data) {
-    //     alert("작가 등록이 완료되었습니다.")
-    //     router.push('/authorworkslist')
-    //   } else {
-    //     alert('작가 등록에 실패하였습니다.');
-    //   }
-    // } catch (err) {
-    //   console.log(err)
-    //   alert('작가 등록에 실패하였습니다.');
-    // }
   }
 
 
@@ -97,7 +80,11 @@ export default function AuthorNicknameAgreement({ inputData, setInputData }: Chi
       </div>
       <div className={style.AuthorButton}>
         <div className={style.AuthorSignupButtonBox}>
-          <button type="button" className={style.AuthorSignupButton} onClick={handleAuthorSignup}>작가 등록</button>
+          {signupbtn === true ?
+            <button type="button" className={style.AuthorSignupButton} onClick={handleAuthorSignup}>작가 등록</button>
+            :
+            <button type="button" className={style.AuthorSignupButton} disabled>작가 등록</button>
+          }
         </div>
       </div>
     </>

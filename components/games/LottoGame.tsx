@@ -125,20 +125,20 @@ function LottoGame() {
         }
         <div className={style.lottoContent}>
           <p className={style.contentTitle}>뽑기 돌리고 블럭 받아 가자~~!!</p>
-          <div className={style.inputBox}>
-            {games.data.lottoDayCount > 0 ?
-              <>
-                <input
-                  type="number"
-                  value={userNumber}
-                  onChange={(e) => setUserNumber(e.target.value)}
-                  ref={inputRef}
-                  placeholder='숫자 1~5 입력'
-                />
-                <button onClick={checkResult} ref={btnRef}>눌러봐!!</button>
-              </>
-              :
-              <>
+          {games.data.lottoDayCount > 0 ?
+            <div className={style.inputBox}>
+              <input
+                type="number"
+                value={userNumber}
+                onChange={(e) => setUserNumber(e.target.value)}
+                ref={inputRef}
+                placeholder='숫자 1~5 입력'
+              />
+              <button onClick={checkResult} ref={btnRef}>눌러봐!!</button>
+            </div>
+            :
+            <>
+              <div className={style.inputBox}>
                 <input
                   type="number"
                   value={userNumber}
@@ -146,9 +146,10 @@ function LottoGame() {
                   disabled
                 />
                 <button disabled>눌러봐!!</button>
-              </>
-            }
-          </div>
+              </div>
+              <p className={style.gameCountText}>오늘의 게임 횟수를 모두 사용하였습니다.</p>
+            </>
+          }
           <p className={style.gamecount}>로또 횟수 : {games.data.lottoDayCount}</p>
         </div>
       </section>
