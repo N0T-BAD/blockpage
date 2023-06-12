@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react';
 
@@ -7,32 +7,18 @@ import style from "@/components/modals/menu/Menu.module.css"
 import CloseBtn from '@/components/ui/CloseBtn';
 import MenuList from './MenuList';
 import MenuBtnSection from './MenuBtnSection';
-import axios from 'axios';
 
-export default function MenuModal(props: { handleModal: () => void }) {
+export default function MenuModal(props: {
+  userProfileImg: string,
+  userNickname: string,
+  userProfileSkin: string,
+  handleModal: () => void,
+}) {
 
   const router = useRouter();
   const { data: session } = useSession();
-  const [userProfileImg, setUserProfileImg] = useState<string>('');
-  const [userNickname, setUserNickname] = useState<string>('');
-  const [userProfileSkin, setUserProfileSkin] = useState<string>('');
 
   useEffect(() => {
-    if (session) {
-      axios.get('https://blockpage.site/member-service/v1/members?type=detail', {
-        headers: {
-          memberId: session?.email || '',
-          // role: role,
-        },
-      })
-        .then((res) => {
-          setUserProfileImg(res.data.data.profileImage);
-          setUserNickname(res.data.data.nickname);
-          setUserProfileSkin(res.data.data.profileSkin);
-          console.log(res.data.data.profileSkin);
-          console.log(res.data.data)
-        })
-    }
     document.body.style.cssText = `
       position: fixed; 
       top: -${window.scrollY}px;
@@ -62,7 +48,7 @@ export default function MenuModal(props: { handleModal: () => void }) {
                 //
                 session?.email ?
                   <Image
-                    src={userProfileImg}
+                    src={props.userProfileImg}
                     alt='유저 프로필 이미지'
                     width={80}
                     height={80}
@@ -80,9 +66,9 @@ export default function MenuModal(props: { handleModal: () => void }) {
             </div>
             <div className={style.selectedUserSkin}>
               {
-                userProfileSkin !== '' &&
+                props.userProfileSkin !== '' &&
                 <Image
-                  src={userProfileSkin}
+                  src={props.userProfileSkin}
                   alt='스킨 이미지'
                   width={80}
                   height={80}
@@ -94,8 +80,8 @@ export default function MenuModal(props: { handleModal: () => void }) {
           {
             session ?
               <div className={style.userSectionTxt}>
-                <p>{userNickname} 님</p>
-                <p>오늘도 좋은 하루입니다.</p>
+                <p>{props.userNickname} 님</p>
+                <p>환영합니다.</p>
               </div>
               : <p>로그인을 해주세요.</p>
           }

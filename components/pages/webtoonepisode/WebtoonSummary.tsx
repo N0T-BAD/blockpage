@@ -16,7 +16,7 @@ export default function WebtoonSummary(props: { summary: string }) {
         <p>줄거리</p>
       </div>
       <div className={style.summary}>
-        <p className={close ? `${style.close}` : ""}>{props.summary}</p>
+        <p className={close ? `${style.summaryTxt} ${style.close}` : `${style.summaryTxt}`}>{props.summary}</p>
       </div>
       <div className={style.shadow}></div>
       <div className={style.summaryMore}>

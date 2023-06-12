@@ -50,7 +50,6 @@ export async function getServerSideProps(context: any) {
   if (storeName === 'profileSkin') {
     const res = await axios.get('https://blockpage.site/member-service/v1/members?type=detail', { headers: { memberId: session?.email }, });
     const data = res.data.data;
-    console.log(data)
 
     return {
       props: { data }

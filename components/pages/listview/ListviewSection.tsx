@@ -10,7 +10,6 @@ export default function ListviewSection(props: { data: webtoonListGetDataType })
   const router = useRouter();
 
   const data = props.data.data;
-  console.log(router.query.categoryName)
 
   return (
     <section className={router.query.categoryName !== 'best' ? `${style.listviewSection} ${style.listviewMargin} ` : `${style.listviewSection}`}>

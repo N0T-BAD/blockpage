@@ -3,14 +3,20 @@
 }
 
 .summaryHead {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 500;
   padding: 0.6rem 0;
+}
+
+.summaryTxt {
+  word-break: keep-all;
+  font-size: 0.9rem;
 }
 
 .summaryMore {
   display: flex;
   justify-content: center;
+  font-size: 0.9rem;
   padding: 1rem 0;
 }
 

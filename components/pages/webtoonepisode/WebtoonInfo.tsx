@@ -23,7 +23,7 @@ export default function WebtoonInfo(props: { data: WebToonListDataType }) {
             likeWidth={15}
             likes={data.interestCount}
           />
-          <h2>{data.webtoonTitle}</h2>
+          <p className={style.titleTxt}>{data.webtoonTitle}</p>
           <div className={style.info}>
             <p>{data.publicationDays}</p>
             <p>{data.genre}</p>
