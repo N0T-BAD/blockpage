@@ -10,7 +10,6 @@ import { useRecoilState } from 'recoil'
 export default function MyBlock() {
 
   const { data: session } = useSession()
-  // const role = sessionStorage.getItem('role');
 
   const [totalBlock, setTotalBlock] = useRecoilState<TotalBlock>(blockAtom)
 
@@ -24,7 +23,6 @@ export default function MyBlock() {
     })
       .then((res) => {
         const totalBlocks = res.data.data.totalBlocks;
-        console.log(totalBlocks)
         setTotalBlock({
           data: {
             totalBlocks,

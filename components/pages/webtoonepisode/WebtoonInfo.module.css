@@ -3,7 +3,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .bannerImg {
@@ -39,6 +39,11 @@
   color: var(--bp-secondary);
 }
 
+.titleTxt {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
 .info {
   display: flex;
   margin-top: 0.5rem;
@@ -50,7 +55,7 @@
 }
 
 .line {
-  margin: 1rem 0;
+  margin: 0.6rem 0;
   width: 2.5rem;
   height: 0.05rem;
   background-color: var(--bp-primary);

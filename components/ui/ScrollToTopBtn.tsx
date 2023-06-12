@@ -30,7 +30,7 @@ export default function ScrollToTopBtn() {
   }, [scrollY])
 
   return (
-    <div className={isActive ? `${style.scrollWrap} ${style.active}` : `${style.scrollWrap} ${style.close}`}>
+    <div className={isActive ? `${style.scrollWrap} ${style.active}` : ``}>
       <div className={style.scrollBtn} onClick={scrollToTop}>
         <Image
           src={'/assets/images/icons/back.svg'}

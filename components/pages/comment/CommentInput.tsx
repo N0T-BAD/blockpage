@@ -28,13 +28,6 @@ export default function CommentInput(props: {
     setBtnState(!btnState);
     setInputCount(0);
 
-    //댓글등록
-    console.log(typeof (Number(episodeId)));
-    console.log(inputText);
-    console.log(session?.email);
-    console.log(session?.nickname);
-    console.log(nickNameData);
-
     if (inputText !== "") {
       if (parents) {
         axios.post(`https://blockpage.site/comment-service/v1/comments`, {
