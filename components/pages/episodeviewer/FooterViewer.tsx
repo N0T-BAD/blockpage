@@ -248,10 +248,10 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
               <p>마지막화입니다.</p>
             </div>
         }
+        <NavFooter
+          author={data.author}
+        />
       </footer >
-      <NavFooter
-        author={data.author}
-      />
     </>
   )
 }

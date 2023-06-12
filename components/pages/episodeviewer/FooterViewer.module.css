@@ -18,29 +18,30 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
+  /* position: fixed; */
   width: 100%;
-  bottom: 0rem;
-  z-index: 200;
+  height: 100%;
+  /* bottom: 0rem; */
+  /* z-index: 200; */
   background-color: var(--bp-white);
-  padding: 1rem 1.5rem;
+  /* padding: 1rem 1.5rem; */
   border-radius: 0.5rem 0.5rem 0 0;
   transition: 0.5s ease-in-out;
 }
 
 .navFoot.close {
-  bottom: -6rem;
+  /* bottom: -6rem; */
   transition: 0.5s ease-in-out;
 }
 
 .navFoot .btn {
-  width: 1.2rem;
-  height: 1.2rem;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .navFoot .btn img {
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 
 .top {
