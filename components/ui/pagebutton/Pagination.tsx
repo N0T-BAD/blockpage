@@ -15,8 +15,8 @@ export default function Pagination({ total, limit, page, setPage }: Props) {
   return (
     <nav className={style.pagination}>
       {
-        Array(limit)
-          .fill(total, 0, numPages)
+        Array(numPages)
+          .fill(total, 0, limit)
           .map((_, i) => (
             <button
               key={i + 1}
