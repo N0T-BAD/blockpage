@@ -9,8 +9,8 @@ button.btn {
   border-radius: 0.3rem;
   border:none;
   margin: 0 0.05rem;
-  background-color: var(--bp-primary);
-  color: var(--bp-white);
+  background-color: var(--bp-white);
+  color: var(--bp-primary);
 }
 
 button.clickbtn{
@@ -18,6 +18,6 @@ button.clickbtn{
   border-radius: 0.3rem;
   border:none;
   margin: 0 0.05rem;
-  background-color: var(--bp-white);
-  color: var(--bp-primary);
+  background-color: var(--bp-primary);
+  color: var(--bp-white);
 }

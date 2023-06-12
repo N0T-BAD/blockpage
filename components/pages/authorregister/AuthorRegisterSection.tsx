@@ -11,13 +11,15 @@ export default function AuthorRegisterSection() {
     creatorNickname: '',
   });
 
+  const [signupbtn, setsignupbtn] = useState<boolean>(false);
+
   return (
     <>
       <section className={style.AuthorRegisterTopSection}>
-        <AuthorRegister inputData={inputData} setInputData={setInputData} />
+        <AuthorRegister inputData={inputData} setInputData={setInputData} setsignupbtn={setsignupbtn} />
       </section>
       <section className={style.AuthorRegisterMiddleSection}>
-        <AuthorNicknameAgreement inputData={inputData} setInputData={setInputData} />
+        <AuthorNicknameAgreement inputData={inputData} setInputData={setInputData} signupbtn={signupbtn} />
       </section>
     </>
   )
