@@ -29,7 +29,7 @@ export interface nftListData {
   data: [
     {
       memberId: string;
-      expiredDate: string,
+      expiredDate: string;
       memberHasNftId: number;
       nftDetail: {
         id: number;
@@ -37,7 +37,23 @@ export interface nftListData {
         nftDescription: string;
         nftImage: string;
         nftType: string;
-      }
+      };
     }
-  ]
+  ];
+}
+
+export interface mySkinData {
+  expiredDate: string;
+  memberHasProfileSkinId: number;
+  memberId: string;
+  profileSkinDefault: boolean;
+  profileSkinDetail: profileSkinDetail[];
+}
+
+export interface profileSkinDetail {
+  id: number;
+  profileSkinBlockPrice: number;
+  profileSkinDescription: string;
+  profileSkinImage: string;
+  profileSkinName: string;
 }
