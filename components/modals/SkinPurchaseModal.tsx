@@ -1,7 +1,6 @@
 import React from 'react'
 
 import style from '@/components/modals/RatingModal.module.css'
-import CloseBtn from '../ui/CloseBtn'
 
 export default function SkinPurchaseModal(props: { myBlock: number, blockQuantity: number, skinName: string, setShowModal: React.Dispatch<React.SetStateAction<boolean>>, handlePurchase: () => void }) {
   return (
