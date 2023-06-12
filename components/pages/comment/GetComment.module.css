@@ -22,12 +22,30 @@
   align-items: center;
 }
 
+.userProfileDiv {
+  display: flex;
+  justify-content: center;
+}
+
+.userProfileImgDiv {
+  position: relative;
+  display: flex;
+}
+
+.selectedUserSkin {
+  position: absolute;
+}
+
+.userProfileImgDiv img {
+  border-radius: 50%;
+}
+
 .date {
   color: var(--bp-secondary);
 }
 
 .profile img {
-  margin-right: 1rem;
+  margin-right: 0.5rem;
 }
 
 .profileTxt p {

@@ -2,8 +2,9 @@ import React from 'react'
 
 import { CommentDataType } from '@/types/commentDataType';
 import Comment from './Comment';
+import { userDataType } from '@/types/storeDataType';
 
-export default function GetComment(props: { commentData: CommentDataType[], nickNameData: string }) {
+export default function GetComment(props: { commentData: CommentDataType[], userData: userDataType }) {
   return (
     <>
       {
@@ -12,7 +13,7 @@ export default function GetComment(props: { commentData: CommentDataType[], nick
           !parentsData.childId &&
           <Comment
             key={parentsData.commentId}
-            nickNameData={props.nickNameData}
+            userData={props.userData}
             commentData={parentsData}
           />
         ))
