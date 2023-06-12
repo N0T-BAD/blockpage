@@ -11,9 +11,10 @@ import { CommentDataType, CommentEmotionDataType, ParentsCommentType } from '@/t
 import CommentInput from './CommentInput'
 import ReportModal from '@/components/modals/ReportModal'
 import ConfirmModal from '@/components/modals/ConfirmModal'
+import { userDataType } from '@/types/storeDataType'
 
 export default function Comment(props: {
-  nickNameData: string,
+  userData: userDataType,
   commentData: CommentDataType,
 }) {
   const { data: session } = useSession();
@@ -22,7 +23,7 @@ export default function Comment(props: {
   const { episodeId } = router.query;
   const { author } = router.query;
 
-  const nickNameData = props.nickNameData;
+  const nickNameData = props.userData.nickname;
   const commentData = props.commentData;
   const [replyData, setReplyData] = useState<CommentDataType[]>([]);
 
@@ -116,6 +117,7 @@ export default function Comment(props: {
         .then((res) => {
           console.log(res);
           setLikeState(!likeState);
+          router.reload();
         })
         .catch((err) => {
           console.log(err);
@@ -130,6 +132,7 @@ export default function Comment(props: {
         .then((res) => {
           console.log(res);
           setLikeState(!likeState);
+          router.reload();
         })
         .catch((err) => {
           console.log(err);
@@ -347,13 +350,13 @@ export default function Comment(props: {
                 commentData.parentsId === childData.parentsId &&
                 <Comment
                   key={childData.commentId}
-                  nickNameData={props.nickNameData}
+                  userData={props.userData}
                   commentData={childData}
                 />
               ))
             }
             <CommentInput
-              nickNameData={props.nickNameData}
+              userData={props.userData}
               parents={parentsJson}
             />
           </div>

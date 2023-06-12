@@ -6,11 +6,18 @@ import CommentLayout from "@/components/layouts/CommentLayout"
 import CommentInputSection from "@/components/pages/comment/CommentInputSection"
 import GetCommentSection from "@/components/pages/comment/GetCommentSection"
 import { CommentDataType } from "@/types/commentDataType"
+import { userDataType } from "@/types/storeDataType"
 
 function Comment(props: { commentData: CommentDataType[], count: number }) {
 
   const { data: session } = useSession();
-  const [nickNameData, setNickNameData] = useState<string>('');
+  const [userData, setUserData] = useState<userDataType>({
+    nickname: '',
+    profileImage: '',
+    profileSkin: '',
+    role: '',
+    creatorNickname: '',
+  });
   const [commentData, setCommentData] = useState<CommentDataType[]>([]);
   useEffect(() => {
     setCommentData(props.commentData);
@@ -22,7 +29,7 @@ function Comment(props: { commentData: CommentDataType[], count: number }) {
         memberId: session?.email || '',
       },
     }).then((res) => {
-      setNickNameData(res.data.data.nickname);
+      setUserData(res.data.data);
     }).catch((err) => {
       console.log(err);
     });
@@ -30,8 +37,8 @@ function Comment(props: { commentData: CommentDataType[], count: number }) {
 
   return (
     <>
-      <CommentInputSection nickNameData={nickNameData} count={props.count} />
-      <GetCommentSection commentData={commentData} nickNameData={nickNameData} />
+      <CommentInputSection userData={userData} count={props.count} />
+      <GetCommentSection commentData={commentData} userData={userData} />
     </>
   )
 }
@@ -52,6 +59,7 @@ export async function getServerSideProps(context: any) {
   const res = await axios.get(`https://blockpage.site/comment-service/v1/comments/${episodeId}`)
   const commentData = res.data.data.commentViewList;
   const count = res.data.data.count;
+  console.log(commentData)
 
   return {
     props: { commentData, count }
