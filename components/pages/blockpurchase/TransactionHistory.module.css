@@ -67,7 +67,6 @@
 
 .refundBox{
   width: 20%;
-  height: 3rem;
 }
 
 .refundBox button {
@@ -79,6 +78,10 @@
   height: 60%;
   font-weight: 700;
   padding: 0.2rem 0.2rem;
+}
+
+.refund {
+  width: 20%;
 }
 
 .refund button {

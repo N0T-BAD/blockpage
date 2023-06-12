@@ -4,7 +4,6 @@
 
 .gameTitle{
   margin: 2rem 1rem;
-  font-size: 1.5rem;
   text-align: center;
   font-family: 'omyu_pretty';
   font-size: 1.5rem;
@@ -82,4 +81,10 @@
 .rouletteCount{
   margin: 1rem 1rem;
   text-align: center;
+}
+
+p.gameCountText{
+  text-align: center;
+  font-family: 'omyu_pretty';
+  font-size: 1rem;
 }

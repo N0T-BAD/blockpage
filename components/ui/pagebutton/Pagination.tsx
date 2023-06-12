@@ -10,14 +10,13 @@ interface Props {
 
 export default function Pagination({ total, limit, page, setPage }: Props) {
 
+  const numPages = Math.ceil(total / limit);
+
   return (
     <nav className={style.pagination}>
-      <button className={style.btn} onClick={() => setPage(1)} disabled={page === 1}>
-        &lt;
-      </button>
       {
         Array(limit)
-          .fill(total, 0, limit)
+          .fill(total, 0, numPages)
           .map((_, i) => (
             <button
               key={i + 1}
@@ -28,9 +27,6 @@ export default function Pagination({ total, limit, page, setPage }: Props) {
               {i + 1}
             </button>
           ))}
-      <button className={style.btn} onClick={() => setPage(limit)} disabled={page === limit}>
-        &gt;
-      </button>
     </nav>
   )
 }
