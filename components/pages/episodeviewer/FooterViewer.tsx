@@ -28,7 +28,6 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
   const [showRatingModal, setShowRatingModal] = useState(false);
   const [isRating, setIsRating] = useState(false);
   const [isRatingData, setIsRatingData] = useState(false);
-  console.log(isRatingData)
   const [value, setValue] = useState<number>(0);
 
   const [showPurchaseModal, setShowPurchaseModal] = useState<boolean>(false);

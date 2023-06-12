@@ -1,22 +1,41 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useSession, signOut } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
+import axios from 'axios'
 
 import style from '@/components/layouts/header/Header.module.css'
 import MenuModal from '@/components/modals/menu/MenuModal'
 import SlidingPane from "react-sliding-pane";
 import "react-sliding-pane/dist/react-sliding-pane.css";
 
-
 export default function Header() {
   const { push } = useRouter();
   const { data: session } = useSession();
   const [showModal, setShowModal] = useState(false);
 
+  const [userProfileImg, setUserProfileImg] = useState<string>('');
+  const [userNickname, setUserNickname] = useState<string>('');
+  const [userProfileSkin, setUserProfileSkin] = useState<string>('');
+
   const handleModal = () => {
     setShowModal(!showModal);
   }
+
+  useEffect(() => {
+    if (session) {
+      axios.get('https://blockpage.site/member-service/v1/members?type=detail', {
+        headers: {
+          memberId: session.email,
+        },
+      })
+        .then((res) => {
+          setUserProfileImg(res.data.data.profileImage);
+          setUserNickname(res.data.data.nickname);
+          setUserProfileSkin(res.data.data.profileSkin);
+        })
+    }
+  }, [session?.email]);
 
   return (
     <>
@@ -33,6 +52,9 @@ export default function Header() {
       >
         <>
           <MenuModal
+            userProfileImg={userProfileImg}
+            userNickname={userNickname}
+            userProfileSkin={userProfileSkin}
             handleModal={handleModal}
           />
         </>

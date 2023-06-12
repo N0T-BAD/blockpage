@@ -8,7 +8,7 @@ import { mySkinData, profileSkinDetail } from '@/types/storeDataType'
 export default function ProfileSkin(props: { mySkin: mySkinData[], skinId: number, selectedSkinId: number, skinName: string, skinDescription: string, skinImage: string, blockPrice: number, handleSelectSkin: (skinId: number, skinName: string, profileSkinImage: string, blockQuantity: number) => void }) {
 
   const [myProfileSkin, setMyProfileSkin] = useState<profileSkinDetail[]>([]);
-  console.log(myProfileSkin)
+
   useEffect(() => {
     props.mySkin.map((data) => {
       setMyProfileSkin(data.profileSkinDetail);

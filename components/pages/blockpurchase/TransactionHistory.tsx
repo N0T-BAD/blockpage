@@ -21,6 +21,7 @@ const TransectionHistory = () => {
         paymentTime: '',
         blockGainType: '',
         validState: true,
+        expiredState: false,
       }],
     }
   )
@@ -42,6 +43,7 @@ const TransectionHistory = () => {
       data: [{
         orderId: '',
         validState: true,
+        expiredState: false,
       }]
     }
   )
@@ -188,14 +190,18 @@ const TransectionHistory = () => {
                       </div>
                       {chargeItem.blockGainType === "블럭 충전" ? (
                         <>
-                          {refund.data[index].validState === true ?
+                          {refund.data[index].validState === true && refund.data[index].expiredState === false ?
                             <div className={style.refundBox}>
                               <button onClick={() => handlerefund(index)}>환불하기</button>
                             </div>
-                            :
-                            <div className={style.refund}>
-                              <button>환불완료</button>
-                            </div>
+                            : refund.data[index].expiredState === true ?
+                              <div className={style.refund}>
+                                <button>기간만료</button>
+                              </div>
+                              :
+                              <div className={style.refund}>
+                                <button>환불완료</button>
+                              </div>
                           }
                         </>
                       )

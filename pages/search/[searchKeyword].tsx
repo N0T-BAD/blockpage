@@ -106,7 +106,6 @@ export async function getServerSideProps(context: any) {
     }
   })
   const searchData = res.data.data
-  console.log(searchData)
 
   return {
     props: { searchData }
