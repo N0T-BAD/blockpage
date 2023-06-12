@@ -50,6 +50,9 @@ const TransectionHistory = () => {
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
 
+  chargeBlock.data.sort((a, b) => { return b.paymentTime.localeCompare(a.paymentTime) })
+  useBlock.data.sort((a, b) => { return b.paymentTime.localeCompare(a.paymentTime) })
+
   useEffect(() => {
     axios.get("https://blockpage.site/block-service/v1/payments?type=gain", {
       headers: {
