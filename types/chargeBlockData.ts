@@ -24,6 +24,7 @@ export interface BlockPurchase {
     paymentTime: string;
     blockGainType: string;
     validState: boolean;
+    expiredState: boolean;
   }];
 }
 
@@ -48,5 +49,6 @@ export interface RefundBlock {
   data: [{
     orderId: string;
     validState: boolean;
+    expiredState: boolean;
   }];
 }
