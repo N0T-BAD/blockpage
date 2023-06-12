@@ -1,25 +1,21 @@
 import Image from 'next/image'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react';
 
 import style from "@/components/modals/menu/Menu.module.css"
 import CloseBtn from '@/components/ui/CloseBtn';
-import UserProfileImg from '@/components/ui/UserProfileImg';
 import MenuList from './MenuList';
 import MenuBtnSection from './MenuBtnSection';
 import axios from 'axios';
-import { userprofile } from '@/state/mypage/userprofile';
-import { ChangeUserDataType, UserImgData } from '@/types/changeUserDataType';
-import { useRecoilState } from 'recoil';
-import { usernickname } from '@/state/mypage/usernickname';
 
 export default function MenuModal(props: { handleModal: () => void }) {
 
   const router = useRouter();
   const { data: session } = useSession();
-  const [userImg, setUserImg] = useRecoilState<UserImgData>(userprofile);
-  const [userNickname, setUserNickname] = useRecoilState<ChangeUserDataType>(usernickname);
+  const [userProfileImg, setUserProfileImg] = useState<string>('');
+  const [userNickname, setUserNickname] = useState<string>('');
+  const [userProfileSkin, setUserProfileSkin] = useState<string>('');
 
   useEffect(() => {
     if (session) {
@@ -30,19 +26,11 @@ export default function MenuModal(props: { handleModal: () => void }) {
         },
       })
         .then((res) => {
-          const profileImage = res.data.data.profileImage;
-          const nickname = res.data.data.nickname
-          setUserImg({
-            data: {
-              profileImage,
-            }
-          })
-          setUserNickname({
-            data: {
-              nickname,
-            },
-          })
-          console.log(res.data)
+          setUserProfileImg(res.data.data.profileImage);
+          setUserNickname(res.data.data.nickname);
+          setUserProfileSkin(res.data.data.profileSkin);
+          console.log(res.data.data.profileSkin);
+          console.log(res.data.data)
         })
     }
     document.body.style.cssText = `
@@ -68,11 +56,45 @@ export default function MenuModal(props: { handleModal: () => void }) {
       </div>
       <section className={style.userSection}>
         <div className={style.user} onClick={session ? undefined : () => router.push("/login")}>
-          <UserProfileImg userImg={userImg} />
+          <div className={style.userProfileDiv}>
+            <div className={style.userProfileImgDiv}>
+              {
+                //
+                session?.email ?
+                  <Image
+                    src={userProfileImg}
+                    alt='유저 프로필 이미지'
+                    width={80}
+                    height={80}
+                    priority
+                  />
+                  :
+                  <Image
+                    src={'/assets/images/mypage/userImg.png'}
+                    alt='게스트 프로필 이미지'
+                    width={80}
+                    height={80}
+                    priority
+                  />
+              }
+            </div>
+            <div className={style.selectedUserSkin}>
+              {
+                userProfileSkin !== '' &&
+                <Image
+                  src={userProfileSkin}
+                  alt='스킨 이미지'
+                  width={80}
+                  height={80}
+                  priority
+                />
+              }
+            </div>
+          </div>
           {
             session ?
               <div className={style.userSectionTxt}>
-                <p>{userNickname.data.nickname} 님</p>
+                <p>{userNickname} 님</p>
                 <p>오늘도 좋은 하루입니다.</p>
               </div>
               : <p>로그인을 해주세요.</p>
