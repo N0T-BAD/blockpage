@@ -38,6 +38,8 @@ export default function CommentInput(props: {
           episodeId: episodeId,
           content: inputText,
           nickname: nickNameData,
+          profileImage: props.userData.profileImage,
+          profileSkin: props.userData.profileSkin,
         }, {
           headers: {
             memberId: session?.email,

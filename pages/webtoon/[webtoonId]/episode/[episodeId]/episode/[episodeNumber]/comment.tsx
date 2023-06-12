@@ -26,7 +26,7 @@ function Comment(props: { commentData: CommentDataType[], count: number }) {
   if (session) {
     axios.get(`https://blockpage.site/member-service/v1/members?type=detail`, {
       headers: {
-        memberId: session?.email || '',
+        memberId: session.email,
       },
     }).then((res) => {
       setUserData(res.data.data);

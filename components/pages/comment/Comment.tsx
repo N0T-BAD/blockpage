@@ -55,7 +55,7 @@ export default function Comment(props: {
         axios.get(`https://blockpage.site/comment-service/v1/comments/reply/${commentData.commentId}`),
         axios.get(`https://blockpage.site/member-service/v1/emotions?commentId=${commentData.commentId}`, {
           headers: {
-            memberId: session?.email,
+            memberId: session.email,
           }
         })]
       )
@@ -235,12 +235,14 @@ export default function Comment(props: {
               {
                 commentData.childNickname ?
                   <>
-                    < CommentUserInfo
+                    <CommentUserInfo
+                      commentData={commentData}
                       nickname={commentData.childNickname}
                       date={commentData.dateTime}
                     />
                   </> :
-                  < CommentUserInfo
+                  <CommentUserInfo
+                    commentData={commentData}
                     nickname={commentData.parentsNickname}
                     date={commentData.dateTime}
                   />
