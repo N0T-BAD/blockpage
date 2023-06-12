@@ -79,8 +79,8 @@ const RouletteGame = () => {
 
   const rLayerPopup = (num: number) => {
     let isSuccess = false;
-    if (num === 2 || num === 4 || num === 0) {
-    } else if (num === 3 || num === 5 || num === 1) {
+    if (num === 1 || num === 3 || num === 5) {
+
       isSuccess = true;
     }
 
@@ -110,9 +110,6 @@ const RouletteGame = () => {
             showConfirmButton: false,
             timer: 1500,
           })
-            .then(() => {
-              window.location.reload();
-            });
         } else {
           Swal.fire({
             icon: "error",
@@ -120,9 +117,6 @@ const RouletteGame = () => {
             showConfirmButton: false,
             timer: 1500,
           })
-            .then(() => {
-              window.location.reload();
-            });
         }
       })
       .catch((error) => {
@@ -166,6 +160,12 @@ const RouletteGame = () => {
         }
       </div>
       <p className={style.gameTitle}>룰렛 횟수 : {games.data.rouletteDayCount}</p>
+      {
+        games.data.rouletteDayCount === 0 ?
+          <p className={style.gameCountText}>오늘의 게임 횟수를 모두 사용하였습니다.</p>
+          :
+          ""
+      }
     </div>
   );
 };
