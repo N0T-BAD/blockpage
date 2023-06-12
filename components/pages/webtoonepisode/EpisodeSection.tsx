@@ -11,6 +11,7 @@ import Separator from '@/components/ui/Separator';
 import { EpisodeViewListType, WebToonListDataType } from '@/types/webtoonDataType';
 import PurchaseModal from '@/components/modals/PurchaseModal';
 import Swal from 'sweetalert2';
+import ConfirmModal from '@/components/modals/ConfirmModal';
 
 export default function EpisodeSection(props: { data: WebToonListDataType, episodeViewList: EpisodeViewListType[] }) {
 
@@ -28,6 +29,7 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
 
   const [myBlock, setMyBlock] = useState<number>(0);
 
+  const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [episodeIdModal, setEpisodeIdModal] = useState<number>(0);
   const [episodeNumberModal, setEpisodeIdNumberModal] = useState<number>(0);
@@ -139,6 +141,16 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
           handleEpisode={handleEpisode}
         />
       }
+      {
+        showConfirmModal &&
+        <ConfirmModal
+          text1='블럭 4개'
+          text2='가 필요합니다.'
+          text3='블럭을 충전하시겠습니까?'
+          setShowModal={setShowConfirmModal}
+          handleconfirm={() => router.push('/blockcharge')}
+        />
+      }
       <PreviewSection isPreviewSection={isPreviewSection} handleView={handleView} priceData={priceData} />
       {
         isPreviewSection &&
@@ -154,11 +166,10 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
               item.isRead === true ?
                 () => handleEpisode('episodeBMPaid', 'rental', item.episodeId, item.episodeNumber, item.episodePrice, false) :
                 !session?.email ?
-                  () => router.push('/login')
-                  :
+                  () => router.push('/login') :
                   myBlock >= 4 ?
                     () => handleShowModal(item.episodeId, item.episodeNumber, item.episodePrice) :
-                    () => router.push('/blockcharge')
+                    () => setShowConfirmModal(true)
             }
           >
             {
@@ -177,7 +188,7 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
                 />
               </>
             }
-          </section>
+          </section >
         ))
       }
       {

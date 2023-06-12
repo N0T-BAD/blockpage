@@ -6,7 +6,7 @@ export default function ConfirmModal(props: {
   text1: string,
   text2: string,
   text3: string,
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>, handle: () => void
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>, handleconfirm: () => void
 }) {
   return (
     <div className={style.modalBox}>
@@ -22,7 +22,7 @@ export default function ConfirmModal(props: {
             <p className={style.useBlock}>{props.text3}</p>
           }
           <div className={style.confirmBox}>
-            <button type='button' className={style.confirmBtn} onClick={props.handle}>확인</button>
+            <button type='button' className={style.confirmBtn} onClick={props.handleconfirm}>확인</button>
             <button type='button' className={style.cancle} onClick={() => props.setShowModal(false)}>취소</button>
           </div>
         </div>

@@ -217,7 +217,7 @@ export default function Comment(props: {
           text2={'을'}
           text3={'삭제하시겠습니까?'}
           setShowModal={setShowDeleteModal}
-          handle={handleDelete}
+          handleconfirm={handleDelete}
         />
       }
       {
