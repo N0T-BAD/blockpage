@@ -157,22 +157,18 @@ export default function AuthorSubCategory({ active, defaultActive }: { active: s
                                 </div>
                               </div>
                               <div className={style.webtoonButton}>
-                                {webtoonsubcategory.webtoonStatus === "수정 요청" ?
-                                  ""
-                                  :
-                                  <button onClick={() => handlechangewebtoonClick(webtoonsubcategory.webtoonId)}>수정</button>
-                                }
-                                {
-                                  webtoonsubcategory.webtoonStatus === "삭제 요청" ?
-                                    ""
-                                    :
+                                {webtoonsubcategory.webtoonStatus === "배포중" ?
+                                  <>
+                                    <button onClick={() => handlechangewebtoonClick(webtoonsubcategory.webtoonId)}>수정</button>
                                     <button onClick={() => handleDeleteWebtoonClick(webtoonsubcategory.webtoonTitle, webtoonsubcategory.webtoonStatus)}>삭제</button>
+                                  </>
+                                  :
+                                  ""
                                 }
                               </div>
                             </div>
                           </>
                         ))}
-
                       </>
                     ) : (
                       <div className={style.sorrybox}>

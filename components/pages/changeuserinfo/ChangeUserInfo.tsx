@@ -244,21 +244,15 @@ export default function ChangeUserInfo() {
                   </div>
                 </>
               </div>
-            </div>
-          </div>
-        </section>
-
-        <section className={style.ChangeUserInfoMiddleSection}>
-          <div className={style.usernicknameImgBox}>
-            <div className={style.usernicknameImg}>
-              <p className={style.profileSkintxt}>닉네임 변경</p>
-              <div className={style.btn_input_box}>
-                <p className={style.nicknametext}>닉네임</p>
-                {userNickname.data.nickname && userNickname.data.nickname.length > 0 ?
-                  <input className={style.usernickname2} type='text' defaultValue={userNickname.data.nickname} onChange={handleChange} />
-                  :
-                  <input className={style.usernickname2} type='text' onChange={handleChange} />
-                }
+              <div className={style.usernicknamewrite}>
+                <div className={style.btn_input_box}>
+                  <p className={style.nicknametext}>닉네임</p>
+                  {userNickname.data.nickname && userNickname.data.nickname.length > 0 ?
+                    <input className={style.usernickname2} type='text' defaultValue={userNickname.data.nickname} onChange={handleChange} />
+                    :
+                    <input className={style.usernickname2} type='text' onChange={handleChange} />
+                  }
+                </div>
               </div>
               <button type="submit" className={style.changebtn}>변경</button>
             </div>

@@ -146,6 +146,13 @@ section.ChangeUserInfoBottomSection {
   margin-left: 2rem;
 }
 
+.usernicknamewrite {
+  display: flex;
+  width: 80%;
+  height: 100%;
+  margin-left: 2rem;
+}
+
 .userImage {
   height: 100%;
   display: flex;
