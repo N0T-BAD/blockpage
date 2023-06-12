@@ -222,11 +222,17 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
             <div
               className={style.nextEpisode}
               onClick={
-                !session?.email ?
-                  (() => router.push('/login')) :
-                  myBlock >= 4 ?
-                    () => handleShowPurchaseModal(nextId, nextNumber, data.nextEpisodeBlockPrice) :
-                    () => router.push('/blockcharge')
+                data.nextEpisodeBlockPrice > 0 ?
+                  (
+                    !session?.email ?
+                      (() => router.push('/login')) :
+                      myBlock >= 4 ?
+                        () => handleShowPurchaseModal(nextId, nextNumber, data.nextEpisodeBlockPrice) :
+                        () => router.push('/blockcharge')
+                  )
+                  :
+                  () => router.push(`/webtoon/${webtoonId}/episode/${nextId}/episode/${nextNumber}`)
+
               }
             >
               <p className={style.nextTxt}>다음화</p>
