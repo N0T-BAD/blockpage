@@ -172,7 +172,7 @@ export default function AuthorSubCategory({ active, defaultActive }: { active: s
                             </div>
                           </>
                         ))}
-                        <WebtoonListFooter />
+
                       </>
                     ) : (
                       <div className={style.sorrybox}>
@@ -180,6 +180,7 @@ export default function AuthorSubCategory({ active, defaultActive }: { active: s
                         <p>작품이 없습니다.</p>
                       </div>
                     )}
+                    <WebtoonListFooter />
                   </>
                   :
                   category.name === '정산 & 통계' ?

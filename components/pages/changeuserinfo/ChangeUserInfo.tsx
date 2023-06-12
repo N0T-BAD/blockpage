@@ -322,11 +322,11 @@ export default function ChangeUserInfo() {
           </div>
         </div>
       </section>
-      <section className={style.ChangeUserInfoBottomSection}>
+      {/* <section className={style.ChangeUserInfoBottomSection}>
         <div className={style.ChangeButtonBox}>
           <button className={style.ChangeButton} onClick={() => router.push("/mypage")}>완료</button>
         </div>
-      </section>
+      </section> */}
     </div>
   )
 }
