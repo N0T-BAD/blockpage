@@ -13,6 +13,8 @@ interface ItemType {
 export default function StoreNavSection() {
 
   const router = useRouter();
+  const { storeName } = router.query;
+  console.log(storeName)
 
   return (
     <div className={style.navSection}>
@@ -22,6 +24,7 @@ export default function StoreNavSection() {
             staticStoreNavData.map((item: ItemType) => (
               <li
                 key={item.id}
+                className={storeName === item.link ? `${style.active}` : ''}
                 onClick={
                   () => router.push(`/store/${item.link}`)
                 }

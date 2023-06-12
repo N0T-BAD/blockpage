@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 
 import style from '@/components/pages/store/ProfileStore.module.css'
-import { skinDataType, userDataType } from '@/types/storeDataType';
+import { mySkinData, skinDataType, userDataType } from '@/types/storeDataType';
 import ProfileSkin from './ProfileSkin';
 import SkinPurchaseModal from '@/components/modals/SkinPurchaseModal';
 import Swal from 'sweetalert2';
@@ -24,6 +24,8 @@ export default function ProfileStore(props: { data: userDataType }) {
   const [blockQuantity, setBlockQuantity] = useState<number>(0);
   const [skinData, setSkinData] = useState<skinDataType[]>([]);
   const userData = props.data;
+
+  const [mySkin, setMySkin] = useState<mySkinData[]>([]);
 
   const [showModal, setShowModal] = useState<boolean>(false);
 
@@ -92,6 +94,17 @@ export default function ProfileStore(props: { data: userDataType }) {
         .catch((err) => {
           console.log(err);
         });
+
+      axios.get('https://blockpage.site/purchase-service/v1/purchases?type=profileSkin', {
+        headers: { memberId: session.email }
+      })
+        .then((res) => {
+          console.log(res.data.data);
+          setMySkin(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
     };
   }, [session?.email, confirm])
 
@@ -158,7 +171,9 @@ export default function ProfileStore(props: { data: userDataType }) {
             skinData.map((data) => (
               <ProfileSkin
                 key={data.profileSkinId}
+                mySkin={mySkin}
                 skinId={data.profileSkinId}
+                selectedSkinId={selectedSkinId}
                 skinName={data.profileSkinName}
                 skinDescription={data.profileSkinDescription}
                 skinImage={data.profileSkinImage}
@@ -169,7 +184,7 @@ export default function ProfileStore(props: { data: userDataType }) {
           }
         </div>
         <div className={style.confirmBox}>
-          <button type='button' className={style.confirm} onClick={session ? () => router.push('/login') : () => setShowModal(true)}>구매</button>
+          <button type='button' className={style.confirm} onClick={!session ? () => router.push('/login') : () => setShowModal(true)}>구매</button>
         </div>
       </section>
     </>

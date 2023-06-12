@@ -92,6 +92,16 @@ p.myBlock {
   font-size: 0.8rem;
 }
 
+.skinTxtTop {
+  display: flex;
+  justify-content: space-between;
+}
+
+.skinTxtDiv .skinSelected {
+  text-align: right;
+  color: var(--bp-secondary);
+}
+
 p.skinName {
   color: var(--bp-secondary);
   font-size: 1rem;
