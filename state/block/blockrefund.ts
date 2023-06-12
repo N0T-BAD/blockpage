@@ -6,7 +6,8 @@ const blockrefund = atom<RefundBlock>({
   default: {
     data: [{
       orderId: '',
-      validState: false,
+      validState: true,
+      expiredState: false,
     }]
   }
 });
