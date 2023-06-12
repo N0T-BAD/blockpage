@@ -8,11 +8,17 @@ export default function NftData(props: {
   nftCreatorId: string,
   nftMemberId: string,
   nftName: string,
+  selectedNftName: string,
   nftDescription: string,
   nftImage: string,
   nftBlockPrice: number,
   nftType: string,
-  handleSelectSkin: (skinId: number, skinName: string, profileSkinImage: string, blockQuantity: number) => void
+  handleSelectSkin: (
+    nftId: number,
+    nftName: string,
+    nftImage: string,
+    blockQuantity: number
+  ) => void
 }) {
   return (
     <>
@@ -27,7 +33,10 @@ export default function NftData(props: {
           />
         </div>
         <div className={style.skinTxtDiv}>
-          <p className={style.skinName}>{props.nftName}</p>
+          <div className={style.skinTxtTop}>
+            <p className={style.skinName}>{props.nftName}</p>
+            <p className={props.selectedNftName === props.selectedNftName ? `${style.skinSelected}` : ""}>{props.selectedNftName === props.selectedNftName ? '선택' : ""}</p>
+          </div>
           <p className={style.skinDescription}>{props.nftDescription}</p>
           <p className={style.blockPrice}>{props.nftBlockPrice} 블럭</p>
         </div>

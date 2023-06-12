@@ -10,7 +10,7 @@ import CommentUserInfo from './CommentUserInfo'
 import { CommentDataType, CommentEmotionDataType, ParentsCommentType } from '@/types/commentDataType'
 import CommentInput from './CommentInput'
 import ReportModal from '@/components/modals/ReportModal'
-import CommentDeleteModal from '@/components/modals/CommentDeleteModal'
+import ConfirmModal from '@/components/modals/ConfirmModal'
 
 export default function Comment(props: {
   nickNameData: string,
@@ -212,9 +212,12 @@ export default function Comment(props: {
       }
       {
         showDeleteModal &&
-        <CommentDeleteModal
-          setShowDeleteModal={setShowDeleteModal}
-          handleDelete={handleDelete}
+        <ConfirmModal
+          text1={'댓글'}
+          text2={'을'}
+          text3={'삭제하시겠습니까?'}
+          setShowModal={setShowDeleteModal}
+          handleconfirm={handleDelete}
         />
       }
       {

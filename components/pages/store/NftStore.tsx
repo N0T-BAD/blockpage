@@ -3,48 +3,50 @@ import { useSession } from 'next-auth/react';
 import axios from 'axios';
 
 import style from '@/components/pages/store/NftStore.module.css'
-import { nftDataType, skinDataType, userDataType } from '@/types/storeDataType';
-import ProfileSkin from './ProfileSkin';
+import { nftDataType, userDataType } from '@/types/storeDataType';
 import SkinPurchaseModal from '@/components/modals/SkinPurchaseModal';
 import Swal from 'sweetalert2';
 import NftData from './NftData';
+import { useRouter } from 'next/router';
 
 export default function NftStore(props: { data: userDataType }) {
 
   const { data: session } = useSession();
 
+  const router = useRouter();
+
   const [confirm, setConfirm] = useState<boolean>(false);
 
   const [myBlock, setMyBlock] = useState<number>(0);
-  const [selectedSkinId, setSelectedSkinId] = useState<number>(0);
-  const [selectedSkinName, setSeletedSkinName] = useState<string>('');
-  const [selectedSkinImage, setSelectedSkinImage] = useState<string>('');
+  const [selectedNftId, setSelectedNftId] = useState<number>(0);
+  const [selectedNftName, setSeletedNftName] = useState<string>('');
+  const [selectedNftImage, setSelectedNftImage] = useState<string>('');
   const [blockQuantity, setBlockQuantity] = useState<number>(0);
   const [nftData, setNftData] = useState<nftDataType[]>([]);
   const userData = props.data;
 
   const [showModal, setShowModal] = useState<boolean>(false);
 
-  const handleSelectSkin = (skinId: number, skinName: string, skinImage: string, blockQuantity: number) => {
-    setSelectedSkinId(skinId);
-    setSeletedSkinName(skinName);
-    setSelectedSkinImage(skinImage);
+  const handleSelectSkin = (nftId: number, nftName: string, nftImage: string, blockQuantity: number) => {
+    setSelectedNftId(nftId);
+    setSeletedNftName(nftName);
+    setSelectedNftImage(nftImage);
     setBlockQuantity(blockQuantity);
   }
 
   const handlePurchase = () => {
     if (session) {
       axios.post(`https://blockpage.site/purchase-service/v1/purchases?type=profileSkin`, {
-        profileSkinId: selectedSkinId,
+        nftId: selectedNftId,
         blockQuantity: blockQuantity,
-        persistType: "permanent",
+        persistType: "rental",
       }, {
         headers: { memberId: session.email }
       })
         .then((res) => {
           Swal.fire({
             icon: 'success',
-            title: selectedSkinName,
+            title: selectedNftName,
             text: '구매가 완료되었습니다.',
             showConfirmButton: false,
             timer: 2000
@@ -57,7 +59,7 @@ export default function NftStore(props: { data: userDataType }) {
           if (err.response.status === 409) {
             Swal.fire({
               icon: 'warning',
-              title: selectedSkinName,
+              title: selectedNftName,
               text: err.response.data,
               showConfirmButton: false,
               timer: 2000
@@ -100,7 +102,7 @@ export default function NftStore(props: { data: userDataType }) {
         <SkinPurchaseModal
           myBlock={myBlock}
           blockQuantity={blockQuantity}
-          skinName={selectedSkinName}
+          skinName={selectedNftName}
           setShowModal={setShowModal}
           handlePurchase={handlePurchase}
         />
@@ -118,6 +120,7 @@ export default function NftStore(props: { data: userDataType }) {
                 nftCreatorId={data.nftCreatorId}
                 nftMemberId={data.nftMemberId}
                 nftName={data.nftName}
+                selectedNftName={selectedNftName}
                 nftDescription={data.nftDescription}
                 nftImage={data.nftImage}
                 nftBlockPrice={data.nftBlockPrice}
@@ -128,7 +131,7 @@ export default function NftStore(props: { data: userDataType }) {
           }
         </div>
         <div className={style.confirmBox}>
-          <button type='button' className={style.confirm} onClick={() => setShowModal(true)}>구매</button>
+          <button type='button' className={style.confirm} onClick={!session ? () => router.push('/login') : () => setShowModal(true)}>구매</button>
         </div>
       </section>
     </>
