@@ -6,11 +6,11 @@ import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import Swal from 'sweetalert2';
 import Image from 'next/image';
+import Pagination from '@/components/ui/pagebutton/Pagination';
 
 const TransectionHistory = () => {
 
   const { data: session } = useSession()
-  // const role = sessionStorage.getItem('role');
   const [active, setActive] = useState('');
   const [defaultActive] = useState("충전 내역");
   const [chargeBlock, setChargeBlock] = useState<BlockPurchase>(
@@ -45,6 +45,10 @@ const TransectionHistory = () => {
       }]
     }
   )
+
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * limit;
 
   useEffect(() => {
     axios.get("https://blockpage.site/block-service/v1/payments?type=gain", {
@@ -85,6 +89,7 @@ const TransectionHistory = () => {
         .catch((err) => {
           console.log(err)
         })
+      setPage(1);
     } else if (name === '사용 내역') {
       axios.get("https://blockpage.site/block-service/v1/payments?type=loss", {
         headers: {
@@ -99,6 +104,7 @@ const TransectionHistory = () => {
         .catch((err) => {
           console.log(err)
         })
+      setPage(1);
     }
   }
 
@@ -122,7 +128,7 @@ const TransectionHistory = () => {
         })
           .then((res) => {
             console.log(res)
-            if (res.status === 200) {
+            if (res.status === 204) {
               Swal.fire({
                 icon: 'success',
                 title: '환불이 완료되었습니다.',
@@ -164,7 +170,7 @@ const TransectionHistory = () => {
             category.name === '충전 내역' ?
               <>
                 {chargeBlock.data.length ?
-                  (chargeBlock.data.map((chargeItem, index) => (
+                  (chargeBlock.data.slice(offset, offset + limit).map((chargeItem, index) => (
                     <div className={style.chargeBox} key={index}>
                       <div className={style.subhistorybox}>
                         <p className={style.chargedays}>{chargeItem.paymentTime}</p>
@@ -193,18 +199,26 @@ const TransectionHistory = () => {
                         : ""
                       }
                     </div>
-                  ))
-                  ) : (
+                  )))
+                  : (
                     <div className={style.sorrybox}>
                       <Image src={'/assets/images/icons/Sorry.gif'} alt={'Sorry'} width={100} height={100} />
                       <p>충전 내역이 없습니다.</p>
                     </div>
                   )}
+                <footer className={style.paginationfotter}>
+                  <Pagination
+                    total={chargeBlock.data.length}
+                    limit={limit}
+                    page={page}
+                    setPage={setPage}
+                  />
+                </footer>
               </>
               :
               category.name === '사용 내역' ?
                 <>
-                  {useBlock.data.length ? (useBlock.data.map((useItem, index) => (
+                  {useBlock.data.length ? (useBlock.data.slice(offset, offset + limit).map((useItem, index) => (
                     <div className={style.UseBox} key={index}>
                       <p className={style.chargedays}>{useItem.paymentTime}</p>
                       <div className={style.chargeBlockBox}>
@@ -233,12 +247,21 @@ const TransectionHistory = () => {
                       )
                       }
                     </div>
-                  ))) :
+                  )))
+                    :
                     <div className={style.sorrybox}>
                       <Image src={'/assets/images/icons/Sorry.gif'} alt={'Sorry'} width={100} height={100} />
                       <p>사용 내역이 없습니다.</p>
                     </div>
                   }
+                  <footer className={style.paginationfotter}>
+                    <Pagination
+                      total={useBlock.data.length}
+                      limit={limit}
+                      page={page}
+                      setPage={setPage}
+                    />
+                  </footer>
                 </>
                 : ""
           }

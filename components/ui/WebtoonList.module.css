@@ -1,7 +1,6 @@
 .webtoonBox {
   display: flex;
   width: 100%;
-  cursor: pointer;
 }
 
 .ImgWrap {
@@ -11,12 +10,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .contentWrap {
   width: 60%;
   align-self: center;
   margin-left: 0.5rem;
+  cursor: pointer;
 }
 
 .contentWrap .option {
@@ -27,8 +28,10 @@
 
 .contentWrap p.title {
   margin-bottom: 0.4rem;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 900;
+  word-break: keep-all;
+  font-family: 'omyu_pretty';
 }
 
 .creatorBox {
@@ -41,6 +44,7 @@
   color: var(--bp-font-gray);
   font-size: 0.7rem;
   font-weight: 500;
+  font-family: 'omyu_pretty';
 }
 
 .contentWrap .illustrator {
@@ -91,16 +95,26 @@
 .genre {
   display: flex;
   width: fit-content;
-  padding: 0.2rem 0.4rem;
+  padding: 0.1rem 0.4rem;
   font-size: 0.5rem;
   font-weight: 400;
   background: var(--bp-secondary-glow);
   color: var(--bp-white);
   border-radius: 1.5rem;
   margin-bottom: 0.3rem;
+  font-family: 'omyu_pretty';
 }
 
 .genre p:nth-child(2)::before {
   content: '/';
   padding: 0 0.3rem;
+}
+
+.heartBtnWrap {
+  display: flex;
+  align-items: center;
+}
+
+.heartBtn {
+  cursor: pointer;
 }

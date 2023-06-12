@@ -65,8 +65,8 @@ export default function UserNickName() {
                 <Image
                   src={userImg.data.profileImage}
                   alt="userProfileImage"
-                  width={70}
-                  height={70}
+                  width={69}
+                  height={69}
                 />
                 : <Image
                   src={"/assets/images/mypage/userImg.png"}
@@ -76,7 +76,7 @@ export default function UserNickName() {
                 />
             }
             {userprofileSkin.data.profileSkin &&
-              <Image className={style.profileskinbox} src={userprofileSkin.data.profileSkin} alt={userprofileSkin.data.profileSkin} width={70} height={70} />
+              <Image className={style.profileskinbox} src={userprofileSkin.data.profileSkin} alt={userprofileSkin.data.profileSkin} width={71} height={72} />
             }
           </div>
           {userNickname.data.nickname &&

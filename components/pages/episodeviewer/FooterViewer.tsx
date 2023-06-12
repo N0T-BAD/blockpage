@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react';
+import axios from 'axios';
 
 import style from '@/components/pages/episodeviewer/FooterViewer.module.css'
+
 import BackBtn from '@/components/ui/BackBtn';
 import CloseBtn from '@/components/ui/CloseBtn';
 import Episode from '../webtoonepisode/Episode';
 import { EpisodeViewDataType } from '@/types/webtoonDataType';
 import RatingModal from '@/components/modals/RatingModal';
-import axios from 'axios';
-import { useSession } from 'next-auth/react';
+import Swal from 'sweetalert2';
+import PurchaseModal from '@/components/modals/PurchaseModal';
 
 export default function FooterViewer(props: { episodeData: EpisodeViewDataType, isViewer: boolean, setIsViewer: React.Dispatch<React.SetStateAction<boolean>> }) {
 
@@ -20,20 +23,52 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
   const { episodeId } = router.query;
   const { episodeNumber } = router.query;
 
-  const [showModal, setShowModal] = useState(false);
+  const [myBlock, setMyBlock] = useState<number>(0);
+
+  const [showRatingModal, setShowRatingModal] = useState(false);
   const [isRating, setIsRating] = useState(false);
 
   const [value, setValue] = useState<number>(0);
 
+  const [showPurchaseModal, setShowPurchaseModal] = useState<boolean>(false);
+  const [episodeIdModal, setEpisodeIdModal] = useState<number>(0);
+  const [episodeNumberModal, setEpisodeIdNumberModal] = useState<number>(0);
+  const [episodePriceModal, setEpisodePriceModal] = useState<number>(0);
+
   const nextId = Number(episodeId) + 1;
   const nextNumber = Number(episodeNumber) + 1;
 
+  const handleShowPurchaseModal = (episodeId: number, episodeNumber: number, episodePrice: number) => {
+    setEpisodeIdModal(episodeId)
+    setEpisodeIdNumberModal(episodeNumber)
+    setEpisodePriceModal(episodePrice)
+    setShowPurchaseModal(true);
+  }
+
   const handleShowRating = () => {
-    setShowModal(!showModal);
+    if (session) {
+      setShowRatingModal(!showRatingModal);
+    } else {
+      Swal.fire({
+        icon: 'warning',
+        text: '로그인이 필요한 서비스입니다.',
+        showConfirmButton: false,
+        timer: 2000
+      }).then(result => {
+        router.push('/login');
+      })
+    }
   }
 
   const handleIsRating = () => {
-    if (session) {
+    if (value === 0) {
+      Swal.fire({
+        icon: 'warning',
+        text: '1~10을 입력해주세요',
+        showConfirmButton: false,
+        timer: 2000
+      })
+    } else if (session) {
       axios.post(`https://blockpage.site/member-service/v1/ratings`, {
         episodeId: episodeId,
         webtoonId: webtoonId,
@@ -45,36 +80,83 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
       })
         .then((res) => {
           console.log(res);
+          setIsRating(!isRating);
+          setShowRatingModal(!showRatingModal);
         })
         .catch((err) => {
           console.log(err);
-          alert(err.response.data);
         })
     }
-
-    setIsRating(!isRating);
-    setShowModal(!showModal);
   }
 
+  // const handleEpisode = (paramEpisodeBM: string, paramPersistType: string, episodeId: number, episodeNumber: number, episodePrice: number, isRead: boolean) => {
+  //   if (session?.email) {
+  //     if (isRead) {
+  //       axios.post(`https://blockpage.site/purchase-service/v1/purchases?type=${paramEpisodeBM}&webtoonId=${webtoonId}`, {
+  //         blockQuantity: episodePrice,
+  //         episodeId: episodeId,
+  //         persistType: paramPersistType,
+  //         webtoonTitle: webtoonData.webtoonTitle,
+  //         episodeNumber: episodeNumber,
+  //         webtoonThumbnail: webtoonData.webtoonThumbnail,
+  //         creator: webtoonData.creator,
+  //         illustrator: webtoonData.illustrator,
+  //         genre: webtoonData.genre,
+  //       }, {
+  //         headers: {
+  //           memberId: session?.email,
+  //         }
+  //       })
+  //         .then((res) => {
+  //           if (episodePrice !== 0) {
+  //             Swal.fire({
+  //               icon: 'success',
+  //               title: episodeNumber + '화',
+  //               text: '구매가 완료되었습니다.',
+  //               showConfirmButton: false,
+  //               timer: 2000
+  //             })
+  //           }
+  //         })
+  //         .catch((err) => {
+  //           console.log(err);
+  //         });
+  //     }
+  //   }
+
+  //   router.push(`/webtoon/${webtoonId}/episode/${episodeId}/episode/${episodeNumber}`);
+  // };
+
   useEffect(() => {
-    axios.get(`https://blockpage.site/member-service/v1/ratings/${episodeId}`, {
-      headers: {
-        memberId: session?.email
-      }
-    })
-      .then((res) => {
-        console.log(res);
-        setValue(res.data.data.ratings)
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }, [])
+    if (session) {
+      axios.all([
+        axios.get(`https://blockpage.site/block-service/v1/blocks`, {
+          headers: { memberId: session.email }
+        }),
+        axios.get(`https://blockpage.site/member-service/v1/ratings/${episodeId}`, {
+          headers: {
+            memberId: session?.email
+          }
+        }),
+      ])
+        .then(
+          axios.spread((getBlock, res2) => {
+            console.log(getBlock);
+            setMyBlock(getBlock.data.data.totalBlocks);
+
+            console.log(res2);
+            setValue(res2.data.data.ratings);
+          }))
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+  }, [session?.email])
 
   return (
     <>
       {
-        showModal &&
+        showRatingModal &&
         <RatingModal
           handleShowRating={handleShowRating}
           handleIsRating={handleIsRating}
@@ -82,6 +164,17 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
           value={value}
         />
       }
+      {/* {
+        showPurchaseModal &&
+        <PurchaseModal
+          myBlock={myBlock}
+          episodeId={episodeIdModal}
+          episodeNumber={episodeNumberModal}
+          episodePrice={episodePriceModal}
+          setShowModal={setShowPurchaseModal}
+          // handleEpisode={handleEpisode}
+        />
+      } */}
       <footer
         className={
           props.isViewer ? `${style.viewerFooterWrap} ${style.view}` : `${style.viewerFooterWrap}`
@@ -122,7 +215,13 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
           data.nextEpisodeThumbnail !== "" ?
             <div
               className={style.nextEpisode}
-              onClick={() => router.push(`/webtoon/${webtoonId}/episode/${nextId}/episode/${nextNumber}`)}
+              onClick={
+                !session?.email ?
+                  (() => router.push('/login')) :
+                  myBlock >= 4 ?
+                    () => handleShowPurchaseModal(nextId, nextNumber, data.nextEpisodeBlockPrice) :
+                    () => router.push('/blockcharge')
+              }
             >
               <p className={style.nextTxt}>다음화</p>
               <Episode
@@ -130,6 +229,7 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
                 thumbnail={data.nextEpisodeThumbnail}
                 rating={data.rating}
                 uploadDate={data.nextUploadDate}
+                price={data.nextEpisodeBlockPrice}
               />
             </div>
             :
@@ -146,6 +246,8 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
 }
 
 const NavFooter = (props: { author: string }) => {
+  const { data: session } = useSession();
+
   const router = useRouter();
   const { webtoonId } = router.query;
   const { episodeId } = router.query;
@@ -169,7 +271,7 @@ const NavFooter = (props: { author: string }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIsViewer(false);
-    }, 3000);
+    }, 2000);
     return () => clearInterval(interval);
   }, []);
 
@@ -180,12 +282,23 @@ const NavFooter = (props: { author: string }) => {
           onClick={() => router.back()}
         />
       </div>
-      <div className={style.btn} onClick={() => router.push(
+      <div className={style.btn} onClick={session ? () => router.push(
         {
           pathname: `/webtoon/${webtoonId}/episode/${episodeId}/episode/${episodeNumber}/comment`,
           query: { author: props.author },
         }
-      )}>
+      ) : () => {
+        Swal.fire({
+          icon: 'warning',
+          text: '로그인이 필요한 서비스입니다.',
+          showConfirmButton: false,
+          timer: 2000
+        }).then(result => {
+          router.push('/login');
+        })
+      }
+
+      }>
         <Image
           src={'/assets/images/icons/comment.svg'}
           alt="commentBtnIcon"
