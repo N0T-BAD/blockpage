@@ -1,10 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 
 import style from '@/components/pages/store/ProfileStore.module.css'
 import Separator from '@/components/ui/Separator'
+import { mySkinData, profileSkinDetail } from '@/types/storeDataType'
 
-export default function ProfileSkin(props: { skinId: number, skinName: string, skinDescription: string, skinImage: string, blockPrice: number, handleSelectSkin: (skinId: number, skinName: string, profileSkinImage: string, blockQuantity: number) => void }) {
+export default function ProfileSkin(props: { mySkin: mySkinData[], skinId: number, selectedSkinId: number, skinName: string, skinDescription: string, skinImage: string, blockPrice: number, handleSelectSkin: (skinId: number, skinName: string, profileSkinImage: string, blockQuantity: number) => void }) {
+
+  const [myProfileSkin, setMyProfileSkin] = useState<profileSkinDetail[]>([]);
+  console.log(myProfileSkin)
+  useEffect(() => {
+    props.mySkin.map((data) => {
+      setMyProfileSkin(data.profileSkinDetail);
+    });
+  }, [])
+
   return (
     <>
       <div className={style.skinImgDiv} onClick={() => props.handleSelectSkin(props.skinId, props.skinName, props.skinImage, props.blockPrice)}>
@@ -18,7 +28,19 @@ export default function ProfileSkin(props: { skinId: number, skinName: string, s
           />
         </div>
         <div className={style.skinTxtDiv}>
-          <p className={style.skinName}>{props.skinName}</p>
+          <div className={style.skinTxtTop}>
+            <p className={style.skinName}>{props.skinName}</p>
+            <p className={props.skinId === props.selectedSkinId ? `${style.skinSelected}` : ""}>{props.skinId === props.selectedSkinId ? '선택' : ""}</p>
+            {/* <p className={props.skinId === props.selectedSkinId ? `${style.skinSelected}` : ""}>
+              {
+                myProfileSkin &&
+                myProfileSkin.map((data) => (
+                  props.skinId === data.id ?
+                    '보유' : ""
+                ))
+              }
+            </p> */}
+          </div>
           <p className={style.skinDescription}>{props.skinDescription}</p>
           <p className={style.blockPrice}>{props.blockPrice} 블럭</p>
         </div>
