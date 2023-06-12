@@ -7,12 +7,6 @@ export default function SkinPurchaseModal(props: { myBlock: number, blockQuantit
   return (
     <div className={style.modalBox}>
       <div className={style.modal}>
-        <div className={style.closeBtn} onClick={() => props.setShowModal(false)}>
-          <CloseBtn
-            height={20}
-            width={20}
-          />
-        </div>
         <div className={style.skinPurchaseModalBox}>
           <p className={style.myBlock}>내 블럭 : {props.myBlock}개</p>
           <p className={style.useBlock}>블럭 {props.blockQuantity}개를 사용하여</p>
