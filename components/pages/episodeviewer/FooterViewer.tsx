@@ -27,7 +27,8 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
 
   const [showRatingModal, setShowRatingModal] = useState(false);
   const [isRating, setIsRating] = useState(false);
-
+  const [isRatingData, setIsRatingData] = useState(false);
+  console.log(isRatingData)
   const [value, setValue] = useState<number>(0);
 
   const [showPurchaseModal, setShowPurchaseModal] = useState<boolean>(false);
@@ -81,6 +82,7 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
         .then((res) => {
           console.log(res);
           setIsRating(!isRating);
+          setIsRatingData(true);
           setShowRatingModal(!showRatingModal);
         })
         .catch((err) => {
@@ -129,26 +131,30 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
 
   useEffect(() => {
     if (session) {
-      axios.all([
-        axios.get(`https://blockpage.site/block-service/v1/blocks`, {
-          headers: { memberId: session.email }
-        }),
-        axios.get(`https://blockpage.site/member-service/v1/ratings/${episodeId}`, {
-          headers: {
-            memberId: session?.email
-          }
-        }),
-      ])
-        .then(
-          axios.spread((getBlock, res2) => {
-            console.log(getBlock);
-            setMyBlock(getBlock.data.data.totalBlocks);
-
-            console.log(res2);
-            setValue(res2.data.data.ratings);
-          }))
+      axios.get(`https://blockpage.site/block-service/v1/blocks`, {
+        headers: { memberId: session.email }
+      })
+        .then((res) => {
+          console.log(res);
+          setMyBlock(res.data.data.totalBlocks);
+        })
         .catch((err) => {
           console.log(err);
+        })
+
+      axios.get(`https://blockpage.site/member-service/v1/ratings/${episodeId}`, {
+        headers: {
+          memberId: session?.email
+        }
+      })
+        .then((res) => {
+          console.log(res);
+          setValue(res.data.data.ratings);
+          setIsRatingData(true);
+        })
+        .catch((err) => {
+          console.log(err);
+          setIsRatingData(false);
         })
     }
   }, [session?.email])
@@ -189,7 +195,7 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
                 : ""
             }
             {
-              value !== 0 ?
+              isRatingData ?
                 <p>참여완료</p>
                 : <p>평점주기</p>
             }
