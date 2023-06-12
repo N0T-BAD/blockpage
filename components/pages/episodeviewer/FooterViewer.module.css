@@ -18,19 +18,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* position: fixed; */
   width: 100%;
   height: 100%;
-  /* bottom: 0rem; */
-  /* z-index: 200; */
   background-color: var(--bp-white);
-  /* padding: 1rem 1.5rem; */
   border-radius: 0.5rem 0.5rem 0 0;
   transition: 0.5s ease-in-out;
 }
 
 .navFoot.close {
-  /* bottom: -6rem; */
   transition: 0.5s ease-in-out;
 }
 
@@ -78,7 +73,7 @@
 .authorSection {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .authorMent {
