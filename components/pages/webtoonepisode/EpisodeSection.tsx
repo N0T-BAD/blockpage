@@ -144,9 +144,9 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
       {
         showConfirmModal &&
         <ConfirmModal
-          text1='블럭 4개'
-          text2='가 필요합니다.'
-          text3='블럭을 충전하시겠습니까?'
+          text1={`블럭 4개`}
+          text2={'가 필요합니다.'}
+          text3={'블럭을 충전하시겠습니까?'}
           setShowModal={setShowConfirmModal}
           handleconfirm={() => router.push('/blockcharge')}
         />
