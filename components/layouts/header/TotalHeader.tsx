@@ -35,6 +35,8 @@ export default function TotalHeader() {
             setTitle('룰렛 게임')
         } else if (path === '/game/lotto') {
             setTitle('로또 게임')
+        } else if (path === '/nftbox') {
+            setTitle('NET 보관함')
         }
     }, [router.pathname])
 

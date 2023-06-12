@@ -10,6 +10,7 @@ import CommentUserInfo from './CommentUserInfo'
 import { CommentDataType, CommentEmotionDataType, ParentsCommentType } from '@/types/commentDataType'
 import CommentInput from './CommentInput'
 import ReportModal from '@/components/modals/ReportModal'
+import CommentDeleteModal from '@/components/modals/CommentDeleteModal'
 
 export default function Comment(props: {
   nickNameData: string,
@@ -32,6 +33,7 @@ export default function Comment(props: {
 
   const [showCommentModal, setShowCommentModal] = useState<boolean>();
   const [reportValue, setReportValue] = useState<number>(0);
+  const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
 
   const [commentEmotionData, setCommentEmotionData] = useState<CommentEmotionDataType>({
     id: 0,
@@ -48,23 +50,28 @@ export default function Comment(props: {
 
   useEffect(() => {
     if (session) {
-      axios.all([axios.get(`https://blockpage.site/comment-service/v1/comments/reply/${commentData.commentId}`), axios.get(`https://blockpage.site/member-service/v1/emotions?commentId=${commentData.commentId}`, {
-        headers: {
-          memberId: session?.email,
-        }
-      })]
+      axios.all([
+        axios.get(`https://blockpage.site/comment-service/v1/comments/reply/${commentData.commentId}`),
+        axios.get(`https://blockpage.site/member-service/v1/emotions?commentId=${commentData.commentId}`, {
+          headers: {
+            memberId: session?.email,
+          }
+        })]
       )
         .then(
           axios.spread((res1, res2) => {
             setReplyData(res1.data.data);
             setCommentEmotionData(res2.data.data);
+
+            console.log(res1.data.data);
+            console.log(res2.data.data);
           })
         )
         .catch((err) => {
           console.log(err);
         });
     }
-  }, [session?.email]);
+  }, [session?.email, likeState]);
 
   const handleView = () => {
     setOpenReply(!openReply);
@@ -77,6 +84,7 @@ export default function Comment(props: {
     })
       .then((res) => {
         console.log(res);
+        router.reload();
       })
       .catch((err) => {
         console.log(err);
@@ -87,6 +95,7 @@ export default function Comment(props: {
     axios.delete(`https://blockpage.site/comment-service/v1/comments/${commentData.commentId}`)
       .then((res) => {
         console.log(res);
+        router.reload();
       })
       .catch((err) => {
         console.log(err);
@@ -110,7 +119,6 @@ export default function Comment(props: {
         })
         .catch((err) => {
           console.log(err);
-          alert(err.response.data);
         })
     }
     else if (likeState === true) {
@@ -125,7 +133,6 @@ export default function Comment(props: {
         })
         .catch((err) => {
           console.log(err);
-          alert(err.response.data);
         })
     }
   }
@@ -144,10 +151,10 @@ export default function Comment(props: {
         .then((res) => {
           console.log(res);
           setDisLikeState(!disLikeState);
+          router.reload();
         })
         .catch((err) => {
           console.log(err);
-          alert(err.response.data);
         })
     } else if (disLikeState === true) {
       axios.post(`https://blockpage.site/member-service/v1/emotions${commentEmotionData?.commentId}`, {
@@ -158,10 +165,10 @@ export default function Comment(props: {
         .then((res) => {
           console.log(res);
           setDisLikeState(!disLikeState);
+          router.reload();
         })
         .catch((err) => {
           console.log(err);
-          alert(err.response.data);
         })
     }
   }
@@ -181,6 +188,7 @@ export default function Comment(props: {
       .then((res) => {
         console.log(res);
         setShowCommentModal(!showCommentModal);
+        router.reload();
       })
       .catch((err) => {
         console.log(err);
@@ -200,6 +208,13 @@ export default function Comment(props: {
           handleShowReportModal={handleShowReportModal}
           handleReport={handleReport}
           setReportValue={setReportValue}
+        />
+      }
+      {
+        showDeleteModal &&
+        <CommentDeleteModal
+          setShowDeleteModal={setShowDeleteModal}
+          handleDelete={handleDelete}
         />
       }
       {
@@ -242,7 +257,7 @@ export default function Comment(props: {
                 }
                 {
                   session?.email === commentData.childId ?
-                    <div onClick={handleDelete}>
+                    <div onClick={() => setShowDeleteModal(true)}>
                       <Image
                         src={"/assets/images/icons/trash.svg"}
                         alt='쓰레기통'
@@ -253,7 +268,7 @@ export default function Comment(props: {
                     </div> :
                     !commentData.childId &&
                       session?.email === commentData.parentsId ?
-                      <div onClick={handleDelete}>
+                      <div onClick={() => setShowDeleteModal(true)}>
                         <Image
                           src={"/assets/images/icons/trash.svg"}
                           alt='쓰레기통'
@@ -276,15 +291,19 @@ export default function Comment(props: {
                     <p onClick={handleView}>답글 달기</p>
               }
               <div className={style.bottomIcon}>
-                <div onClick={handleShowReportModal}>
-                  <Image
-                    src={"/assets/images/icons/siren.svg"}
-                    alt='신고'
-                    width={14}
-                    height={14}
-                    priority
-                  />
-                </div>
+                {
+                  session?.email === commentData.parentsId ?
+                    <div onClick={handleShowReportModal}>
+                      <Image
+                        src={"/assets/images/icons/siren.svg"}
+                        alt='신고'
+                        width={14}
+                        height={14}
+                        priority
+                      />
+                    </div>
+                    : ""
+                }
                 <div className={style.emotion}>
                   <Image
                     src={"/assets/images/icons/thumbsup.svg"}

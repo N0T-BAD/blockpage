@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import axios from 'axios';
 
 import style from '@/components/pages/store/ProfileStore.module.css'
@@ -13,8 +14,9 @@ export default function ProfileStore(props: { data: userDataType }) {
 
   const { data: session } = useSession();
 
-  const [confirm, setConfirm] = useState<boolean>(false);
+  const router = useRouter();
 
+  const [confirm, setConfirm] = useState<boolean>(false);
   const [myBlock, setMyBlock] = useState<number>(0);
   const [selectedSkinId, setSelectedSkinId] = useState<number>(0);
   const [selectedSkinName, setSeletedSkinName] = useState<string>('');
@@ -70,26 +72,27 @@ export default function ProfileStore(props: { data: userDataType }) {
   }
 
   useEffect(() => {
-    if (session) {
-      axios.all([
-        axios.get(`https://blockpage.site/purchase-service/v1/products?type=profileSkin`),
-        axios.get(`https://blockpage.site/block-service/v1/blocks`, {
-          headers: { memberId: session.email }
-        }),
-      ])
-        .then(
-          axios.spread((res1, res2) => {
-            console.log(res1);
-            setSkinData(res1.data.data);
+    axios.get(`https://blockpage.site/purchase-service/v1/products?type=profileSkin`)
+      .then((res) => {
+        console.log(res);
+        setSkinData(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
-            console.log(res2);
-            setMyBlock(res2.data.data.totalBlocks)
-          })
-        )
+    if (session) {
+      axios.get(`https://blockpage.site/block-service/v1/blocks`, {
+        headers: { memberId: session.email }
+      })
+        .then((res) => {
+          console.log(res);
+          setMyBlock(res.data.data.totalBlocks)
+        })
         .catch((err) => {
           console.log(err);
         });
-    }
+    };
   }, [session?.email, confirm])
 
   return (
@@ -111,13 +114,25 @@ export default function ProfileStore(props: { data: userDataType }) {
         </div>
         <div className={style.userProfileDiv}>
           <div className={style.userProfileImgDiv}>
-            <Image
-              src={userData.profileImage}
-              alt='유저 프로필 이미지'
-              width={80}
-              height={80}
-              priority
-            />
+            {
+              //
+              session?.email ?
+                <Image
+                  src={userData.profileImage}
+                  alt='유저 프로필 이미지'
+                  width={80}
+                  height={80}
+                  priority
+                />
+                :
+                <Image
+                  src={'/assets/images/mypage/userImg.png'}
+                  alt='게스트 프로필 이미지'
+                  width={80}
+                  height={80}
+                  priority
+                />
+            }
           </div>
           <div className={style.selectedUserSkin}>
             {
@@ -154,7 +169,7 @@ export default function ProfileStore(props: { data: userDataType }) {
           }
         </div>
         <div className={style.confirmBox}>
-          <button type='button' className={style.confirm} onClick={() => setShowModal(true)}>구매</button>
+          <button type='button' className={style.confirm} onClick={session ? () => router.push('/login') : () => setShowModal(true)}>구매</button>
         </div>
       </section>
     </>

@@ -19,3 +19,4 @@ Chargeresult.getLayout = function getLayout(page: React.ReactElement) {
 
 export default Chargeresult
 
+Chargeresult.auth = true;

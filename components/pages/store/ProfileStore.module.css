@@ -4,7 +4,7 @@
   top: 0;
   z-index: 100;
   background-color: white;
-  margin-top: 5.5rem;
+  margin-top: 7rem;
   padding: 0 1.5rem;
   border-bottom: 0.02rem solid var(--bp-line-gray);
 }
@@ -15,7 +15,7 @@
 }
 
 .sectionProfileTxt p {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 700;
 }
 
@@ -37,7 +37,6 @@ p.myBlock {
 
 .selectedUserSkin {
   position: absolute;
-  top: 2.6rem;
 }
 
 .userProfileImgDiv img {
@@ -45,7 +44,7 @@ p.myBlock {
 }
 
 .profileSkinSection {
-  margin-top: 15rem;
+  margin-top: 17rem;
   padding: 0 1.5rem;
 }
 
@@ -54,7 +53,7 @@ p.myBlock {
 }
 
 .sectionTxt p {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 700;
 }
 

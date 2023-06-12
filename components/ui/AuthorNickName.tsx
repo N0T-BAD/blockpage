@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import style from '@/components/pages/mypage/UserNickName.module.css'
 import UserIcon from '@/components/pages/mypage/UserIcon'
 import axios from 'axios'
-import { UserImgData } from '@/types/changeUserDataType'
+import { UserImgData, profileskinDataType } from '@/types/changeUserDataType'
 import { authorNickname } from '@/types/authorNameDataType'
 import { useSession } from 'next-auth/react'
 import { userprofile } from '@/state/mypage/userprofile'
@@ -26,7 +26,12 @@ export default function AuthorNickName() {
       },
     }
   );
-  console.log(session?.email)
+
+  const [profileskin, setProfileSkin] = useState<profileskinDataType>({
+    data: {
+      profileSkin: '',
+    }
+  })
 
 
   useEffect(() => {
@@ -38,7 +43,7 @@ export default function AuthorNickName() {
             // role: role,
           },
         });
-        const { creatorNickname, profileImage } = res.data.data;
+        const { creatorNickname, profileImage, profileSkin } = res.data.data;
         setauthorNickName({
           data: {
             creatorNickname,
@@ -49,7 +54,11 @@ export default function AuthorNickName() {
             profileImage,
           }
         })
-        console.log(res.data)
+        setProfileSkin({
+          data: {
+            profileSkin,
+          }
+        })
       }
       catch (err) {
         console.log(err);
@@ -65,14 +74,14 @@ export default function AuthorNickName() {
     <>
       <div className={style.usernicknameImgBox}>
         <div className={style.usernicknameImg}>
-          <div className={style.userImage}>
+          <div className={style.profileskin}>
             {
               userImg.data.profileImage ?
                 <Image
                   src={userImg.data.profileImage}
                   alt="userProfileImage"
-                  width={70}
-                  height={70}
+                  width={69}
+                  height={69}
                 />
                 : <Image
                   src={"/assets/images/mypage/userImg.png"}
@@ -80,6 +89,9 @@ export default function AuthorNickName() {
                   width={70}
                   height={70}
                 />
+            }
+            {profileskin.data.profileSkin &&
+              <Image className={style.profileskinbox} src={profileskin.data.profileSkin} alt={profileskin.data.profileSkin} width={71} height={72} />
             }
           </div>
           {

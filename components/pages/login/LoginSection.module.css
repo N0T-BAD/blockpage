@@ -23,6 +23,7 @@
 }
 
 .loginSection p {
-  font-size: 0.8rem;
+  font-size: 1rem;
   line-height: 1.5;
+  font-family: 'omyu_pretty';
 }

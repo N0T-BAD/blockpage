@@ -53,3 +53,7 @@ section.mainBannerSection {
     border-radius: 1rem;
   }
   
+  p.webtoonTitle{
+    font-size: 1.5rem;
+    font-family: 'omyu_pretty';
+  }
