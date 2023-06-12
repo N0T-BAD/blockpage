@@ -166,6 +166,12 @@ const RouletteGame = () => {
         }
       </div>
       <p className={style.gameTitle}>룰렛 횟수 : {games.data.rouletteDayCount}</p>
+      {
+        games.data.rouletteDayCount === 0 ?
+          <p className={style.gameCountText}>오늘의 게임 횟수를 모두 사용하였습니다.</p>
+          :
+          ""
+      }
     </div>
   );
 };
