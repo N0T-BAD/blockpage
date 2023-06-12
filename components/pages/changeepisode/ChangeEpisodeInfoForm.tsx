@@ -61,7 +61,6 @@ export default function ChangeEpisodeInfoForm() {
       {
         headers: {
           memberId: session?.email || '',
-          // role: role,
         },
         params: {
           webtoonId: webtoonId,
