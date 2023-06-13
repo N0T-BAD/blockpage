@@ -73,6 +73,17 @@ export default function ProfileStore(props: { data: userDataType }) {
     }
   }
 
+  const handleLogin = () => {
+    Swal.fire({
+      icon: 'warning',
+      text: '로그인이 필요한 서비스입니다.',
+      showConfirmButton: false,
+      timer: 2000
+    }).then(result => {
+      router.push('/login');
+    })
+  }
+
   useEffect(() => {
     axios.get(`https://blockpage.site/purchase-service/v1/products?type=profileSkin`)
       .then((res) => {
@@ -184,7 +195,7 @@ export default function ProfileStore(props: { data: userDataType }) {
           }
         </div>
         <div className={style.confirmBox}>
-          <button type='button' className={style.confirm} onClick={!session ? () => router.push('/login') : () => setShowModal(true)}>구매</button>
+          <button type='button' className={style.confirm} onClick={!session ? () => handleLogin() : () => setShowModal(true)}>구매</button>
         </div>
       </section>
     </>

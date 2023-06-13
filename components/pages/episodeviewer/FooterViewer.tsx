@@ -45,6 +45,17 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
     setShowPurchaseModal(true);
   }
 
+  const handleLogin = () => {
+    Swal.fire({
+      icon: 'warning',
+      text: '로그인이 필요한 서비스입니다.',
+      showConfirmButton: false,
+      timer: 2000
+    }).then(result => {
+      router.push('/login');
+    })
+  }
+
   const handleShowRating = () => {
     if (session) {
       setShowRatingModal(!showRatingModal);
@@ -224,7 +235,7 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
                 data.nextEpisodeBlockPrice > 0 ?
                   (
                     !session?.email ?
-                      (() => router.push('/login')) :
+                      () => handleLogin() :
                       myBlock >= 4 ?
                         () => handleShowPurchaseModal(nextId, nextNumber, data.nextEpisodeBlockPrice) :
                         () => router.push('/blockcharge')
