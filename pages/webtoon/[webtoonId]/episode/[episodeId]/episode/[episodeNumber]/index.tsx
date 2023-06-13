@@ -18,7 +18,6 @@ function EpisodeId(props: { data: EpisodeViewDataType }) {
 
   const handleScroll = () => {
     if (window.scrollY + window.innerHeight > document.body.offsetHeight - 100) {
-      console.log("isViewer : ", isViewer)
       setIsViewer(true);
     } else {
       setIsViewer(false);
@@ -49,9 +48,3 @@ export async function getServerSideProps(context: any) {
     props: { data }
   }
 }
-
-// EpisodeId.auth = {
-//   // role: "admin",
-//   loading: <DataFetchingLoader text="load" />,
-//   unauthorized: '/login', // redirect to this url
-// }
