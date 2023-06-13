@@ -5,6 +5,7 @@ import style from '@/components/pages/store/ProfileStore.module.css'
 import Separator from '@/components/ui/Separator'
 
 export default function NftData(props: {
+  nftId: number,
   nftCreatorId: string,
   nftMemberId: string,
   nftName: string,
@@ -13,7 +14,7 @@ export default function NftData(props: {
   nftImage: string,
   nftBlockPrice: number,
   nftType: string,
-  handleSelectSkin: (
+  handleSelectNft: (
     nftId: number,
     nftName: string,
     nftImage: string,
@@ -22,7 +23,7 @@ export default function NftData(props: {
 }) {
   return (
     <>
-      <div className={style.skinImgDiv} onClick={() => console.log('onClick')}>
+      <div className={style.skinImgDiv} onClick={() => props.handleSelectNft(props.nftId, props.nftName, props.nftImage, props.nftBlockPrice)}>
         <div className={style.skinImg}>
           <Image
             src={props.nftImage}
@@ -34,8 +35,12 @@ export default function NftData(props: {
         </div>
         <div className={style.skinTxtDiv}>
           <div className={style.skinTxtTop}>
-            <p className={style.skinName}>{props.nftName}</p>
-            <p className={props.selectedNftName === props.selectedNftName ? `${style.skinSelected}` : ""}>{props.selectedNftName === props.selectedNftName ? '선택' : ""}</p>
+            <div className={style.titleTxt}>
+              <p className={style.skinName}>{props.nftName}</p>
+            </div>
+            <div>
+              <p className={props.nftName === props.selectedNftName ? `${style.skinSelected}` : ""}>{props.nftName === props.selectedNftName ? '선택' : ""}</p>
+            </div>
           </div>
           <p className={style.skinDescription}>{props.nftDescription}</p>
           <p className={style.blockPrice}>{props.nftBlockPrice} 블럭</p>

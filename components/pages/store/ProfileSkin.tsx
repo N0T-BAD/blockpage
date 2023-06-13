@@ -29,8 +29,12 @@ export default function ProfileSkin(props: { mySkin: mySkinData[], skinId: numbe
         </div>
         <div className={style.skinTxtDiv}>
           <div className={style.skinTxtTop}>
-            <p className={style.skinName}>{props.skinName}</p>
-            <p className={props.skinId === props.selectedSkinId ? `${style.skinSelected}` : ""}>{props.skinId === props.selectedSkinId ? '선택' : ""}</p>
+            <div>
+              <p className={style.skinName}>{props.skinName}</p>
+            </div>
+            <div>
+              <p className={props.skinId === props.selectedSkinId ? `${style.skinSelected}` : ""}>{props.skinId === props.selectedSkinId ? '선택' : ""}</p>
+            </div>
             {/* <p className={props.skinId === props.selectedSkinId ? `${style.skinSelected}` : ""}>
               {
                 myProfileSkin &&

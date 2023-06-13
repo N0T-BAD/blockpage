@@ -27,7 +27,7 @@ export default function NftStore(props: { data: userDataType }) {
 
   const [showModal, setShowModal] = useState<boolean>(false);
 
-  const handleSelectSkin = (nftId: number, nftName: string, nftImage: string, blockQuantity: number) => {
+  const handleSelectNft = (nftId: number, nftName: string, nftImage: string, blockQuantity: number) => {
     setSelectedNftId(nftId);
     setSeletedNftName(nftName);
     setSelectedNftImage(nftImage);
@@ -86,7 +86,6 @@ export default function NftStore(props: { data: userDataType }) {
         headers: { memberId: session.email }
       })
         .then((res) => {
-          console.log(res);
           setMyBlock(res.data.data.totalBlocks)
         })
         .catch((err) => {
@@ -110,6 +109,7 @@ export default function NftStore(props: { data: userDataType }) {
       <section className={style.nftSection}>
         <div className={style.sectionTxt}>
           <p>NFT 목록</p>
+          <p className={style.myBlock}>보유 블럭 {myBlock}</p>
         </div>
         <div className={style.skinImgList}>
           {
@@ -117,6 +117,7 @@ export default function NftStore(props: { data: userDataType }) {
             nftData.map((data) => (
               <NftData
                 key={data.nftId}
+                nftId={data.nftId}
                 nftCreatorId={data.nftCreatorId}
                 nftMemberId={data.nftMemberId}
                 nftName={data.nftName}
@@ -125,7 +126,7 @@ export default function NftStore(props: { data: userDataType }) {
                 nftImage={data.nftImage}
                 nftBlockPrice={data.nftBlockPrice}
                 nftType={data.nftType}
-                handleSelectSkin={handleSelectSkin}
+                handleSelectNft={handleSelectNft}
               />
             ))
           }
