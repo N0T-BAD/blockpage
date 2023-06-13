@@ -113,15 +113,17 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
 
       axios.get(`https://blockpage.site/member-service/v1/ratings/${episodeId}`, {
         headers: {
-          memberId: session?.email
+          memberId: session.email
         }
       })
         .then((res) => {
           setValue(res.data.data.ratings);
-          setIsRatingData(true);
+          setIsRatingData(res.data.data.choice);
+          console.log(res);
         })
         .catch((err) => {
           setIsRatingData(false);
+          console.log(err);
         })
     }
   }, [session?.email])
