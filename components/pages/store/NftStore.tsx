@@ -85,7 +85,6 @@ export default function NftStore(props: { data: userDataType }) {
   useEffect(() => {
     axios.get(`https://blockpage.site/purchase-service/v1/products?type=nft`)
       .then((res) => {
-        console.log(res);
         setNftData(res.data.data);
       })
       .catch((err) => {

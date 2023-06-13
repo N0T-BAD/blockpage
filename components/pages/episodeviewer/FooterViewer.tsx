@@ -12,7 +12,6 @@ import Episode from '../webtoonepisode/Episode';
 import { EpisodeViewDataType } from '@/types/webtoonDataType';
 import RatingModal from '@/components/modals/RatingModal';
 import Swal from 'sweetalert2';
-import PurchaseModal from '@/components/modals/PurchaseModal';
 
 export default function FooterViewer(props: { episodeData: EpisodeViewDataType, isViewer: boolean, setIsViewer: React.Dispatch<React.SetStateAction<boolean>> }) {
 
@@ -90,7 +89,6 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
         }
       })
         .then((res) => {
-          console.log(res);
           setIsRating(!isRating);
           setIsRatingData(true);
           setShowRatingModal(!showRatingModal);
@@ -101,51 +99,12 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
     }
   }
 
-  // const handleEpisode = (paramEpisodeBM: string, paramPersistType: string, episodeId: number, episodeNumber: number, episodePrice: number, isRead: boolean) => {
-  //   if (session?.email) {
-  //     if (isRead) {
-  //       axios.post(`https://blockpage.site/purchase-service/v1/purchases?type=${paramEpisodeBM}&webtoonId=${webtoonId}`, {
-  //         blockQuantity: episodePrice,
-  //         episodeId: episodeId,
-  //         persistType: paramPersistType,
-  //         webtoonTitle: webtoonData.webtoonTitle,
-  //         episodeNumber: episodeNumber,
-  //         webtoonThumbnail: webtoonData.webtoonThumbnail,
-  //         creator: webtoonData.creator,
-  //         illustrator: webtoonData.illustrator,
-  //         genre: webtoonData.genre,
-  //       }, {
-  //         headers: {
-  //           memberId: session?.email,
-  //         }
-  //       })
-  //         .then((res) => {
-  //           if (episodePrice !== 0) {
-  //             Swal.fire({
-  //               icon: 'success',
-  //               title: episodeNumber + '화',
-  //               text: '구매가 완료되었습니다.',
-  //               showConfirmButton: false,
-  //               timer: 2000
-  //             })
-  //           }
-  //         })
-  //         .catch((err) => {
-  //           console.log(err);
-  //         });
-  //     }
-  //   }
-
-  //   router.push(`/webtoon/${webtoonId}/episode/${episodeId}/episode/${episodeNumber}`);
-  // };
-
   useEffect(() => {
     if (session) {
       axios.get(`https://blockpage.site/block-service/v1/blocks`, {
         headers: { memberId: session.email }
       })
         .then((res) => {
-          console.log(res);
           setMyBlock(res.data.data.totalBlocks);
         })
         .catch((err) => {
@@ -158,12 +117,10 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
         }
       })
         .then((res) => {
-          console.log(res);
           setValue(res.data.data.ratings);
           setIsRatingData(true);
         })
         .catch((err) => {
-          console.log(err);
           setIsRatingData(false);
         })
     }
@@ -180,17 +137,6 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
           value={value}
         />
       }
-      {/* {
-        showPurchaseModal &&
-        <PurchaseModal
-          myBlock={myBlock}
-          episodeId={episodeIdModal}
-          episodeNumber={episodeNumberModal}
-          episodePrice={episodePriceModal}
-          setShowModal={setShowPurchaseModal}
-          // handleEpisode={handleEpisode}
-        />
-      } */}
       <footer
         className={
           props.isViewer ? `${style.viewerFooterWrap} ${style.view}` : `${style.viewerFooterWrap}`
@@ -242,7 +188,6 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
                   )
                   :
                   () => router.push(`/webtoon/${webtoonId}/episode/${nextId}/episode/${nextNumber}`)
-
               }
             >
               <p className={style.nextTxt}>다음화</p>
@@ -289,7 +234,6 @@ const NavFooter = (props: { author: string }) => {
     };
   }, []);
 
-  // interval 3s for slide down
   useEffect(() => {
     const interval = setInterval(() => {
       setIsViewer(false);

@@ -87,7 +87,6 @@ export default function ProfileStore(props: { data: userDataType }) {
   useEffect(() => {
     axios.get(`https://blockpage.site/purchase-service/v1/products?type=profileSkin`)
       .then((res) => {
-        console.log(res);
         setSkinData(res.data.data);
       })
       .catch((err) => {
@@ -99,7 +98,6 @@ export default function ProfileStore(props: { data: userDataType }) {
         headers: { memberId: session.email }
       })
         .then((res) => {
-          console.log(res);
           setMyBlock(res.data.data.totalBlocks)
         })
         .catch((err) => {
@@ -110,7 +108,6 @@ export default function ProfileStore(props: { data: userDataType }) {
         headers: { memberId: session.email }
       })
         .then((res) => {
-          console.log(res.data.data);
           setMySkin(res.data.data);
         })
         .catch((err) => {
