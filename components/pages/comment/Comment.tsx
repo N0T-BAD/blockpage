@@ -63,9 +63,6 @@ export default function Comment(props: {
           axios.spread((res1, res2) => {
             setReplyData(res1.data.data);
             setCommentEmotionData(res2.data.data);
-
-            console.log(res1.data.data);
-            console.log(res2.data.data);
           })
         )
         .catch((err) => {
@@ -84,7 +81,6 @@ export default function Comment(props: {
       withCredentials: true
     })
       .then((res) => {
-        console.log(res);
         router.reload();
       })
       .catch((err) => {
@@ -95,7 +91,6 @@ export default function Comment(props: {
   const handleDelete = () => {
     axios.delete(`https://blockpage.site/comment-service/v1/comments/${commentData.commentId}`)
       .then((res) => {
-        console.log(res);
         router.reload();
       })
       .catch((err) => {
@@ -115,7 +110,6 @@ export default function Comment(props: {
         }
       })
         .then((res) => {
-          console.log(res);
           setLikeState(!likeState);
           router.reload();
         })
@@ -130,7 +124,6 @@ export default function Comment(props: {
         }
       })
         .then((res) => {
-          console.log(res);
           setLikeState(!likeState);
           router.reload();
         })
@@ -152,7 +145,6 @@ export default function Comment(props: {
         }
       })
         .then((res) => {
-          console.log(res);
           setDisLikeState(!disLikeState);
           router.reload();
         })
@@ -166,7 +158,6 @@ export default function Comment(props: {
         }
       })
         .then((res) => {
-          console.log(res);
           setDisLikeState(!disLikeState);
           router.reload();
         })
@@ -189,7 +180,6 @@ export default function Comment(props: {
       }
     })
       .then((res) => {
-        console.log(res);
         setShowCommentModal(!showCommentModal);
         router.reload();
       })

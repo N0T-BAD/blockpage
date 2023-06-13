@@ -60,6 +60,17 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
     setIsPreviewSection(!isPreviewSection);
   }
 
+  const handleLogin = () => {
+    Swal.fire({
+      icon: 'warning',
+      text: '로그인이 필요한 서비스입니다.',
+      showConfirmButton: false,
+      timer: 2000
+    }).then(result => {
+      router.push('/login');
+    })
+  }
+
   const handleShowModal = (episodeId: number, episodeNumber: number, episodePrice: number) => {
     setEpisodeIdModal(episodeId)
     setEpisodeIdNumberModal(episodeNumber)
@@ -120,11 +131,8 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
       ])
         .then(
           axios.spread((getBlock, free, paid) => {
-            console.log(getBlock)
             setMyBlock(getBlock.data.data.totalBlocks);
-            // const freeData = free.data.data;
             setFreeData(free.data.data);
-            // const paidData = paid.data.data;
             setPaidData(paid.data.data);
           })
         )
@@ -172,7 +180,7 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
               item.isRead === true ?
                 () => handleEpisode('episodeBMPaid', 'rental', item.episodeId, item.episodeNumber, item.episodePrice, false) :
                 !session?.email ?
-                  () => router.push('/login') :
+                  () => handleLogin() :
                   myBlock >= 4 ?
                     () => handleShowModal(item.episodeId, item.episodeNumber, item.episodePrice) :
                     () => setShowConfirmModal(true)

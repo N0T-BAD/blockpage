@@ -95,6 +95,7 @@ p.myBlock {
 .skinTxtTop {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .skinTxtDiv .skinSelected {
@@ -104,7 +105,7 @@ p.myBlock {
 
 p.skinName {
   color: var(--bp-secondary);
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 700;
 }
 
