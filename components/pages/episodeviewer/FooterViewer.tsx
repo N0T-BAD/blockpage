@@ -222,6 +222,17 @@ const NavFooter = (props: { author: string }) => {
 
   const [isViewer, setIsViewer] = useState<boolean>(false);
 
+  const handleLogin = () => {
+    Swal.fire({
+      icon: 'warning',
+      text: '로그인이 필요한 서비스입니다.',
+      showConfirmButton: false,
+      timer: 2000
+    }).then(result => {
+      router.push('/login');
+    })
+  }
+
   useEffect(() => {
     const handleTouch = (e: TouchEvent) => {
       if (e.touches[0].clientY > 100) {
@@ -253,16 +264,7 @@ const NavFooter = (props: { author: string }) => {
           pathname: `/webtoon/${webtoonId}/episode/${episodeId}/episode/${episodeNumber}/comment`,
           query: { author: props.author },
         }
-      ) : () => {
-        Swal.fire({
-          icon: 'warning',
-          text: '로그인이 필요한 서비스입니다.',
-          showConfirmButton: false,
-          timer: 2000
-        }).then(result => {
-          router.push('/login');
-        })
-      }
+      ) : () => handleLogin()
 
       }>
         <Image
