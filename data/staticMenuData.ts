@@ -37,13 +37,13 @@ export const staticTopNavData = [
 export const staticStoreNavData = [
   {
     id: 1,
-    name: "프로필 스킨",
-    link: "profileSkin",
+    name: "NFT",
+    link: "nft",
   },
   {
     id: 2,
-    name: "NFT",
-    link: "nft",
+    name: "프로필 스킨",
+    link: "profileSkin",
   },
 ];
 
@@ -188,7 +188,7 @@ export const staticMenuListData = [
   {
     id: 6,
     name: "스토어",
-    link: "/store/profileSkin",
+    link: "/store/nft",
   },
 ];
 

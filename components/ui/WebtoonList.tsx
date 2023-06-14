@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react'
+import axios from 'axios'
 
 import style from '@/components/ui/WebtoonList.module.css'
+import { listviewDataType } from '@/types/listviewDataType'
 import Separator from './Separator'
 import ViewLike from './ViewLike'
-import { listviewDataType } from '@/types/listviewDataType'
 import LikeButton from './LikeButton'
-import axios from 'axios'
-import { useSession } from 'next-auth/react'
 
 interface likeStateType {
   id: number;
