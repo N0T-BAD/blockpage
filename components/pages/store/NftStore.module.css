@@ -10,12 +10,20 @@ p.myBlock {
 }
 
 .sectionTxt {
+  display: flex;
+  justify-content: space-between;
   padding: 1rem 0 0;
 }
 
 .sectionTxt p {
   font-size: 1.1rem;
   font-weight: 700;
+}
+
+.sectionTxt p.myBlock {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--bp-font-gray);
 }
 
 .skinImgList {

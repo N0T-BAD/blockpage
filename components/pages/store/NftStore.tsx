@@ -27,7 +27,7 @@ export default function NftStore(props: { data: userDataType }) {
 
   const [showModal, setShowModal] = useState<boolean>(false);
 
-  const handleSelectSkin = (nftId: number, nftName: string, nftImage: string, blockQuantity: number) => {
+  const handleSelectNft = (nftId: number, nftName: string, nftImage: string, blockQuantity: number) => {
     setSelectedNftId(nftId);
     setSeletedNftName(nftName);
     setSelectedNftImage(nftImage);
@@ -71,6 +71,17 @@ export default function NftStore(props: { data: userDataType }) {
     }
   }
 
+  const handleLogin = () => {
+    Swal.fire({
+      icon: 'warning',
+      text: '로그인이 필요한 서비스입니다.',
+      showConfirmButton: false,
+      timer: 2000
+    }).then(result => {
+      router.push('/login');
+    })
+  }
+
   useEffect(() => {
     axios.get(`https://blockpage.site/purchase-service/v1/products?type=nft`)
       .then((res) => {
@@ -108,6 +119,7 @@ export default function NftStore(props: { data: userDataType }) {
       <section className={style.nftSection}>
         <div className={style.sectionTxt}>
           <p>NFT 목록</p>
+          <p className={style.myBlock}>보유 블럭 {myBlock}</p>
         </div>
         <div className={style.skinImgList}>
           {
@@ -115,6 +127,7 @@ export default function NftStore(props: { data: userDataType }) {
             nftData.map((data) => (
               <NftData
                 key={data.nftId}
+                nftId={data.nftId}
                 nftCreatorId={data.nftCreatorId}
                 nftMemberId={data.nftMemberId}
                 nftName={data.nftName}
@@ -123,13 +136,13 @@ export default function NftStore(props: { data: userDataType }) {
                 nftImage={data.nftImage}
                 nftBlockPrice={data.nftBlockPrice}
                 nftType={data.nftType}
-                handleSelectSkin={handleSelectSkin}
+                handleSelectNft={handleSelectNft}
               />
             ))
           }
         </div>
         <div className={style.confirmBox}>
-          <button type='button' className={style.confirm} onClick={!session ? () => router.push('/login') : () => setShowModal(true)}>구매</button>
+          <button type='button' className={style.confirm} onClick={!session ? () => handleLogin() : () => setShowModal(true)}>구매</button>
         </div>
       </section>
     </>

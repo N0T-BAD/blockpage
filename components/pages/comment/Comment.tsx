@@ -11,9 +11,10 @@ import { CommentDataType, CommentEmotionDataType, ParentsCommentType } from '@/t
 import CommentInput from './CommentInput'
 import ReportModal from '@/components/modals/ReportModal'
 import ConfirmModal from '@/components/modals/ConfirmModal'
+import { userDataType } from '@/types/storeDataType'
 
 export default function Comment(props: {
-  nickNameData: string,
+  userData: userDataType,
   commentData: CommentDataType,
 }) {
   const { data: session } = useSession();
@@ -22,7 +23,7 @@ export default function Comment(props: {
   const { episodeId } = router.query;
   const { author } = router.query;
 
-  const nickNameData = props.nickNameData;
+  const nickNameData = props.userData.nickname;
   const commentData = props.commentData;
   const [replyData, setReplyData] = useState<CommentDataType[]>([]);
 
@@ -54,7 +55,7 @@ export default function Comment(props: {
         axios.get(`https://blockpage.site/comment-service/v1/comments/reply/${commentData.commentId}`),
         axios.get(`https://blockpage.site/member-service/v1/emotions?commentId=${commentData.commentId}`, {
           headers: {
-            memberId: session?.email,
+            memberId: session.email,
           }
         })]
       )
@@ -110,6 +111,7 @@ export default function Comment(props: {
       })
         .then((res) => {
           setLikeState(!likeState);
+          router.reload();
         })
         .catch((err) => {
           console.log(err);
@@ -123,6 +125,7 @@ export default function Comment(props: {
       })
         .then((res) => {
           setLikeState(!likeState);
+          router.reload();
         })
         .catch((err) => {
           console.log(err);
@@ -222,12 +225,14 @@ export default function Comment(props: {
               {
                 commentData.childNickname ?
                   <>
-                    < CommentUserInfo
+                    <CommentUserInfo
+                      commentData={commentData}
                       nickname={commentData.childNickname}
                       date={commentData.dateTime}
                     />
                   </> :
-                  < CommentUserInfo
+                  <CommentUserInfo
+                    commentData={commentData}
                     nickname={commentData.parentsNickname}
                     date={commentData.dateTime}
                   />
@@ -337,13 +342,13 @@ export default function Comment(props: {
                 commentData.parentsId === childData.parentsId &&
                 <Comment
                   key={childData.commentId}
-                  nickNameData={props.nickNameData}
+                  userData={props.userData}
                   commentData={childData}
                 />
               ))
             }
             <CommentInput
-              nickNameData={props.nickNameData}
+              userData={props.userData}
               parents={parentsJson}
             />
           </div>

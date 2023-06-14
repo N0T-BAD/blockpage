@@ -5,15 +5,16 @@ import { useSession } from 'next-auth/react';
 
 import style from '@/components/pages/comment/CommentInput.module.css'
 import { ParentsCommentType } from '@/types/commentDataType';
+import { userDataType } from '@/types/storeDataType';
 
 export default function CommentInput(props: {
-  nickNameData: string,
+  userData: userDataType,
   parents?: ParentsCommentType,
 }) {
   const { data: session } = useSession();
   const router = useRouter();
   const { episodeId } = router.query;
-  const nickNameData = props.nickNameData;
+  const nickNameData = props.userData.nickname;
   const parents = props.parents;
   const [btnState, setBtnState] = useState(false);
   const [inputCount, setInputCount] = useState(0);
@@ -37,6 +38,8 @@ export default function CommentInput(props: {
           episodeId: episodeId,
           content: inputText,
           nickname: nickNameData,
+          profileImage: props.userData.profileImage,
+          profileSkin: props.userData.profileSkin,
         }, {
           headers: {
             memberId: session?.email,
@@ -53,6 +56,9 @@ export default function CommentInput(props: {
           episodeId: episodeId,
           content: inputText,
           nickname: nickNameData,
+          profileImage: props.userData.profileImage,
+          profileSkin: props.userData.profileSkin,
+
         }, {
           headers: {
             memberId: session?.email,

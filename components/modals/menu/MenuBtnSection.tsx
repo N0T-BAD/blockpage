@@ -12,17 +12,17 @@ export default function MenuBtnSection() {
   return (
     <section className={style.btnSection}>
       <div className={style.mypageBtn} onClick={() => router.push("/mypage")}>
-        마이페이지
+        <p>마이페이지</p>
       </div>
       {
         session ?
           (
             <div className={style.logoutBtn} onClick={() => signOut()}>
-              로그아웃
+              <p>로그아웃</p>
             </div>
           ) : (
             <div className={style.logoutBtn} onClick={() => router.push("/login")}>
-              로그인
+              <p>로그인</p>
             </div>
           )
       }

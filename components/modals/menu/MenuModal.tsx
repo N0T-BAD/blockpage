@@ -50,16 +50,16 @@ export default function MenuModal(props: {
                   <Image
                     src={props.userProfileImg}
                     alt='유저 프로필 이미지'
-                    width={80}
-                    height={80}
+                    width={70}
+                    height={70}
                     priority
                   />
                   :
                   <Image
                     src={'/assets/images/mypage/userImg.png'}
                     alt='게스트 프로필 이미지'
-                    width={80}
-                    height={80}
+                    width={70}
+                    height={70}
                     priority
                   />
               }
@@ -70,8 +70,8 @@ export default function MenuModal(props: {
                 <Image
                   src={props.userProfileSkin}
                   alt='스킨 이미지'
-                  width={80}
-                  height={80}
+                  width={70}
+                  height={70}
                   priority
                 />
               }
@@ -83,7 +83,10 @@ export default function MenuModal(props: {
                 <p>{props.userNickname} 님</p>
                 <p>환영합니다.</p>
               </div>
-              : <p>로그인을 해주세요.</p>
+              :
+              <div className={style.guestSectionTxt}>
+                <p>로그인을 해주세요.</p>
+              </div>
           }
         </div>
       </section>

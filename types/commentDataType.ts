@@ -4,6 +4,8 @@ export interface CommentDataType {
   dateTime: string;
   parentsId: string;
   parentsNickname: string;
+  profileImage: string;
+  profileSkin: string;
   childId?: string;
   childNickname?: string;
   content: string;

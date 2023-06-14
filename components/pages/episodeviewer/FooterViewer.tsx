@@ -12,7 +12,6 @@ import Episode from '../webtoonepisode/Episode';
 import { EpisodeViewDataType } from '@/types/webtoonDataType';
 import RatingModal from '@/components/modals/RatingModal';
 import Swal from 'sweetalert2';
-import PurchaseModal from '@/components/modals/PurchaseModal';
 
 export default function FooterViewer(props: { episodeData: EpisodeViewDataType, isViewer: boolean, setIsViewer: React.Dispatch<React.SetStateAction<boolean>> }) {
 
@@ -43,6 +42,17 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
     setEpisodeIdNumberModal(episodeNumber)
     setEpisodePriceModal(episodePrice)
     setShowPurchaseModal(true);
+  }
+
+  const handleLogin = () => {
+    Swal.fire({
+      icon: 'warning',
+      text: '로그인이 필요한 서비스입니다.',
+      showConfirmButton: false,
+      timer: 2000
+    }).then(result => {
+      router.push('/login');
+    })
   }
 
   const handleShowRating = () => {
@@ -103,16 +113,17 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
 
       axios.get(`https://blockpage.site/member-service/v1/ratings/${episodeId}`, {
         headers: {
-          memberId: session?.email
+          memberId: session.email
         }
       })
         .then((res) => {
           setValue(res.data.data.ratings);
-          setIsRatingData(true);
+          setIsRatingData(res.data.data.choice);
+          console.log(res);
         })
         .catch((err) => {
-          console.log(err);
           setIsRatingData(false);
+          console.log(err);
         })
     }
   }, [session?.email])
@@ -128,17 +139,6 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
           value={value}
         />
       }
-      {/* {
-        showPurchaseModal &&
-        <PurchaseModal
-          myBlock={myBlock}
-          episodeId={episodeIdModal}
-          episodeNumber={episodeNumberModal}
-          episodePrice={episodePriceModal}
-          setShowModal={setShowPurchaseModal}
-          // handleEpisode={handleEpisode}
-        />
-      } */}
       <footer
         className={
           props.isViewer ? `${style.viewerFooterWrap} ${style.view}` : `${style.viewerFooterWrap}`
@@ -183,14 +183,13 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
                 data.nextEpisodeBlockPrice > 0 ?
                   (
                     !session?.email ?
-                      (() => router.push('/login')) :
+                      () => handleLogin() :
                       myBlock >= 4 ?
                         () => handleShowPurchaseModal(nextId, nextNumber, data.nextEpisodeBlockPrice) :
                         () => router.push('/blockcharge')
                   )
                   :
                   () => router.push(`/webtoon/${webtoonId}/episode/${nextId}/episode/${nextNumber}`)
-
               }
             >
               <p className={style.nextTxt}>다음화</p>
@@ -207,10 +206,10 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
               <p>마지막화입니다.</p>
             </div>
         }
+        <NavFooter
+          author={data.author}
+        />
       </footer >
-      <NavFooter
-        author={data.author}
-      />
     </>
   )
 }
@@ -225,6 +224,17 @@ const NavFooter = (props: { author: string }) => {
 
   const [isViewer, setIsViewer] = useState<boolean>(false);
 
+  const handleLogin = () => {
+    Swal.fire({
+      icon: 'warning',
+      text: '로그인이 필요한 서비스입니다.',
+      showConfirmButton: false,
+      timer: 2000
+    }).then(result => {
+      router.push('/login');
+    })
+  }
+
   useEffect(() => {
     const handleTouch = (e: TouchEvent) => {
       if (e.touches[0].clientY > 100) {
@@ -237,7 +247,6 @@ const NavFooter = (props: { author: string }) => {
     };
   }, []);
 
-  // interval 3s for slide down
   useEffect(() => {
     const interval = setInterval(() => {
       setIsViewer(false);
@@ -257,16 +266,7 @@ const NavFooter = (props: { author: string }) => {
           pathname: `/webtoon/${webtoonId}/episode/${episodeId}/episode/${episodeNumber}/comment`,
           query: { author: props.author },
         }
-      ) : () => {
-        Swal.fire({
-          icon: 'warning',
-          text: '로그인이 필요한 서비스입니다.',
-          showConfirmButton: false,
-          timer: 2000
-        }).then(result => {
-          router.push('/login');
-        })
-      }
+      ) : () => handleLogin()
 
       }>
         <Image
