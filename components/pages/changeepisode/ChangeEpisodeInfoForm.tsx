@@ -2,10 +2,9 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import style from '@/components/pages/episodeinfo/EpisodeInfoForm.module.css'
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { ChangeEpisodeInfo, ChangeepisodeInfoType, UploadFile, episodeInfoFormDataType, episodeInfoType } from '@/types/episodeInfoForm';
+import { ChangeEpisodeInfo, UploadFile, episodeInfoType } from '@/types/episodeInfoForm';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
-import { ChangeEpisode, ChangeWebtoon } from '@/types/authorWebtoonInfoImgDataType';
 import Swal from 'sweetalert2';
 
 export default function ChangeEpisodeInfoForm() {
