@@ -15,10 +15,8 @@ interface ChildProps {
 export default function AuthorNicknameAgreement({ inputData, setInputData, signupbtn }: ChildProps) {
 
   const router = useRouter();
-  console.log(inputData.creatorNickname)
 
   const { data: session } = useSession()
-  // const role = sessionStorage.getItem('role');
 
   const handleAuthorSignup = async () => {
 
@@ -26,12 +24,7 @@ export default function AuthorNicknameAgreement({ inputData, setInputData, signu
       const formData = new FormData();
       formData.append("creatorNickname", inputData.creatorNickname);
 
-      console.log(inputData.creatorNickname)
-      console.log(session)
-
       //put - formdata 못 넣음. 데이터를 넣을때 사용.
-
-      console.log(formData.get('creatorNickname'))
 
       const res = await fetch('https://blockpage.site/member-service/v1/members?type=author', {
         method: 'PUT',
@@ -43,7 +36,6 @@ export default function AuthorNicknameAgreement({ inputData, setInputData, signu
       })
 
       const data = await res.json()
-      console.log(data)
       if (data) {
         Swal.fire({
           icon: 'success',
@@ -61,7 +53,6 @@ export default function AuthorNicknameAgreement({ inputData, setInputData, signu
         })
       }
     } catch (err) {
-      console.log(err)
       Swal.fire({
         icon: 'success',
         title: '작가 등록에 실패하였습니다.',

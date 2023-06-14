@@ -61,7 +61,6 @@ export default function WebtoonHeader() {
           }
         })
           .then((res) => {
-            console.log(res);
             setLike(true);
           })
           .catch((err) => {

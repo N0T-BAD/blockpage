@@ -6,8 +6,6 @@ export default function Kakao() {
 
   const { data } = useSession()
   const [kakaoUser, setKakaoUser] = React.useState<any>(null)
-  console.log(data)
-  console.log(data?.id)
 
   useEffect(() => {
     const getUserData = async () => {

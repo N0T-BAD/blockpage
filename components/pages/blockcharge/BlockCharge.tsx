@@ -31,11 +31,9 @@ export default function BlockCharge() {
         headers: {
           'Content-Type': 'application/json',
           memberId: session?.email,
-          // role: role,
         },
       });
 
-      console.log(response.data.data);
       window.location.href = response.data.data.nextRedirectPcUrl;
     }
     catch (error) {

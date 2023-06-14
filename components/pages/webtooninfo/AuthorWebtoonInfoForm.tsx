@@ -45,8 +45,6 @@ export default function AuthorWebtoonInfoForm() {
             creatorNickname,
           },
         });
-        console.log(res.data)
-        console.log(authorName)
       })
   }, [])
 
@@ -79,8 +77,6 @@ export default function AuthorWebtoonInfoForm() {
       setWebtoonThumbnailImage(e.target.files[0]);
     }
   };
-
-  console.log(webtoonInfoData)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -118,7 +114,6 @@ export default function AuthorWebtoonInfoForm() {
         },
       )
         .then((res) => {
-          console.log(res)
           Swal.fire({
             icon: 'success',
             title: '웹툰이 등록 되었습니다.',

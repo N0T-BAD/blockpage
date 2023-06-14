@@ -65,7 +65,6 @@ const TransectionHistory = () => {
     })
       .then((res) => {
         setChargeBlock(res.data)
-        console.log(chargeBlock)
         setRefund(res.data)
       })
       .catch((err) => {
@@ -84,12 +83,8 @@ const TransectionHistory = () => {
         },
       })
         .then((res) => {
-          console.log(res)
           setChargeBlock(res.data)
-          console.log(chargeBlock)
           setRefund(res.data)
-          console.log(refund)
-          console.log(res.data)
         })
         .catch((err) => {
           console.log(err)
@@ -132,7 +127,6 @@ const TransectionHistory = () => {
           }
         })
           .then((res) => {
-            console.log(res)
             if (res.status === 200) {
               Swal.fire({
                 icon: 'success',

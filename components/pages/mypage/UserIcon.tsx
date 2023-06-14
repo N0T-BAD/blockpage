@@ -28,7 +28,6 @@ export default function UserIcon() {
             role,
           },
         });
-        console.log(Role)
       })
   }, [])
 

@@ -49,8 +49,6 @@ export default function EpisodeInfoForm() {
       })
       .then((res) => {
         setEpisodeInfo(res.data)
-        console.log(res.data)
-        console.log(episodeInfo)
       })
       .catch((err) => {
         console.log(err)
@@ -147,11 +145,9 @@ export default function EpisodeInfoForm() {
             confirmButtonText: '확인',
           })
           router.back();
-          console.log(response)
         }
       } catch (error) {
         console.error(error);
-        console.log(session?.email)
       }
     }
   };
