@@ -9,6 +9,7 @@ import { mySkinData, skinDataType, userDataType } from '@/types/storeDataType';
 import ProfileSkin from './ProfileSkin';
 import SkinPurchaseModal from '@/components/modals/SkinPurchaseModal';
 import Swal from 'sweetalert2';
+import StoreFooter from './StoreFooter';
 
 export default function ProfileStore(props: { data: userDataType }) {
 
@@ -176,9 +177,11 @@ export default function ProfileStore(props: { data: userDataType }) {
         <div className={style.skinImgList}>
           {
             skinData &&
-            skinData.map((data) => (
+            skinData.map((data, index) => (
               <ProfileSkin
                 key={data.profileSkinId}
+                index={index}
+                length={skinData.length}
                 mySkin={mySkin}
                 skinId={data.profileSkinId}
                 selectedSkinId={selectedSkinId}
@@ -191,10 +194,12 @@ export default function ProfileStore(props: { data: userDataType }) {
             ))
           }
         </div>
-        <div className={style.confirmBox}>
-          <button type='button' className={style.confirm} onClick={!session ? () => handleLogin() : () => setShowModal(true)}>구매</button>
-        </div>
       </section>
+      <StoreFooter
+        handleLogin={handleLogin}
+        setShowModal={setShowModal}
+        selectedProductName={selectedSkinName}
+      />
     </>
   )
 }

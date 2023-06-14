@@ -290,7 +290,7 @@ export default function Comment(props: {
               }
               <div className={style.bottomIcon}>
                 {
-                  session?.email === commentData.parentsId ?
+                  session?.email !== commentData.parentsId ?
                     <div onClick={handleShowReportModal}>
                       <Image
                         src={"/assets/images/icons/siren.svg"}

@@ -1,5 +1,6 @@
 .navSection {
   padding-bottom: 1rem;
+  border-bottom: 0.02rem solid var(--bp-line-gray);
 }
 
 .navSection nav ul {
