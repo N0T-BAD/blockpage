@@ -172,7 +172,6 @@
 
 .labelBox p{
   width: 50%;
-  /* text-align: center; */
   padding-left: 0.5rem;
 }
 
@@ -207,6 +206,7 @@
 
 .episodeImg img{
   height: auto;
+  width: 80%;
 }
 
 .filename {
