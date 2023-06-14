@@ -11,7 +11,7 @@ export default function StoreFooter(props: { selectedProductName: string, handle
   const handleConfirmSelected = () => {
     Swal.fire({
       icon: 'warning',
-      text: '구매할 스킨을 선택해주세요.',
+      text: `구매할 제품을 선택해주세요.`,
       showConfirmButton: false,
       timer: 2000
     })

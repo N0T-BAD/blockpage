@@ -69,14 +69,13 @@ export default function Comment(props: {
           console.log(err);
         });
     }
-  }, [session?.email, likeState]);
+  }, [session?.email]);
 
   const handleView = () => {
     setOpenReply(!openReply);
   }
 
   const handlePush = () => {
-    // pin
     axios.patch(`https://blockpage.site/comment-service/v1/comments/${commentData.commentId}`, {
       withCredentials: true
     })
@@ -169,9 +168,9 @@ export default function Comment(props: {
 
   const handleReport = () => {
     axios.post(`https://blockpage.site/comment-service/v1/reports`, {
-      memberId: session?.email,
+      memberId: commentData.parentsId,
       commentId: commentData.commentId,
-      memberNickname: nickNameData,
+      memberNickname: commentData.parentsNickname,
       content: commentData.content,
       reportType: reportValue,
     }, {
