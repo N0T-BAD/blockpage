@@ -5,9 +5,26 @@ import style from '@/components/pages/store/ProfileStore.module.css'
 import Separator from '@/components/ui/Separator'
 import { mySkinData, profileSkinDetail } from '@/types/storeDataType'
 
-export default function ProfileSkin(props: { mySkin: mySkinData[], skinId: number, selectedSkinId: number, skinName: string, skinDescription: string, skinImage: string, blockPrice: number, handleSelectSkin: (skinId: number, skinName: string, profileSkinImage: string, blockQuantity: number) => void }) {
+export default function ProfileSkin(props: {
+  mySkin: mySkinData[],
+  index: number,
+  length: number,
+  skinId: number,
+  selectedSkinId: number,
+  skinName: string,
+  skinDescription: string,
+  skinImage: string,
+  blockPrice: number,
+  handleSelectSkin: (
+    skinId: number,
+    skinName: string,
+    profileSkinImage: string,
+    blockQuantity: number
+  ) => void
+}) {
 
   const [myProfileSkin, setMyProfileSkin] = useState<profileSkinDetail[]>([]);
+  const number = props.length - 1;
 
   useEffect(() => {
     props.mySkin.map((data) => {
@@ -50,11 +67,11 @@ export default function ProfileSkin(props: { mySkin: mySkinData[], skinId: numbe
         </div>
       </div>
       {
-        props.skinId !== 7 &&
-        <Separator
-          color='var(--bp-line-gray)'
-          gutter={0}
-        />
+        props.index !== number ?
+          <Separator
+            color='var(--bp-line-gray)'
+            gutter={0}
+          /> : ""
       }
     </>
   )
