@@ -40,7 +40,6 @@ export default function BestRankingCard() {
       },
     })
       .then((res) => {
-        console.log(res)
         setWeeksData(res.data)
       })
       .catch((err) => {
@@ -53,8 +52,7 @@ export default function BestRankingCard() {
   }
 
   const handleMainCategory = (weekdays: number) => {
-    setActive(weekdays);
-    console.log(weekdays)
+    setActive(weekdays)
 
     axios.get(`https://blockpage.site/webtoon-service/v1/webtoons?weekdays=${weekdays}&best=0`, {
       headers: {
@@ -64,7 +62,6 @@ export default function BestRankingCard() {
       },
     })
       .then((res) => {
-        console.log(res)
         setWeeksData(res.data)
       })
       .catch((err) => {

@@ -79,7 +79,6 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
         }
       })
         .then((res) => {
-          console.log(res);
           setIsRating(!isRating);
           setIsRatingData(true);
           setShowRatingModal(!showRatingModal);
@@ -90,51 +89,12 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
     }
   }
 
-  // const handleEpisode = (paramEpisodeBM: string, paramPersistType: string, episodeId: number, episodeNumber: number, episodePrice: number, isRead: boolean) => {
-  //   if (session?.email) {
-  //     if (isRead) {
-  //       axios.post(`https://blockpage.site/purchase-service/v1/purchases?type=${paramEpisodeBM}&webtoonId=${webtoonId}`, {
-  //         blockQuantity: episodePrice,
-  //         episodeId: episodeId,
-  //         persistType: paramPersistType,
-  //         webtoonTitle: webtoonData.webtoonTitle,
-  //         episodeNumber: episodeNumber,
-  //         webtoonThumbnail: webtoonData.webtoonThumbnail,
-  //         creator: webtoonData.creator,
-  //         illustrator: webtoonData.illustrator,
-  //         genre: webtoonData.genre,
-  //       }, {
-  //         headers: {
-  //           memberId: session?.email,
-  //         }
-  //       })
-  //         .then((res) => {
-  //           if (episodePrice !== 0) {
-  //             Swal.fire({
-  //               icon: 'success',
-  //               title: episodeNumber + '화',
-  //               text: '구매가 완료되었습니다.',
-  //               showConfirmButton: false,
-  //               timer: 2000
-  //             })
-  //           }
-  //         })
-  //         .catch((err) => {
-  //           console.log(err);
-  //         });
-  //     }
-  //   }
-
-  //   router.push(`/webtoon/${webtoonId}/episode/${episodeId}/episode/${episodeNumber}`);
-  // };
-
   useEffect(() => {
     if (session) {
       axios.get(`https://blockpage.site/block-service/v1/blocks`, {
         headers: { memberId: session.email }
       })
         .then((res) => {
-          console.log(res);
           setMyBlock(res.data.data.totalBlocks);
         })
         .catch((err) => {
@@ -147,7 +107,6 @@ export default function FooterViewer(props: { episodeData: EpisodeViewDataType, 
         }
       })
         .then((res) => {
-          console.log(res);
           setValue(res.data.data.ratings);
           setIsRatingData(true);
         })

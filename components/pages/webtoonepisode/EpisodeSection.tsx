@@ -120,11 +120,8 @@ export default function EpisodeSection(props: { data: WebToonListDataType, episo
       ])
         .then(
           axios.spread((getBlock, free, paid) => {
-            console.log(getBlock)
             setMyBlock(getBlock.data.data.totalBlocks);
-            // const freeData = free.data.data;
             setFreeData(free.data.data);
-            // const paidData = paid.data.data;
             setPaidData(paid.data.data);
           })
         )

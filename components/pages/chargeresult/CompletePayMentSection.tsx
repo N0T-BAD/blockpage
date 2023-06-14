@@ -23,8 +23,6 @@ export default function CompletePayMentSection() {
     }
   );
 
-
-  console.log(orderdata)
   useEffect(() => {
     const orderlist = localStorage.getItem('orderdata') as string;
     setOrderData(JSON.parse(orderlist))

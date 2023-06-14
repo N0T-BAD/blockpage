@@ -28,9 +28,7 @@ function LottoGame() {
       }
     })
       .then((res) => {
-        console.log(res)
         setGames(res.data)
-        console.log(games)
       })
       .catch((err) => {
         console.log(err)

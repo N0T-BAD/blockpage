@@ -43,7 +43,6 @@ export default function CommentInput(props: {
           }
         })
           .then((res) => {
-            console.log(res);
             router.reload();
           })
           .catch((err) => {
@@ -60,7 +59,6 @@ export default function CommentInput(props: {
           }
         })
           .then((res) => {
-            console.log(res);
             router.reload();
           })
           .catch((err) => {

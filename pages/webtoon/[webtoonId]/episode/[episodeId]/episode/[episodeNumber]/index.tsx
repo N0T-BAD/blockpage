@@ -18,7 +18,6 @@ function EpisodeId(props: { data: EpisodeViewDataType }) {
 
   const handleScroll = () => {
     if (window.scrollY + window.innerHeight > document.body.offsetHeight - 100) {
-      console.log("isViewer : ", isViewer)
       setIsViewer(true);
     } else {
       setIsViewer(false);
@@ -43,7 +42,6 @@ export async function getServerSideProps(context: any) {
 
   const res = await axios.get(`https://blockpage.site/webtoon-service/v1/episodes/view?episodeId=${episodeId}&webtoonId=${webtoonId}&episodeNumber=${episodeNumber}`)
   const data = res.data;
-  console.log(data);
 
   return {
     props: { data }

@@ -30,8 +30,6 @@ export default function EpisodelistBox() {
     }]
   })
 
-  console.log(episodeData);
-
   useEffect(() => {
 
     const fetchEpisodeData = async () => {
@@ -48,12 +46,8 @@ export default function EpisodelistBox() {
           }
         );
         const episodeInfoData = response.data;
-        console.log(episodeInfoData)
         setEpisodeData(episodeInfoData);
-        console.log(episodeData);
         setWebtoonData(episodeInfoData);
-        console.log(webtoonData)
-        console.log(episodeData.data)
       } catch (error) {
         console.error(error);
       }
@@ -76,7 +70,6 @@ export default function EpisodelistBox() {
         },
       })
       .then((res) => {
-        console.log(res)
         Swal.fire({
           icon: 'success',
           title: '삭제되었습니다.',

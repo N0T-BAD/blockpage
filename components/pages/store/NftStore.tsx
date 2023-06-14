@@ -74,7 +74,6 @@ export default function NftStore(props: { data: userDataType }) {
   useEffect(() => {
     axios.get(`https://blockpage.site/purchase-service/v1/products?type=nft`)
       .then((res) => {
-        console.log(res);
         setNftData(res.data.data);
       })
       .catch((err) => {
@@ -86,7 +85,6 @@ export default function NftStore(props: { data: userDataType }) {
         headers: { memberId: session.email }
       })
         .then((res) => {
-          console.log(res);
           setMyBlock(res.data.data.totalBlocks)
         })
         .catch((err) => {

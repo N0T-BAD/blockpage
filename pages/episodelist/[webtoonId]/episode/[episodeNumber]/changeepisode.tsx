@@ -11,8 +11,6 @@ interface EpisodeListProps {
 }
 
 const ChangeEpisode: NextPageWithLayout<EpisodeListProps> = ({ webtoonId, episodeNumber }) => {
-  console.log(webtoonId);
-  console.log(episodeNumber);
 
   return (
     <>
@@ -35,8 +33,6 @@ export default ChangeEpisode
 export async function getServerSideProps(context: Params) {
   const { webtoonId } = context.query;
   const { episodeNumber } = context.query;
-
-  console.log(webtoonId);
 
   return {
     props: {

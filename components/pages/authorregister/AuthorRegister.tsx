@@ -74,7 +74,6 @@ export default function AuthorRegister({ inputData, setInputData, setsignupbtn }
           }
         })
         .then((res) => {
-          console.log(res)
           Swal.fire({
             icon: 'success',
             title: '사용 가능한 작가명입니다.',

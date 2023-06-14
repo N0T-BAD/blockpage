@@ -57,7 +57,6 @@ export async function getServerSideProps(context: any) {
   } else {
     const res = await axios.get(`https://blockpage.site/purchase-service/v1/products?type=nft`);
     const data = res.data.data;
-    console.log(data);
     return {
       props: { data }
     }
