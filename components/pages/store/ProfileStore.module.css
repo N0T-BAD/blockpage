@@ -28,7 +28,7 @@ p.myBlock {
 .userProfileDiv {
   display: flex;
   justify-content: center;
-  padding: 1rem 1rem;
+  padding: 0.5rem 1rem;
 }
 
 .userProfileImgDiv {
@@ -44,7 +44,8 @@ p.myBlock {
 }
 
 .profileSkinSection {
-  margin-top: 17rem;
+  margin-top: 15rem;
+  margin-bottom: 5rem;
   padding: 0 1.5rem;
 }
 
@@ -118,9 +119,14 @@ p.skinDescription {
 }
 
 .confirmBox {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
   display: flex;
   justify-content: center;
-  padding: 1rem 0;
+  padding: 0.7rem 0;
+  background-color: var(--bp-white);
+  border-top: 0.02rem solid var(--bp-line-gray);
 }
 
 .confirm {
@@ -130,5 +136,5 @@ p.skinDescription {
   background-color: var(--bp-blue);
   border: none;
   border-radius: 2rem;
-  padding: 1rem 3rem;
+  padding: 0.6rem 3rem;
 }
