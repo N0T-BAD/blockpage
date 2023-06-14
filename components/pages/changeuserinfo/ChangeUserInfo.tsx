@@ -45,7 +45,6 @@ export default function ChangeUserInfo() {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log(session?.email)
       try {
         const res = await axios.get('https://blockpage.site/member-service/v1/members?type=detail', {
           headers: {
@@ -69,7 +68,6 @@ export default function ChangeUserInfo() {
             profileSkin,
           }
         });
-        console.log(res.data)
 
         const res2 = await axios.get("https://blockpage.site/purchase-service/v1/purchases?type=profileSkin", {
           headers: {
@@ -78,9 +76,8 @@ export default function ChangeUserInfo() {
           },
         })
         setChangeProfileSkin(res2.data);
-        console.log(res2.data.data)
-      } catch (e) {
-        console.log(e);
+      } catch (err) {
+        console.log(err);
       }
     }
     fetchData();
@@ -103,7 +100,6 @@ export default function ChangeUserInfo() {
   };
 
   const handleProfileSkinSubmit = () => {
-    console.log(check)
     axios.put('https://blockpage.site/purchase-service/v1/purchases?type=profileSkin', {
       memberProfileSkinId: check,
     }, {
@@ -113,7 +109,6 @@ export default function ChangeUserInfo() {
       },
     })
       .then((res) => {
-        console.log(res.data)
         Swal.fire({
           icon: 'success',
           title: '변경되었습니다.',
@@ -171,7 +166,6 @@ export default function ChangeUserInfo() {
           },
         })
         .then((res) => {
-          console.log(res.data)
           Swal.fire({
             icon: 'success',
             title: '변경되었습니다.',
@@ -247,11 +241,13 @@ export default function ChangeUserInfo() {
               <div className={style.usernicknamewrite}>
                 <div className={style.btn_input_box}>
                   <p className={style.nicknametext}>닉네임</p>
-                  {userNickname.data.nickname && userNickname.data.nickname.length > 0 ?
-                    <input className={style.usernickname2} type='text' defaultValue={userNickname.data.nickname} onChange={handleChange} />
-                    :
-                    <input className={style.usernickname2} type='text' onChange={handleChange} />
-                  }
+                  <div className={style.infouserbox}>
+                    {userNickname.data.nickname && userNickname.data.nickname.length > 0 ?
+                      <input className={style.usernickname2} type='text' defaultValue={userNickname.data.nickname} onChange={handleChange} />
+                      :
+                      <input className={style.usernickname2} type='text' onChange={handleChange} />
+                    }
+                  </div>
                 </div>
               </div>
               <button type="submit" className={style.changebtn}>변경</button>

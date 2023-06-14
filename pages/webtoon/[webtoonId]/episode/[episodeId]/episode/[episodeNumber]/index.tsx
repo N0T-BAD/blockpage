@@ -42,7 +42,6 @@ export async function getServerSideProps(context: any) {
 
   const res = await axios.get(`https://blockpage.site/webtoon-service/v1/episodes/view?episodeId=${episodeId}&webtoonId=${webtoonId}&episodeNumber=${episodeNumber}`)
   const data = res.data;
-  console.log(data);
 
   return {
     props: { data }

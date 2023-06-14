@@ -29,8 +29,6 @@ export default function UserBottomMenu() {
     })
       .then((res) => {
         setAuthorNickname(res.data);
-        console.log(res.data)
-        console.log(authorNickname)
       })
   }, [])
 

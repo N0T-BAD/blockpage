@@ -32,8 +32,6 @@ export default function AuthorSubCategory({ active, defaultActive }: { active: s
     }]
   });
 
-  console.log(webtoonList)
-
   const [WebtoonStatus, setWebtoonStatus] = useState<WebtoonStatusData>({
     data: {
       webtoonStatus: '',
@@ -50,7 +48,6 @@ export default function AuthorSubCategory({ active, defaultActive }: { active: s
       })
       .then((res) => {
         setWebtoonList(res.data)
-        console.log(res.data)
         setWebtoonStatus(res.data)
       })
       .catch((err) => {
@@ -66,8 +63,6 @@ export default function AuthorSubCategory({ active, defaultActive }: { active: s
     router.push(`/authorworkslist/${webtoonId}/changewebtoon`);
   };
 
-  console.log(webtoonList.data)
-
   const handleDeleteWebtoonClick = (webtoonTitle: string, WebtoonStatus: string) => {
 
     const formData = new FormData();
@@ -82,7 +77,6 @@ export default function AuthorSubCategory({ active, defaultActive }: { active: s
         },
       })
       .then((res) => {
-        console.log(res)
         Swal.fire({
           icon: 'success',
           title: '삭제되었습니다.',
@@ -97,7 +91,6 @@ export default function AuthorSubCategory({ active, defaultActive }: { active: s
         console.log(err)
       })
   };
-  console.log(session?.email)
 
   const getGenreTypeString = (genre: number) => {
     if (genre === 0) {

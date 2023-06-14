@@ -14,7 +14,6 @@ export default function ChargeResultSection() {
 
   const router = useRouter();
   const pgToken = router.query.pg_token;
-  console.log(pgToken)
 
   const handlego = async () => {
     axios.post('https://blockpage.site/block-service/v1/payments?type=kakao-approve', {
@@ -28,7 +27,6 @@ export default function ChargeResultSection() {
     }
     )
       .then((res) => {
-        console.log(res.data.data)
         const orderlist = res.data.data
         axios.post('https://blockpage.site/block-service/v1/blocks?type=cash', {
           orderId: orderlist.orderId,
@@ -41,7 +39,6 @@ export default function ChargeResultSection() {
           },
         })
           .then((res) => {
-            console.log(res)
             router.push('/completepayment')
             localStorage.setItem('orderdata', JSON.stringify(orderlist))
           })

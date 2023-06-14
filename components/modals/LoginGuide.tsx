@@ -11,7 +11,7 @@ export default function LoginGuide() {
     // 3초 후에 페이지 이동
     setTimeout(() => {
       router.push('/login');
-    }, 3000);
+    }, 1000);
   }, []);
 
   return (

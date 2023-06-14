@@ -40,22 +40,6 @@ export default function ChangeEpisodeInfoForm() {
   const [episodeImagePreview, setEpisodeImagePreview] = useState<UploadFile[]>([]);
   const regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
 
-  // useEffect(() => {
-  //   axios(`/api/authorwebtooninfo/${router.query.id}`)
-  //     .then(res => res.data)
-  //     .then(data => {
-  //       setEpisodeInfoData(data);
-  //       setEpisodeThumbnailImagePreview(data.episodeThumbnail);
-  //       setEpisodeImagePreview(data.episodeImage.map((url: string, index: number) => ({
-  //         name: `Episode ${index + 1}`,
-  //         preview: url,
-  //         file: null,
-  //       })));
-  //     })
-  // }, [episodeInfoData, router.query.id])
-
-  console.log(episodeInfoData)
-
   useEffect(() => {
     axios.get(`https://blockpage.site/webtoon-service/v1/episodes/creator?${webtoonId}`,
       {
@@ -69,8 +53,6 @@ export default function ChangeEpisodeInfoForm() {
       })
       .then((res) => {
         setEpisodeInfoData(res.data)
-        console.log(res.data)
-        console.log(episodeInfoData)
       })
       .catch((err) => {
         console.log(err)
@@ -171,8 +153,6 @@ export default function ChangeEpisodeInfoForm() {
               memberId: session?.email || '',
             },
           });
-
-          console.log(res);
           if (res.status === 201) {
             Swal.fire({
               title: '요청 성공!',
