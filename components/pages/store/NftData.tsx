@@ -5,6 +5,8 @@ import style from '@/components/pages/store/ProfileStore.module.css'
 import Separator from '@/components/ui/Separator'
 
 export default function NftData(props: {
+  index: number,
+  length: number,
   nftId: number,
   nftCreatorId: string,
   nftMemberId: string,
@@ -21,6 +23,9 @@ export default function NftData(props: {
     blockQuantity: number
   ) => void
 }) {
+
+  const number = props.length - 1;
+
   return (
     <>
       <div className={style.skinImgDiv} onClick={() => props.handleSelectNft(props.nftId, props.nftName, props.nftImage, props.nftBlockPrice)}>
@@ -47,10 +52,11 @@ export default function NftData(props: {
         </div>
       </div>
       {
-        <Separator
-          color='var(--bp-line-gray)'
-          gutter={0}
-        />
+        props.index !== number ?
+          <Separator
+            color='var(--bp-line-gray)'
+            gutter={0}
+          /> : ""
       }
     </>
   )

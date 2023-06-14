@@ -8,6 +8,7 @@ import SkinPurchaseModal from '@/components/modals/SkinPurchaseModal';
 import Swal from 'sweetalert2';
 import NftData from './NftData';
 import { useRouter } from 'next/router';
+import StoreFooter from './StoreFooter';
 
 export default function NftStore(props: { data: userDataType }) {
 
@@ -124,9 +125,11 @@ export default function NftStore(props: { data: userDataType }) {
         <div className={style.skinImgList}>
           {
             nftData &&
-            nftData.map((data) => (
+            nftData.map((data, index) => (
               <NftData
                 key={data.nftId}
+                index={index}
+                length={nftData.length}
                 nftId={data.nftId}
                 nftCreatorId={data.nftCreatorId}
                 nftMemberId={data.nftMemberId}
@@ -141,10 +144,12 @@ export default function NftStore(props: { data: userDataType }) {
             ))
           }
         </div>
-        <div className={style.confirmBox}>
-          <button type='button' className={style.confirm} onClick={!session ? () => handleLogin() : () => setShowModal(true)}>구매</button>
-        </div>
       </section>
+      <StoreFooter
+        handleLogin={handleLogin}
+        setShowModal={setShowModal}
+        selectedProductName={selectedNftName}
+      />
     </>
   )
 }
