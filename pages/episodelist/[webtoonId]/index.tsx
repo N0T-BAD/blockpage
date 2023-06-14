@@ -13,7 +13,6 @@ interface EpisodeListProps {
 }
 
 const EpisodeListPage: NextPageWithLayout<EpisodeListProps> = ({ webtoonId }) => {
-  console.log(webtoonId)
 
   return (
     <>

@@ -7,7 +7,6 @@ export default function BlockChargeButton() {
   const router = useRouter();
 
   const onClickCharge = () => {
-    console.log("충전하기")
     router.push("/blockcharge")
   }
 

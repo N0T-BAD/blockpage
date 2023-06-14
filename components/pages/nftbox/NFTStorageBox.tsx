@@ -34,8 +34,6 @@ export default function NFTStorageBox() {
     })
       .then((res) => {
         setNftList(res.data)
-        console.log(nftList)
-        console.log(res.data.data)
       })
       .catch((err) => {
         console.log(err)

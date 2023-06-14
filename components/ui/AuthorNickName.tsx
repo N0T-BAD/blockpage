@@ -67,9 +67,6 @@ export default function AuthorNickName() {
     fetchData();
   }, [])
 
-  console.log(authorNickName);
-  console.log(userprofile);
-
   return (
     <>
       <div className={style.usernicknameImgBox}>

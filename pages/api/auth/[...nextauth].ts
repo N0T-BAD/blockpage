@@ -48,15 +48,12 @@ export const authOptions: NextAuthOptions = {
     },
     async jwt({ token, user, account }) {
       if (user) {
-        console.log(user);
         token.id = user.id;
         token.email = user.email;
         token.name = user.name;
       }
       if (account) {
         token.accessToken = account.access_token;
-
-        console.log(account);
       }
       return token;
     },

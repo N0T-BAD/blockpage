@@ -2,10 +2,9 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import style from '@/components/pages/episodeinfo/EpisodeInfoForm.module.css'
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import { ChangeEpisodeInfo, ChangeepisodeInfoType, UploadFile, episodeInfoFormDataType, episodeInfoType } from '@/types/episodeInfoForm';
+import { ChangeEpisodeInfo, UploadFile, episodeInfoType } from '@/types/episodeInfoForm';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
-import { ChangeEpisode, ChangeWebtoon } from '@/types/authorWebtoonInfoImgDataType';
 import Swal from 'sweetalert2';
 
 export default function ChangeEpisodeInfoForm() {
@@ -40,22 +39,6 @@ export default function ChangeEpisodeInfoForm() {
   const [episodeImagePreview, setEpisodeImagePreview] = useState<UploadFile[]>([]);
   const regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
 
-  // useEffect(() => {
-  //   axios(`/api/authorwebtooninfo/${router.query.id}`)
-  //     .then(res => res.data)
-  //     .then(data => {
-  //       setEpisodeInfoData(data);
-  //       setEpisodeThumbnailImagePreview(data.episodeThumbnail);
-  //       setEpisodeImagePreview(data.episodeImage.map((url: string, index: number) => ({
-  //         name: `Episode ${index + 1}`,
-  //         preview: url,
-  //         file: null,
-  //       })));
-  //     })
-  // }, [episodeInfoData, router.query.id])
-
-  console.log(episodeInfoData)
-
   useEffect(() => {
     axios.get(`https://blockpage.site/webtoon-service/v1/episodes/creator?${webtoonId}`,
       {
@@ -69,8 +52,6 @@ export default function ChangeEpisodeInfoForm() {
       })
       .then((res) => {
         setEpisodeInfoData(res.data)
-        console.log(res.data)
-        console.log(episodeInfoData)
       })
       .catch((err) => {
         console.log(err)
@@ -171,8 +152,6 @@ export default function ChangeEpisodeInfoForm() {
               memberId: session?.email || '',
             },
           });
-
-          console.log(res);
           if (res.status === 201) {
             Swal.fire({
               title: '요청 성공!',

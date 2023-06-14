@@ -24,9 +24,7 @@ const RouletteGame = () => {
       }
     })
       .then((res) => {
-        console.log(res)
         setGames(res.data)
-        console.log(games.data.rouletteDayCount)
       })
       .catch((err) => {
         console.log(err)
@@ -95,7 +93,6 @@ const RouletteGame = () => {
         },
       })
       .then((res) => {
-        console.log(res)
         setGames(prevGames => ({
           ...prevGames,
           data: {

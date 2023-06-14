@@ -27,7 +27,6 @@ export default function UserHoldBlock() {
           },
         });
         const totalBlocks = res.data.data.totalBlocks;
-        console.log(totalBlocks);
         setTotalBlock({
           data: {
             totalBlocks,

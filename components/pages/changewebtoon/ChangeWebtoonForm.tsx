@@ -63,28 +63,22 @@ export default function ChangeWebtoonForm() {
         },
       })
       .then((res) => {
-        console.log(res)
         const selectedWebtoon = res.data.data.find((webtoon: any) => webtoon.webtoonId === Number(webtoonId));
         if (selectedWebtoon) {
           setWebtoonData({
             data: [selectedWebtoon],
           })
         }
-        console.log(res.data.data)
-        console.log(webtoonData)
         if (selectedWebtoon) {
           setAuthorName({
             data: selectedWebtoon.creator,
           });
         }
-        console.log(authorName)
       })
       .catch((err) => {
         console.log(err)
       })
   }, [])
-
-  console.log(webtoonData)
 
   const handleInput = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -92,7 +86,6 @@ export default function ChangeWebtoonForm() {
       ...webtoonInfoData,
       [name]: Number(value) || value,
     });
-    console.log(webtoonInfoData)
   };
 
   const handleMainImage = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -170,7 +163,6 @@ export default function ChangeWebtoonForm() {
           },
         )
           .then((res) => {
-            console.log(res)
             Swal.fire({
               icon: 'success',
               title: '요청 성공!',

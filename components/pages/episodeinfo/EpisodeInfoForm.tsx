@@ -49,8 +49,6 @@ export default function EpisodeInfoForm() {
       })
       .then((res) => {
         setEpisodeInfo(res.data)
-        console.log(res.data)
-        console.log(episodeInfo)
       })
       .catch((err) => {
         console.log(err)
@@ -147,26 +145,17 @@ export default function EpisodeInfoForm() {
             confirmButtonText: '확인',
           })
           router.back();
-          console.log(response)
         }
       } catch (error) {
         console.error(error);
-        console.log(session?.email)
       }
     }
   };
 
   return (
     <>
-      {/* {episodeInfo.data &&
-        episodeInfo.data.map((episode) => (
-          episode.episodeNumber && ( */}
       <div className={style.WebtoonDeleteInfoWrap}>
         <form onSubmit={handleSubmit}>
-          {/* <div className={style.webtoonInfoBox}>
-                  <p>에피소드 회차 : </p>
-                  <p className={style.episodeNumber}>{episode.episodeNumber} 화</p>
-                </div> */}
           <div className={style.numberBox}>
             <div className={style.episodeInfoNumberBox}>
               <p>에피소드 회차 :</p>

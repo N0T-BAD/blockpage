@@ -41,23 +41,18 @@ export default function LoginSection() {
       signOut()
       return
     } else if (res.status === 403) {
-      console.log('403')
       router.push('/login')
       return
     }
     const kakaoData = await res.json()
-    console.log(kakaoData)
     if (kakaoData.id) {
       postUser(kakaoData)
     } else {
-      console.log("kakao login error")
       router.push('/login')
     }
   }
 
   const postUser = async (kakaoLoginData: any) => {
-    console.log('kakaoLoginData', kakaoLoginData)
-    console.log('now session', session)
     const res = await fetch('https://blockpage.site/member-service/v1/members', {
       method: 'POST',
       headers: {
@@ -71,20 +66,16 @@ export default function LoginSection() {
       })
     })
     const data = await res.json()
-    console.log(data.data.role)
     update({ ...session, role: data.data.role })
     if (data.data.role) {
       sessionStorage.setItem('role', data.data.role)
       userLogIn(data.data.role).then(() => {
-        console.log('userLogIn')
         router.push('/')
-        console.log(session)
       })
     }
   }
 
   const userLogIn = async (role: string) => {
-    console.log('userLogIn', role, session?.email)
     if (!session?.email) return
     const res = await fetch('https://blockpage.site/member-service/v1/members/log', {
       method: 'GET',
@@ -95,7 +86,6 @@ export default function LoginSection() {
       },
     })
     const data = await res.json()
-    console.log('userLogIn', data)
   }
 
   useEffect(() => {
@@ -104,7 +94,6 @@ export default function LoginSection() {
   }, [session?.accessToken])
 
   if (session?.role) {
-    console.log('session', session)
     return (
       <DataFetchingLoader text={'kakao login'} />
     )

@@ -32,7 +32,6 @@ export default Main
 export async function getServerSideProps(context: any) {
 
   const gameRes = gameEventData
-  console.log(gameRes)
 
   return {
     props: {
