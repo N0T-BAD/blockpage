@@ -154,15 +154,8 @@ export default function EpisodeInfoForm() {
 
   return (
     <>
-      {/* {episodeInfo.data &&
-        episodeInfo.data.map((episode) => (
-          episode.episodeNumber && ( */}
       <div className={style.WebtoonDeleteInfoWrap}>
         <form onSubmit={handleSubmit}>
-          {/* <div className={style.webtoonInfoBox}>
-                  <p>에피소드 회차 : </p>
-                  <p className={style.episodeNumber}>{episode.episodeNumber} 화</p>
-                </div> */}
           <div className={style.numberBox}>
             <div className={style.episodeInfoNumberBox}>
               <p>에피소드 회차 :</p>

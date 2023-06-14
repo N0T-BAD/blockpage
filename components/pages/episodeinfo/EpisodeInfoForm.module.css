@@ -205,6 +205,10 @@
   text-align: center;
 }
 
+.episodeImg img{
+  height: auto;
+}
+
 .filename {
   width: 100%;
   display: flex;
