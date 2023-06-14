@@ -241,11 +241,13 @@ export default function ChangeUserInfo() {
               <div className={style.usernicknamewrite}>
                 <div className={style.btn_input_box}>
                   <p className={style.nicknametext}>닉네임</p>
-                  {userNickname.data.nickname && userNickname.data.nickname.length > 0 ?
-                    <input className={style.usernickname2} type='text' defaultValue={userNickname.data.nickname} onChange={handleChange} />
-                    :
-                    <input className={style.usernickname2} type='text' onChange={handleChange} />
-                  }
+                  <div className={style.infouserbox}>
+                    {userNickname.data.nickname && userNickname.data.nickname.length > 0 ?
+                      <input className={style.usernickname2} type='text' defaultValue={userNickname.data.nickname} onChange={handleChange} />
+                      :
+                      <input className={style.usernickname2} type='text' onChange={handleChange} />
+                    }
+                  </div>
                 </div>
               </div>
               <button type="submit" className={style.changebtn}>변경</button>
