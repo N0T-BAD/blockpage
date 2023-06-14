@@ -1,11 +1,11 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
+import { useRouter } from "next/router";
 import axios from "axios";
 
 import ProfileStore from "@/components/pages/store/ProfileStore";
 import { userDataType } from "@/types/storeDataType";
 import StoreLayout from "@/components/layouts/StoreLayout";
-import { useRouter } from "next/router";
 import NftStore from "@/components/pages/store/NftStore";
 
 function Store(props: { data: userDataType }) {
