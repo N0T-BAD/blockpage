@@ -9,7 +9,6 @@ import { userprofile } from '@/state/mypage/userprofile';
 import { usernickname } from '@/state/mypage/usernickname';
 import { profileskin } from '@/state/mypage/profileskin';
 import { useRouter } from 'next/router';
-import UserIcon from '../mypage/UserIcon';
 import Swal from 'sweetalert2';
 
 
@@ -224,7 +223,6 @@ export default function ChangeUserInfo() {
                         }
                       </>
                     )}
-                    <UserIcon />
                   </div>
 
                   <div className={style.infobox}>
